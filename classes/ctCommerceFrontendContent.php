@@ -407,7 +407,7 @@ class ctCommerceFrontendContent{
 		            
 		            
 		               <?=		     			
-		                  do_shortcode( '[gallery  type=”slideshow” ids="'.$product['primaryImage'].','.$product['addtionalImages'].' "
+		                  do_shortcode( '[gallery  type=â€�slideshowâ€� ids="'.$product['primaryImage'].','.$product['addtionalImages'].' "
 														 size="full"  link="file" column="1"]' ); ?>
 				
 		                
@@ -1262,7 +1262,7 @@ class ctCommerceFrontendContent{
     $postContent .= '<div class="ctcPostImgGallery">';
     
     
-    $postContent .= do_shortcode( '[gallery  type=”slideshow” ids="'.$data['gallery'].' "
+    $postContent .= do_shortcode( '[gallery  type=â€�slideshowâ€� ids="'.$data['gallery'].' "
 														 size="full" link="file" ]' );
     
    
@@ -1885,6 +1885,8 @@ class ctCommerceFrontendContent{
     //function to add shortcode for post social sharing
     
     public function ctcPostGalleryOverlay(){
+        
+        if(is_single()):
     	?>
     	<script type="text/javascript">
     	jQuery(document).ready(function(){
@@ -1895,7 +1897,7 @@ class ctCommerceFrontendContent{
     
     	
     	<?php
-		
+    	endif;
     }
     
     //function to get url for social bar sharing

@@ -329,10 +329,10 @@ jQuery(window).load(function() {
 		jQuery.post(ajaxurl, data, function(response) {
 		
 			//style rules for thickbox
-			var thickBoxStyle = {'height':'410px', 'width':'490px','margin-top':'-250px','overflow':'auto',
+			var thickBoxStyle = {'height':'450px', 'width':'490px','margin-top':'-250px','overflow':'hidden',
 								'padding-left':'30px','border-radius': '100px 10px ','opacity':'0.9', 'max-width':'90%',
 								'max-height':'90%'};
-			var contentStyle = {'width': '450px','height': '390px','max-width':'95%','max-height':'95%'};
+			var contentStyle = {'width': '450px','height': '390px', 'overflow':'hidden',   'margin-top': '25px','max-width':'95%','max-height':'95%'};
 			
 			//put server response inside hidden div for thickbox
 			jQuery('#ctcUpdateCategoryContent').empty().prepend(response);
