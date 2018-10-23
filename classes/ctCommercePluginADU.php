@@ -220,7 +220,7 @@ class ctCommercePluginADU{
                   
                   
                   $sql[] =  "CREATE TABLE `".$wpdb->prefix."ctCommercePendingOrders`(
-                 			`transactionId` varchar(255) NOT NULL,
+                 			`transactionId` varchar(155) NOT NULL,
                  			`productPurchased` text NOT NULL,
 							`shippingCost` decimal(10,2) NOT NULL,
 							`shippingOption` text NOT NULL,
@@ -234,7 +234,7 @@ class ctCommercePluginADU{
 						     UNIQUE KEY (`transactionId`)) $charset_collate;";
                   
                   $sql[] =  "CREATE TABLE `".$wpdb->prefix."ctCommerceCompleteOrders`(
-                 			`transactionId` varchar(255) NOT NULL,
+                 			`transactionId` varchar(155) NOT NULL,
                  			`productPurchased` text NOT NULL,
 							`shippingOption` text NOT NULL,
 							`shippingCost` decimal(10,2) NOT NULL,
@@ -248,7 +248,7 @@ class ctCommercePluginADU{
 						     UNIQUE KEY (`transactionId`)) $charset_collate;";
                   
                   $sql[] =  "CREATE TABLE `".$wpdb->prefix."ctCommerceRefund`(
-							`refundId` varchar(255) NOT NULL,
+							`refundId` varchar(155) NOT NULL,
                  			`transactionId` varchar(255) NOT NULL,
 							`refundTotal` decimal(10,2) NOT NULL,
 							`refundDate` varchar(15) NOT NULL,
