@@ -553,7 +553,7 @@ class ctCommerceFrontendContent{
 
 			
 					</div>
-					<?php if($totalComments >5):
+					<?php if($totalComments >3):
 					?>
 					<a id="ctcLoadMoreReview" href="JavaScript:void(0)" data-type-offset="3" data-type-totalreview="<?=$totalComments?>" data-type-postId="<?=$postId?>">Load more reviews</a>
 					

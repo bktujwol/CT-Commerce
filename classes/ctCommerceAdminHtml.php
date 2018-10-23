@@ -894,10 +894,10 @@ class ctCommerceAdminHtml{
 		                    	   <label for="ctcCategoryMetaInfo"> Meta Information : </label>
 		                        </div>
 		                       <div class="right">
-		                             <input id="ctcCategoryMetaInfo"     name="metaInfo" size="35" value="<?=trim($categoryData['metaInfo'])?>"   />
+		                             <input id="ctcCategoryMetaInfo"     name="metaInfo" value="<?=trim($categoryData['metaInfo'])?>"  size="35"    />
 		                            <span class="ctcFormComments">Noteworthy info like 100  %Cotton, Handmade etc.</span>
 		                             
-		                               <span class="ctcFormComments"></span>
+		                             
 		                        </div>
                     	</div>
                     	
@@ -919,7 +919,7 @@ class ctCommerceAdminHtml{
 		                    	endif;
 		                    	
 		                    	submit_button($text,'primary',$name,false);
-		                    	
+		                    
 		                    	
 		                    	?>
 		                    	</div>
@@ -2681,8 +2681,8 @@ class ctCommerceAdminHtml{
                        </div>   
                        
                        <div id="ctcBusinessAddressOrderTab" style="display:none;">
-                        	 <p><?= get_option('ctcEcommerceName')?>,</p>
-                           <p><?= get_option('ctcBusinessStreetAddress1')?>,</p>
+                        	 <p><?=get_option('ctcEcommerceName')?>,</p>
+                           <p><?=get_option('ctcBusinessStreetAddress1')?>,</p>
                            <p><?=get_option('ctcBusinessStreetAddress1')?>,</p>
                            <p><?=get_option('ctcBusinessAddressStreet2')?>,</p>
                             <p><?=get_option('ctcBusinessAddressCity')?>,</p>
@@ -2803,8 +2803,7 @@ class ctCommerceAdminHtml{
 		              			    <div id="ctcOrderCustomerEmail<?=$order['transactionId']?>"><span>Customer Email :</span><span><?=$user->user_email?></span></div>
 		              			    </div> 
 		              			    <div id="ctcOrderCustomerPhone<?=$order['transactionId']?>"><span>Customer Phone :</span><span><?=$wpdb->get_var("SELECT customerPhone FROM {$wpdb->base_prefix}ctCommerceCustomerInfo WHERE wpUserId={$order['wpUserId']};")?></span></div>
-		              			    
-		              			    
+
 		              			    </div>
 							</div>
 		              	
@@ -3156,7 +3155,7 @@ class ctCommerceAdminHtml{
     	
   		<li> <span>Popular item <i> by sales</i> :- <?=str_replace('#', '',key($salesReport[4]))?> </span><span><font title="sold so far"> <?=$salesReport[4][key($salesReport[4])]?></font> </span></li>
   		<?php endif;?>
-    	<li ><span>Orders <i>pending shipping </i> : </span><span> <a title="Go to pending orders page" href="<?=admin_url()?>?page=ctCommerceAdminPanel&tab=orders"><?=$pendingOrders?></a></span></li>
+    	<li ><span>Orders <i>pending shipment </i> : </span><span> <a title="Go to pending orders page" href="<?=admin_url()?>?page=ctCommerceAdminPanel&tab=orders"><?=$pendingOrders?></a></span></li>
     	<li ><span>Products out of inventory : </span><span> <a  title="Go to product list page" href="<?=admin_url()?>?page=ctCommerceAdminPanel&tab=products&sub_tab=product_list"><?=$salesReport[2]?></a></span></li>
     	<li ><span>Sales <i>to date </i> : </span><span> <?=number_format($salesReport[0],2)?> <i><?=strtoupper(get_option('ctcBusinessCurrency'))?></i></span></li>
     	<li ><span>Active discount  : </span><span> <a title="Go to product discount lis page" href="<?=admin_url()?>?page=ctCommerceAdminPanel&tab=discount&sub_tab=discount_list"><?=$salesReport[3]?></a></span></li>
