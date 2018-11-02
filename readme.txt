@@ -1,10 +1,10 @@
 === CT Commerce ===
 Contributors: UjW0l
-Tags: e-commerce, Webapp,
+Tags: e-commerce, online shop,selling tool
 Requires at least: 4.9
 Tested up to: 4.9
 Requires PHP: 5 or Higher
-Stable tag: 1.0 Alpha
+Stable tag: 1.0.0 Beta 1
 License: GPLV2
 
 e-commerce Web app built for WordPress. Mostly runs on frontend for better website speed and performance
@@ -84,3 +84,10 @@ Or you can download it and upload it manually
 13. CT commerce auto generated menu
 14. Tooltip cart preview
 15. Check out page
+15. Built in user registration for in modal window
+
+= 1.0 Beta 1 =
+* Bug fixes
+* Improvement to the built in overlay
+* Improvemed  UI
+

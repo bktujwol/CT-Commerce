@@ -919,11 +919,11 @@ class ctCommerceAdminPanelProcessing{
     
     //function to get applicable products name with id
     public function ctcGetAplicableDiscountProducts($productId){
-    	if(is_numeric($productId)):
+
 	    	global $wpdb;
 	    	
-	    	$products = $wpdb->get_results("SELECT productName FROM {$wpdb->prefix}ctCommerceProducts WHERE productId in ({$productId});",ARRAY_A);
-	    	
+	    	$Ids = str_replace(',','","',str_replace(')','")',str_replace('(', '("','('.$productId.')')));
+	    	$products = $wpdb->get_results("SELECT productName FROM {$wpdb->prefix}ctCommerceProducts WHERE productId IN {$Ids};",ARRAY_A);
 	    	foreach($products as $product){
 	    		
 	    		$resultProducts[] = $product['productName'];
@@ -931,7 +931,8 @@ class ctCommerceAdminPanelProcessing{
 	    	}
 	    	
 	    	return implode(',',$resultProducts);
-	    endif;	
+	  
+	    	
     }
     
     

@@ -122,10 +122,10 @@ class ctCommerceAdminHtml{
     
                     //function to display first agree disagree with term option
                     public function ctcConditionAgreeDisagree(){
-                         add_thickbox(); 
+                       //  add_thickbox(); 
                         
                         ?>
-                        	<a id="ctcTermConditionsModalLink" href="#TB_inline?height=50&width=50&inlineId=ctcConditionModalTb&modal=true" id="ctcTermConditionsContent" class="thickbox thickBoxModalContent"></a>
+                        	<!-- <a id="ctcTermConditionsModalLink" href="#TB_inline?height=50&width=50&inlineId=ctcConditionModalTb&modal=true" id="ctcTermConditionsContent" class="thickbox thickBoxModalContent"></a> -->
                            
                             <div id ="ctcConditionModalTb" class="thickBoxModalContent">
                             
@@ -151,7 +151,7 @@ class ctCommerceAdminHtml{
                                 ?>
                                 
                         		<label for="ctcConditionsAgreeCheckbox">Please check if you agree : </label>
-                                 <input id="ctcConditionsAgreeCheckbox"  class ="ctcConditionsAgreeCheckbox" type="checkbox" <?php if(get_option('ctcConditionsAgree')  == '1'): echo 'checked="checked"'; endif;?> name="ctcConditionsAgree" value = "1"  disabled="disabled"/> &nbsp;&nbsp;
+                                 <input id="ctcConditionsAgreeCheckbox"  class ="ctcConditionsAgreeCheckbox" type="checkbox" <?php if(get_option('ctcConditionsAgree')  == '1'): echo 'checked="checked"'; endif;?> name="ctcConditionsAgree" value = "1"  /> &nbsp;&nbsp;
                         		
                                   <?php submit_button('I Agree','primary','ctcConditionsAgreeButton', FALSE ,array('disabled' => 'disabled', 'name'=>'submit')); ?>
                                     <a id="ctcConditionsDisgreeButton" href="#" class="button button-primary">I Disagree</a> 
@@ -341,9 +341,20 @@ class ctCommerceAdminHtml{
 			                    
 							    
 			                    
-			             <h5><span class="dashicons dashicons-id"></span>Business Contact Info:</h5>
-			                   <div class="row">
+			             <div class="row">
+			                   
 					                	<div class="left">
+					                	 <b><span class="dashicons dashicons-id"></span>Business Contact Info</b>
+					                	</div>
+					                	<div class="right">  
+					                	:
+					                </div>
+					             </div>   	
+			            
+			                   <div class="row">
+			                   
+					                	<div class="left">
+					                	
 					                		<label for="ctcBusinessStreetAddress1"> Street Address 1: </label>
 					                	</div>
 					                	<div class="right">  
@@ -839,7 +850,7 @@ class ctCommerceAdminHtml{
                     	<form id="<?=$formId?>" autocomplete="on">
                     	 <div class="form-table">
                    		  
-                   		    <div class="row">
+                   		    <div class="categoryRow">
                    		          
 	                   		              <div class="left">
                     	
@@ -856,7 +867,7 @@ class ctCommerceAdminHtml{
 					                              
 					                    	</div>
                     	</div>
-                    	  <div class="row">
+                    	  <div class="categoryRow">
                    		          
 			                   	 <div class="left">
 		                    	   <label for="ctcSubCategory1">Sub Category 1 : </label>
@@ -869,7 +880,7 @@ class ctCommerceAdminHtml{
 		                        </div>
                         </div>
                     	
-                    	 <div class="row">
+                    	 <div class="categoryRow">
 		                    	<div class="left">
 		                    	   <label for="ctcSubCategory2">Sub Category 2 : </label>
 		                        </div>
@@ -878,7 +889,7 @@ class ctCommerceAdminHtml{
 		                             <span class="ctcFormComments">Like sizes for clothing, Transmission for cars</span>
 		                        </div>
                     	</div>
-                    	 <div class="row">
+                    	 <div class="categoryRow">
 		                    	<div class="left">
 		                    	   <label for="ctcSubCategory3">Sub Category 3 : </label>
 		                    	  
@@ -888,20 +899,20 @@ class ctCommerceAdminHtml{
 		                               <span class="ctcFormComments">More specfic info of items.</span>
 		                        </div>
                     	</div>
-                    	 <div class="row">
+                    	 <div class="categoryRow">
 		                    	<div class="left">
 		                    	  
-		                    	   <label for="ctcCategoryMetaInfo"> Meta Information : </label>
+		                    	   <label for="ctCCategoryMetaInfo"> Meta Information : </label>
 		                        </div>
 		                       <div class="right">
-		                             <input id="ctcCategoryMetaInfo"     name="metaInfo" value="<?=trim($categoryData['metaInfo'])?>"  size="35"    />
+		                             <input id="ctComCategoryMetaInfo"    name="metaInfo" value="<?=trim($categoryData['metaInfo'])?>"  size="35"    />
 		                            <span class="ctcFormComments">Noteworthy info like 100  %Cotton, Handmade etc.</span>
 		                             
 		                             
 		                        </div>
                     	</div>
                     	
-                    	 <div class="row">
+                    	 <div class="categoryRow">
 		                    	<div class="left">
 		                    	<?php 
 		                    	
@@ -1382,7 +1393,7 @@ class ctCommerceAdminHtml{
               				   <?php foreach($products as $key=>$product): ?>
               				   
               				    <tr id="ctcProductRow<?=$product['productId']?>">
-              				    <a id="ctcOtherInfoTrigger<?=$product['productId']?>" href="#TB_inline?width=650&height=550&inlineId=ctcOtherContent<?=$product['productId']?>" title="<?=$product['productName']?>" class="thickbox"  style="display:none;"/></a>     
+              				  
               				   	<div id="ctcOtherContent<?=$product['productId']?>" style="display:none">
               				   			
               				   		<div class="ctcProductTableOther">
@@ -1520,20 +1531,21 @@ class ctCommerceAdminHtml{
 								</td>
 								<td>
 								<?php if(!empty($product['primaryImage'])): 
-								
+
 								$parsed = parse_url(wp_get_attachment_url($product['primaryImage']));
 								$imgUrl    = dirname( $parsed [ 'path' ] ) . '/' . rawurlencode( basename( $parsed[ 'path' ] ) );
 								
 								?>
 								
-								<a id="primaryPic<?=$product['productId']?>" href="<?=$imgUrl?>?TB_iframe=true&width=800&height=650" title="<?=$product['productName']?>" class="thickbox" >
-								  
-								       <?=wp_get_attachment_image($product['primaryImage'],array('50', '50'), true);?>
+								<a class="ctcProductPrimaryPic" id="primaryPic<?=$product['productId']?>" href="JavaScript:void(0)" title="<?=$product['productName']?>"  >
+								  	
+								  	<img src="<?=$imgUrl?>" title="<?=$product['productName']?>" />
+								      
 								     </a>
 								     <?php   
 								     else: ; 
 								     ?>
-								   <a id="primaryPic<?=$product['productId']?>"><span  class="dashicons dashicons-format-image"></span></a>
+								   <a id="primaryPic<?=$product['productId']?>" class="ctcProductPrimaryPic" ><span  class="dashicons dashicons-format-image"></span><img src=" " title="<?=$product['productName']?>" style="display:none;"/></a>
 								     <?php
 								     endif ; ?>
 								</td  >
@@ -1922,32 +1934,33 @@ class ctCommerceAdminHtml{
                                            			   </div>
                                        			</div>
                                        			
-                                       			
-                                       			 <div class="ctcProductFormRow ctcUpdateDeleteProductButton">
-                                       			      <div class="ctcProductFormColumn">
+                                       			<div class="ctcProductFormRow ">
+                                       			      <span class="ctcProductFormColumn">
                                                    
                                                     	
                                                    	<button id="ctcPurgeProductButton" type="button" class="button primary">Purge Product</button>
                                                    	
-                                                   	</div>
+                                                   	</span>
                                                    	
-                                                    <div class="ctcProductFormColumn">
+                                                    <span class="ctcProductFormColumn">
                                                    	
                                                   <?php
                                                    	submit_button("Update Product",'primary',"ctcUpdateProductButton",FALSE);
                                                   ?>
                                                   
-                                                  </div>
+                                                  </span>
                                                     	
-                            	           </div>
+                            	           </div>  
+                                       			
                                        			
                         			     </div>	
                         			     
-                             
+                            
                         			  
                    		</div>
            
-                   
+           
+                     
                     </form>
                   
                    </div>
@@ -2052,14 +2065,14 @@ class ctCommerceAdminHtml{
 							 <td id="primaryImage<?=$product['productId']?>">
 		              		<?php if(!empty($product['primaryImage'])): 
 										
-										$parsed = parse_url(wp_get_attachment_url($product['primaryImage']));
-										$imgUrl    = dirname( $parsed [ 'path' ] ) . '/' . rawurlencode( basename( $parsed[ 'path' ] ) );
+		              		$parsed = parse_url(wp_get_attachment_url($product['primaryImage']));
+		              		$imgUrl    = dirname( $parsed [ 'path' ] ) . '/' . rawurlencode( basename( $parsed[ 'path' ] ) );
 										
 										?>
 										
-										<a id="primaryPic<?=$product['productId']?>" href="<?=$imgUrl?>?TB_iframe=true&width=800&height=650" title="<?=$product['productName']?>" class="thickbox" >
+										<a id="primaryPic<?=$product['productId']?>" href="JavaScript:void(0)" title="<?=$product['productName']?>" class="ctcPurgedProductPic" >
 										  
-										       <?=wp_get_attachment_image($product['primaryImage'],array('50', '50'), true);?>
+										      <img src="<?=$imgUrl?>" title="<?=$product['productName']?>" />
 										     </a>
 										     <?php   
 										     else: ; 
@@ -2372,8 +2385,9 @@ class ctCommerceAdminHtml{
 										$imgUrl    = dirname( $parsed [ 'path' ] ) . '/' . rawurlencode( basename( $parsed[ 'path' ] ) );
 										
 										?>
-              				   <a id="ctcCouponImage<?=$discount['discountId']?>" href="<?=$imgUrl?>?TB_iframe=true&width=800&height=650" title="<?=$discount['discountName']?>" class="thickbox ctcDiscountThumb" >
-              				    <?=wp_get_attachment_image($discount['couponImage'],array('50', '50'), true);?>
+										
+              				   <a id="ctcCouponImage<?=$discount['discountId']?>" href="JavaScript:void(0);" title="<?=$discount['discountName']?>" class="ctcDiscountThumb" >
+              				    <img src="<?=$imgUrl?>" title="<?=$discount['discountName']?>" />
 							  </a>
               				    <?php  else: ?>
               				      <a id="ctcCouponImage<?=$discount['discountId']?>" >
@@ -2384,6 +2398,7 @@ class ctCommerceAdminHtml{
 							 </td> 
 							 <td id="productsAplicable<?=$discount['discountId']?>">
 							         <div id="ctcDiscountAplicableProductsName" >
+							       
 		              				    <?=$ctcAdminProcessing->ctcGetAplicableDiscountProducts($discount['productsAplicable'])?>
 		              				 </div>   
 							 </td> 
@@ -2404,7 +2419,7 @@ class ctCommerceAdminHtml{
 							 </td>
 							  <td >
 							      <div id="ctcDiscountUpdateContent<?=$discount['discountId']?>" style="display:none;"></div>
-							  	  <a id="ctcDiscountUpdateTigger<?=$discount['discountId']?>"  href="#TB_inline?width=600&height=550&inlineId=ctcDiscountUpdateContent<?=$discount['discountId']?>" class="thickbox" style="display:none;"></a>	
+							  
 							  
 		              				<a id="ctcUpdateDeleteDiscount" data-type-id="<?=$discount['discountId']?>" href="JavaScript:void(0);" ><span class="dashicons dashicons-edit"></span></a>   
 							 </td>
@@ -2792,7 +2807,7 @@ class ctCommerceAdminHtml{
 							<a href="JavaScript:void(0);" class="ctcPurchaseDetail" data-type-transactionid="<?=$order['transactionId']?>"> <span class="dashicons dashicons-clipboard"></span> </a>
 		              		
 		              		<div id="contentPurchasedDetail<?=$order['transactionId']?>" style="display:none;">		
-		              			   <div>	 
+		              			   <div class="ctcPurchaseDetailInfo">	 
 		              			   <?php $user= WP_User::get_data_by('ID',$order['wpUserId']); ?>
 		              			    <h5 class="dashicons-before dashicons-info ctcModalHeader ">Additional Transaction Info</h5>
 		              			    <?=$order['purchaseDetail']?>
@@ -2992,8 +3007,8 @@ class ctCommerceAdminHtml{
 		<a href="JavaScript:void(0);" class="ctcPurchaseDetail" data-type-transactionid="<?=$order['transactionId']?>"> <span class="dashicons dashicons-clipboard"></span> </a>
 							
 		
-		              		<div id="contentPurchasedDetail<?=$order['transactionId']?>" style="display:none;">		
-		              			   <div>	 
+		              		<div id="contentPurchasedDetail<?=$order['transactionId']?>"  style="display:none;">		
+		              			   <div class="ctcPurchaseDetailInfo">	 
 		              			   <?php $user= WP_User::get_data_by('ID',$order['wpUserId']); ?>
 		              			    <h5 class="dashicons-before dashicons-info ctcModalHeader ">Additional Transaction Info</h5>
 		              			    <?=$order['purchaseDetail']?>

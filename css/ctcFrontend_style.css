@@ -274,8 +274,14 @@ display: block;
    margin:1%;
    max-width:90%;
      box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);
+     
+     text-align:center;
 }
-
+.ctcCategoryLinkContainer a{
+	
+	text-align:center;
+	text-decoration:none !important;
+}
 .ctcCategoryLinkContainer a img{
 	
 	
@@ -288,6 +294,8 @@ display: block;
    transition: 0.3s ease;
   -webkit-transition: 0.3s ease;
   -moz-transition: 0.3s ease;
+  border: 1px solid  rgba(30, 132, 73,0.1);
+   border-radius: 5px;
 }
 .ctcCategoryLinkText{
 	position: absolute;
@@ -1428,12 +1436,7 @@ width:200px;
         
     
     }
-    .ctcUserUpdateRow,
-    .ctcUserRegistrationRow
-    {
-       display:table-row;
-       width:auto;
-    }
+  
     .ctcUserUpdateColumn,
     .ctcUserUpdateColumnRight,
     .ctcUserRegistrationColumnRight,
@@ -1460,8 +1463,9 @@ width:200px;
    }
    .ctcUpdateUserButton,
    .ctcRegisterUserButton{
-   float:right;
-      
+  
+      color:rgba(255,255,255,1) !important;
+      border-color:rgba(255,255,255,1) !important;
    }
    
    /**
@@ -1884,7 +1888,9 @@ width:200px;
     width: auto;
     
 }
- 
+ .ctcUserUpdateRowButton{
+   display:block !important;
+ }
  
  
  .ctcUserRegistrationColumn
@@ -1907,225 +1913,7 @@ width:200px;
  
  }
  
- /*styling for overlay box for single product page */
- /* The Overlay (background) */
-.ctcOverlay {
-    /* Height & width depends on how you want to reveal the overlay (see JS below) */    
-    
-    width: 100%;
-    height:0;
-    position: fixed; /* Stay in place */
-    z-index: 250000!important; /* Sit on top */
-    left: 0;
-    top: 0;
-    background-color: rgba(0,0,0,0.8); /* Black fallback color */
-    max-height:100%;
-      -webkit-transition: width 2s,height 3s ; /* Safari */
-       transition:  width 2s,height3s;
-       transition: 0.5s ease;
-      -webkit-transition: 0.5s ease;
-      -moz-transition: 0.5s ease;
-   
-     overflow:hidden;
-      
-}
-
-/* Position the content inside the overlay */
-.ctcOverlayContent {
  
-}
-
-/* The navigation links inside the overlay */
-
-.ctcOverlayClosebtn{
-
-float:right
-  
-}
- .ctcOverlayClosebtn::before {
-   
-    text-decoration: none;
-    transition: 0.3s; /* Transition effects on hover (color) */
-    z-index:2000;
-    font-size:40px;
-    color:rgba(255,255,255,0.8);
-   
-   
-}
-
-/* When you mouse over the navigation links, change their color */
- .ctcOverlayClosebtn:focus:before,
- .ctcOverlayClosebtn:hover:before{
-    -webkit-transition: width 0.5s; /* Safari */
-     transition: width 0.5;
-     transition: 0.5s ease;
-     -webkit-transition: 0.5s ease;
-     -moz-transition: 0.5s ease;
-     color:rgba(255,255,255,1);
-       font-size:44px;
-       cursor:pointer;
-    
- }
-
-/* Position the close button (top right corner) */
-.ctcOverlay .ctcOverlayClosebtn::before {
-   
-   
-}
-
-  .ctcGalleryLeftNav{
-			 width:0px !important;
-			 float:left;
-			  font-family: dashicons;
-			 content: "\f341";
-			 -webkit-transition: width 1s; /* Safari */
-            transition: width 1s;
-            transition: 0.5s ease;
-           -webkit-transition: 0.5s ease;
-           -moz-transition: 0.5s ease;
-            display:inline-block!important;;
-            cursor:pointer;
-            color:white;
-            opacity:0;
-            font-size:80px!important;
-      
-  }
-  .ctcGalleryRightNav{
-		   float:right;
-		    width:0px !important;
-		    font-family: dashicons;
-		  content: "\f345";
-		  -webkit-transition: width 1s; /* Safari */
-            transition: width 1s;
-            transition: 0.5s ease;
-           -webkit-transition: 0.5s ease;
-           -moz-transition: 0.5s ease;
-            display:inline-block!important;;
-            cursor:pointer;
-            color:white;
-            opacity:0;
-            font-size:80px!important;
-             margin-right:6%;
-  }
-
- 
-
- 
- .ctcGalleryLeftNav:hover,
- .ctcGalleryRightNav:hover{
-    -webkit-transition: width 0.5s; /* Safari */
-     transition: width 0.5;
-     transition: 0.5s ease;
-     -webkit-transition: 0.5s ease;
-     -moz-transition: 0.5s ease;
-     color:white;
-      opacity:1;
-       display:inline-block;
-     
-    -webkit-transform: scale(1.2);
-    -moz-transform: scale(1.2);
-    -o-transform: scale(1.2);
-    -ms-transform: scale(1.2);
-     transform: scale(1.2);
-      cursor:pointer;
- }
-
- .ctcGalleryRightNav:hover{
- 
-     margin-right:6%;
- }
-  
- 
- .ctcOverlayImageContainer{
- 
-    margin-left:auto;
-    margin-right:auto;
-    display:inline-block;
-    position:absolute;
-    text-align: center; /* Centered text/links */
-    display:inline-block;
-  
-    border-radius:5%;
-  
-  
- }
- 
- .ctcOverlayImageContainer img{
- margin-left:auto;
- margin-right:auto;
- display:block;
- opacity:1; 
- border-radius:2.5%;
- position: relative; 
-
-
-}
-
-
- 
-div.ctcOverlayCountAndCurrentImage{
-
-position:absolute;	
- margin-top:0px;
-  opacity:0;
-  color:white !important;
-  display:inline-block 1important;
-  float:left !important;
-  margin-bottom:-20px;
-   background-color:rgba(0,0,0,0.9);
-   border-radius:25%;
-   padding:3px;
-   max-width:50%;
-    border:2px solid white;
-   bottom:0px;
-   z-index:25500;
-   
- }
- .ctcOverlayCountAndCurrentImage span{
- color:white;
- opacity:1;
-
-}
-  .ctcOverlayCountAndCurrentImage span:nth-child(2){
-  width:10px;
-  }
-  
-  .ctcLoadedImgAltTitle{
-
-  border:2px solid white;
-   padding-left:5px;
-   padding-right:5px;
-   padding-bottom:2px;
-   border-radius:35%;
-   display:inline-block;
-   opacity:0;
-    background-color:rgba(0,0,0,0.9);
-    float:right;
-    position:absolute;
-    color:white;
-    right:0px;
-    bottom:0px;
-    z-index:25500;
-   
-  }
-  
-  .ctcOverlayImages{
-  display:none;
-  width:0px;
-  height:0px;
-  z-index:25000;
-  }
-  .ctcImageBeingDisplayed{
-   
-  }
-  
-.ctcRollingOverlayClosebtn{
-
-	-webkit-animation: closeButtonRoll 0.3s infinite linear; /* Safari 4.0 - 8.0 */
-    animation: closeButtonRoll 0.3s infinite linear;
-	
-} 
-
 
 
  

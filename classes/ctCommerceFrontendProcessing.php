@@ -760,7 +760,7 @@ class ctCommerceFrontendProcessing{
 					'taxAmount'=>$taxAmount,
 					'purchaseTotal'=>$finalTotal,
 					'purchasedDate'=>current_time( 'timestamp'),
-					'purchaseDetail'=>"Promo Code : {$data['ctcCheckOutPromoCode']} <br> Shipping Time Info : ".str_replace("Delivers","Dleivery",str_replace("You can", "Customer will", $data['customerShippingOptionInfo'])),
+					'purchaseDetail'=>"Promo Code : {$data['ctcCheckOutPromoCode']} <br> Shipping Time Info : ".str_replace("Delivers","Delivery",str_replace("You can", "Customer will", $data['customerShippingOptionInfo'])),
 					'wpUserId'=>$customerId
 					
 			);
@@ -921,7 +921,7 @@ class ctCommerceFrontendProcessing{
 								'taxAmount'=>$taxAmount,
 								'purchaseTotal'=>$finalTotal,
 								'purchasedDate'=>current_time( 'timestamp'),
-								'purchaseDetail'=>"Promo Code : {$data['ctcCheckOutPromoCode']} <br> Shipping Time Info : ".str_replace("Delivers","Dleivery", str_replace("You can", "Customer will", $data['customerShippingOptionInfo'])),
+								'purchaseDetail'=>"Promo Code : {$data['ctcCheckOutPromoCode']} <br> Shipping Time Info : ".str_replace("Delivers","Delivery", str_replace("You can", "Customer will", $data['customerShippingOptionInfo'])),
 								'wpUserId'=>$customerId
 								
 						);

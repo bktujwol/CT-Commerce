@@ -226,9 +226,11 @@ class ctCommerceFrontendContent{
 	   ?>
 	          
 	             <div class="ctcCategoryLinkContainer">
+	             
 			     <a class="ctcCategoryLink" href="<?=home_url()?>/product-category/?category=<?=$key?>">
-			      <span class="ctcCategoryLinkText"> <?=$key?> </span>
+			   
 				         <?=  wp_get_attachment_image($images[$randomImage] ,array('295','295'));?>
+				            <?=$key?> 
 				   </a>
 			   </div>
 		
@@ -1491,22 +1493,24 @@ class ctCommerceFrontendContent{
                                              
                                          </div>
                                   </div> 
-                                  
-                             </div>    
-                             
-                              <div class="ctcUserRegistrationRow">
+                                  <div class="ctcUserRegistrationRow">
                    		          
 	                   		              <div class="ctcUserRegistrationColumn">
-	                   		             
-	                                    <p></p>
+	                   		 
 	                                      </div>  
                                           <div class="ctcUserRegistrationColumnRight">
-                                          <p></p>
+                                           <br/>
+                                            <br/>
+                                            <br/>
                                             <input id="ctcUserRegistrationFormReset" type="reset" value="Reset" style="display:none;">
                                             <button id="ctcRegisterUserButton" type="submit" class="button primary ctcRegisterUserButton">Register</button>
                                              
                                          </div>
                                   </div> 
+                                  
+                             </div>    
+                             
+                              
                                   
                              </div>     
             
@@ -1527,11 +1531,11 @@ class ctCommerceFrontendContent{
     	
     	
     ?>	
-    	
+    	<form id="ctcUserUpdateForm" autocomplete="on" >
     	<div id="ctcUserUpdateForm">
 		    	
 		    	     <h2 class="dashicons-before dashicons-edit">Update Information</h2>
-                   		<form id="ctcUserUpdateForm" autocomplete="on" >
+                   		
                    		
                    		  <div class="ctcUserUpdateFormTable">
                    		       <div class="ctcUserUpdateLeft">
@@ -1700,29 +1704,33 @@ class ctCommerceFrontendContent{
                                              
                                          </div>
                                   </div> 
-                                  
-                             </div>    
-                             
-                              <div class="ctcUserUpdateRow">
+                                  <div class="ctcUserUpdateRow">
                    		          
-	                   		              <div class="ctcUserUpdateColumn">
-	                   		             
-	                                    <p></p>
+	                   		             <div class="ctcUserUpdateColumn">
+	                   		 
 	                                      </div>  
-                                          <div class="ctcUserUpdateColumnRight">
-                                          <p></p>
-                                            <input id="ctcUserUpdatenFormReset" type="reset" value="Reset" style="display:none;">
+                                        <div class="ctcUserUpdateColumnRight">
+                                           <br/>
+                                            <br/>
+                                            <br/>
+                                                  <input id="ctcUserUpdatenFormReset" type="reset" value="Reset" style="display:none;">
                                             <button id="ctcUpdateUserButton" type="submit" class="button primary ctcRegisterUserButton">Update</button>
                                              
                                          </div>
                                   </div> 
                                   
+                             </div>    
+                             
+                             
+                                  
                              </div>     
                                       
                
-		    	
-		    	   </form>
+		    	      </form>
+		    	  
 		    	  </div>
+		    	 
+		    	 
     	
     <?php 
     else:

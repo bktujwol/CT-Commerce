@@ -1,20 +1,8 @@
 jQuery(document).ready(function($){
 
 	 
-	//jquery function to style thickbox
-		(function( $ ){
-			   $.fn.thickBoxCss = function(windowCss,ajaxContentCss) {
-				   
-				   jQuery(document).find('#TB_ajaxContent').css(ajaxContentCss);
-					jQuery(document).find('#TB_window').css(windowCss);
-					jQuery('#TB_ajaxWindowTitle').remove();
-					jQuery('#TB_title').css({'border':'none', 'margin-top':'0px','width':'0px','height':'0px'});
-					jQuery('.tb-close-icon').removeClass('tb-close-icon').addClass("dashicons dashicons-no-alt" );
-					
-			      return this;
-			   }; 
-			})( jQuery );
-		
+
+	
 		
 		//simple function to check if the value of field is null is so set it to empty
 		   function checkNull (value) {
@@ -105,32 +93,20 @@ jQuery(document).ready(function($){
 	 /*Section to handle jquery functionalities for Terms and condition part of plugin */
 			   
 			   
-			   
+	   
 		
 	 //this sections loads info of terms and condition on modal box
 jQuery(window).load(function() {
-	   
-		jQuery("#ctcTermConditionsModalLink").trigger('click');
-		jQuery(document).find('#TB_ajaxContent').css({'width': '770px','height': '666px'});
-		jQuery(document).find('#TB_window').css({'width':'800px','height':'660px','margin-top':'-330px', 
-												'margin-left':'-380px','border-radius':'10px','opacity':'0.9'});
-
+	if(jQuery('#ctcConditionModalTb').length >= 1){
+			jQuery.ctcOverlayEl({elemHeight:'640px',elemWidth:'775px',hideCloseBtn:'yes',elemSelector:'#ctcConditionModalTb'});
+	}
+		
 	 });
 	
 	 //this section handles basic styling of Terms and conditions box 
-	 jQuery("div.ctcConditionReading").css({'height':'520px','width':'730px','overflow':'scroll !important'});
+	 jQuery("div.ctcConditionReading").css({'height':'520px','width':'730px','overflow':'scroll'});
 	
-	//if admin read whole term and condition activate check box
-	 jQuery("div.ctcConditionReading").bind('scroll',function() {
-		  
-		 if (jQuery(this).scrollTop() + jQuery(this).innerHeight() >= jQuery(this)[0].scrollHeight-100) {
-	             jQuery("input.ctcConditionsAgreeCheckbox").removeAttr('disabled');
-	             jQuery("div.ctcConditionsForm p").fadeOut( "slow");
-	        }
-		 
-		});
-	 
-	 
+	
 	 
 	 //this section enables submit button once admin agrees to term and condition
 	 jQuery( document).on( "click","#ctcConditionsAgreeCheckbox" , function(){
@@ -149,34 +125,9 @@ jQuery(window).load(function() {
 
 	
 	 
-	 /*
-	 //this section will handle masonary ficntionality with masonary jquery plugin
-	 jQuery('.ctcBasicInfoContent').masonry({
-		 resize: true
-		});
-	 */
-	 jQuery(document).find('#TB_window').masonry({resize: true});
-	 
 	
 	 
-	 //copy business name as e-commerce name
-	 jQuery(document).on('click','#ctcSameAsBusinessName', function(){
-		 
-		 var businessName = jQuery("[name*='ctcBusinessName']").val();
-		 var oldEcommerceName = jQuery("[name*='ctcOldEcommerceName']").val();
-
-		 if(jQuery(this).is(':checked')){
-			 
-			 jQuery("[name*='ctcEcommerceName']").removeData().attr("value",businessName);
-			 
-		 }
-		 else{
-			 jQuery("[name*='ctcEcommerceName']").val(oldEcommerceName);
-			 
-		 }
-		 
-		 
-	 });
+	
 	 
 	  /**
 	   * This section will included requred code to process ajax request
@@ -212,6 +163,25 @@ jQuery(window).load(function() {
 			
 		});
 	 
+		
+		 //copy business name as e-commerce name
+		 jQuery(document).on('click','#ctcSameAsBusinessName', function(){
+			 
+			 var businessName = jQuery("[name*='ctcBusinessName']").val();
+			 var oldEcommerceName = jQuery("[name*='ctcOldEcommerceName']").val();
+
+			 if(jQuery(this).is(':checked')){
+				 
+				 jQuery("[name*='ctcEcommerceName']").removeData().attr("value",businessName);
+				 
+			 }
+			 else{
+				 jQuery("[name*='ctcEcommerceName']").val(oldEcommerceName);
+				 
+			 }
+			 
+			 
+		 });	
 		
 	 //this section will make ajax request to create business page
 		jQuery(document).on('click','#ctcBusinessSettingsButton', function(){
@@ -319,34 +289,16 @@ jQuery(window).load(function() {
 		
 		
 		
-		var data = {
+		let data = {
 				'action': 'ctcGetCategoryUpdateForm',
 			    'categoryId': jQuery(this).attr('data-type-id')
 
-			    
 			};
 		
-		jQuery.post(ajaxurl, data, function(response) {
 		
-			//style rules for thickbox
-			var thickBoxStyle = {'height':'450px', 'width':'490px','margin-top':'-250px','overflow':'hidden',
-								'padding-left':'30px','border-radius': '100px 10px ','opacity':'0.9', 'max-width':'90%',
-								'max-height':'90%'};
-			var contentStyle = {'width': '450px','height': '390px', 'overflow':'hidden',   'margin-top': '25px','max-width':'95%','max-height':'95%'};
-			
-			//put server response inside hidden div for thickbox
-			jQuery('#ctcUpdateCategoryContent').empty().prepend(response);
-			
-			//style thickbox with custom function
-			jQuery("#ctcUpdateCategoryFormModalTrigger").trigger('click').thickBoxCss(thickBoxStyle,contentStyle);
-			
-			
 		
-		}).fail(function() {
-
-	        alert( "Action could not be completed at this time \nPlease try again later");
-	  
-	    });
+		jQuery.ctcOverlayEl({elemHeight:'450px',elemWidth:'490px',ajaxUrl:ajaxurl,ajaxData:data,ajaxMethod:'post'});
+		
 		
 		
 	});
@@ -398,7 +350,7 @@ var categoryData =[];
 
 						
 						//trigger thickbox close botton click
-						jQuery('#TB_closeWindowButton').trigger('click');
+						jQuery('#ctcOverlayElClosebtn').trigger('click');
 						
 					}
 					else{
@@ -442,7 +394,7 @@ var categoryData =[];
 								if(response == 1){
 									
 									
-									jQuery('#TB_closeWindowButton').trigger('click');
+									jQuery('#ctcOverlayElClosebtn').trigger('click');
 									
 									alert('Category sucessfully deleted');
 						
@@ -1067,75 +1019,36 @@ var categoryData =[];
  
 
 
-//function to load products other info inside thickbox
+//function to load product's other info inside thickbox
  
  jQuery(document).on('click','#ctctPoductOtherInfo', function(){
-	 
-	//style rules for thickbox
-		var thickBoxStyle = {'height':'570px', 'width':'630px','margin-top':'-300px','overflow':'hidden',
-							'padding-left':'10px','border-radius': '100px 10px ','opacity':'0.9', 'max-width':'90%',
-							'max-height':'90%','padding-right':'8px', 'padding-bottom':'10px'};
-		var ajaxContentStyle = {'height': '550px','width': '600px','max-width':'98%','max-height':'90%','margin-top':'30px','margin-bottom':'5px',
-								'margin-left':'auto','margin-right':'auto','display':'block'};
-	 
-		var id = jQuery(this).attr('data-type-id');
-		
 	
-	 
-	 jQuery('#ctcOtherInfoTrigger'+id).trigger('click').thickBoxCss(thickBoxStyle,ajaxContentStyle);
-	
-	 
+	 let id = jQuery(this).attr('data-type-id');
+	 jQuery.ctcOverlayEl({elemHeight:'570px',elemWidth:'630px',elemSelector:'#ctcOtherContent'+id});
  });
+ 
+//apply overlay to primary pic on product list
+jQuery('.ctcProductPrimaryPic').ctcOverlay();
+
  
  
 	 //this section deal with product list tab update button
 	 jQuery(document).on('click', '#ctcUpdateProduct', function(){
-		 
-		 var thickBoxStyle = {'height':'570px', 'width':'570px','margin-top':'-300px','overflow':'hidden',
-					'padding-left':'30px','border-radius': '100px 10px ','opacity':'0.9', 'max-width':'90%',
-					'max-height':'90%', 'padding-bottom':'50px'};
-		 var ajaxContentStyle = {'height': '550px','width': '530px','max-width':'100%','max-height':'100%','margin-top':'30px','margin-bottom':'80px'};
-		
-		 
-					 var data= {
+		 		 
+					 let data= {
 							 
 								 'action':'ctcGetProductUpdateForm',
 								 'id'    : jQuery(this).attr('data-type-id') 
 							 
 					           }
 					 
-					 jQuery.post(ajaxurl, data, function(response){
-						 
-						
-						 
-						 jQuery('#ctcProductUpdateForm').empty().prepend(response);
-						 jQuery('#ctcProductUpdateModalTrigger').trigger('click').thickBoxCss(thickBoxStyle,ajaxContentStyle);
-						 
-			
-	
-							//jQuery('.ctcAdditionaImages').addClass('masonry');
-							var container = jQuery('.ctcAdditionaImagesUpdate');
-	
-							  container.imagesLoaded( function(){
-							  container.masonry({
-							    
-							     });
-						 
-							  });
-						 
-		
-						 
-					 }).fail(function() {
-
-					        alert( "Action could not be completed at this time \nPlease try again later");
-					  
-					    });
-					 
+					 jQuery.ctcOverlayEl({elemHeight:'760px',elemWidth:'63%',ajaxUrl:ajaxurl,ajaxData:data,ajaxMethod:'post'});
+	 
 	   });
  
 
 
-	 /*script to remove sinngle product variation from avilable product text area on add product and update product form */ 
+	 /*script to remove single product variation from avilable product text area on add product and update product form */ 
 	 jQuery(document).on('click','#ctcRemoveAvilableProduct,#ctcRemoveAvilableProductUpdateForm',function(){
 	 	
 		 if(!jQuery('#ctcProductName').val()){
@@ -1575,7 +1488,7 @@ var categoryData =[];
 	   }); 
 	 
 	 
-	 
+	
 	 
 	 
 	   //this section deals with updating product video
@@ -1707,9 +1620,8 @@ var categoryData =[];
    		 jQuery('#productDimension'+productId).empty().append(returnedData.productDimension);
    		 jQuery('#subCategory'+productId).empty().append(returnedData.subCategory);
    		 jQuery('#postLink'+productId).empty().append(postTdContent);
-   		 jQuery('#primaryPic'+productId).attr('href',returnedData.primaryPicDir+'?TB_iframe=true&width=800&height=650').empty().append(returnedData.primaryPic);
-	
-		  //update yes no of preorder and featured product
+   		 jQuery('#primaryPic'+productId+' span').remove();
+   		 jQuery('#primaryPic'+productId+' img').show().attr({'src':returnedData.primaryPicDir,'title':jQuery('#primaryPic'+productId).attr('title')}).parent().removeAttr('data-ctc-active-gallery');
    		 var ctcPreOrder = (returnedData.preOrder == 1)?'Yes':'No';
    		 jQuery('#preOrder'+productId).empty().append(ctcPreOrder);
    		 var ctcFeatureProduct = (returnedData.featureProduct == 1)?'Yes':'No';
@@ -1822,7 +1734,7 @@ var categoryData =[];
 							  
 							  
 							  
-							  jQuery('#TB_closeWindowButton').trigger('click');
+							  jQuery('#ctcOverlayElClosebtn').trigger('click');
 							  var productId = jQuery('#ctcProductIdUpdate').val(); 
 							  updateProductOnSucess(formData, productId,responseObj, otherData);
 							  
@@ -1875,7 +1787,7 @@ var categoryData =[];
 			   if(response >= 1){
 			
 				   alert("Product sucesfully purged.");
-				   jQuery('#TB_closeWindowButton').trigger('click');
+				   jQuery('#ctcOverlayElClosebtn').trigger('click');
 				   jQuery('#ctcProductRow'+data['productId']).remove();
 				   
 			   }
@@ -1928,6 +1840,8 @@ var categoryData =[];
 		   
 	   });
 	   
+	   
+	   jQuery('.ctcPurgedProductPic').ctcOverlay();
 
 /*
  * 
@@ -2112,35 +2026,20 @@ var categoryData =[];
     //script to get form with option to update or delete discount
 	  jQuery(document).on('click', '#ctcUpdateDeleteDiscount', function(){
 		  
-		  var data ={
+		  let data ={
 				  
 				  'action': 'ctcGetDiscountUpdateForm',
 				  'discountId':jQuery(this).attr('data-type-id')
 		  }
 		  
 		  
-		  
-		  jQuery.post(ajaxurl, data , function(response){
-			  
-			  var thickBoxStyle = {'height':'690px', 'width':'500px','margin-top':'-340px','overflow':'hidden',
-						'padding-left':'20px','border-radius': '100px 10px ','opacity':'0.9', 'max-width':'90%',
-						'max-height':'90%', 'padding-bottom':'0px'};
-			 var ajaxContentStyle = {'height': '670px','width': '480px','max-width':'100%','max-height':'100%','margin-top':'10px','margin-bottom':'10px'};
-			 
-			 jQuery('#ctcDiscountUpdateContent'+data['discountId']).empty().append(response);
-			  jQuery('#ctcDiscountUpdateTigger'+data['discountId']).trigger('click').thickBoxCss(thickBoxStyle,ajaxContentStyle);;
-			  
-			  
-		  }).fail(function() {
-
-		        alert( "Action could not be completed at this time \nPlease try again later");
-		  
-		    });
+		  jQuery.ctcOverlayEl({elemHeight:'690px',elemWidth:'500px',ajaxUrl:ajaxurl,ajaxData:data,ajaxMethod:'post'});
 		  
 		  return false;
 	  }); 
 	   
-	   
+	  jQuery(".ctcDiscountThumb").ctcOverlay();
+	  
 	  //script to add dicount image
 	   jQuery(document).on('click', '#ctcCouponImageLibraryUpdate',function(){
 		   
@@ -2226,13 +2125,8 @@ var categoryData =[];
 			     case 'update':	 
 			    	 break;
 				 case 'couponImage':
-					 jQuery('#ctcCouponImage'+returnedData['discountId']).addClass('thickbox ctcDiscountThumb').attr({'href': returnedData[key]+'?TB_iframe=true&width=800&height=650'});
-					 
+					 jQuery('a#ctcCouponImage'+returnedData['discountId']+' img').attr({'src': returnedData[key],'title':jQuery('#ctcCouponImage'+returnedData['discountId']).attr("title")}).parent().removeAttr('data-ctc-active-gallery');
 					break; 
-				 case 'couponImgThumb':
-					 jQuery('#ctcCouponImage'+returnedData['discountId']).empty().prepend(returnedData[key]);
-					
-					 break;
 				 case 'discountPercent':
 				 case 'discountAmount':
 					 if(returnedData[key] == 0){
@@ -2274,7 +2168,7 @@ var categoryData =[];
 			  
 			   if(responseObj.update == 1){
 				   alert("Discount sucesfully updated");
-				   jQuery('#TB_closeWindowButton').trigger('click');
+				   jQuery('#ctcOverlayElClosebtn').trigger('click');
 				  
 				   
 				   ctcUpdateDiscountList(responseObj);
@@ -2315,7 +2209,7 @@ var categoryData =[];
 			  if(response == 1){
 				  
 				  alert("Discount successfully deleted.");
-				  jQuery('#TB_closeWindowButton').trigger('click');
+				  jQuery('#ctcOverlayElClosebtn').trigger('click');
 				  jQuery("#ctcDiscountListRow"+data['discountId']).remove();
 				  
 			  }
@@ -2409,8 +2303,8 @@ var categoryData =[];
 		   
 		   
 	   });
-	   
-	  
+ 
+
 	   
 	   //function to update pending order notification
 	   function updatePendingOrdersNotifications(){
@@ -2606,22 +2500,8 @@ var categoryData =[];
 				 
 		 }
 		 
-		 jQuery.post(ajaxurl,data,function(response){
-			 
-				//style rules for thickbox
-				var thickBoxStyle = {'height':'220px', 'width':'380px','margin-top':'-12%','margin-left':'-10%','display':'block','overflow':'auto',
-									'padding-left':'10px','border-radius': '100px 10px ','opacity':'0.9', 'max-width':'90%',
-									'max-height':'90%'};
-				var contentStyle = {'height': '200px','width': '340px','max-width':'95%','max-height':'95%','margin-left':'auto','margin-right':'auto','display':'block'};
-			 
-			 jQuery('#ctcRefundFormContainer').empty().append(response);
-			 jQuery('#ctcRefundFormModalTrigger').trigger('click').thickBoxCss(thickBoxStyle,contentStyle);
-			 
-		 }).fail(function() {
-
-		        alert( "Action could not be completed at this time \nPlease try again later");
-		  
-		    });
+		 jQuery.ctcOverlayEl({elemHeight:'220px',elemWidth:'380px',ajaxUrl:ajaxurl,ajaxData:data,ajaxMethod:'post'});
+		
  
 	 });  
 	   
@@ -2645,7 +2525,7 @@ var categoryData =[];
 			if(response === 'refundSuccessful'){
 				
 				alert("Refund successfully processed");
-				jQuery('#TB_closeWindowButton').trigger('click');
+				jQuery('#ctcOverlayElClosebtn').trigger('click');
 	
 				var newRefund = parseFloat(jQuery('#ctcRefundtotal-'+data['refundData'][1]['value']).text())+parseFloat(data['refundData'][0]['value']);
 				
@@ -2669,16 +2549,7 @@ var categoryData =[];
 	});  
 //script to style thickbox with purchase detail
 jQuery(document).on('click','.ctcPurchaseDetail', function(){
-	
-	//style rules for thickbox
-	var thickBoxStyle = {'height':'320px', 'width':'300px','margin-top':'-12%','margin-left':'-10%','display':'block','overflow':'auto',
-						'padding-left':'10px','border-radius': '100px 10px ','opacity':'0.9', 'max-width':'90%',
-						'max-height':'90%'};
-	var contentStyle = {'height': '260px','width': '260px','max-width':'95%','max-height':'95%','margin-top':'10px','margin-left':'10px','margin-right':'auto','display':'block'};
-	var transactionId = jQuery(this).attr('data-type-transactionid');
-	
-	
-	 jQuery('#purchaseDetailTrigger'+transactionId).trigger('click').thickBoxCss(thickBoxStyle,contentStyle);
+		jQuery.ctcOverlayEl({elemHeight:'270px',elemWidth:'300px',elemSelector:'#contentPurchasedDetail'+jQuery(this).attr('data-type-transactionid')});
 	
 });	   
 

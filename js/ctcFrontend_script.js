@@ -109,33 +109,9 @@ jQuery('.ctcSingleProductGallery span:nth-child(2),.ctcSingleProductGallery span
 	
 	
 
- /**
-  * 
-  * 
-  * this section contains function to add content and modification of the wp media modal
-  * 
-  * 
-  * 
-  */
 	 
-	 function ctcOpenWpMediaModal(content,modalCss){
-		
-		
-		//first remove previously loaded wp media modal
-		  jQuery(document).find('.media-modal-content').remove();
-		 
-		 // Create a modal view.
-			var modal = new wp.media.view.Modal({
-
-				// getting console errors.
-				controller: { trigger: function() {} }
 	
-			});
-			
-			modal.open();
-		 	
-		  jQuery(document).find('.media-modal-content').append(content).css(modalCss);
-	 }
+
 	 
 	 
 	 /**
@@ -178,21 +154,22 @@ jQuery('.ctcSingleProductGallery span:nth-child(2),.ctcSingleProductGallery span
 	 jQuery(document).on('click','#ctCommerceUserRegistration', function(){
 
 		 
-		 var modalCss = {'padding':'50px',' outline':'none!important'};
+		
 		
 		 
 		 var data = {
 				 
 				 'action':'ctcGetUserRegistrationForm'
-				 
-		 
+
 		 }
 		 
 		 
 		 
 		 jQuery.post(ctc_ajax_url, data , function(response){
 			 
-			 ctcOpenWpMediaModal(response,modalCss);
+			 
+			 $.ctcOverlayEl({elemHeight:'630px',elemWidth:'65%',ajaxUrl:ctc_ajax_url,ajaxData:data,ajaxMethod:'post'});
+			 
 		
 
 		 });
@@ -226,7 +203,8 @@ jQuery('.ctcSingleProductGallery span:nth-child(2),.ctcSingleProductGallery span
 				
 				if(response == 1){
 					
-					alert('Account sucesfully created');
+					
+					$.ctcOverlayEl({modalMessage:'Account sucesfully created.'});
 					jQuery('button.media-modal-close, #ctcUserRegistrationFormReset').trigger('click');
 					
 				}
@@ -234,10 +212,12 @@ jQuery('.ctcSingleProductGallery span:nth-child(2),.ctcSingleProductGallery span
 					var errorUser ='Error :';
 					responseObj = JSON.parse(response);
 					for(var i in responseObj['errors']){
-					errorUser  = errorUser.concat('\n'+responseObj['errors'][i]);
+					errorUser  = errorUser.concat('<br/>'+responseObj['errors'][i]);
 				   }
 					
-					alert(errorUser);
+					$.ctcOverlayEl({modalMessage:errorUser});
+				
+					
 					
 				}
 				
@@ -261,17 +241,18 @@ jQuery('.ctcSingleProductGallery span:nth-child(2),.ctcSingleProductGallery span
 		
 		var data = {
 			 
-				
 				'action':'ctcGetUserInfoUpdateForm'
-			
 		}
+
+		$.ctcOverlayEl({elemHeight:'630px',elemWidth:'65%',ajaxUrl:ctc_ajax_url,ajaxData:data,ajaxMethod:'post'});
 		
+		/*
 		jQuery.post(ctc_ajax_url, data , function(response){
 			
 			ctcOpenWpMediaModal(response,modalCss);
 			
 		});
-		
+		*/
 		return false;
 		
 	}) ;
@@ -302,11 +283,13 @@ jQuery('.ctcSingleProductGallery span:nth-child(2),.ctcSingleProductGallery span
 		    		  
 		    		if(response >= 1){
 		    			
-		    			alert("Information sucessfully updated");
+		    			$.ctcOverlayEl({modalMessage:'Information sucessfully updated.'});
+		    			
 		    			jQuery('button.media-modal-close, #ctcUserUpdatenFormReset').trigger('click');
 		    		}
 		    		else{
-		    			alert("Information could not be updated at this time.\nTry loging out log back in and update");
+		    			$.ctcOverlayEl({modalMessage:'Information could not be updated at this time.<br/>Try loging out log back in and update'});
+		    			
 			
 		    		}
 		  			
@@ -701,7 +684,9 @@ jQuery('.ctcSingleProductGallery span:nth-child(2),.ctcSingleProductGallery span
 		
 		//check if empty option is selcted 
 		  if(jQuery('#ctcProductSelect-'+id).val() =='emptyOption'){
-				alert('Please select a product combination first');
+			  
+			  $.ctcOverlayEl({modalMessage:'Please select a product combination first'});
+				
 				return false;
 				
 			}
@@ -1075,15 +1060,13 @@ jQuery(document).tooltip({
 
 		}
 		
-		alert(response);
+		//alert(response);
 		
 		jQuery.post(ctc_ajax_url, data , function(response){
-			
-			
-			
 		
 			if(JSON.parse(response)['notLoggedIn']){
-				alert(JSON.parse(response)['notLoggedIn']);
+				  $.ctcOverlayEl({modalMessage:JSON.parse(response)['notLoggedIn']});
+				
 				
 			}
 			
@@ -1180,8 +1163,8 @@ function ctcCheckEmptyShippingAddress(){
 	
 	
 	  if(requiredField == 'empty'){
-		   
-		   alert('Please fill in required fields, before proceeding.');
+		  $.ctcOverlayEl({modalMessage:'Please fill in required fields, before proceeding.'});
+		  
 		  
 		return false;   
 		   
@@ -1249,7 +1232,8 @@ function ctcCheckEmptyShippingAddress(){
 								  	      jQuery('#ctcShippingOptionUsps').prop('checked', false);
 								    	  
 								  	      
-								  		alert("Invalid Address, Please re-check your address again.");
+								  		
+								  		$.ctcOverlayEl({modalMessage:"Invalid Address, Please re-check your address again."});
 							    		
 							    		return false;
 							    	}
@@ -1585,15 +1569,15 @@ if(data['promoCode'].length != 0){
 			
 		}
 		else if(response =='invalidPromoCode'){
-			
-			alert("Coupon code you have entered is invalid");
+			$.ctcOverlayEl({modalMessage:'Coupon code you have entered is invalid.'});
 			jQuery('#ctcCheckOutPromoCode').val('');
 			
 		}
 		else{
 			
-			alert("Coupon does not apply to any of the products in cart.");
+			
 			jQuery('#ctcCheckOutPromoCode').val('');
+			$.ctcOverlayEl({modalMessage:"Coupon does not apply to any of the products in cart."});
 		}
 	}).fail(function() {
 
@@ -1715,7 +1699,8 @@ if(data['promoCode'].length != 0){
 		jQuery.post(ctc_ajax_url, data , function(response){
 			
 			if(response === 'notLoggedIn' ){
-				alert('You need to log in to rate this product.');
+				$.ctcOverlayEl({modalMessage:'You need to log in to rate this product.'});
+				
 				
 				event.preventDefault();
 				return false;
@@ -1750,631 +1735,6 @@ if(data['promoCode'].length != 0){
 	 * 
 	 */
 	
-	/***
-	 * 
-	 * 
-	 * 
-	 * ctcOverlay
-	 * jQuery plugin to display images in overlay
-	 * https://ujwolbastakoti.wordpress.com/
-	 * MIT license
-	 * 
-	 * 
-	 * 
-	 */
-
-
-
-
-		//load overlay conatiner on window load
-		window.onload = function(){
-				
-				var overlayContainer = '';
-						
-						overlayContainer += '<div  id="ctcOverlay" class="ctcOverlay">'; 
-						overlayContainer +='<span id="ctcGalleryLeftNav" class="ctcGalleryLeftNav dashicons-arrow-left-alt2"></span>';
-						overlayContainer +='<span id="ctcGalleryRightNav" class="ctcGalleryRightNav dashicons dashicons-arrow-right-alt2">	</span>';
-						overlayContainer +=' <div id="ctcLoadedImgAltTitle" class="ctcLoadedImgAltTitle"></div>';	
-						overlayContainer +='<div id="ctcOverlayCountAndCurrentImage" class="ctcOverlayCountAndCurrentImage">';
-						overlayContainer +='<span id="ctcOverlayCurrentImageNumber" class="ctcOverlayCurrentImageNumber"></span>';
-						overlayContainer +='<span id="ctcOverlayTotalImageCount" class="ctcOverlayTotalImageCount">  </span>';
-						overlayContainer +=' </div>';
-						overlayContainer +='<div id="ctcOverlayImageContainer" class="ctcOverlayImageContainer">';		
-						overlayContainer +=' </div>'; 
-						overlayContainer +='<span id="ctcOverlayClosebtn" class="ctcOverlayClosebtn dashicons dashicons-dismiss" ></span>';	
-						overlayContainer +=' </div>';			   
-					
-						jQuery('body').prepend(overlayContainer);
-						
-
-			}	
-		
-		
-		
-	(function( $ ){
-
-		
-	jQuery.fn.ctcOverlay = function (){
-		
-		
-
-	/*
-	 * 
-	 * supplementary functions to the core function
-	 * 
-	 * 
-	 * 
-	 */	
-		
-	//function to resize font based on screen size
-		
-	function ctcResizeFontOnResize(screenWidth){
-			
-			 var optimizedFontSize = (screenWidth/1280)*80; 
-			 	
-			 	if(jQuery('#ctc-font-style').length>=1){
-			 	
-				 		jQuery('#ctc-font-style').remove();
-				 		jQuery('head').append('<style id=ctc-font-style>#ctcGalleryLeftNav::before,#ctcGalleryRightNav::before{font-size:'+Math.ceil(optimizedFontSize)+'px !important;} #ctcOverlayClosebtn::before{font-size:'+Math.ceil((optimizedFontSize/2))+'px !important}</style>');
-			 	
-			 	}
-			 	else{
-			 		jQuery('head').append('<style id=ctc-font-style>.ctcGalleryLeftNav::before,.ctcGalleryRightNav::before{font-size:'+optimizedFontSize+'px !important;}</style>');
-			 	}
-			
-		}	
-		
-	//function to return title and alt for image
-	function returnImgTitleAlt(imgAttr){
-
-		if(imgAttr !==(undefined || null ||''||'undefined')){
-			return imgAttr;
-		}
-		else{
-			
-			return '';
-		}
-	}
-
-
-
-
-	/***
-	 * 
-	 * core plugin functionalities
-	 * 
-	 * 
-	 */
-
-	window.onresize =  function(){
-
-
-		if(document.getElementById("ctcOverlay").style.height != '0px'){
-			
-				 loadOverlayImages(jQuery('.ctcImageBeingDisplayed').attr('data-img-number'));
-			}
-		return false;
-	};
-
-		/* Close when someone clicks on the "x" symbol inside the overlay */
-		document.getElementById("ctcOverlayClosebtn").addEventListener("click", function(){
-		
-				 jQuery("#ctcOverlay").animate({
-					    height:0,
-						opacity:0,
-						},
-					    300,
-					    function(){
-							 jQuery('.ctcImageBeingDisplayed').hide();
-						});
-		});	
-
-
-
-	document.getElementById("ctcGalleryLeftNav").addEventListener("click",function () {loadOverlayImages(this.getAttribute("data-img-number"));},false);
-	document.getElementById("ctcGalleryRightNav").addEventListener("click",function () {loadOverlayImages(this.getAttribute("data-img-number"));},false);
-		
-
-	document.addEventListener('keydown', function(event) {
-		
-		if(document.getElementById("ctcOverlay").style.height != '0px'){
-
-			if (event.code === 'ArrowLeft'){ 
-				var imgNumber = document.getElementById("ctcGalleryLeftNav").getAttribute("data-img-number");
-				if(imgNumber.length > 0) loadOverlayImages(imgNumber);
-			}
-			else if (event.code == 'ArrowRight'){ 
-				var imgNumber = document.getElementById("ctcGalleryRightNav").getAttribute("data-img-number");
-				if(imgNumber.length > 0) loadOverlayImages(imgNumber);
-						
-			}
-			else if (event.code == 'Escape') 
-				document.getElementById('ctcOverlayClosebtn').click();
-			
-		}
-		  
-	});
-
-	jQuery(this).on('mouseenter',function(event){
-		if( jQuery('.ctcOverlayImages').length === 0){
-				var overlayImageGallery ='';
-				
-				var i=0;
-				
-				jQuery('img',this).each(function(){
-					jQuery(this).attr('data-img-number',i);
-					overlayImageGallery += '<img  data-img-number="'+i+'" class="ctcOverlayImages"  alt="'+jQuery(this).attr('alt')+'" id="ctc-image-overlay-'+i+'" alt="'+jQuery(this).attr('alt')+'" src="'+jQuery(this).attr('src')+'"/>';
-					i++;
-				});
-				
-				
-
-				document.getElementById("ctcOverlayImageContainer").innerHTML = overlayImageGallery;
-				
-		}
-
-	});
-
-
-	//on click of each image  trigger overlay
-	jQuery('img',this).on('click',function(event){
-		loadOverlayImages(jQuery(this).attr('data-img-number'));
-		event.preventDefault();
-	});
-
-
-
-	function loadOverlayImages(currentImageNumber){
-		
-			var imageRatio = 0;
-			var imageWidth = 0;
-			var imageHeight = 0;
-			var imageActualHeight =0;
-			var imageActualWidth =0;
-			var imgHeightRatio =0;
-			var imgMarginTop ='';
-			var prevImage = 0;
-			var nextImage = 0;
-			var imageToHide =jQuery('.ctcImageBeingDisplayed');
-			var imageToDisplay = jQuery("#ctc-image-overlay-"+currentImageNumber);
-			var screenWidth = window.screen.width;
-			var screenHeight = window.screen.height;
-			var image = new Image();
-			    image.src =imageToDisplay.attr('src');
-	  
-	  image.addEventListener('load',function(){
-			 
-			imageActualHeight = image.height;
-			imageActualWidth  = image.width; 
-			
-			//special case when window is not in full screen
-			
-			 var windowWidth = window.innerWidth;
-			 var windowHeight = window.innerHeight;
-			 
-			 
-			 //while window is resized little bit
-			 
-			 if(screenWidth>windowWidth  || screenHeight>windowHeight){
-				screenWidth =  windowWidth;
-				screenHeight = windowHeight;
-			 }
-			
-			 var optimizedFontSize = (screenWidth/1280)*80;    
-			//call function to style font based on screen size
-			 ctcResizeFontOnResize(screenWidth);
-			 
-			 
-			var totalImageCount = jQuery('.ctcOverlayImages').length;
-			
-		
-			
-		
-						    if(totalImageCount >= 2){
-			
-							
-															var imageNumberToLoad = parseInt(currentImageNumber);
-															var prevImage = imageNumberToLoad-1;
-															
-															var nextImage = imageNumberToLoad+1;
-																
-															
-												
-																		if(prevImage >= 0  && nextImage < totalImageCount){
-																		
-																			jQuery('#ctcGalleryLeftNav').attr('data-img-number',prevImage);
-																			jQuery('#ctcGalleryRightNav').attr('data-img-number',nextImage);
-																			jQuery('#ctcOverlayCurrentImageNumber').empty().prepend('Image '+(imageNumberToLoad+1));
-																			jQuery('#ctcOverlayTotalImageCount').empty().prepend(' of '+totalImageCount);
-																			jQuery('#ctcGalleryLeftNav,.ctcGalleryRightNav').animate({opacity:1},100, function(){});
-																			
-																
-																		}
-																		else if(prevImage < 0  && nextImage < totalImageCount){
-																		
-																			jQuery('#ctcGalleryLeftNav').attr('data-img-number','').animate({opacity:0},300, function(){});
-																			jQuery('#ctcGalleryRightNav').attr('data-img-number',nextImage);
-																			jQuery('#ctcOverlayCurrentImageNumber').empty().prepend('Image '+(imageNumberToLoad+1));
-																			jQuery('#ctcOverlayTotalImageCount').empty().prepend(' of '+totalImageCount);
-																			jQuery('#ctcGalleryRightNav').animate({opacity:1},100, function(){});
-																			
-																			
-																		}
-																		else if (prevImage >= 0 && nextImage >= totalImageCount){
-																			
-																			jQuery('#ctcGalleryRightNav').attr('data-img-number','').animate({opacity:0},300, function(){});
-																			jQuery('#ctcGalleryLeftNav').attr('data-img-number',prevImage);
-																			jQuery('#ctcOverlayCurrentImageNumber').empty().prepend('Image '+(imageNumberToLoad+1));
-																			jQuery('#ctcOverlayTotalImageCount').empty().prepend(' of '+totalImageCount);
-																			jQuery('#ctcGalleryLeftNav').animate({opacity:1},100, function(){});
-																
-																		}	
-															
-						}	
-						else{
-				
-							imageNumberToLoad = currentImageNumber;
-							jQuery('#ctcGalleryRightNav,#ctcGalleryLeftNav,#ctcOverlayCountAndCurrentImage').css('visibility','hidden');
-							
-							
-						}	
-			
-						
-						var imageScreenHeightRatio = 0;
-						var imageScreenWidthRatio =0;
-						var optimizedImageHeight = 0;
-						var optimizedImageWidth = 0;
-					
-						
-								
-		imageToDisplay.imagesLoaded( function() {				
-						
-					if((imageActualWidth >= screenWidth) && (imageActualHeight >= screenHeight )){	
-						
-						
-						 
-								if(imageActualWidth >= imageActualHeight){
-									  
-										
-														if(imageActualWidth > imageActualHeight ){
-															 
-														     imageScreenWidthRatio = imageActualWidth/screenWidth;
-														     
-														     optimizedImageWidth = (imageActualWidth/imageScreenWidthRatio)-(0.15*screenWidth);
-													    		
-														     optimizedImageHeight = imageActualHeight*(optimizedImageWidth/imageActualWidth);
-														     
-																	     if(optimizedImageHeight >=(0.85*screenHeight)){
-																	    	
-																	    	 imageScreenHeightRatio = screenHeight/imageActualHeight;
-																	
-																			 optimizedImageHeight = imageActualHeight*imageScreenHeightRatio-(0.15*screenHeight);
-									
-																			 optimizedImageWidth = imageActualWidth*(optimizedImageHeight/imageActualHeight);
-																			 
-																	     }
-													 
-													}
-										
-										else{
-
-													   if(screenWidth > screenHeight){
-													    
-														  
-														   optimizedImageHeight = (0.85*screenHeight);
-														   optimizedImageWidth =  optimizedImageHeight;
-														  
-													     }
-													   else if(screenHeight > screenWidth){
-														   
-														   optimizedImageWidth = (0.85*screenWidth);
-														   optimizedImageHeight =  optimizedImageWidth;
-														   
-													   }
-													   else{	   
-													
-														   imageScreenHeightRatio = screenHeight/imageActualHeight;
-															
-															 optimizedImageHeight = imageActualHeight*imageScreenHeightRatio-(0.15*screenHeight);
-											
-															 
-															 optimizedImageWidth = imageActualWidth*(optimizedImageHeight/imageActualHeight);
-													 
-													   }
-													  
-												
-										}	 
-								 	
-						}
-						else{
-							 imageScreenHeightRatio = imageActualHeight/screenHeight;
-				
-							 optimizedImageHeight = (imageActualHeight/imageScreenHeightRatio)-(0.15*screenHeight);
-		
-							 optimizedImageWidth = imageActualWidth*(optimizedImageHeight/imageActualHeight);
-							
-							
-						}    
-					        
-						
-					}
-					else if(imageActualWidth >= screenWidth &&  imageActualHeight  < screenHeight){
-						
-						
-					
-						 imageScreenWidthRatio = screenWidth/imageActualWidth;
-				
-						 
-						 optimizedImageWidth = imageActualWidth*imageScreenWidthRatio-(0.15*screenWidth);
-						  
-						  
-							
-						  optimizedImageHeight = imageActualHeight*(optimizedImageWidth/imageActualWidth);
-						  
-						  
-						
-						
-					}
-					else if(imageActualHeight >= screenHeight && imageActualWidth < screenWidth){
-						
-						
-						
-						 imageScreenHeightRatio = screenHeight/imageActualHeight;
-							
-						
-						
-						 optimizedImageHeight = imageActualHeight*imageScreenHeightRatio-(0.15*screenHeight);
-		
-						 
-						 optimizedImageWidth = imageActualWidth*(optimizedImageHeight/imageActualHeight);
-					
-						 
-						
-
-						 optimizedImageHeight = imageActualHeight*(optimizedImageWidth/imageActualWidth);
-						  
-						
-					}
-					else{
-						
-						
-						
-								var avilableImageWidth =  0.85*screenWidth;
-								
-								var avilableImageHeight =  0.85*screenHeight;
-						 
-						 
-								if(imageActualWidth >= avilableImageWidth &&  imageActualHeight >= avilableImageHeight){
-									
-									
-									
-									var imageAvilableWidthRatio = avilableWidth/imageActualWidth;
-									imageAvilableHeightRatio = avilableHeight/imageActualHeight;
-									 
-									 
-									
-										 optimizedImageWidth = avilableWidth*imageAvilableWidthRatio;
-
-								         optimizedImageHeight = screenHeight*imageScreenHeightRatio;
-									
-									
-								}	
-								else if(imageActualWidth >= avilableImageWidth &&  imageActualHeight < avilableImageHeight ){
-									
-									
-									 var imageAvilableWidthRatio = avilableImageWidth/imageActualWidth;
-							
-									 optimizedImageWidth = imageActualWidth*imageAvilableWidthRatio;
-							
-									  optimizedImageHeight = imageActualHeight*(optimizedImageWidth/imageActualWidth);
-									
-									
-								}
-								else if(imageActualHeight >= avilableImageHeight && imageActualWidth < avilableImageWidth){
-									
-									
-									 imageAvilableHeightRatio = avilableImageHeight/imageActualHeight;
-										
-										
-										
-									 optimizedImageHeight = imageActualHeight*imageAvilableHeightRatio;
-					
-									 
-									 optimizedImageWidth = imageActualWidth*(optimizedImageHeight/imageActualHeight);
-									
-								}
-								else{
-									
-									
-									optimizedImageWidth = imageActualWidth;
-									optimizedImageHeight = imageActualHeight;
-								}
-								
-								
-								optimizedImageHeight = imageActualHeight*(optimizedImageWidth/imageActualWidth);
-								  
-							
-							
-					} 
-					
-					
-			//at last check it optimized width is still large			
-		   if(optimizedImageWidth>(0.85*screenWidth)){	   
-			   optimizedImageWidth = 0.85*screenWidth;
-			   optimizedImageHeight = imageActualHeight*(optimizedImageWidth/imageActualWidth);
-			   
-		   }
-			
-		   
-			
-			//first set image to be displayed height width to 0 for effect
-		   imageToDisplay.css({ 'width':optimizedImageWidth+'px','height':optimizedImageHeight+'px'});
-			
-				
-	           jQuery("#ctcOverlay").animate({width:screenWidth,height:screenHeight,opacity:1},200,function(){	
-	        	var containerMarginTop = (screenHeight-optimizedImageHeight)/2;
-	        	var containerMarginLeft= (screenWidth-optimizedImageWidth)/2;
-
-				var navIconMargin = 	containerMarginTop+(optimizedImageHeight/2)-45;
-				var closeButton =  jQuery('#ctcOverlayClosebtn');
-				
-				var ctcExtraInfoTop = screenHeight-50;
-		
-						if(jQuery('img.ctcOverlayImages').length>=2){
-									
-												
-												
-												if(imageToHide.length ===1){
-											
-												imageToHide.animate({opacity:0},300,function(){
-													
-													imageToHide.removeClass("ctcImageBeingDisplayed").hide(100,function(){
-														
-														 
-														  jQuery('#ctcOverlayImageContainer').animate({'margin-left':containerMarginLeft+'px','margin-top':containerMarginTop+'px'},10,function(){	
-															  //hide all images before diplaying one
-															  jQuery('.ctcOverlayImages').hide();
-															  
-															  closeButton.animate({'margin-right':(((screenWidth-optimizedImageWidth)/2)-(1.2*optimizedFontSize))+'px'},300,function(){
-																	jQuery(this).animate({'margin-top':(containerMarginTop-20)+'px'},250,function(){});
-																	 
-																 });
-															  
-															    imageToDisplay.show().animate({
-												        			  opacity:1
-																	  },600,function(){
-																		 
-																		  
-																		  
-																		  
-																		//first loat alt image
-																			 if(returnImgTitleAlt(jQuery(this).attr('title'))){
-																				    jQuery('#ctcLoadedImgAltTitle').empty().animate({opacity:1,'right':'10px','bottom':'10px'},300,function(){}).prepend(jQuery(this).attr('title'));
-																				  }
-																		    else if(returnImgTitleAlt(jQuery(this).attr('alt'))){
-																				    jQuery('#ctcLoadedImgAltTitle').empty().animate({opacity:1,'right':'10px','bottom':'10px'},300,function(){}).prepend(jQuery(this).attr('alt'));
-																				  }
-																			  else{
-																				  
-																				  jQuery('#ctcLoadedImgAltTitle').animate({'opacity':'0','right':'0px','bottom':'0px'});
-																				  
-																			  }
-																			 
-																			 jQuery('#ctcOverlayCountAndCurrentImage').animate({opacity:1,'left':'5px','bottom':'30px'},200,function(){});
-																				  
-																			  }).addClass('ctcImageBeingDisplayed');
-															    
-															   
-															   
-															        jQuery('#ctcGalleryRightNav').css({'margin-top':(navIconMargin-10)+'px'});
-															        jQuery('#ctcGalleryLeftNav').css({'margin-top':(navIconMargin-30)+'px'});
-															  });
-													});
-													
-												  });	
-										}else{
-											
-											
-											 
-											  jQuery('#ctcOverlayImageContainer').animate({'margin-left':containerMarginLeft+'px','margin-top':containerMarginTop+'px'},10,function(){	
-												  //hide all images before diplaying one
-												  jQuery('.ctcOverlayImages').hide();
-												  
-												  closeButton.animate({'margin-right':(((screenWidth-optimizedImageWidth)/2)-(1.2*optimizedFontSize))+'px'},300,function(){
-														jQuery(this).animate({'margin-top':(containerMarginTop-20)+'px'},250,function(){});
-														 
-													 });
-												    imageToDisplay.show().animate({
-									        			  opacity:1
-														
-														  },600,function(){
-															
-															//first load alt image
-																 if(returnImgTitleAlt(jQuery(this).attr('title'))){
-																	    jQuery('#ctcLoadedImgAltTitle').empty().animate({opacity:1,'right':'10px','bottom':'10px'},300,function(){}).prepend(jQuery(this).attr('title'));
-																	  }
-															    else if(returnImgTitleAlt(jQuery(this).attr('alt'))){
-																	    jQuery('#ctcLoadedImgAltTitle').empty().animate({opacity:1,'right':'10px','bottom':'10px'},300,function(){}).prepend(jQuery(this).attr('alt'));
-																	  }
-																  else{
-																	  
-																	  jQuery('#ctcLoadedImgAltTitle').animate({'opacity':'0','right':'0px','bottom':'0px'});
-																	  
-																  }
-	 
-																 if(totalImageCount >= 2){
-																	 jQuery('#ctcOverlayCountAndCurrentImage').animate({opacity:1,'left':'5px','bottom':'30px'},200,function(){});
-																 }
-																
-																  }).addClass('ctcImageBeingDisplayed');	
-												    
-												    
-												        jQuery('#ctcGalleryRightNav').css({'margin-top':navIconMargin+'px'});
-												        jQuery('#ctcGalleryLeftNav').css({'margin-top':navIconMargin+'px'});
-												  });
-											
-										}		
-										
-								}
-								else{
-									
-									 jQuery('#ctcOverlayImageContainer').animate({'margin-left':containerMarginLeft+'px','margin-top':containerMarginTop+'px'},10,function(){	
-										 
-										 closeButton.animate({'margin-right':(((screenWidth-optimizedImageWidth)/2)-(1.2*optimizedFontSize))+'px'},300,function(){
-												jQuery(this).animate({'margin-top':(containerMarginTop-20)+'px'},250,function(){});
-												 
-											 });
-										  
-										 
-										    imageToDisplay.show().animate({
-							        			  opacity:1
-												  },600,function(){
-													 
-													 
-													
-														 if(returnImgTitleAlt(jQuery(this).attr('title'))){
-															    jQuery('#ctcLoadedImgAltTitle').empty().animate({opacity:1,'right':'10px','bottom':'10px'},300,function(){}).prepend(jQuery(this).attr('title'));
-															  }
-													    else if(returnImgTitleAlt(jQuery(this).attr('alt'))){
-															    jQuery('#ctcLoadedImgAltTitle').empty().animate({opacity:1,'right':'10px','bottom':'10px'},300,function(){}).prepend(jQuery(this).attr('alt'));
-															  }
-														  else{
-															  
-															  jQuery('#ctcLoadedImgAltTitle').animate({'opacity':'0','right':'0px','bottom':'0px'});
-															  
-														  }
-	 
-														  }).addClass('ctcImageBeingDisplayed');
-										    
-										   
-										    
-										        jQuery('#ctcGalleryRightNav').css({'margin-top':navIconMargin+'px'});
-										        jQuery('#ctcGalleryLeftNav').css({'margin-top':navIconMargin+'px'});
-										  });
-							
-								}
-				
-		        	});
-
-				
-		  });
-		
-	 
-
-	   });	
-	}
-
-	  return this;
-							
-	 };
-
-		}(jQuery));
-		
-
-
-
-
-
 	
 	
 

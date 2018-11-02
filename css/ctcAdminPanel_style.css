@@ -247,13 +247,16 @@ div.ctcConditionMain{
 
 	
 }
-
+div.ctcConditionMain span:first-child{
+	
+	margin-left:10px;
+}
 #ctcTermConditionsModalLink {
 	display: none !important;
 }
 div.ctcConditionMain h3{
 
-	
+	color:rgba(255,255,255,1);
 }
 
 div.ctcConditionReading{
@@ -269,7 +272,8 @@ div.ctcConditionReading{
 }
 
 #ctcGoToDashboard{
-	margin-left: 327px !important;
+	float: right;
+    margin-right: 10px;
     text-decoration: none !important;
     padding-bottom:2px !important;
     border-style:none !important;
@@ -623,7 +627,16 @@ tr.ctcBusinessSettingContact{
     height:40px;
     position:relative;
     }
-
+.categoryRow{
+	
+	display: block;
+    width:500px;
+    max-width:100%;
+    margin-bottom:5px;
+    margin-top:5px;
+	
+    position:relative;
+}
   .left, .right {
     display:inline-block;
     position:relative;
@@ -783,6 +796,14 @@ div.ctcProductCategoryGrid{
 			div.ctcProductCategoryGridHeader span:last-child{
 			
 			}
+			
+#ctcUpdateCategoryForm{
+	
+	margin-left:auto;
+	margin-right:auto;
+	display:block;
+	margin-left:5%;
+}			
 
 /*This section deals with styling of add products subatab */
 #ctcAddProductMain{
@@ -890,14 +911,6 @@ span.ctcPrimaryPicThumb img{
 
 
 
-span.ctcPrimaryPicThumb img:hover{
-	margin-left:16px;
-	margin-top:4px;
-	height:130px;
-	width:130px;
-
-}
-
 
 #ctcAdditionalImageLibrary{
 	float:left;
@@ -948,7 +961,11 @@ float:left;
 	margin-top: -2px !important;
 	
 }
-
+.ctcPurgedProductPic img,
+.ctcProductPrimaryPic img{
+	height:50px !important;
+	width:50px !important;
+}
 
     
       .ctcProductRow
@@ -997,6 +1014,7 @@ float:left;
         border-spacing:5px;/*cellspacing:poor IE support for  this*/
         display:block;
         clear:both;
+        margin-left:3%;
    }
   .ctcProductRowOther{
       display:table-row;
@@ -1061,10 +1079,7 @@ float:left;
 }
 
 span.ctcPrimaryPicThumbUpdate img:hover{
-	margin-left:25px;
-	margin-top:4px;
-	height:130px;
-	width:130px;
+
 
 }
 
@@ -1135,10 +1150,17 @@ div.ctcAdditionaImagesUpdate{
   }
 
 div.ctcUpdateDeleteProductButton{
-	
-	margin-top:300px;
+	max-width:81%;
+	display:block;
 }
-   
+ div.ctcUpdateDeleteProductButton span:first-child{
+  float:left;
+  margin-left:5%;
+ } 
+  div.ctcUpdateDeleteProductButton span:last-child{
+  float:right;
+  margin-right:5%;
+ }   
  #ctcUpdateProductButton{
  
  display:inline-block;
@@ -1236,6 +1258,10 @@ div.ctcUpdateDeleteProductButton{
  #ctcDiscountProductsList{
     width:30%;
  }
+ .ctcDiscountThumb img{
+ width:50px !important;
+ height:50px !important;
+ }
  span.ctcDiscountPicThumb img{
     float:left;
     
@@ -1249,7 +1275,10 @@ div.ctcUpdateDeleteProductButton{
     
 }
 
-
+#ctcUpdateDiscountModalConent{
+	margin-left:5%;
+	
+}
 
 span.ctcDiscountPicThumb img:hover{
     margin-left:16px;
@@ -1311,9 +1340,7 @@ span.ctcDiscountPicThumbUpdate img{
 
 
 span.ctcDiscountPicThumbUpdate img:hover{
-	float:left;
-    height:75px;
-    width:75px;
+
    
 	
 }
@@ -1389,6 +1416,13 @@ span.ctcDiscountPicThumbUpdate img:hover{
   font-weight:bold;
  }
  
+ .ctcPurchaseDetailInfo{
+ margin-left:10%;
+ }
+ .ctcRefundFormContainer{
+ margin-left:10%;
+ }
+
 /*styling for category snapshot chart*/ 
 .ctcAdminPanelProductChart{
 	border:none !important;
@@ -1437,21 +1471,17 @@ div.ctcProductPreviewChart ul{
   
    -webkit-animation:   animateSlideIn  0.5s linear;
     animation:   animateSlideIn  0.5s linear;
-    
      -webkit-transition: width 0.5s; /* Safari */
     transition: width 0.5;
    transition: 0.5s ease;
   -webkit-transition: 0.5s ease;
   -moz-transition: 0.5s ease;
-  
-  
   border-radius:2%;
   box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);
     
  }
  
  .ctcChartBar:hover{
- 
     border-radius:5px 4px 8px 6px;
     border:1px solid rgba(0,0,0,0.9); 
     
