@@ -28,8 +28,6 @@ class ctCommerceMain{
     }
     
     
-    
-    
     /**
      * 
      * 
@@ -107,6 +105,8 @@ class ctCommerceMain{
         add_action('wp_ajax_ctcUpdateProduct' , array($ctcAdminRequiredAjax, 'ctcUpdateProduct'));
         add_action('wp_ajax_ctcPurgeProduct' , array($ctcAdminRequiredAjax, 'ctcPurgeProduct'));
         add_action('wp_ajax_ctcPutBackPurgedProduct' , array($ctcAdminRequiredAjax, 'ctcPutBackPurgedProduct'));
+        add_action('wp_ajax_ctcRemovePurgedProduct' , array($ctcAdminRequiredAjax, 'ctcRemovePurgedProduct'));
+        
         add_action('wp_ajax_ctcAddProductDiscount' , array($ctcAdminRequiredAjax, 'ctcAddProductDiscount'));
         add_action('wp_ajax_ctcGetDiscountUpdateForm',array($ctcAdminRequiredAjax,'ctcGetDiscountUpdateForm'));
         add_action('wp_ajax_ctcUpdateProductDiscount',array($ctcAdminRequiredAjax,'ctcUpdateProductDiscount'));
@@ -164,7 +164,6 @@ class ctCommerceMain{
         wp_enqueue_script('jquery-masonry');
         wp_enqueue_script('imagesloaded');
         wp_enqueue_media();
-        
         wp_enqueue_script( 'jquery-ui-tooltip' );
     }
     

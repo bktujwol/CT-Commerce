@@ -160,11 +160,19 @@ class ctCommerceAdminPanelAjax{
     //ajax function to put back purged product
     public function ctcPutBackPurgedProduct(){
     	$ctcAdminPanelProcessing = new ctCommerceAdminPanelProcessing();
+    	$ctcAdminPanelHtml = new ctCommerceAdminHtml();
     	
-    	
-    	$ctcAdminPanelProcessing->ctcReAddPurgedProduct($_POST['productId']);
+    	$ctcAdminPanelHtml->ctcProductReAddFormHtml($ctcAdminPanelProcessing->ctcReAddPurgedProduct($_POST['productId']));
     	
     	wp_die();
+    }
+    
+    //ajax to remove product from purged table
+    public function ctcRemovePurgedProduct(){
+        $ctcAdminPanelProcessing = new ctCommerceAdminPanelProcessing();
+        echo $ctcAdminPanelProcessing->ctcProcessRemovePurgedProduct($_POST['productId']);
+        wp_die();
+        
     }
   
     

@@ -1216,12 +1216,9 @@ function ctcCheckEmptyShippingAddress(){
 							    	
 						
 						     jQuery.get(uspsUrl, validationData, function(response){
-						    	 
-						    	 
+						    	 		    	 
 						    	 var addressError = jQuery(response).contents().find("Description").text();
-						    	 
-						    	 
-						    	 
+				
 							    	if( addressError.length !== 0 ){
 					
 							    		

@@ -999,6 +999,8 @@ var categoryData =[];
 					  jQuery('.ctcAdditionaImages').empty().hide();
 					  jQuery('#ctcVideoThumb').remove();
 					  jQuery('.ctcPrimaryPicThumb img').hide().attr('src','');
+					  
+					 
 				  }
 				  else{
 					  
@@ -1815,17 +1817,21 @@ jQuery('.ctcProductPrimaryPic').ctcOverlay();
 		 var data = {  
 			 		'action' : 'ctcPutBackPurgedProduct',
 			 		'productId' : jQuery(this).attr('data-type-id')
-			 		
-			 		
+		 
 		 }
 		 
 		 
+		 $.ctcOverlayEl({elemHeight:'760px',elemWidth:'63%',ajaxUrl:ajaxurl, ajaxData:data,ajaxMethod:'POST' });
+		 
+		 /*
+		  * height: 760px; width: 63%; margin-left: 252.5px; margin-top: 132px; opacity: 1;
 		 jQuery.post(ajaxurl, data, function(response){
 			 
+			 $.ctcOverlayEl({ });
 			 if(response == 1){
 				 
 				 alert("Product sucessfully added back.");
-				 jQuery('#ctcPurgedProductRow'+data['productId']).remove();
+				 
 			 }
 			 else{
 				 
@@ -1837,10 +1843,97 @@ jQuery('.ctcProductPrimaryPic').ctcOverlay();
 		        alert( "Action could not be completed at this time \nPlease try again later");
 		  
 		    });
+		    */
 		   
 	   });
 	   
-	   
+	 //this part handles ajax re add purged product button click
+	   jQuery(document).on('submit','#ctcReAddProductForm',function(event){
+
+	  	var emptyField =[];
+	  	 var i =0;
+	  	jQuery('.ctcRequiredField').each(function(){
+	  		//alert(jQuery(this).attr('id'));
+	  		
+	  		
+	  		var fieldVal = jQuery(this).val() ;
+	  		
+
+	  		
+	  		if(!jQuery.trim(fieldVal)){
+	  		
+	  			
+	  			emptyField[i] = jQuery(this).val();
+	  			
+	  			jQuery(this).parent('div').find('span.ctcRequiredFieldWarning').remove();
+	  			jQuery(this).css('border','2px solid red').parent('div').prepend('<span  style="margin-bottom:5px;color:red; font-weight:200;" class="dashicons dashicons-warning ctcRequiredFieldWarning">Required field</span>');
+	  			
+	  			i++;
+	  		}
+	  		else{
+	  			 jQuery(this).removeAttr('style').parent('div').find('span.ctcRequiredFieldWarning').remove();
+	  		}
+
+	  		
+	  	});
+	  	
+
+	  	
+	  	if(emptyField.length >= 1){
+
+	  			return false;
+	  	
+	     }
+
+	  		  var formData = jQuery('#ctcReAddProductForm').serializeArray();
+	  		  
+	  		
+	  		   
+	  		  var  data ={
+	  				   
+	  				   'action': 'ctcAddProduct',
+	  				   'productData': JSON.stringify(formData)
+	  				   
+	  		   }
+	  		  
+	  		
+	  		   
+	  		  //trigger ajax to add product
+	  			jQuery.post(ajaxurl, data, function(response) {
+	  			
+	  				
+	  				
+	  				  if(response >= 1){
+
+	  					jQuery.post(ajaxurl, {action:'ctcRemovePurgedProduct','productId':jQuery('#ctcReAddProductButton').attr('data-product-id')}, function(response) {
+	  						
+	  					});
+	  					
+	  					  alert('Product sucessfully added back.');
+	  					  jQuery('#ctcPurgedProductRow'+jQuery('#ctcReAddProductButton').attr('data-product-id')).remove();
+	  					  jQuery('#ctcOverlayElClosebtn').trigger('click');
+	  					 // document.getElementById("ctcAddProductForm").reset();
+	  					  //jQuery('.ctcAdditionaImages').empty().hide();
+	  					  //jQuery('#ctcVideoThumb').remove();
+	  					  //jQuery('.ctcPrimaryPicThumb img').hide().attr('src','');
+	  					  
+	  					 
+	  				  }
+	  				  else{
+	  					  
+	  					  alert('Product could not be re added, Probably it already exists, try updating it');
+
+	  				  }	  
+	  				
+	  			}).fail(function() {
+
+	  		        alert( "Action could not be completed at this time \nPlease try again later");
+	  		  
+	  		    });
+
+	  		  event.preventDefault();
+	  		  return false;
+	   });
 	   jQuery('.ctcPurgedProductPic').ctcOverlay();
 
 /*

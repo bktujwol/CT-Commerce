@@ -811,6 +811,7 @@ class ctCommerceAdminPanelProcessing{
 		    	$result = $wpdb->insert( $wpdb->prefix.'ctCommercePurgedProducts', $row, array('%s','%s','%d','%s','%d','%d'));
 		    	if($result == 1):
 		    	wp_delete_post( $postId, true );
+		    	      $wpdb->delete($wpdb->prefix.'ctcommerceproductrating', array('productId' => $productId), array( '%d' ));
 		    	echo $wpdb->delete($wpdb->prefix.'ctCommerceProducts', array('productId' => $productId), array( '%d' ));
 		    	
 		    	endif;
@@ -818,7 +819,14 @@ class ctCommerceAdminPanelProcessing{
     	
     }
     
-    
+    //function to process purge product removal from table
+    public function ctcProcessRemovePurgedProduct($productId){
+        global $wpdb;
+        if(is_numeric($productId)):
+         echo   $wpdb->delete($wpdb->prefix.'ctCommercePurgedProducts', array('productId'=>$productId));
+         endif;
+         
+    }
    
     
     //function to get list of purged products
@@ -846,13 +854,8 @@ class ctCommerceAdminPanelProcessing{
 	    	
 	    	$row = $wpdb->get_row("SELECT * FROM {$wpdb->prefix}ctCommercePurgedProducts WHERE productId={$productId};", ARRAY_A);
 	    	
-	    	if(!is_null($row)):
-		    	$row['addDate'] = current_time('timestamp');
-	    	   // $row['avilableProducts'] = 'NA-NA-NA~0';
-		    	  if($wpdb->insert( $wpdb->prefix.'ctCommerceProducts', $row)):
-		    	    echo   $wpdb->delete($wpdb->prefix.'ctCommercePurgedProducts', array('productId'=>$productId));
-		    	  endif;  
-	    	endif;
+	    	return $row;
+	    	
     	endif;
     	
     }

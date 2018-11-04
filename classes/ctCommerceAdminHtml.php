@@ -1971,6 +1971,373 @@ class ctCommerceAdminHtml{
              
  
                 
+                //function get product form html
+                
+                public function ctcProductReAddFormHtml($productData){
+                    $ctcAdminPanelProcessing = new ctCommerceAdminPanelProcessing();
+                    
+                    ?>
+                    
+                    <div id="ctcAddProductMain" >
+                    <h4  class="ctcModalHeader dashicons-before dashicons-edit" >  Update Product Information:</h4>
+                   		<form id="ctcReAddProductForm"  autocomplete="on">
+                   		  <div class="ctcAddProductFormTable">
+                                       		     <div class="ctcAddProductLeft">
+                                                       		
+                                                               		<div class="ctcProductFormRow">
+                                                                       			 <div class="ctcProductFormColumn">
+                                                                       			 		<label for="ctcProductName">Product Name : </label>
+                                                                       			 </div>
+                                                                       			 <div class="ctcProductFormColumn">
+                                                                               			 <input id="ctcProductName" type="text" class="ctcRequiredField" required="required"  name="productName" pattern="[^,,|,#,:,~,`,\x22,\x27]+" title="Special Charaters like #,-,:,~ are not allowed" title="Special Charaters like #,-,:,~ are not allowed" size="30" value="<?=trim($productData['productName'])?>"  />
+                                                                                        
+                                                                                         <input id="ctcProductIdUpdate" type="hidden"   name="productId"  value="<?=$productData['productId']?>"  />
+                                                                                       
+                                                                                 </div>
+                                                                     </div>    
+                                                                    <div class="ctcProductFormRow">
+                                                                     	  <div class="ctcProductFormColumn">
+                                                                          		<label for="ctcProductCategorySelect">Product Category : </label>
+                                                                          </div>
+                                                                          <div class="ctcProductFormColumn">
+                                                                        		 <select id="ctcProductCategorySelect" class="widefat ctcRequiredField" required="required" name="categoryName">
+                                                                        		 <option value=''></option>
+                                                                        		 <option data-type-id="<?=$productData['categoryId']?>" value="<?=$productData['categoryName']?>" selected><?=$productData['categoryName']?></option>
+                                                                                   <?php $this->ctcCategoryOptionList($productData['categoryName']); ?>
+                                                                                </select>
+                                                                           </div>
+                                                                      </div>  
+                                                                    <div class="ctcProductFormRow">     
+                                                                        <div class="ctcProductFormColumn">  
+                                                                         	<label for="ctcProductSubCategory1">Sub Category 1 : </label>
+                                                                        </div>
+                                                                         <div class="ctcProductFormColumn"> 
+                                                                         
+                                                                         <?php $subCat = json_decode($ctcAdminPanelProcessing->ctcGetAllSubCategories($productData['categoryId'])); ?>
+                                                                         	
+                                                                         	
+                                                                        
+                                                                         	<select id="ctcProductSubCategory1" class="widefat ctcProductSubCategory1" name="subCategory1">
+                                                                         	<?=$subCat->subCategory1?>
+                                                                                 
+                                                                                </select>
+                                                                                                                                                         	
+                                                               			 </div>
+                                                       			 </div>
+                                                       			    <div class="ctcProductFormRow">
+                                                                   		<div class="ctcProductFormColumn">
+                                                                   			 <label for="ctcProductSubCategory2"> Sub Category 2: </label>
+                                                                   		</div>
+                                                                   		<div class="ctcProductFormColumn">
+                                                                               <select id="ctcProductSubCategory2" class="widefat ctcProductSubCategory2" name="subCategory2">
+                                                                                  <?=$subCat->subCategory2?> 
+                                                                                </select>
+                                                                   		</div>
+                                                       			    </div>
+                                                       			    <div class="ctcProductFormRow">
+                                                                   		<div class="ctcProductFormColumn">
+                                                                   			 <label for="ctcProductSubCategory3"> Sub Category 3: </label>
+                                                                   		</div>
+                                                                   		<div class="ctcProductFormColumn">
+                                                                               <select id="ctcProductSubCategory3" class="widefat ctcProductSubCategory3" name="subCategory3">
+                                                                                   <?=$subCat->subCategory3?> 
+                                                                                </select>
+                                                                   		</div>
+                                                       			    </div>
+                                                       			    
+                                                       			    <div class="ctcProductFormRow">
+                                                                       <div class="ctcProductFormColumn">
+                                                                          <label for="ctcProductInventory">Inventory : </label>
+                                                                      </div>
+                                                                     <div class="ctcProductFormColumn">
+                                                                        <input id="ctcProductInventory" type="number" class="ctcproductInventory "  size="35"  />
+                                                                     
+                                                                    </div>
+                                                                  </div> 
+                                                       			    
+                                                       			    <div class="ctcProductFormRow">
+                                                           			    <div class="ctcProductFormColumn">
+                                                           			  		<label for="ctcAvilableProducts">Available Products: </label>
+                                                           			     </div>
+                                                           			    <div class="ctcProductFormColumn">
+                                                           			    <a id="ctcAddAvilableProductUpdateForm" class="dashicons-before dashicons-plus" title="click here once you are done choosing category" href="JavaScript:void(0);"></a>
+                                                                        
+                                                                        
+                                                                        <a id="ctcRemoveAvilableProductUpdateForm" title="click here if you want to remove selected variation" class="dashicons-before dashicons-trash" href="JavaScript:void(0);"></a>
+                                                                    
+                                                                		 <textarea id="ctcAvilableProducts" class="ctcRequiredField"  required="required" name="avilableProducts" rows="7" cols="30" ><?=trim($productData['avilableProducts'])?>  </textarea>
+                                                                       <input type="hidden" />
+                                                                       
+                                                                       </div>
+                                                                   </div>
+                                                       			 
+                                                                   <div class="ctcProductFormRow">
+                                                                         <div class="ctcProductFormColumn">
+                                                                     	<label for="ctcPrimaryProductImage">Primary Image : </label>
+                                                                       </div>
+                                                                    
+                                                                          <div class="ctcProductFormColumn">
+                                                                         		<input id="ctcPrimaryProductImageUpdate" type="hidden"  type="text" name="primaryImage"    value="<?=$productData['primaryImage']?>"  >
+                                                                         		<a href="JavaScript:void(0);" id="ctcPrimaryImageLibraryUpdate" >
+                                                                                   
+                                                                                         <span class="dashicons dashicons-format-image"></span>
+                                  
+                                                                           	     </a>
+                                                                           	     <span class="ctcPrimaryPicThumbUpdate">
+                                                                           	    <?php  
+                                                                           	     if(!empty($productData['primaryImage'])):
+                                                                           	     
+                                                                           	            $parsed = parse_url( wp_get_attachment_url($productData['primaryImage']) );
+                                                            							$url    = dirname( $parsed [ 'path' ] ) . '/' . rawurlencode( basename( $parsed[ 'path' ] ) );
+                                                            					  ?>
+                                                                           	          <img src="<?=$url?>" />
+                                                                           	     
+                                                                           	     <?php 
+                                                                           	     endif;
+                                                                           	     ?>
+                                                                         		</span>
+                                                                
+                                                                         </div>
+                                                                     </div>
+                                                                   <div class="ctcProductFormRow">
+                                                                      <div class="ctcProductFormColumn">
+                                                                     	<label for="ctcAddtionalProductImages">Adittional Images : </label>
+                                                                     </div>
+                                                                      <div class="ctcProductFormColumn">
+                                                                        <input id="ctcAddtionalProductImagesUpdate" type="hidden" name="addtionalImages" size="35"    value="<?=$productData['addtionalImages']?>"  />
+                                                                     	<a href="JavaScript:void(0);" id="ctcAdditionalImageLibraryUpdate" >
+                                                                                   
+                                                                                         <span class="dashicons dashicons-images-alt"></span>
+                                             
+                                                                           	     </a>
+                                                                     	<div id="ctcAdditionaImagesUpdate" class="ctcAdditionaImagesUpdate">
+                                                                     	<?php if(!empty($productData['addtionalImages'])):
+                                                                     	$gallery = (explode(',',$productData['addtionalImages']));
+                                                                     	
+                                                                     	      
+                                                                     	      
+                                                                     	       $imgNum = count($gallery);
+                                                                     	       
+                                                                     	    
+                                                                     	       
+                                                                     	       if($imgNum<20):
+                                                                     	       
+                                                                                 	      if($imgNum > 3):
+                                                                                 	          if ($imgNum < 6):
+                                                                                 	               $imgWidth = 180/($imgNum);
+                                                                                 	              $imgHeight = 80/($imgNum/2);
+                                                                                 	          
+                                                                                 	          else:
+                                                                                 	              
+                                                                                 	              $imgWidth = 320/($imgNum);
+                                                                                 	              $imgHeight = 150/($imgNum/2);
+                                                                                 	          endif;  
+                                                                                 	     
+                                                                                 	      else:
+                                                                                 	          if($imgNum != 1):
+                                                                                 	              $imgWidth = 60/($imgNum/2);
+                                                                                 	              $imgHeight = 50/($imgNum/2);
+                                                                                 	          
+                                                                                 	          else:
+                                                                                 	              $imgWidth = 50;
+                                                                                 	              $imgHeight = 50;
+                                                                                 	          endif;   
+                                                                                 	     endif;
+                                                                     
+                                                                              else:   	      
+                                                                         	      $imgHeight=35;
+                                                                                  $imgWidth=35;
+                                                                     	      endif;
+                                                                     	      
+                                                                     	      foreach($gallery as $key=> $img):
+                                                                     	
+                                                                     	                  $parsed = parse_url( wp_get_attachment_thumb_url($img));
+                                                                             	          $imgUrl    = dirname( $parsed [ 'path' ] ) . '/' . rawurlencode( basename( $parsed[ 'path' ] ) );
+                                                                           
+                                                                     	          ?>
+                                                                     	          
+                                                                     	          <img width="<?=$imgWidth?>" height="<?=$imgHeight?>" src="<?=$imgUrl?>">
+                                                                     	          
+                                                                     	          <?php    
+                                                                     	          endforeach;
+                                                                     	          
+                                                                     	      endif;      
+                                                                     	?>
+                                                                     	
+                                                                     	
+                                                                     	
+                                                                     	</div>
+                                                                        		
+                                                                     </div>
+                                                                   </div>
+                                                                   <div class="ctcProductFormRow">
+                                                                   
+                                                                         <div class="ctcProductFormColumn">
+                                                                           <label for="ctcProductVideo">Product Video : </label>
+                                                                         </div>
+                                                                         <div class="ctcProductFormColumn">
+                                                                          <input id="ctcProductVideoUpdate" type="hidden" readonly size="15" name="productVideo"  value="<?=$productData['productVideo']?>"  />
+                                                                          <a href="JavaScript:void(0);" id="ctcAddVideoLibraryUpdate" >
+                                                                               <span class="dashicons dashicons-video-alt2">
+                                                                              
+                                                                               </span>
+                                                                           	</a>
+                                                                          <?php
+                                                                       if(!empty($productData['productVideo'])):
+                                                                            $parsed = parse_url( wp_get_attachment_url($productData['productVideo']) );
+                                                                        	$url    = dirname( $parsed [ 'path' ] ) . '/' . rawurlencode( basename( $parsed[ 'path' ] ) );
+                                                                        	?>
+                                                                           
+                                                                        	
+                                                                           	 <video id="ctcVideoThumbUpdate"   src="<?=$url?>" ></video>
+                                                                     
+                                                                         <?php endif; ?>
+                                                                       </div>
+                                                    </div>
+                         
+                                                               	                                          	
+                                                </div>
+                                       
+                                         <div class="ctcAddProductRight" >
+                                         
+                                         		    
+                                                 	  <div class="ctcProductFormRow">
+                                                           			    <div class="ctcProductFormColumn">
+                                                           			  		<label for="ctcProductMetaInfo">Meta Data : </label>
+                                                           			  		<span class="ctcFormComments">Noteworthy features.</span>
+                                                           			     </div>
+                                                           			    <div class="ctcProductFormColumn">
+                                                                		 <input id="ctcProductMetaInfo" type="text" name="metaInfo" size="35"    value="<?=$productData['metaInfo']?>"  />
+                                                                       </div>
+                                                                   </div>
+                                                  <div class="ctcProductFormRow">
+                                                                          <div class="ctcProductFormColumn">
+                                                                            <label for="ctcProductPrice">Price : </label>
+                                                                          </div>
+                                                                           <div class="ctcProductFormColumn">
+                                                                          <input id="ctcProductPrice"  type="number" step="0.01" class="ctcRequiredField" required="required" name="productPrice" size="35"    value="<?=!empty($productData['productPrice'])? trim($productData['productPrice']):''?>"  />
+                                                                          </div>
+                                                                  </div>	
+                                                 	
+                                                  <div class="ctcProductFormRow">
+                                               			 <div class="ctcProductFormColumn">
+                                               			     <label for="ctcProductDimension">Product Dimension  (<?=get_option('ctcLengthUnit') ?>): 
+                                               			     
+                                               			     </label>
+                                               			    
+                                               			 </div>
+                                               			  <div class="ctcProductFormColumn">
+                                                           
+                                                         
+                                                           <span>
+                                                             <input placeholder="Width" type="number"  name="productDimensionWidth" size="6"   pattern='[,~,`,\x22,\x27]+' title='Special Charaters like `:,~,Quotation are not allowed' value="<?=$productData['width']?>"/>
+                                                          </span>
+                                                           <span>
+                                                             <input placeholder="Length" type="number"  name="productDimensionLength" size="6"  pattern='[^~,`,\x22,\x27]+' title='Special Charaters like `:,~,Quotation are not allowed'  value="<?=$productData['length']?>"/>
+                                                          </span>
+                                                           <span >
+                                                             <input  placeholder="Height" type="number"  name="productDimensionHeight" size="6" pattern='[^~,`,\x22,\x27]+' title='Special Charaters like `:,~,Quotation are not allowed'   value="<?=$productData['height']?>"/>
+                                                          </span>
+                                                           <span >
+                                                             <input  placeholder="Girth" type="number"  name="productDimensionGirth" size="6"  pattern='[^`,\x22,\x27]+' title='Special Charaters like `:,~,Quotation are not allowed'   value="<?=$productData['girth']?>"/>
+                                                          </span>
+                                                          </div>
+                                                  </div>
+                                                  <div class="ctcProductFormRow">
+                                                       <div class="ctcProductFormColumn">
+                                                          <label for="ctcProductWeight">Product Weight (<?= get_option('ctcWeightUnit') ?>): </label>
+                                                      </div>
+                                                       <div class="ctcProductFormColumn">
+                                                         <input id="ctcProductWeight" type="number" step="0.01" name="productWeight" required="required" size="20"    value="<?php if($productData['productWeight'] !== '0.00'): echo trim($productData['productWeight']); endif;?>"/>
+                                                         <span class="ctcFormComments"></span>
+                                                       </div>
+                                                  </div>
+                                                  <div class="ctcProductFormRow">
+                                 			             <div class="ctcProductFormColumn">
+                                               			   <label for="ctcProductSku">Product SKU : </label>
+                                               			 </div>
+                                               			  <div class="ctcProductFormColumn">
+                                                            <input id="ctcProductSku" type="text" name="productSku" size="35"    value="<?=trim($productData['productSku'])?>"/>
+                                                          </div>
+                                                  </div>
+                                        		
+                                        		  <div class="ctcProductFormRow">
+                                           			  <div class="ctcProductFormColumn">
+                                           			     <label for="ctcProductPreOrder">Pre Order : </label>
+                                           			  </div>
+                                       			     <div class="ctcProductFormColumn">
+
+                                                 		<input id="ctcProductPreOrder" type="checkbox" name="preOrder" size="35"  value="1"   <?=$productData['preOrder']==1? "checked = 'checked'":""?>/>
+                                       			      <span class="ctcFormComments">If pre order is available for this product</span>
+                                       			     </div>
+                                       			 </div>
+                                       			 <div class="ctcProductFormRow">
+                                               			  <div class="ctcProductFormColumn">	
+                                               		       <label for="ctcfeatureProduct">Feature This Products? : </label>
+                                               		       </div>
+                                           		        <div class="ctcProductFormColumn">
+                                                         <input id="ctcFeatureProduct" type="checkbox" name="featureProduct" size="35"  value="1"  <?=$productData['featureProduct'] == 1?"checked = 'checked'":" "?>/>
+                                           			   <span class="ctcFormComments">Customer will see product in main page.</span>
+                                           			    </div>
+                                       			</div>
+
+                                                  <div class="ctcProductFormRow">
+                                                       <div class="ctcProductFormColumn">
+                                           			      <label for="ctcProductPostId">Create product post?: </label>
+                                           			      
+                                           			    </div>
+                                           			   <div class="ctcProductFormColumn">
+                                                           <input id="ctcProductPostId" title="Create blog post about this product?" type="checkbox" name="createProductPost"   value="1" <?=$productData['productPostId'] >= 1? "value='1'  checked ='checked'":"value='0'"?> />
+                                           			  	  <input type="hidden" id="ctcProductPostId"	name="productPostId" value="<?=$productData['productPostId']?>" />
+                                           			  <span class="ctcFormComments">Required for customers to write review. </span>
+                                           			   </div>
+                                       			 </div>
+
+                                                <div class="ctcProductFormRow">
+                                                           <div class="ctcProductFormColumn ctcAddProductTextareaLable">
+                                                           <label for="ctcProductDescription">Product Description : </label>
+                                                          </div>
+                                                           <div class="ctcProductFormColumn">
+                                                          
+                                                           <textarea id="ctcProductDescription" class="mceEditor"  rows="15" cols="36" placeholder="Brief description of product...." name="productDescription"><?=trim($productData['productDescription'])?></textarea>
+                                           			   </div>
+                                       			</div>
+                                       			
+                                       			<div class="ctcProductFormRow ">
+                                       			      <span class="ctcProductFormColumn">
+                                                   
+                                                    	
+                                                   	
+                                                   	
+                                                   	</span>
+                                                   	
+                                                    <span class="ctcProductFormColumn">
+                                                   	
+                                                  <?php
+                                                  submit_button("Re Add Product",'primary',"ctcReAddProductButton",FALSE,array('data-product-id'=>$productData['productId']));
+                                                  ?>
+                                                  
+                                                  </span>
+                                                    	
+                            	           </div>  
+                                       			
+                                       			
+                        			     </div>	
+                        			     
+                            
+                        			  
+                   		</div>
+           
+           
+                     
+                    </form>
+                  
+                   </div>
+                    
+                   <?php  
+                    
+                }
+                
                 
                 //function to handle purged products
                 public function ctcPurgeProducts(){
