@@ -1912,10 +1912,7 @@ jQuery('.ctcProductPrimaryPic').ctcOverlay();
 	  					  alert('Product sucessfully added back.');
 	  					  jQuery('#ctcPurgedProductRow'+jQuery('#ctcReAddProductButton').attr('data-product-id')).remove();
 	  					  jQuery('#ctcOverlayElClosebtn').trigger('click');
-	  					 // document.getElementById("ctcAddProductForm").reset();
-	  					  //jQuery('.ctcAdditionaImages').empty().hide();
-	  					  //jQuery('#ctcVideoThumb').remove();
-	  					  //jQuery('.ctcPrimaryPicThumb img').hide().attr('src','');
+	  					
 	  					  
 	  					 
 	  				  }

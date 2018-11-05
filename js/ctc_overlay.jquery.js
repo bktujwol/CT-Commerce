@@ -22,8 +22,8 @@
 						overlayContainer += '<div  id="ctcOverlay" class="ctcOverlay">'; 
 						
 						
-						overlayContainer +='<span id="ctcOverlayClosebtn" title="close" class="ctcOverlayClosebtn" ></span>';
-						overlayContainer +='<div id="ctcOverlayImageContainer" class="ctcOverlayImageContainer overlayContentloading">';
+						overlayContainer +='<span id="ctcOverlayClosebtn" title="close" class="ctcOverlayClosebtn  overlayContentloading" ></span>';
+						overlayContainer +='<div id="ctcOverlayImageContainer" class="ctcOverlayImageContainer">';
 						overlayContainer +='<span id="ctcGalleryLeftNav" class="ctcGalleryLeftNav"></span>';
 						overlayContainer +='<span id="ctcGalleryRightNav" class="ctcGalleryRightNav"></span>';
 						overlayContainer +='<div id="ctcOverlayCountAndCurrentImage" class="ctcOverlayCountAndCurrentImage">';
@@ -153,14 +153,13 @@
 	});
 
 	$(this).on('mouseover',function(event){
-		
 		if($(this).attr('data-ctc-active-gallery') != 'active'){
 				let overlayImageGallery ='';
 				let i=0;
 				
-				//$('.ctcOverlayLoadedImage').removeAttr('data-img-number');
-				$("*[data-ctc-active-gallery = 'active']").removeAttr('data-ctc-active-gallery').add("img").removeAttr('data-img-number').removeClass('.ctcOverlayLoadedImage');
 				
+				$("*[data-ctc-active-gallery = 'active']").removeAttr('data-ctc-active-gallery');
+				$("img[data-img-number]").removeClass('ctcOverlayLoadedImage').removeAttr('data-img-number');
 				
 				$('img',this).each(function(){
 					$(this).addClass('ctcOverlayLoadedImage').attr('data-img-number',i);
@@ -198,7 +197,7 @@
 			var image = new Image();
 			var imageToLoad = image.src = $('.ctcOverlayLoadedImage[data-img-number = "'+currentImageNumber+'"]').attr('src');//$("*[data-img-number ='"+currentImageNumber+"']").attr('src');
 
-	 $('.ctcOverlayImageContainer').addClass('overlayContentloading');	
+			$('#ctcOverlayClosebtn').addClass('overlayContentloading');
 	 
 	  image.addEventListener('load',function(){
 		  $('.ctcOverlayImageContainer').removeClass('overlayContentloading');
@@ -230,24 +229,7 @@
 			 
 			
 			
-			//first load image title or alt first
-			  let imgTitle = $('.ctcOverlayLoadedImage[data-img-number = "'+currentImageNumber+'"]').attr('title');
-			  let imgAlt = $('.ctcOverlayLoadedImage[data-img-number = "'+currentImageNumber+'"]').attr('alt');
-						//first load alt image
-							if(returnImgTitleAlt(imgTitle)){
-								
-								    $('#ctcLoadedImgAltTitle').show().empty().prepend(imgTitle);
-								  }
-						    else if(returnImgTitleAlt(imgAlt)){
-						    	
-								    $('#ctcLoadedImgAltTitle').show().empty().prepend(imgAlt);
-								  }
-							
-							  else{
-								 
-								  $('#ctcLoadedImgAltTitle').hide().empty();
-								  
-						}
+			
 							
 							var totalImageCount = $('.ctcOverlayLoadedImage').length;
 		
@@ -258,7 +240,7 @@
 															var prevImage = imageNumberToLoad-1;
 															var nextImage = imageNumberToLoad+1;
 																
-															
+															$('#ctcOverlayCountAndCurrentImage').css('visibility','visible');
 												
 																		if(prevImage >= 0  && nextImage < totalImageCount){
 																		
@@ -266,7 +248,7 @@
 																			$('#ctcGalleryRightNav').attr('data-img-number',nextImage);
 																			$('#ctcOverlayCurrentImageNumber').empty().prepend('Image '+(imageNumberToLoad+1));
 																			$('#ctcOverlayTotalImageCount').empty().prepend(' of '+totalImageCount);
-																			$('#ctcGalleryLeftNav,.ctcGalleryRightNav').animate({opacity:1},100, function(){jQuery(this).css('cursor','pointer');});
+																			$('#ctcGalleryLeftNav,.ctcGalleryRightNav').animate({opacity:1},100, function(){$(this).css({'cursor':'pointer','visibility':'visible'});});
 																
 																		}
 																		else if(prevImage < 0  && nextImage < totalImageCount){
@@ -275,7 +257,7 @@
 																			$('#ctcGalleryRightNav').attr('data-img-number',nextImage);
 																			$('#ctcOverlayCurrentImageNumber').empty().prepend('Image '+(imageNumberToLoad+1));
 																			$('#ctcOverlayTotalImageCount').empty().prepend(' of '+totalImageCount);
-																			$('#ctcGalleryRightNav').animate({opacity:1},100, function(){jQuery(this).css('cursor','pointer');});
+																			$('#ctcGalleryRightNav').animate({opacity:1},100, function(){$(this).css({'cursor':'pointer','visibility':'visible'});});
 																			
 																			
 																		}
@@ -285,7 +267,7 @@
 																			$('#ctcGalleryLeftNav').attr('data-img-number',prevImage);
 																			$('#ctcOverlayCurrentImageNumber').empty().prepend('Image '+(imageNumberToLoad+1));
 																			$('#ctcOverlayTotalImageCount').empty().prepend(' of '+totalImageCount);
-																			$('#ctcGalleryLeftNav').animate({opacity:1},100, function(){jQuery(this).css('cursor','pointer');});
+																			$('#ctcGalleryLeftNav').animate({opacity:1},100, function(){$(this).css({'cursor':'pointer','visibility':'visible'});});
 																			
 																		
 																		}	
@@ -401,8 +383,7 @@
 	           $("#ctcOverlay").animate({width:screenWidth,height:screenHeight,opacity:1},200,function(){	
 	        	var containerMarginTop = (screenHeight-optimizedImageHeight)/2;
 	        	var containerMarginLeft = (screenWidth-optimizedImageWidth)/2;
-				var navIconMargin = ((optimizedImageHeight-(2*optimizedFontSize))/2)+'px';	//((optimizedImageHeight-$('#ctcGalleryRightNav').height())-$('#ctcOverlayCountAndCurrentImage').height())/2+'px';
-				var closeButton =  $('#ctcOverlayClosebtn');
+				var navIconMargin = ((optimizedImageHeight-(2*optimizedFontSize))/2)+'px';	
 				//var ctcExtraInfoTop = screenHeight-50;
 				
 				
@@ -413,12 +394,15 @@
 															  									'margin-top':containerMarginTop+'px','width':optimizedImageWidth+'px','height':optimizedImageHeight+'px',})
 															 							   .animate({
 																							      	  opacity:1,
-																								      //'padding-top':((optimizedImageHeight-$('#ctcGalleryRightNav').height())-$('#ctcOverlayCountAndCurrentImage').height())/3+'px'
+																								     
 																									  },300,function(){	
 															  
 															  
 															  closeButton.animate({'margin-right':(screenWidth-optimizedImageWidth-containerMarginLeft-(closeButton.width()/1.2))+'px'},300,function(){
-																	$(this).animate({'margin-top':(containerMarginTop-($(this).height()/1.5))+'px'},250,function(){});
+																	$(this).animate({'margin-top':(containerMarginTop-($(this).height()/1.5))+'px'},250,function(){
+																		
+																		$('#ctcOverlayClosebtn').removeClass('overlayContentloading');
+																	});
 																 });
 	
 												 }).attr('data-overlay-img',currentImageNumber);	
@@ -449,10 +433,30 @@
 																	      	  opacity:1,
 																		      
 																			  },300,function(){		
+																				  
+																				  
+																				//first load image title or alt first
+																				  let imgTitle = $('.ctcOverlayLoadedImage[data-img-number = "'+currentImageNumber+'"]').attr('title');
+																				  let imgAlt = $('.ctcOverlayLoadedImage[data-img-number = "'+currentImageNumber+'"]').attr('alt');
+																							//first load alt image
+																								if(returnImgTitleAlt(imgTitle)){
+																									
+																									    $('#ctcLoadedImgAltTitle').show().empty().prepend(imgTitle);
+																									  }
+																							    else if(returnImgTitleAlt(imgAlt)){
+																							    	
+																									    $('#ctcLoadedImgAltTitle').show().empty().prepend(imgAlt);
+																									  }
+																								
+																								  else{
+																									 
+																									  $('#ctcLoadedImgAltTitle').hide().empty();
+																									  
+																							}
 										 
 													closeButton.animate({'margin-right':(screenWidth-optimizedImageWidth-containerMarginLeft-(closeButton.width()/1.2))+'px'},300,function(){
 																						$(this).animate({'margin-top':(containerMarginTop-($(this).height()/1.5))+'px'},250,function(){});
-																						 
+																						$('#ctcOverlayClosebtn').removeClass('overlayContentloading');
 																					 });
 										  
 												 
