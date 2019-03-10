@@ -47,7 +47,7 @@ class ctCommerceAdminHtml{
            ?>
                   <h1><span class="dashicons dashicons-admin-home">&nbsp;&nbsp;</span>CT Commerce Admin Panel</h1>
            <?php        
-                self::ctcAdminPanelTab();
+                 self::ctcAdminPanelTab();
                  self::ctcAdminPanelHtml(); 
 
             else:
@@ -3482,10 +3482,7 @@ class ctCommerceAdminHtml{
     	$categoryInventory = $ctcAdminpanelProcssing->ctcGetProductSnapshot();
     	
     ?>
-    
-  
-			
-			
+
 			<?php 
 			$i=0;
 			
@@ -3501,14 +3498,9 @@ class ctCommerceAdminHtml{
 					data-product-name='<?=$key?>'
 					data-product-precent='<?=$productPercent?>'
 					style="width:<?=$productPercent?>%;"  class="ctcChartBar"  title="Inventory : <?=$val?>" >
-		
 			</li>
 			
 		</div>
-			
-				
-			
-			
 			
     		<?php 
     		$i++;
@@ -3529,9 +3521,7 @@ class ctCommerceAdminHtml{
     	$ctcAdminpanelProcssing = new ctCommerceAdminPanelProcessing();
     	$salesReport = $ctcAdminpanelProcssing->ctcGetSalesReportData();
     	$pendingOrders = $ctcAdminpanelProcssing->ctcGetPendingOrdersCount();
-    	
-    	
-    	
+    
     	if(!empty($salesReport[4])):
     	?>
     	

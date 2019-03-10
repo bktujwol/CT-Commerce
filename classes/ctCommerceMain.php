@@ -238,7 +238,6 @@ class ctCommerceMain{
     	add_shortcode('ctcPostSocialbarSharing', array($ctcFrontEndHtml,'ctcPostSocialbarSharing'));
     	add_shortcode('ctcPostGalleryOverlay', array($ctcFrontEndHtml,'ctcPostGalleryOverlay'));
     	
-    	
     }
     
     //function to add required filters

@@ -1,10 +1,10 @@
 === CT Commerce ===
 Contributors: UjW0l
-Tags: e-commerce, online shop,selling tool
+Tags: e-commerce, online shop,selling tool, one step e-commerce solution 
 Requires at least: 4.9
-Tested up to: 4.9
+Tested up to: 5.1
 Requires PHP: 5 or Higher
-Stable tag: 1.0.0 Beta 1
+Stable tag: 1.0.1
 License: GPLV2
 
 e-commerce Web app built for WordPress. Mostly runs on frontend for better website speed and performance
@@ -60,7 +60,9 @@ You can create add/update/remove discount along with promo code and clearance.
 
 You can view pending orders and complete orders and it also print shipping labels for shipping
 
-You can also process refund from backend 
+You can also process refund from backend.
+
+
 
 
 
@@ -90,4 +92,10 @@ Or you can download it and upload it manually
 * Bug fixes
 * Improvement to the built in overlay
 * Improvemed  UI
+
+= 1.0.1 =
+* Bug fixes
+* Improvement to the built in overlay
+* Product categries page bug fixes
+
 

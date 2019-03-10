@@ -22,8 +22,8 @@
 						overlayContainer += '<div  id="ctcOverlay" class="ctcOverlay">'; 
 						
 						
-						overlayContainer +='<span id="ctcOverlayClosebtn" title="close" class="ctcOverlayClosebtn  overlayContentloading" ></span>';
-						overlayContainer +='<div id="ctcOverlayImageContainer" class="ctcOverlayImageContainer">';
+						overlayContainer +='<span id="ctcOverlayClosebtn" title="close" class="ctcOverlayClosebtn overlayContentloading" ></span>';
+						overlayContainer +='<div id="ctcOverlayImageContainer" class="ctcOverlayImageContainer ">';
 						overlayContainer +='<span id="ctcGalleryLeftNav" class="ctcGalleryLeftNav"></span>';
 						overlayContainer +='<span id="ctcGalleryRightNav" class="ctcGalleryRightNav"></span>';
 						overlayContainer +='<div id="ctcOverlayCountAndCurrentImage" class="ctcOverlayCountAndCurrentImage">';
@@ -123,6 +123,7 @@
 						},
 					    100,
 					    function(){
+						
 							  $('body').css('overflow','auto');
 						});
 		});	
@@ -197,10 +198,10 @@
 			var image = new Image();
 			var imageToLoad = image.src = $('.ctcOverlayLoadedImage[data-img-number = "'+currentImageNumber+'"]').attr('src');//$("*[data-img-number ='"+currentImageNumber+"']").attr('src');
 
-			$('#ctcOverlayClosebtn').addClass('overlayContentloading');
+	$('#ctcOverlayClosebtn').addClass('overlayContentloading');
 	 
 	  image.addEventListener('load',function(){
-		  $('.ctcOverlayImageContainer').removeClass('overlayContentloading');
+		  
 		  $('body').css('overflow','hidden');
 		  
 			imageActualHeight = image.height;
@@ -229,21 +230,26 @@
 			 
 			
 			
-			
+	
 							
 							var totalImageCount = $('.ctcOverlayLoadedImage').length;
-		
-						    if(totalImageCount >= 2){
-			
 							
+							
+							
+							
+						    if(totalImageCount > 1){
+			
+						    			
 															var imageNumberToLoad = parseInt(currentImageNumber);
 															var prevImage = imageNumberToLoad-1;
 															var nextImage = imageNumberToLoad+1;
-																
+															
 															$('#ctcOverlayCountAndCurrentImage').css('visibility','visible');
+															
 												
 																		if(prevImage >= 0  && nextImage < totalImageCount){
 																		
+																			
 																			$('#ctcGalleryLeftNav').attr('data-img-number',prevImage);
 																			$('#ctcGalleryRightNav').attr('data-img-number',nextImage);
 																			$('#ctcOverlayCurrentImageNumber').empty().prepend('Image '+(imageNumberToLoad+1));
@@ -252,8 +258,8 @@
 																
 																		}
 																		else if(prevImage < 0  && nextImage < totalImageCount){
-																		
-																			$('#ctcGalleryLeftNav').attr('data-img-number','').animate({opacity:0},300, function(){jQuery(this).css('cursor','initial');});
+																			
+																			$('#ctcGalleryLeftNav').attr('data-img-number','').animate({opacity:0},300, function(){$(this).css('cursor','initial');});
 																			$('#ctcGalleryRightNav').attr('data-img-number',nextImage);
 																			$('#ctcOverlayCurrentImageNumber').empty().prepend('Image '+(imageNumberToLoad+1));
 																			$('#ctcOverlayTotalImageCount').empty().prepend(' of '+totalImageCount);
@@ -263,13 +269,12 @@
 																		}
 																		else if (prevImage >= 0 && nextImage >= totalImageCount){
 																			
-																			$('#ctcGalleryRightNav').attr('data-img-number','').animate({opacity:0},300, function(){jQuery(this).css('cursor','initial');});
+																			$('#ctcGalleryRightNav').attr('data-img-number','').animate({opacity:0},300, function(){$(this).css('cursor','initial');});
 																			$('#ctcGalleryLeftNav').attr('data-img-number',prevImage);
 																			$('#ctcOverlayCurrentImageNumber').empty().prepend('Image '+(imageNumberToLoad+1));
 																			$('#ctcOverlayTotalImageCount').empty().prepend(' of '+totalImageCount);
 																			$('#ctcGalleryLeftNav').animate({opacity:1},100, function(){$(this).css({'cursor':'pointer','visibility':'visible'});});
 																			
-																		
 																		}	
 															
 						}	
@@ -277,6 +282,8 @@
 				
 							imageNumberToLoad = currentImageNumber;
 							$('#ctcGalleryRightNav,#ctcGalleryLeftNav,#ctcOverlayCountAndCurrentImage').css('visibility','hidden');
+							
+							
 					
 						}	
 			
@@ -384,6 +391,7 @@
 	        	var containerMarginTop = (screenHeight-optimizedImageHeight)/2;
 	        	var containerMarginLeft = (screenWidth-optimizedImageWidth)/2;
 				var navIconMargin = ((optimizedImageHeight-(2*optimizedFontSize))/2)+'px';	
+				var closeButton =  $('#ctcOverlayClosebtn');
 				//var ctcExtraInfoTop = screenHeight-50;
 				
 				
@@ -394,8 +402,27 @@
 															  									'margin-top':containerMarginTop+'px','width':optimizedImageWidth+'px','height':optimizedImageHeight+'px',})
 															 							   .animate({
 																							      	  opacity:1,
-																								     
 																									  },300,function(){	
+																										  
+																											//first load image title or alt first
+																			 let imgTitle = $('.ctcOverlayLoadedImage[data-img-number = "'+currentImageNumber+'"]').attr('title');
+																			 let imgAlt = $('.ctcOverlayLoadedImage[data-img-number = "'+currentImageNumber+'"]').attr('alt');
+																						//first load alt image
+																						if(returnImgTitleAlt(imgTitle)){
+																															
+																								$('#ctcLoadedImgAltTitle').show().empty().prepend(imgTitle);
+																							}
+																							else if(returnImgTitleAlt(imgAlt)){
+																													    	
+																								 $('#ctcLoadedImgAltTitle').show().empty().prepend(imgAlt);
+																								}
+																														
+																							 else{
+
+																									$('#ctcLoadedImgAltTitle').hide().empty();						  
+																								}
+																																																								  
+																										  
 															  
 															  
 															  closeButton.animate({'margin-right':(screenWidth-optimizedImageWidth-containerMarginLeft-(closeButton.width()/1.2))+'px'},300,function(){
@@ -433,30 +460,14 @@
 																	      	  opacity:1,
 																		      
 																			  },300,function(){		
-																				  
-																				  
-																				//first load image title or alt first
-																				  let imgTitle = $('.ctcOverlayLoadedImage[data-img-number = "'+currentImageNumber+'"]').attr('title');
-																				  let imgAlt = $('.ctcOverlayLoadedImage[data-img-number = "'+currentImageNumber+'"]').attr('alt');
-																							//first load alt image
-																								if(returnImgTitleAlt(imgTitle)){
-																									
-																									    $('#ctcLoadedImgAltTitle').show().empty().prepend(imgTitle);
-																									  }
-																							    else if(returnImgTitleAlt(imgAlt)){
-																							    	
-																									    $('#ctcLoadedImgAltTitle').show().empty().prepend(imgAlt);
-																									  }
-																								
-																								  else{
-																									 
-																									  $('#ctcLoadedImgAltTitle').hide().empty();
-																									  
-																							}
 										 
 													closeButton.animate({'margin-right':(screenWidth-optimizedImageWidth-containerMarginLeft-(closeButton.width()/1.2))+'px'},300,function(){
-																						$(this).animate({'margin-top':(containerMarginTop-($(this).height()/1.5))+'px'},250,function(){});
-																						$('#ctcOverlayClosebtn').removeClass('overlayContentloading');
+																						$(this).animate({'margin-top':(containerMarginTop-($(this).height()/1.5))+'px'},250,function(){
+																							
+																							$('#ctcOverlayClosebtn').removeClass('overlayContentloading');
+																							
+																						});
+																						 
 																					 });
 										  
 												 

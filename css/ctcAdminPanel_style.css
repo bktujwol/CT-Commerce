@@ -337,8 +337,6 @@ div.ctcBasicInfoGrid  {
  div.ctcAdminInstruction,
  div.ctcAdminPanelShortcodes{
   margin-bottom:0px;
-  -webkit-animation:   animateComponentSlide  0.7s linear;
-   animation:   animateComponentSlide  0.7s linear;
   -webkit-transition: width 0.5s; /* Safari */
    transition: width 0.5;
    transition: 0.5s ease;

@@ -225,12 +225,12 @@ class ctCommerceFrontendContent{
 	   
 	   ?>
 	          
-	             <div class="ctcCategoryLinkContainer">
+	             <div class="ctcCategoryLinkContainer" data-category-name="<?=$key?>">
 	             
-			     <a class="ctcCategoryLink" href="<?=home_url()?>/product-category/?category=<?=$key?>">
+			     <a class="ctcCategoryLink" href="<?=home_url()?>/product-category/?category=<?=$key?>" >
 			   
 				         <?=  wp_get_attachment_image($images[$randomImage] ,array('295','295'));?>
-				            <?=$key?> 
+				           
 				   </a>
 			   </div>
 		
