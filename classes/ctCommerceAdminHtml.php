@@ -1748,9 +1748,6 @@ class ctCommerceAdminHtml{
                                                                      	      
                                                                      	      
                                                                      	       $imgNum = count($gallery);
-                                                                     	       
-                                                                     	    
-                                                                     	       
                                                                      	       if($imgNum<20):
                                                                      	       
                                                                                  	      if($imgNum > 3):
