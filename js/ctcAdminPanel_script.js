@@ -679,7 +679,7 @@ var categoryData =[];
 				var file = selectionCollection.map( function( attachment ) {
 					  attachment = attachment.toJSON();
 	
-					   thumb = attachment.sizes.thumbnail.url;
+					   thumb = attachment.sizes.full.url;
 					  id =  attachment.id;
 					  
 					  return false;
@@ -757,7 +757,7 @@ var categoryData =[];
 
 					  
 					 imagesId[i] = attachment.id;
-					 imagesThumb[i] = attachment.sizes.thumbnail.url;;
+					 imagesThumb[i] = attachment.sizes.full.url;;
 					  
 					 i++;
 					  
@@ -1028,7 +1028,7 @@ var categoryData =[];
  });
  
 //apply overlay to primary pic on product list
-jQuery('.ctcProductPrimaryPic').ctcOverlay();
+//jQuery('.ctcProductPrimaryPic').ctcOverlay();
 
  
  
@@ -1319,13 +1319,14 @@ jQuery('.ctcProductPrimaryPic').ctcOverlay();
 				var file = selectionCollection.map( function( attachment ) {
 					  attachment = attachment.toJSON();
 	
-					   thumb = attachment.sizes.thumbnail.url;
+						console.log(attachment);
+					   thumb = attachment.sizes.full.url;
 					  id =  attachment.id;
 					  
 					  return false;
 					}).join();
 				
-				 jQuery('.ctcPrimaryPicThumbUpdate').empty().append('<img src="'+thumb+'" style="display:block;"/>');
+				 jQuery('.ctcPrimaryPicThumbUpdate').removeClass('ctcActiveGalleryV').empty().append('<img src="'+thumb+'" style="display:block;"/>');
 					
 			     jQuery('#ctcPrimaryProductImageUpdate').val(id);
 
@@ -1402,7 +1403,7 @@ jQuery('.ctcProductPrimaryPic').ctcOverlay();
 					
 					  
 					 imagesId[i] = attachment.id;
-					 imagesThumb[i] = attachment.sizes.thumbnail.url;;
+					 imagesThumb[i] = attachment.sizes.full.url;;
 					  
 					 i++;
 					  
@@ -1450,14 +1451,14 @@ jQuery('.ctcProductPrimaryPic').ctcOverlay();
 			
 				for(var i in imagesThumb){
 					 
-					 productCollage += '<div class="ctcImgAlbumUpdate"><img   style="width:'+imgWidth+'px;  height:'+imgHeight+'px;" class="gridImg"  src="'+imagesThumb[i]+'" /></div>';  
+					 productCollage += '<div class="ctcImgAlbumUpdate" ><img   style="width:'+imgWidth+'px;  height:'+imgHeight+'px;" class="gridImg"  src="'+imagesThumb[i]+'" /></div>';  
 
 				 }
 				
 					jQuery('.ctcAdditionaImagesUpdate').masonry('destroy');
 				
 				
-				jQuery('.ctcAdditionaImagesUpdate').empty().show().prepend(productCollage);
+				jQuery('.ctcAdditionaImagesUpdate').removeClass('ctcActiveGalleryV').empty().show().prepend(productCollage);
 				
 				
 				
@@ -1840,7 +1841,7 @@ jQuery('.ctcProductPrimaryPic').ctcOverlay();
 	   });
 	   
 	   
-	   jQuery('.ctcPurgedProductPic').ctcOverlay();
+	  // jQuery('.ctcPurgedProductPic').ctcOverlay();
 
 /*
  * 
@@ -1944,13 +1945,13 @@ jQuery('.ctcProductPrimaryPic').ctcOverlay();
 				var file = selectionCollection.map( function( attachment ) {
 					  attachment = attachment.toJSON();
 	
-					   thumb = attachment.sizes.thumbnail.url;
+					   thumb = attachment.sizes.full.url;
 					  id =  attachment.id;
 					  
 					  return false;
 					}).join();
 				
-				 jQuery('.ctcDiscountPicThumb').empty().append('<img src="'+thumb+'" style="display:block;"/>');
+				 jQuery('.ctcDiscountPicThumb').removeClass('ctcActiveGalleryV').empty().append('<img src="'+thumb+'" style="display:block;"/>');
 					
 			     jQuery('#ctcCouponImage').val(id);
 
@@ -2037,7 +2038,7 @@ jQuery('.ctcProductPrimaryPic').ctcOverlay();
 		  return false;
 	  }); 
 	   
-	  jQuery(".ctcDiscountThumb").ctcOverlay();
+	 // jQuery(".ctcDiscountThumb").ctcOverlay();
 	  
 	  //script to add dicount image
 	   jQuery(document).on('click', '#ctcCouponImageLibraryUpdate',function(){
@@ -2090,13 +2091,13 @@ jQuery('.ctcProductPrimaryPic').ctcOverlay();
 				var file = selectionCollection.map( function( attachment ) {
 					  attachment = attachment.toJSON();
 	
-					   thumbImg = attachment.sizes.thumbnail.url;
+					   thumbImg = attachment.sizes.full.url;
 					    id =  attachment.id;
 					  
 					  return false;
 					}).join();
 				
-				 jQuery('.ctcDiscountPicThumbUpdate').empty().append('<img src="'+thumbImg+'" style="display:block;"/>');
+				 jQuery('.ctcDiscountPicThumbUpdate').removeClass('ctcActiveGalleryV').empty().append('<img src="'+thumbImg+'" style="display:block;"/>');
 				 
 			     jQuery('input[name="couponImage"]').val(id);
 

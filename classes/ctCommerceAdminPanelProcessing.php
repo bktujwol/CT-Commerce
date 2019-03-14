@@ -932,9 +932,12 @@ class ctCommerceAdminPanelProcessing{
 	    		$resultProducts[] = $product['productName'];
 	    		
 	    	}
-	    	
-	    	return implode(',',$resultProducts);
-	  
+			
+			if(!empty($resultProducts)):
+				return implode(',',$resultProducts);
+			else : 
+				return '';
+			endif;	
 	    	
     }
     

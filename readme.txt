@@ -4,7 +4,7 @@ Tags: e-commerce, online shop,selling tool, one step e-commerce solution
 Requires at least: 4.9
 Tested up to: 5.1
 Requires PHP: 5 or Higher
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLV2
 
 e-commerce Web app built for WordPress. Mostly runs on frontend for better website speed and performance
@@ -86,7 +86,8 @@ Or you can download it and upload it manually
 13. CT commerce auto generated menu
 14. Tooltip cart preview
 15. Check out page
-15. Built in user registration for in modal window
+16. Built in user registration for in modal window
+17. Image gallery on backend
 
 = 1.0 Beta 1 =
 * Bug fixes
@@ -98,4 +99,7 @@ Or you can download it and upload it manually
 * Improvement to the built in overlay
 * Product categries page bug fixes
 
+= 1.0.2 =
+*included ctc overlay gallery viewer 
+*minor improvement
 
