@@ -823,7 +823,7 @@ class ctCommerceAdminPanelProcessing{
     public function ctcProcessRemovePurgedProduct($productId){
         global $wpdb;
         if(is_numeric($productId)):
-         echo   $wpdb->delete($wpdb->prefix.'ctCommercePurgedProducts', array('productId'=>$productId));
+         	echo   $wpdb->delete($wpdb->prefix.'ctCommercePurgedProducts', array('productId'=>$productId));
          endif;
          
     }

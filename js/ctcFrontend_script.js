@@ -942,7 +942,7 @@ jQuery(document).tooltip({
 		
 		 
 		 //data for stripe checkout
-	     ctcCheckOutAmount = grandTotalAfterTax;
+	   ctcCheckOutAmount = grandTotalAfterTax;
 		 ctcDataDescription ='Total Amount : '+grandTotalAfterTax;
 
 
@@ -1084,28 +1084,66 @@ jQuery(document).tooltip({
  */	
 	
 jQuery(document).on('click', '#ctcCheckOutOptionStripe,#ctcCheckOutOptionCash', function(){
+
+	var checkoutButton =  jQuery("#ctcCashCheckoutButton");
 	
 	if(jQuery(this).attr('id') === 'ctcCheckOutOptionStripe'){
-		jQuery(".stripe-button-el").removeAttr('disabled');
-	
-		jQuery("#ctcCashCheckoutButton").hide('slow');
-			
-		jQuery('#ctcStripeCheckoutButton').show("slow");
-		
-	
+		jQuery('#ctcCheckoutPaymentOptions button').attr('id','ctcStripeCheckoutButton').text('Pay with Card').show();
 	}
 	else if(jQuery(this).attr('id') === 'ctcCheckOutOptionCash'){
-	
-		jQuery(".stripe-button-el").attr('disabled','disabled');
-		
-			jQuery("#ctcStripeCheckoutButton").hide('slow');
-			jQuery('#ctcCashCheckoutButton').show("slow");
+		jQuery('#ctcCheckoutPaymentOptions button').attr('id','ctcCashCheckoutButton').text("Cash on checkout").show();
 	}
 	
 });
 
 
-	
+/**
+ * 
+ * Stripe payment script
+ * 
+ * 
+ */
+if(document.getElementById('ctcCheckoutButton') !== null){
+				var handler = StripeCheckout.configure({
+					key: ctcStripeParams.ctcStripePubKey,
+					image: ctcStripeParams.ctcStripeLogo,
+					locale: 'auto',
+					token: function(token) {
+						var ctcCashCheckoutParent =	document.getElementById('ctcCheckoutCashButton').parentNode;
+							ctcCashCheckoutParent.parentNode.removeChild(ctcCashCheckoutParent);
+						var checkoutForm = document.getElementById('ctcProductCartPageForm');
+						var stripeTokenInput  = document.createElement('input');
+								stripeTokenInput.setAttribute('name','stripeToken');
+								stripeTokenInput.setAttribute('type','hidden');
+								stripeTokenInput.setAttribute('value',token.id);
+								checkoutForm.insertBefore(stripeTokenInput, checkoutForm.firstChild);
+								checkoutForm.submit();
+					}
+				});
+
+
+				document.getElementById('ctcCheckoutButton').addEventListener('click', function(event) {
+
+					if(this.getAttribute('id') == 'ctcStripeCheckoutButton'){
+						
+					// Open Checkout with further options:
+					handler.open({
+						name: ctcStripeParams.ctcStripeName,
+						description: ctcStripeParams.ctcStripeDescription,
+						currency :ctcStripeParams.ctcStripeCurrency,
+						amount: parseFloat(document.getElementById('ctcPageCartGrandTotalInput').getAttribute('value'))*100,
+						email:ctcStripeParams.ctcStripeEmail,
+					});
+					event.preventDefault();
+				}
+				});
+
+				// Close Checkout on page navigation:
+				window.addEventListener('popstate', function() {
+					handler.close();
+				});
+
+}
 /**
  * 
  * script to display and apply shipping cost and time
@@ -1383,8 +1421,8 @@ jQuery(document).on('click','#ctcShippingOptionUsps,#ctcShippingOptionVendor,#ct
 		    	jQuery("#ctcCashPayment").hide(1000);
 		    	jQuery(".stripe-button-el").removeAttr('disabled');
 		    	jQuery('#ctcCheckOutOptionStripe').prop('checked', true);
-				jQuery("#ctcCashCheckoutButton").hide('slow');
-				jQuery('#ctcStripeCheckoutButton').show("slow");
+					//jQuery("#ctcCashCheckoutButton").hide('slow');
+					jQuery('#ctcCheckoutPaymentOptions button').attr('id','ctcStripeCheckoutButton').text('Pay with Card').show();
 		    	jQuery(".ctcCalculateShipingWait").remove();
 		    	shippingRadio.parent().append('<font class="ctcCalculateShipingWait dashicons-before dashicons-update"></font>');
 		    	jQuery('#ctcUserShippingAddress').slideDown(1500);
@@ -1869,24 +1907,15 @@ function ctcSortProductBySelection(sortBy,parentContainer,sortableItems){
 		
 	
 		var sortedHtml = '';
-		  
-		
 		if(sortType=='asc'){	
 			  productArrayToSort.sort((a, b) => a[1] - b[1]);//function(a,b){return a[1]-b[1]});
-			  
-			 
 		  }
 		  else{
 			   productArrayToSort.sort((a, b) => b[1] - a[1]);//function(a,b){return b[1]-a[1]});
-			   
-			  
-	   
 		  }
 		
 		for(var key in  productArrayToSort){
-			  
 			   sortedHtml +=	productArrayToSort[key][2];
-			   	
 			  }
 		
 		

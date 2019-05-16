@@ -164,6 +164,16 @@ class ctCommerceMain{
         wp_localize_script( 'ctcFrontendlJs', 'ctc_ajax_url', admin_url( 'admin-ajax.php' ) );
         wp_enqueue_script('jquery-masonry');
         wp_enqueue_script('imagesloaded');
+        wp_enqueue_script('ctcStripeCheckoutJs',"https://checkout.stripe.com/checkout.js");
+        wp_localize_script('ctcFrontendlJs', 'ctcStripeParams', array(
+                                                                       'ctcStripePubKey' =>   get_option('ctcStripePublishableKey'),
+                                                                       'ctcStripeName' => get_option('ctcEcommerceName'),
+                                                                       'ctcStripeLogo' => get_option('ctcBusinessLogoDataImage'),
+                                                                       'ctcStripeCurrency' => strtoupper( get_option('ctcBusinessCurrency') ),
+                                                                       'ctcStripeEmail' => wp_get_current_user()->user_email,
+                                                                       'ctcStripeDescription'=> "Shopping at ".get_option('ctcEcommerceName')
+                                                                            ));
+
         wp_enqueue_media();
         wp_enqueue_script( 'jquery-ui-tooltip' );
     }

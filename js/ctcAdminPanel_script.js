@@ -1660,8 +1660,6 @@ var categoryData =[];
 	 
 	   jQuery(document).on('submit','#ctcUpdateProductForm', function(event){
 		   
-		  
-		    
 		   var emptyField =[];
 		   
 			 var i =0;
@@ -1731,14 +1729,9 @@ var categoryData =[];
 							    //get product video to update product list on sucessfull update
 							    otherData['videoSrc'] = jQuery('#ctcVideoThumbUpdate').attr('src');
 							    otherData['videoType'] = jQuery('#ctcVideoThumbUpdate').attr('type');
-							  
-							  
-							  
 							  jQuery('#ctcOverlayElClosebtn').trigger('click');
 							  var productId = jQuery('#ctcProductIdUpdate').val(); 
 							  updateProductOnSucess(formData, productId,responseObj, otherData);
-							  
-							  
 							  alert('Product sucessfully updated.');
 							 
 				
@@ -1783,7 +1776,7 @@ var categoryData =[];
 		   }
 		   
 		   jQuery.post(ajaxurl, data, function(response){
-			   
+				
 			   if(response >= 1){
 			
 				   alert("Product sucesfully purged.");
@@ -1792,6 +1785,7 @@ var categoryData =[];
 				   
 			   }
 			   else{
+					 
 				   alert("Product couldn't be purged, please try again.");
 			   }
 			   
@@ -1818,31 +1812,94 @@ var categoryData =[];
 			 		
 			 		
 		 }
-		 
-		 
-		 jQuery.post(ajaxurl, data, function(response){
-			 
-			 if(response == 1){
-				 
-				 alert("Product sucessfully added back.");
-				 jQuery('#ctcPurgedProductRow'+data['productId']).remove();
-			 }
-			 else{
-				 
-				 alert("Product couldn't be added back, please try again.");
-			 }
-			 
-		 }).fail(function() {
+		 jQuery.ctcOverlayEl({elemHeight:'690px',elemWidth:'500px',ajaxUrl:ajaxurl,ajaxData:data,ajaxMethod:'post'});
 
-		        alert( "Action could not be completed at this time \nPlease try again later");
+		 event.preventDefault();
+
+		 });
+		 
+
+
+		 //this part handles ajax add porduct button click
+ jQuery(document).on('submit','#ctcReAddProductForm',function(event){
+
+	var emptyField =[];
+	 var i =0;
+	jQuery('.ctcRequiredField').each(function(){
+		//alert(jQuery(this).attr('id'));
+		
+		
+		var fieldVal = jQuery(this).val() ;
+		
+
+		
+		if(!jQuery.trim(fieldVal)){	
+			
+			emptyField[i] = jQuery(this).val();
+	
+			jQuery(this).parent('div').find('span.ctcRequiredFieldWarning').remove();
+			jQuery(this).css('border','2px solid red').parent('div').prepend('<span  style="margin-bottom:5px;color:red; font-weight:200;" class="dashicons dashicons-warning ctcRequiredFieldWarning">Required field</span>');
+			
+			i++;
+		}
+		else{
+			 jQuery(this).removeAttr('style').parent('div').find('span.ctcRequiredFieldWarning').remove();
+		}
+
+		
+	});
+	
+
+	
+	if(emptyField.length >= 1){
+
+			return false;
+	
+   }
+
+		  var formData = jQuery('#ctcReAddProductForm').serializeArray();
 		  
-		    });
+		
 		   
-	   });
-	   
-	   
-	  // jQuery('.ctcPurgedProductPic').ctcOverlay();
+		  var  data ={
+				   
+				   'action': 'ctcAddProduct',
+				   'productData': JSON.stringify(formData)
+				   
+		   }
+		  
+		
+		   
+		  //trigger ajax to add product
+			jQuery.post(ajaxurl, data, function(response) {
+			
+				  if(response >= 1){
+					var productId = jQuery('#ctcProductIdUpdate').val();
+					var newData = {'action': 'ctcRemovePurgedProduct', 'productId':productId}
+							
+								jQuery.post(ajaxurl,newData, function(response){
+											if(response === '1'){
+												alert('Product sucessfully added back.');
+												jQuery('#ctcPurgedProductRow'+productId).remove();
+												jQuery('#ctcOverlayElClosebtn').trigger('click');
+											}else{
+												alert('Product could not be added, Probably it already exists');
+											}
+								});
+				  }
+				  else{
+					  
+					  alert('Product could not be added, Probably it already exists');
+				  }	  
+			}).fail(function() {
+		        alert( "Action could not be completed at this time \nPlease try again later");
+		    });
 
+		  event.preventDefault();
+		  return false;
+ });
+
+	   
 /*
  * 
  * This section deals with javascript functionlaities of discount tab
@@ -2118,7 +2175,6 @@ var categoryData =[];
 	   
 	   function ctcUpdateDiscountList(returnedData){
 		   
-	
 		 for(var key in returnedData){
 			 switch (key){
 			     case 'discountId':

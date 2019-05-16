@@ -3491,10 +3491,7 @@ class ctCommerceAdminHtml{
 			?>
 			
 			<div>
-			<li  
-					data-product-name='<?=$key?>'
-					data-product-precent='<?=$productPercent?>'
-					style="width:<?=$productPercent?>%;"  class="ctcChartBar"  title="Inventory : <?=$val?>" >
+			<li  data-product-name='<?=$key?>' data-product-precent='<?=$productPercent?>' style="width:<?=$productPercent?>%;"  class="ctcChartBar"  title="Inventory : <?=$val?>" >
 			</li>
 			
 		</div>
@@ -3518,23 +3515,18 @@ class ctCommerceAdminHtml{
     	$ctcAdminpanelProcssing = new ctCommerceAdminPanelProcessing();
     	$salesReport = $ctcAdminpanelProcssing->ctcGetSalesReportData();
     	$pendingOrders = $ctcAdminpanelProcssing->ctcGetPendingOrdersCount();
-    
     	if(!empty($salesReport[4])):
     	?>
     	
-  		<li> <span>Popular item <i> by sales</i> :- <?=str_replace('#', '',key($salesReport[4]))?> </span><span><font title="sold so far"> <?=$salesReport[4][key($salesReport[4])]?></font> </span></li>
+  		<li><span>Popular item <i> by sales</i> :- <?=str_replace('#', '',key($salesReport[4]))?> </span><span><font title="sold so far"> <?=$salesReport[4][key($salesReport[4])]?></font> </span></li>
   		<?php endif;?>
     	<li ><span>Orders <i>pending shipment </i> : </span><span> <a title="Go to pending orders page" href="<?=admin_url()?>?page=ctCommerceAdminPanel&tab=orders"><?=$pendingOrders?></a></span></li>
     	<li ><span>Products out of inventory : </span><span> <a  title="Go to product list page" href="<?=admin_url()?>?page=ctCommerceAdminPanel&tab=products&sub_tab=product_list"><?=$salesReport[2]?></a></span></li>
     	<li ><span>Sales <i>to date </i> : </span><span> <?=number_format($salesReport[0],2)?> <i><?=strtoupper(get_option('ctcBusinessCurrency'))?></i></span></li>
     	<li ><span>Active discount  : </span><span> <a title="Go to product discount lis page" href="<?=admin_url()?>?page=ctCommerceAdminPanel&tab=discount&sub_tab=discount_list"><?=$salesReport[3]?></a></span></li>
     	<li><span>Discount <i>applied so far</i>   : </span><span> <?=number_format($salesReport[1],2)?>  <i><?=strtoupper(get_option('ctcBusinessCurrency'))?></i></span></li>
-    	
-   
     	<?php
     }
- 
-    
-    
+   
 }
 

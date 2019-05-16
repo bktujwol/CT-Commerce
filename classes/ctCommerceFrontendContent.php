@@ -833,21 +833,21 @@ class ctCommerceFrontendContent{
 						  					  	
 						  						<span > Payment Options : </span>
 							  						
-							  				
 							  						 <?php $this->ctcDisplayCashOnDeliveryButton($ctcPaymentOption['cashOnDelivery'])?>
-							  					
-							  					      <?php $this->ctcDisplayStripeButton($ctcPaymentOption['stripeKeys'])?>
-						
-											        
-							  						 
-							  					
-							  					
-							  					    
-							  					   
-							  					 
-													 
-												
-													 
+														 <?php $this->ctcDisplayStripeButton($ctcPaymentOption['stripeKeys'])?>	
+														 <input id="ctcCheckoutCashButton" type="hidden" name="ctcCheckoutCashButton"  value="cash"/>
+														 <button id="ctcCheckoutButton" style="display:none;"> Pay With Card</button>			
+
+														 
+														<!--
+															<div id="ctcCashCheckoutButton">
+															  <span >
+															  
+															  <button    onclick="document.getElementById('ctcProductCartPageForm').submit();return false;" > Cash On Delivery</button> 
+																</span>
+																
+														</div >
+	-->			
 											 <?php else:
 													
 													$noPaymentSet ="Vendor has not set up any payment option yet.";
@@ -872,25 +872,7 @@ class ctCommerceFrontendContent{
 		
 		<div id="ctcStripePayment">
 		<span><input type="radio"  id="ctcCheckOutOptionStripe" name="ctcCheckOutOption"  /> : Check Out With Card</span>
-		  <div id="ctcStripeCheckoutButton">
-							  				
-							  						<span  >
-													  <script
-													    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-													    data-key="<?=get_option('ctcStripePublishableKey')?>"
-													    data-name="<?=get_option('ctcEcommerceName') ?>"
-													    data-zip-code ="true"
-													    data-image="<?= get_option('ctcBusinessLogoDataImage')?>"
-													    data-locale="auto"
-													    data-currency="<?=strtoupper( get_option('ctcBusinessCurrency') )?>"
-													
-													    data-email="<?=wp_get_current_user()->user_email?>"
-													    data-description = "Shopping at <?= get_option('ctcEcommerceName') ?>"
-													    >
-													    
-													  </script>
-													  </span>
-			</div>	
+		 
 			
 		</div>										  
 	<?php 
@@ -909,13 +891,7 @@ class ctCommerceFrontendContent{
 		 ?>
 		 <div id="ctcCashPayment">
 		 <span id="ctcCheckOutCashRadio"> <input type="radio" id="ctcCheckOutOptionCash" name="ctcCheckOutOption" /> : Cash on Delivery </span>
-			  <div id="ctcCashCheckoutButton">
-															  <span >
-										
-															  <input type="hidden" name="ctcCheckoutCashButton"  value="cash"/>
-															  <button id="ctcCheckoutCashButton"   onclick="document.getElementById('ctcProductCartPageForm').submit();return false;" > Cash On Delivery</button>
-															  </span>
-			</div >												  
+			  										  
 		</div>												  
     <?php endif;    
 		
@@ -982,12 +958,7 @@ class ctCommerceFrontendContent{
 		
 		
 		</div>
-		 <div class="ctcShippingAddressRightSection">
-                            
-                             
-                             
-                                 
-                                  
+		 <div class="ctcShippingAddressRightSection"> 
                                   <div class="ctcUserUpdateRow">
                    		          
 	                   		              <div class="ctcShippingAddressColumn">
