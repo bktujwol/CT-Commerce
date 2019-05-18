@@ -1382,7 +1382,8 @@ class ctCommerceAdminPanelProcessing{
     //function to get sales report for a period
     public function ctcGetSalesReportData(){
     	global $wpdb;
-    	$salesTotal =0;
+		$salesTotal =0;
+		$indProductSale = array();
     	$totalDiscount =0;
     	$currentTime = time();
     	

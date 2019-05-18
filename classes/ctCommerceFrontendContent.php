@@ -22,6 +22,7 @@ class ctCommerceFrontendContent{
 	
 	//function to create main product page
 	public function ctcStoreFrontPage(){
+		if(!is_admin()):
 		$userId= get_current_user_id();
 		$ctcFrontendProcessing  = new ctCommerceFrontendProcessing();
 		
@@ -42,7 +43,8 @@ class ctCommerceFrontendContent{
 		</div>	
 		
 	<?php	
-		
+	
+		endif;		
 	}
 	
 	/**
@@ -197,6 +199,8 @@ class ctCommerceFrontendContent{
 	
 	//function to displayproduct categories by shortcode
 	public function ctcDisplayProductCategories(){
+
+		if(!is_admin()):
 		$ctcFrontendProcessing = new ctCommerceFrontendProcessing();
 		
 		$categories = $ctcFrontendProcessing->ctcGetProductCategories();
@@ -242,12 +246,14 @@ class ctCommerceFrontendContent{
 		 
 		
 		<?php 
+	endif;	
 	}
 	
 	//function to display single product category
 	
 	public function ctcDisplaySingleCategory(){
 		
+		if(!is_admin()):
 		$category = isset($_GET['category'])? $_GET['category']:'';
 		$subCat = isset($_GET['subcat'])? $_GET['subcat']:'';
 		$header = '';
@@ -361,11 +367,17 @@ class ctCommerceFrontendContent{
 			       $this->ctcStoreFrontPage();
 		endif;
 		
+	
+	
+	
+	endif;
+	
 	}
 	
 	//function to display single product page 
 	public function ctcDisplaySingleProduct(){
 
+		if(!is_admin()):
 		$productId = isset($_GET['product-id'])? $_GET['product-id']:'';
 		
 	if(!empty($productId)):	
@@ -505,6 +517,8 @@ class ctCommerceFrontendContent{
 	$this->ctcStoreFrontPage();
 	
 	endif;
+
+endif;
 	}
 	
 	
@@ -641,7 +655,7 @@ class ctCommerceFrontendContent{
 	//function to display user product cart
 	public function ctcDisplayProductCart(){
 		
-		
+		if(!is_admin()):
 		
          
 							?>
@@ -703,7 +717,7 @@ class ctCommerceFrontendContent{
 			</div>	  
 			 <div id="ctcPageEmptyCartMessage"> </div>
 	<?php	  
-		
+	endif;	
 	}
 	
 	
@@ -1013,6 +1027,9 @@ class ctCommerceFrontendContent{
  */	
 	//function to display purchase confirmation page
 	public function ctcPurchaseConfirmation(){
+
+		if(!is_admin()):
+
 		$ctcFrontendProcessing = new ctCommerceFrontendProcessing();
 		
 		if(!empty($_POST)):
@@ -1042,10 +1059,12 @@ class ctCommerceFrontendContent{
 		
 		<?php 
 		endif;
+	endif;	
 	}
 	
 	//function to display discounted producta in page
 	public function ctcDisplayDiscountProducts(){
+		if(!is_admin()):
 		$userId= get_current_user_id();
 		$discountCode = isset($_GET['discount'])? $_GET['discount']:'all';
 		
@@ -1085,11 +1104,14 @@ class ctCommerceFrontendContent{
 		 
 			
 	<?php 
+	endif;
 	}
 	
 	
 	//function to display products with meta tags
 	public function ctcProductAndCategoryMetaTag(){
+
+		if(!is_admin()):
 		$metaTag = isset($_GET['tag'])? $_GET['tag']:'';
 		
 		
@@ -1190,7 +1212,7 @@ class ctCommerceFrontendContent{
 	       
 	    endif;	
 		
-		
+		endif;	
 	}
 	
 	
@@ -1819,8 +1841,8 @@ class ctCommerceFrontendContent{
     
     //function to add shortcode to the product post page add to cart button
     public function ctcGetPostAddToCart(){
+			if(!is_admin()):
     	$ctcFrontendProcessing = new ctCommerceFrontendProcessing();
-    	
     	$product = $ctcFrontendProcessing->ctcGetProductFromPost(get_the_ID());
     	
     	$productVariation = $ctcFrontendProcessing->ctcProcessProducVariation( $product['avilableProducts'],$product['preOrder']);
@@ -1834,12 +1856,15 @@ class ctCommerceFrontendContent{
 	    			$productVariation);
 	    
     	endif;
-    	return ob_get_clean();
+			return ob_get_clean();
+		endif;	
     }
     
     //function to add shortcode for rating for post
     
     public function ctcGetPostRating(){
+
+			if(!is_admin()):
     	$ctcFrontendProcessing = new ctCommerceFrontendProcessing();
  
     	$rating = $ctcFrontendProcessing->ctcGetRatingFromPost(get_the_ID());
@@ -1847,17 +1872,19 @@ class ctCommerceFrontendContent{
     	$this->ctcDisplayRatingThumbs($rating['productId'], $rating['thumbsUpCount'], 
     								  $rating['thumbsDownCount'],$rating['thumbsUpUser'],$rating['thumbsDownUser'],
     								  'ctcPostPage',get_current_user_id());
-     return ob_get_clean();
+		 return ob_get_clean();
+			endif; 
     }
     
     
     //function to add shortcode for post social sharing
     
     public function ctcPostSocialbarSharing(){
-    
+    if(!is_admin()):
     	ob_start();
     	$this->ctcDisplaySocialbarSharing(get_permalink());
-       return ob_get_clean();
+			 return ob_get_clean();
+		endif;	 
     }
     
     
