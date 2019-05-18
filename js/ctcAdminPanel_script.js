@@ -265,17 +265,11 @@
 
 			//this section provides admin form to update category
 			$(document).on('click', '#ctcUpdateProductCategory', function() {
-
-
-
-
 					let data = {
 							'action': 'ctcGetCategoryUpdateForm',
 							'categoryId': $(this).attr('data-type-id')
 
 					};
-
-
 
 					$.ctcOverlayEl({
 							elemHeight: '450px',
@@ -1011,7 +1005,7 @@
 
 					$.ctcOverlayEl({
 							elemHeight: '760px',
-							elemWidth: '63%',
+							elemWidth: '70%',
 							ajaxUrl: ajaxurl,
 							ajaxData: data,
 							ajaxMethod: 'post'

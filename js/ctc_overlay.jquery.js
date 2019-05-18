@@ -538,8 +538,6 @@
 
 				$('body').css('overflow', 'hidden');
 
-
-
 				let elHeight = '200px';
 				let elWidth = '350px';
 				var elHtml;
@@ -556,6 +554,7 @@
 				}
 
 
+				console.log(param);
 				if (param.elemWidth != undefined) {
 						elWidth = param.elemWidth;
 				}
@@ -597,7 +596,7 @@
 
 				} else if (param.modalMessage != undefined) {
 						hideExitBtn = 'YES';
-						ctcLoadOverlayEl('<div style="font-size:20px;" id="ctcOverlayModal">' + param.modalMessage + '<br/><button style="text-align:center;font-size:22px;" id="ctcOverlayModaButton">OK</button></div>');
+						ctcLoadOverlayEl('<div style="font-size:18px;float:left;" id="ctcOverlayModal">' + param.modalMessage + '<div style="margin-left:auto;margin-right:auto;display:block;"><button style="font-size:22px;" id="ctcOverlayModaButton"> OK </button></div></div>');
 				} else if (param.iframeUrl !== undefined) {
 
 						ctcLoadOverlayEl('<iframe height="' + elHeight + '" width="' + elWidth + '" src="' + param.iframeUrl + '" allowfullscreen>></iframe>');
@@ -685,7 +684,7 @@
 
 
 						let overlayContainerEl = '';
-						overlayContainerEl += '<div  id="ctcOverlayEl" class="ctcOverlayEl" style="font-size:20px;">';
+						overlayContainerEl += '<div  id="ctcOverlayEl" class="ctcOverlayEl" style="font-size:14px;">';
 						if (hideExitBtn == 'NO') {
 								overlayContainerEl += '<span id="ctcOverlayElClosebtn" title="close" class="ctcOverlayElClosebtn" ></span>';
 						}
@@ -695,22 +694,21 @@
 						$('body').prepend(overlayContainerEl);
 
 
-
-
 						var marginHor = (screenWidth - $('#overlayElContainer').width()) / 2;
 						var marginVer = (screenHeight - $('#overlayElContainer').height()) / 2;
 
 
 
 						$('#overlayElContainer').css({
-								'margin-left': marginHor + 'px',
-								'margin-top': marginVer + 'px'
+								'margin-left': marginHor+'px',
+								'margin-top': marginVer+'px'
 						});
 
 						$('#ctcOverlayElClosebtn').css({
-								'margin-right': '20px',
-								'margin-top': '0px',
+							'margin-right':(marginHor-$('#ctcOverlayElClosebtn').width())+'px',
+							'margin-top':(marginVer-$('#ctcOverlayElClosebtn').height())+'px',
 						});
+
 						$("#ctcOverlayEl").animate({
 								width: screenWidth,
 								height: screenHeight,

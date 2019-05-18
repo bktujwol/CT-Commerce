@@ -834,34 +834,24 @@ endif;
 	
 	private function ctcDisplayCheckOutOption(){
 		
-		$ctcPaymentOption = array(
-				
-				'stripeKeys'=>array('stripeSecretKey'=>get_option('ctcStripeSecretKey'),'StripePublishableKey'=>get_option('ctcStripePublishableKey')),
-				'cashOnDelivery'=>get_option('ctcCashOnDelivery'),
-				
-		);
-		
-		if (!empty($ctcPaymentOption)):?>
+		$ctcPaymentOptions = array(
+																$this->ctcDisplayCashOnDeliveryButton(),
+																$this->ctcDisplayStripeButton(),
+												);
+
+		if (!empty(implode('',$ctcPaymentOptions))):?>
 						  		<p class="ctcChooseShippingOption"> Please choose shipping option first to proceed with check out.</p>	
 						  			<div id="ctcCheckoutPaymentOptions" class="ctcCheckoutPaymentOptions ">			
 						  					  	
 						  						<span > Payment Options : </span>
-							  						
-							  						 <?php $this->ctcDisplayCashOnDeliveryButton($ctcPaymentOption['cashOnDelivery'])?>
-														 <?php $this->ctcDisplayStripeButton($ctcPaymentOption['stripeKeys'])?>	
-														 <input id="ctcCheckoutCashButton" type="hidden" name="ctcCheckoutCashButton"  value="cash"/>
-														 <button id="ctcCheckoutButton" style="display:none;"> Pay With Card</button>			
+													<?php
+													array_map(function($option){
 
-														 
-														<!--
-															<div id="ctcCashCheckoutButton">
-															  <span >
-															  
-															  <button    onclick="document.getElementById('ctcProductCartPageForm').submit();return false;" > Cash On Delivery</button> 
-																</span>
-																
-														</div >
-	-->			
+														echo $option;
+
+													},$ctcPaymentOptions);
+													?>
+														 <button id="ctcCheckoutButton" style="display:none;"> Pay With Card</button>			
 											 <?php else:
 													
 													$noPaymentSet ="Vendor has not set up any payment option yet.";
@@ -880,34 +870,41 @@ endif;
 
 	
 //function to display stripe checkout option
-	private function ctcDisplayStripeButton($ctcStripeKeys){
-		
-		if (!empty($ctcStripeKeys['stripeSecretKey']) && !empty($ctcStripeKeys['StripePublishableKey'])):?>
-		
-		<div id="ctcStripePayment">
-		<span><input type="radio"  id="ctcCheckOutOptionStripe" name="ctcCheckOutOption"  /> : Check Out With Card</span>
-		 
-			
-		</div>										  
-	<?php 
-		endif;
-		
-		
-		
+	private function ctcDisplayStripeButton(){
+
+		if (!empty(get_option('ctcStripeTestPublishableKey')) && !empty(get_option('ctcStripeTestSecretKey')) && '1'=== get_option('ctcStripeTestMode')):		
+			$stripeOption = '<div id="ctcStripePayment" data-mode-test="test">';
+			$stripeOption .='<span><input type="radio"  id="ctcCheckOutOptionStripe" name="ctcCheckOutOption"  /> : Check Out With Card</span>';
+			$stripeOption .='<div id="ctcStripeMountDiv" ></div>';
+			$stripeOption .='</div>';
+			return $stripeOption;	
+
+	elseif( !empty(get_option('ctcStripeLivePublishableKey')) && !empty(get_option('ctcStripeLiveSecretKey'))):
+					$stripeOption  ='<div id="ctcStripePayment" data-mode-test="live">';
+					$stripeOption .='<span><input type="radio"  id="ctcCheckOutOptionStripe" name="ctcCheckOutOption"  /> : Check Out With Card</span>';
+					$stripeOption .='<div id="ctcStripeMountDiv" ></div>';
+					$stripeOption .='</div>';
+			return $stripeOption;	
+	else :
+		return false;			
+	endif;			
+
 	}
 	
 //function to display cash on heck out button
-	private function ctcDisplayCashOnDeliveryButton($ctcCashOption){
+	private function ctcDisplayCashOnDeliveryButton(){
 		
 		
-		if($ctcCashOption ==='1' ):
-		 
-		 ?>
-		 <div id="ctcCashPayment">
-		 <span id="ctcCheckOutCashRadio"> <input type="radio" id="ctcCheckOutOptionCash" name="ctcCheckOutOption" /> : Cash on Delivery </span>
-			  										  
-		</div>												  
-    <?php endif;    
+		if('1' === get_option('ctcCashOnDelivery')  ):
+	
+		 $cashOption ='<div id="ctcCashPayment">';
+		 $cashOption .='<span id="ctcCheckOutCashRadio"> <input type="radio" id="ctcCheckOutOptionCash" name="ctcCheckOutOption" /> : Cash on Delivery </span>';
+		 $cashOption .='<input id="ctcCheckoutCashButton" type="hidden" name="ctcCheckoutCashButton"  value="cash"/>';  										  
+		 $cashOption .='</div>';
+		 return $cashOption;	
+		 else :
+			return false;													  
+     endif;    
 		
 	}
 	

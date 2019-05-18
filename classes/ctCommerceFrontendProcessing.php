@@ -728,9 +728,9 @@ class ctCommerceFrontendProcessing{
 			);
 			
 	
-			
+			$stripeSecretKey = '1' == get_option('ctcStripeTestMode') ? get_option( 'ctcStripeTestSecretKey' ) : get_option( 'ctcStripeLiveSecretKey' );
 			// See your keys here: https://dashboard.stripe.com/account/apikeys
-			\Stripe\Stripe::setApiKey( get_option('ctcStripeSecretKey'));
+			\Stripe\Stripe::setApiKey( $stripeSecretKey);
 			
 			// Token is created using Checkout or Elements!
 			// Get the payment token ID submitted by the form:

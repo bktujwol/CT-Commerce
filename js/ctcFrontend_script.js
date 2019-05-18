@@ -157,7 +157,7 @@ jQuery.noConflict();
 
 
                 $.ctcOverlayEl({
-                    elemHeight: '630px',
+                    elemHeight: '550px',
                     elemWidth: '80%',
                     ajaxUrl: ctc_ajax_url,
                     ajaxData: data,
@@ -245,7 +245,7 @@ jQuery.noConflict();
             }
 
             $.ctcOverlayEl({
-                elemHeight: '650px',
+                elemHeight: '550px',
                 elemWidth: '80%',
                 ajaxUrl: ctc_ajax_url,
                 ajaxData: data,

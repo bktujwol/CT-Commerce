@@ -164,9 +164,14 @@ class ctCommerceMain{
         wp_localize_script( 'ctcFrontendlJs', 'ctc_ajax_url', admin_url( 'admin-ajax.php' ) );
         wp_enqueue_script('jquery-masonry');
         wp_enqueue_script('imagesloaded');
+        wp_enqueue_media();
+        wp_enqueue_script( 'jquery-ui-tooltip' );
+
         wp_enqueue_script('ctcStripeCheckoutJs',"https://checkout.stripe.com/checkout.js");
+        $stripPubKey = '1' == get_option('ctcStripeTestMode') ? get_option( 'ctcStripeTestPublishableKey' ) : get_option( 'ctcStripeLivePublishableKey' );
+
         wp_localize_script('ctcFrontendlJs', 'ctcStripeParams', array(
-                                                                       'ctcStripePubKey' =>   get_option('ctcStripePublishableKey'),
+                                                                       'ctcStripePubKey' =>    $stripPubKey,
                                                                        'ctcStripeName' => get_option('ctcEcommerceName'),
                                                                        'ctcStripeLogo' => get_option('ctcBusinessLogoDataImage'),
                                                                        'ctcStripeCurrency' => strtoupper( get_option('ctcBusinessCurrency') ),
@@ -174,8 +179,6 @@ class ctCommerceMain{
                                                                        'ctcStripeDescription'=> "Shopping at ".get_option('ctcEcommerceName')
                                                                             ));
 
-        wp_enqueue_media();
-        wp_enqueue_script( 'jquery-ui-tooltip' );
     }
     
     /* function to eneque fontend style sheets*/

@@ -467,31 +467,17 @@ class ctCommerceAdminHtml{
 							                         <input type="text" name="ctcBusinessCurrency" size="7" value="<?=get_option('ctcBusinessCurrency') ?>" />            
 							         			</div>
 					         			 </div>
-					         			<div class="row">
-							                	<div class="left">          
-							                    <label for="ctcStripePublishableKey"> Stripe Publishable Key : </label>
-							                    </div>
-							                   <div class="right">
-							                         <input type="text" name="ctcStripePublishableKey" size="30" value="<?= get_option('ctcStripePublishableKey') ?>" />            
-							         			</div>
-					         			</div>
-					         			<div class="row">
-							                	<div class="left">          
-							                       <label for="ctcStripeSecretKey"> Stripe Secret Key : </label>
-							                    </div>
-							                    <div class="right">
-							                         <input type="text" name="ctcStripeSecretKey" size="30" value="<?=get_option('ctcStripeSecretKey') ?>" />            
-							         			</div>
-					         			</div>
+											
 					   
 					         			<div class="row">
 							                	<div class="left">         
 							                    <label for="ctcCashOnDelivery"> Cash On Delivery : </label>
 							                    </div>
 							                     <div class="right">
-							                         <input type="checkbox" name="ctcCashOnDelivery" <?php if(!empty( get_option('ctcCashOnDelivery'))):echo 'checked="checked"'; endif; ?>  value="1" />            
+							                         <input type="checkbox" name="ctcCashOnDelivery" <?php echo '1' == get_option('ctcCashOnDelivery') ?'checked="checked"' :'';  ?>  value="1" />            
 							         			</div>
 					         			</div>
+												 <?= $this->ctcStripeSettingHtml() ?>
 					         		    <div class="row">
 						                	<div class="right">          
 						                  		 <?php submit_button('Save','primary','ctcBillingSettingsButton', FALSE ); ?>
@@ -502,9 +488,56 @@ class ctCommerceAdminHtml{
          			</div>
                  <?php        
                     }
-                    
-           
-                    public function ctcEmailSetting(){
+  //function to render stripe setting                  
+	public function ctcStripeSettingHtml(){
+	
+		?>
+
+		<div class="row">
+		<div class="left">          
+			<label for="ctcStripeTestPublishableKey"> Stripe Test Publishable Key : </label>
+			</div>
+		 <div class="right">
+					 <input type="text" name="ctcStripeTestPublishableKey" size="30" value="<?=  get_option( 'ctcStripeTestPublishableKey' ) ?>" />            
+ </div>
+</div>
+<div class="row">
+		<div class="left">          
+				 <label for="ctcStripeTestSecretKey"> Test Secret Key : </label>
+			</div>
+			<div class="right">
+					 <input type="text" name="ctcStripeTestSecretKey" size="30" value="<?=get_option('ctcStripeTestSecretKey') ?>" />            
+ </div>
+</div>	
+<div class="row">
+		<div class="left">         
+			<label for="ctcStripeTestMode"> Test Mode : </label>
+			</div>
+			 <div class="right">
+					 <input type="checkbox" name="ctcStripeTestMode" <?php  echo '1' == get_option('ctcStripeTestMode')? 'checked="checked"' : ''; ?> value="1"  />            
+ </div>
+</div>
+<div class="row">
+		<div class="left">          
+			<label for="ctcStripeLivePublishableKey"> Live Publishable Key : </label>
+			</div>
+		 <div class="right">
+					 <input type="text" name="ctcStripeLivePublishableKey" size="30" value="<?= get_option('ctcStripeLivePublishableKey') ?>" />            
+ </div>
+</div>
+<div class="row">
+		<div class="left">          
+				 <label for="ctcStripeLiveSecretKey"> Live Secret Key : </label>
+			</div>
+			<div class="right">
+					 <input type="text" name="ctcStripeLiveSecretKey" size="30" value="<?=get_option('ctcStripeLiveSecretKey') ?>" />            
+ </div>
+</div>
+
+	<?php	
+	}         
+		
+public function ctcEmailSetting(){
                     	
                     ?>	
                     
