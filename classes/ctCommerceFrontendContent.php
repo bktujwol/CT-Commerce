@@ -873,16 +873,18 @@ endif;
 	private function ctcDisplayStripeButton(){
 
 		if (!empty(get_option('ctcStripeTestPublishableKey')) && !empty(get_option('ctcStripeTestSecretKey')) && '1'=== get_option('ctcStripeTestMode')):		
-			$stripeOption = '<div id="ctcStripePayment" data-mode-test="test">';
-			$stripeOption .='<span><input type="radio"  id="ctcCheckOutOptionStripe" name="ctcCheckOutOption"  /> : Check Out With Card</span>';
-			$stripeOption .='<div id="ctcStripeMountDiv" ></div>';
+			$stripeOption = '<div id="ctcStripePayment" data-mode-test="test"  style="margin-bottom:20px;">';
+			$stripeOption .='<span><input type="radio"  id="ctcCheckOutOptionStripe" name="ctcCheckOutOption"  /> : Check Out With Stripe</span>';
+			$stripeOption .='<div style="display:none;" id="ctcStripeMountDiv" ></div>';
+			$stripeOption .='<div id="card-errors" role="alert"></div>';
 			$stripeOption .='</div>';
 			return $stripeOption;	
 
 	elseif( !empty(get_option('ctcStripeLivePublishableKey')) && !empty(get_option('ctcStripeLiveSecretKey'))):
-					$stripeOption  ='<div id="ctcStripePayment" data-mode-test="live">';
-					$stripeOption .='<span><input type="radio"  id="ctcCheckOutOptionStripe" name="ctcCheckOutOption"  /> : Check Out With Card</span>';
-					$stripeOption .='<div id="ctcStripeMountDiv" ></div>';
+					$stripeOption  ='<div id="ctcStripePayment" data-mode-test="live" style="margin-bottom:20px;">';
+					$stripeOption .='<span><input type="radio"  id="ctcCheckOutOptionStripe" name="ctcCheckOutOption"  /> : Check Out With Stripe</span>';
+					$stripeOption .='<div style="display:none;" id="ctcStripeMountDiv" ></div>';
+					$stripeOption .='<div id="card-errors" role="alert"></div>';
 					$stripeOption .='</div>';
 			return $stripeOption;	
 	else :

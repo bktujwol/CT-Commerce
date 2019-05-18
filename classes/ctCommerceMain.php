@@ -167,19 +167,25 @@ class ctCommerceMain{
         wp_enqueue_media();
         wp_enqueue_script( 'jquery-ui-tooltip' );
 
-        wp_enqueue_script('ctcStripeCheckoutJs',"https://checkout.stripe.com/checkout.js");
+       
         $stripPubKey = '1' == get_option('ctcStripeTestMode') ? get_option( 'ctcStripeTestPublishableKey' ) : get_option( 'ctcStripeLivePublishableKey' );
 
-        wp_localize_script('ctcFrontendlJs', 'ctcStripeParams', array(
-                                                                       'ctcStripePubKey' =>    $stripPubKey,
-                                                                       'ctcStripeName' => get_option('ctcEcommerceName'),
-                                                                       'ctcStripeLogo' => get_option('ctcBusinessLogoDataImage'),
-                                                                       'ctcStripeCurrency' => strtoupper( get_option('ctcBusinessCurrency') ),
-                                                                       'ctcStripeEmail' => wp_get_current_user()->user_email,
-                                                                       'ctcStripeDescription'=> "Shopping at ".get_option('ctcEcommerceName')
-                                                                            ));
+        if(!empty( $stripPubKey)):
+                wp_enqueue_script('ctcStripeV3','https://js.stripe.com/v3/');
+                wp_localize_script('ctcFrontendlJs', 'ctcStripeParams', 
+                                                                array(
+                                                                        'ctcStripePubKey' =>    $stripPubKey,
+                                                                        'ctcStripeName' => get_option('ctcEcommerceName'),
+                                                                        'ctcStripeLogo' => get_option('ctcBusinessLogoDataImage'),
+                                                                        'ctcStripeCurrency' => strtoupper( get_option('ctcBusinessCurrency') ),
+                                                                        'ctcStripeEmail' => wp_get_current_user()->user_email,
+                                                                        'ctcStripeDescription'=> "Shopping at ".get_option('ctcEcommerceName')
+                                                                    )
+                                    );
+            endif;                                                                     
 
-    }
+            }
+  
     
     /* function to eneque fontend style sheets*/
     public function ctcFrontendEnqeueCss(){

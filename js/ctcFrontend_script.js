@@ -1088,7 +1088,9 @@ jQuery.noConflict();
 
             if ($(this).attr('id') === 'ctcCheckOutOptionStripe') {
                 $('#ctcCheckoutPaymentOptions button').attr('id', 'ctcStripeCheckoutButton').text('Pay with Card').show();
+                $('#ctcStripeMountDiv,#card-errors').show();
             } else if ($(this).attr('id') === 'ctcCheckOutOptionCash') {
+                $('#ctcStripeMountDiv,#card-errors').hide();
                 $('#ctcCheckoutPaymentOptions button').attr('id', 'ctcCashCheckoutButton').text("Cash on checkout").show();
             }
 
@@ -1101,47 +1103,78 @@ jQuery.noConflict();
          * 
          * 
          */
-        if (document.getElementById('ctcCheckoutButton') !== null) {
-            var handler = StripeCheckout.configure({
-                key: ctcStripeParams.ctcStripePubKey,
-                image: ctcStripeParams.ctcStripeLogo,
-                locale: 'auto',
-                token: function(token) {
-                    var ctcCashCheckoutParent = document.getElementById('ctcCheckoutCashButton').parentNode;
-                    ctcCashCheckoutParent.parentNode.removeChild(ctcCashCheckoutParent);
-                    var checkoutForm = document.getElementById('ctcProductCartPageForm');
-                    var stripeTokenInput = document.createElement('input');
-                    stripeTokenInput.setAttribute('name', 'stripeToken');
-                    stripeTokenInput.setAttribute('type', 'hidden');
-                    stripeTokenInput.setAttribute('value', token.id);
-                    checkoutForm.insertBefore(stripeTokenInput, checkoutForm.firstChild);
-                    checkoutForm.submit();
-                }
+        if (document.getElementById('ctcCheckoutButton') !== null && 'undefined' !== typeof(ctcStripeParams)) {
+
+    
+            // Create a Stripe client.
+            var stripe = Stripe(ctcStripeParams.ctcStripePubKey);
+
+            // Create an instance of Elements.
+            var elements = stripe.elements();
+
+            // Custom styling can be passed to options when creating an Element.
+            // (Note that this demo uses a wider set of styles than the guide below.)
+            var style = {
+            base: {
+                color: '#32325d',
+                fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                fontSmoothing: 'antialiased',
+                fontSize: '16px',
+                '::placeholder': {
+                color: '#aab7c4'
+                },
+            },
+            invalid: {
+                color: '#fa755a',
+                iconColor: '#fa755a'
+            }
+            };
+
+            // Create an instance of the card Element.
+            var card = elements.create('card', {style: style});
+
+            // Add an instance of the card Element into the `card-element` <div>.
+            card.mount('#ctcStripeMountDiv');
+
+            // Handle real-time validation errors from the card Element.
+            card.addEventListener('change', function(event) {
+            var displayError = document.getElementById('card-errors');
+            if (event.error) {
+                displayError.textContent = event.error.message;
+            } else {
+                displayError.textContent = '';
+            }
             });
 
-
-            document.getElementById('ctcCheckoutButton').addEventListener('click', function(event) {
-
-                if (this.getAttribute('id') == 'ctcStripeCheckoutButton') {
-
-                    // Open Checkout with further options:
-                    handler.open({
-                        name: ctcStripeParams.ctcStripeName,
-                        description: ctcStripeParams.ctcStripeDescription,
-                        currency: ctcStripeParams.ctcStripeCurrency,
-                        amount: parseFloat(document.getElementById('ctcPageCartGrandTotalInput').getAttribute('value')) * 100,
-                        email: ctcStripeParams.ctcStripeEmail,
-                    });
+            // Handle form submission.
+            document.getElementById('ctcProductCartPageForm').addEventListener('submit', function(event) {
+            if('none' !== document.getElementById('ctcStripeMountDiv').style.display){
                     event.preventDefault();
-                }
-            });
 
-            // Close Checkout on page navigation:
-            window.addEventListener('popstate', function() {
-                handler.close();
-            });
+                    stripe.createToken(card).then(function(result) {
+                        if (result.error) {
+                        // Inform the user if there was an error.
+                        var errorElement = document.getElementById('card-errors');
+                        errorElement.textContent = result.error.message;
+                        } else {
+                        // Send the token to your server.
+                        // Insert the token ID into the form so it gets submitted to the server
+                            var form = document.getElementById('ctcProductCartPageForm');
+                            var hiddenInput = document.createElement('input');
+                            hiddenInput.setAttribute('type', 'hidden');
+                            hiddenInput.setAttribute('name', 'stripeToken');
+                            hiddenInput.setAttribute('value', result.token.id);
+                            form.appendChild(hiddenInput);
 
+                            // Submit the form
+                            form.submit();
+                        }
+            });
         }
+        });
+
+
+}
         /**
          * 
          * script to display and apply shipping cost and time
@@ -1421,9 +1454,8 @@ jQuery.noConflict();
                 case 'ctcUSPS':
                     if (ctcCheckEmptyShippingAddress()) {
                         $("#ctcCashPayment").hide(1000);
-                        $(".stripe-button-el").removeAttr('disabled');
-                        $('#ctcCheckOutOptionStripe').prop('checked', true);
-                        //$("#ctcCashCheckoutButton").hide('slow');
+
+                        $('#ctcCheckOutOptionStripe').prop('checked', true).parents('#ctcStripePayment').find('div').show();
                         $('#ctcCheckoutPaymentOptions button').attr('id', 'ctcStripeCheckoutButton').text('Pay with Card').show();
                         $(".ctcCalculateShipingWait").remove();
                         shippingRadio.parent().append('<font class="ctcCalculateShipingWait dashicons-before dashicons-update"></font>');
@@ -1547,7 +1579,7 @@ jQuery.noConflict();
                         $(this).remove()
                     });
                     shippingRadio.parent().append('<font class="ctcCalculateShipingWait dashicons-before dashicons-update"></font>');
-                    $('#ctcUserShippingAddress').slideUp(2000);
+                    $('#ctcUserShippingAddress').slideUp(2000).find('input').removeAttr('required');
 
                     $('#ctcCheckoutPaymentOptions,#ctcDisplayShippingCost').show(1500);
                     $('.ctcChooseShippingOption').hide("medium");

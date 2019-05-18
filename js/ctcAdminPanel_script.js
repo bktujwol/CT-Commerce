@@ -12,67 +12,7 @@
 			};
 
 
-
-			/*script to hide and show nav tab*/
-
-			if (localStorage.getItem("ctcNavTabShowHide") == 'active') {
-					$('.ctcAdminPanel h1,.ctcMainNavTab,.ctcHideOnEdit,.ctcAdminPanel h3').addClass('ctcHideShowNavTab');
-
-			}
-
-
-			$(document).on('click', '.ctcAdminPanel input,.ctcAdminPanel textarea,.ctcAdminPanel table tr th', function() {
-
-					var inputType = $(this).attr('type');
-					if (inputType !== 'submit' && inputType !== 'checkbox' && !$(':parent', this).is('a')) {
-
-
-							$('.ctcAdminPanel h1,.ctcMainNavTab,.ctcHideOnEdit,.ctcAdminPanel h3').addClass('ctcHideShowNavTab').slideUp(1100);
-
-
-					}
-
-					if (localStorage.getItem("ctcNavTabShowHide") != 'active') {
-							localStorage.setItem("ctcNavTabShowHide", 'active');
-					}
-			});
-
-			$(document).on('dblclick', '.ctcAdminPanel', function() {
-
-
-					if ($('.ctcAdminPanel h1,.ctcMainNavTab,.ctcHideOnEdit,.ctcAdminPanel h3').hasClass('ctcHideShowNavTab')) {
-
-							$('h4.ctcHideOnEdit').show();
-							$('.ctcAdminPanel h1,.ctcMainNavTab,.ctcHideOnEdit,.ctcAdminPanel h3').removeClass('ctcHideShowNavTab').addClass('ctcShowHideAgain').slideDown(900);
-
-					}
-
-			});
-
-			$(document).on('mouseenter', '#toplevel_page_ctCommerceAdminPanel', function() {
-
-					if ($('.ctcAdminPanel h1,.ctcMainNavTab,.ctcHideOnEdit,.ctcAdminPanel h3').hasClass('ctcHideShowNavTab')) {
-
-							$('h4.ctcHideOnEdit').show();
-							$('.ctcAdminPanel h1,.ctcMainNavTab,.ctcHideOnEdit,.ctcAdminPanel h3').removeClass('ctcHideShowNavTab').addClass('ctcShowHideAgain').slideDown(900);
-
-					} else {
-
-							if ($('.ctcAdminPanel h1,.ctcMainNavTab,.ctcHideOnEdit,.ctcAdminPanel h3').hasClass('ctcShowHideAgain')) {
-
-
-									$('.ctcAdminPanel h1,.ctcMainNavTab,.ctcHideOnEdit,.ctcAdminPanel h3').removeClass('ctcShowHideAgain').addClass('ctcHideShowNavTab').slideUp(900);
-
-							};
-					}
-
-
-			});
-
-
 			/*Section to handle $ functionalities for Terms and condition part of plugin */
-
-
 
 
 			//this sections loads info of terms and condition on modal box

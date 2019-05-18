@@ -492,10 +492,11 @@ class ctCommerceAdminHtml{
 	public function ctcStripeSettingHtml(){
 	
 		?>
-
+<div id="ctcStripeSettingForm"  style=" padding-left:50px; border:1px dotted rgba(0,0,0,0.3);" >
+<h4 class="dashicons-before dashicons-money" style=" margin-left:-50px;font-size:19px;" > Stripe Settings :</h4>
 		<div class="row">
 		<div class="left">          
-			<label for="ctcStripeTestPublishableKey"> Stripe Test Publishable Key : </label>
+			<label for="ctcStripeTestPublishableKey"> Test Publishable Key : </label>
 			</div>
 		 <div class="right">
 					 <input type="text" name="ctcStripeTestPublishableKey" size="30" value="<?=  get_option( 'ctcStripeTestPublishableKey' ) ?>" />            
@@ -533,7 +534,7 @@ class ctCommerceAdminHtml{
 					 <input type="text" name="ctcStripeLiveSecretKey" size="30" value="<?=get_option('ctcStripeLiveSecretKey') ?>" />            
  </div>
 </div>
-
+</div>
 	<?php	
 	}         
 		
@@ -3183,7 +3184,7 @@ public function ctcEmailSetting(){
 		              				  <?=$order['shippingOption']?> 
 		              				  <br><b>Customer Address:</b><br>
 		              				  <span id="shippingAddress<?=$order['transactionId']?>" >
-		              				      <?=str_replace(',',',<br>',$order['shippingAddress'])?> 
+		              				      <?=str_replace(',', ' <br>',$order['shippingAddress'])?> 
 										</span>
 						</td>
 						
@@ -3383,7 +3384,7 @@ public function ctcEmailSetting(){
 		              				  <?=$order['shippingOption']?> 
 		              				  <br><b>Cutomer Address :</b><br>
 		              				  <span id="shippingAddress<?=$order['transactionId']?>" >
-		              				      <?=str_replace(',',',<br>',$order['shippingAddress'])?> 
+		              				      <?=str_replace(',',' <br>',$order['shippingAddress'])?> 
 										</span>
 						</td>
 						

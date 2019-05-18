@@ -461,7 +461,7 @@ class ctCommerceFrontendProcessing{
 		$machinable = strtoupper(get_option('ctcUspsMachinable'));
 		$businessAddress =  get_option('ctcBusinessAddressZip') ;
 
-		$uspsRequest .='API=RateV4&XML=<RateV4Request USERID="'.get_option("ctcUspsApiKey").'">';
+		$uspsRequest ='API=RateV4&XML=<RateV4Request USERID="'.get_option("ctcUspsApiKey").'">';
 		foreach($productShippingInfo as $key=>$product):
 		
 		$weight = explode('.',$product['productWeight']);
