@@ -289,7 +289,7 @@ class ctCommerceAdminHtml{
                         
                         ?>
                         <div id="ctcBusinessInfoSetting">
-                        <h4 class="dashicons-before dashicons-info ">Business Information</h4>
+                        
                         <form id="ctcBusinessSettingsForm" method="post" action="options.php" autocomplete="on">
                           <?php
 
@@ -299,8 +299,9 @@ class ctCommerceAdminHtml{
                         
                         
                         ?>
-                        <div class="form-table">
-            
+                    <div class="form-table">
+													<fieldset style="padding:10px; padding-left:70px; border:2px dotted rgba(0,0,0,0.3);"> 
+														<legend class="dashicons-before dashicons-info" style="font-size:17px;">Business Information</legend>
 			           			<div class="row">
 						                	<div class="left">
 						                	  <label for="ctcBusinessName">Business Name: </label>
@@ -339,17 +340,11 @@ class ctCommerceAdminHtml{
 							         			</div>
 					         			</div>
 			                    
-							    
+							    </fieldset>
 			                    
-			             <div class="row">
-			                   
-					                	<div class="left">
-					                	 <b><span class="dashicons dashicons-id"></span>Business Contact Info</b>
-					                	</div>
-					                	<div class="right">  
-					                	:
-					                </div>
-					             </div>   	
+			            <fieldset style="padding:10px; padding-left:70px; border:2px dotted rgba(0,0,0,0.3);"> 
+					                
+					                	 <legend class="dashicons-before dashicons-id" style="font-size:17px;">Business Contact Info 	: </legend>	 	
 			            
 			                   <div class="row">
 			                   
@@ -420,6 +415,7 @@ class ctCommerceAdminHtml{
 					                         <input type="email" name="ctcBusinessEmail" size="35" value="<?=get_option('ctcBusinessEmail') ?>" />
 					                     </div>
 			                     </div>
+													</fieldset> 
 			        			 <div class="row">
 						                	<div class="left">
 						                      <?php submit_button('Save','primary','ctcBusinessSettingsButton', FALSE); ?>
@@ -450,7 +446,8 @@ class ctCommerceAdminHtml{
 		           
 		                        ?>
 					               <div class="form-table">
-					                     
+					               <fieldset style="padding:10px; padding-left:70px; border:2px dotted rgba(0,0,0,0.3);"> 
+												 <legend class="dashicons-before dashicons-admin-generic ctcMovingSettingIcon" style="font-size:17px;"> Basic Settings : </legend>     
 					           		<div class="row">
 						                	<div class="left">
 						                	   <label for="ctcBusinessTaxRate">Tax Rate %: </label>
@@ -477,6 +474,7 @@ class ctCommerceAdminHtml{
 							                         <input type="checkbox" name="ctcCashOnDelivery" <?php echo '1' == get_option('ctcCashOnDelivery') ?'checked="checked"' :'';  ?>  value="1" />            
 							         			</div>
 					         			</div>
+												 </fieldset>
 												 <?= $this->ctcStripeSettingHtml() ?>
 					         		    <div class="row">
 						                	<div class="right">          
@@ -492,8 +490,8 @@ class ctCommerceAdminHtml{
 	public function ctcStripeSettingHtml(){
 	
 		?>
-<div id="ctcStripeSettingForm"  style=" padding-left:50px; border:1px dotted rgba(0,0,0,0.3);" >
-<h4 class="dashicons-before dashicons-money" style=" margin-left:-50px;font-size:19px;" > Stripe Settings :</h4>
+<fieldset id="ctcStripeSettingForm"  style="padding:10px; padding-left:70px; border:2px dotted rgba(0,0,0,0.3);" >
+<legend class="dashicons-before dashicons-money" style="font-size:17px;" > Stripe Settings :</legend>
 		<div class="row">
 		<div class="left">          
 			<label for="ctcStripeTestPublishableKey"> Test Publishable Key : </label>
@@ -534,7 +532,7 @@ class ctCommerceAdminHtml{
 					 <input type="text" name="ctcStripeLiveSecretKey" size="30" value="<?=get_option('ctcStripeLiveSecretKey') ?>" />            
  </div>
 </div>
-</div>
+</fieldset>
 	<?php	
 	}         
 		
@@ -543,7 +541,7 @@ public function ctcEmailSetting(){
                     ?>	
                     
                       <div id="ctcEmailSetting">
-                        <h4 class="dashicons-before  dashicons-admin-generic ctcMovingSettingIcon">eMail Setting :</h4>
+                       
 		                        <form id="ctcBillingSettingsForm" method="post" action="options.php" autocomplete="on" >
 		                          <?php
 		                        
@@ -553,7 +551,8 @@ public function ctcEmailSetting(){
 		           
 		                        ?>
 					               <div class="form-table" auto-complete="on">
-					                     
+					               <fieldset style="padding:10px; padding-left:70px; border:2px dotted rgba(0,0,0,0.3);">    
+												 <legend class="dashicons-before  dashicons-admin-generic ctcMovingSettingIcon" style="font-size:17px;">eMail Setting :</legend>  
 					           		<div class="row">
 						                	<div class="left">
 						                	   <label for="ctcSmtpUsername">Email Username : </label>
@@ -635,7 +634,7 @@ public function ctcEmailSetting(){
 					         			</div>
 					         			
 					         			
-					         			
+					         			</fieldset>
 					         			
 					         		    <div class="row">
 						                	<div class="right">          
@@ -653,7 +652,7 @@ public function ctcEmailSetting(){
      public function ctcShippingMethodsSubTab(){
                     	?>
     	<div id="ctcShippingInfoSetting">
-    	<h4 class="dashicons-before dashicons-cart"><span class="dashicons-before dashicons-admin-generic ctcMovingSettingIcon"></span>Shipping Setting :</h4>
+    
     	<form id="ctcShippingSettingsForm" method="post" action="options.php" autocomplete="on" >
     	<?php
     	
@@ -663,8 +662,8 @@ public function ctcEmailSetting(){
     	
     	?>
 					               <div class="form-table">
-					                     
-					           		  
+					               <fieldset style="padding:10px; padding-left:70px; border:2px dotted rgba(0,0,0,0.3);">       
+												<legend class="dashicons-before dashicons-admin-generic ctcMovingSettingIcon" style="font-size:17px;"> <span class="dashicons-before dashicons-cart"></span> Shipping Setting : </legend>
 					                    <div class="row">
 							                	<div class="left">   
 							                	<?php 
@@ -791,7 +790,7 @@ public function ctcEmailSetting(){
 							         			    <span> Store pickup time (in days, 0 for sameday)</span>    
 							         			</div>
 					         			</div>
-					         			
+					         			</fieldset>
 					         		    <div class="row">
 						                	<div class="right">          
 						                  		 <?php submit_button('Save','primary','ctcShippingSettingsButton', FALSE ); ?>
@@ -3184,7 +3183,7 @@ public function ctcEmailSetting(){
 		              				  <?=$order['shippingOption']?> 
 		              				  <br><b>Customer Address:</b><br>
 		              				  <span id="shippingAddress<?=$order['transactionId']?>" >
-		              				      <?=str_replace(',', ' <br>',$order['shippingAddress'])?> 
+														<address>    <?=str_replace(',',' ',$order['shippingAddress'])?> </address>
 										</span>
 						</td>
 						
@@ -3384,7 +3383,8 @@ public function ctcEmailSetting(){
 		              				  <?=$order['shippingOption']?> 
 		              				  <br><b>Cutomer Address :</b><br>
 		              				  <span id="shippingAddress<?=$order['transactionId']?>" >
-		              				      <?=str_replace(',',' <br>',$order['shippingAddress'])?> 
+
+		              				  <address>    <?=str_replace(',',' ',$order['shippingAddress'])?> </address>
 										</span>
 						</td>
 						
