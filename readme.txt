@@ -4,7 +4,7 @@ Tags: e-commerce, online shop,selling tool, one step e-commerce solution
 Requires at least: 4.9
 Tested up to: 5.1
 Requires PHP: 5 or Higher
-Stable tag: 1.0.3
+Stable tag: 1.0.5
 License: GPLV2
 
 e-commerce Web app built for WordPress. Mostly runs on frontend for better website speed and performance
