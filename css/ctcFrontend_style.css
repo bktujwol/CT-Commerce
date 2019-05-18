@@ -1446,8 +1446,9 @@ width:200px;
     .ctcUserRegistrationLeft{
     
         float:left;
-        width: 500px;
+        width: 550px;
         max-width: 90%;
+        margin-left:25px;
 
     }
    
@@ -1456,8 +1457,7 @@ width:200px;
         float:left;
         width: 500px;
         max-width: 90%;
-        
-    
+        margin-left:25px;
     }
   
     .ctcUserUpdateColumn,
@@ -1467,7 +1467,7 @@ width:200px;
     {
         float:left;/*fix for  buggy browsers*/
         display:table-column;
-        width:170px;
+        width:180px;
         max-width:90%;
        
        
@@ -1890,7 +1890,7 @@ width:200px;
  .ctcUserRegistrationLeft,
  .ctcUserUpdateLeft{
  
- float: left;
+    float: left;
     width: 495px;
     max-width: 90%;
     display:inline-block;

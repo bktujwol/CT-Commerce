@@ -108,5 +108,7 @@ Or you can download it and upload it manually
 *purged product putback bug fixed
 *better animation for sales report backend
 
-
+= 1.0.4 =
+*Address confirmation bug fix
+*User registration bug fix
 
