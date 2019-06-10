@@ -122,7 +122,7 @@ class ctCommerceAdminHtml{
     
                     //function to display first agree disagree with term option
                     public function ctcConditionAgreeDisagree(){
-                       //  add_thickbox(); 
+                       //  
                         
                         ?>
                         	<!-- <a id="ctcTermConditionsModalLink" href="#TB_inline?height=50&width=50&inlineId=ctcConditionModalTb&modal=true" id="ctcTermConditionsContent" class="thickbox thickBoxModalContent"></a> -->
@@ -978,7 +978,7 @@ public function ctcEmailSetting(){
     
                 //fucntion to display category in admin panel
                 public function ctcDisplayCategoryAdmin(){
-                   add_thickbox(); 
+                   
                   $ctcAdminProcessing =  new ctCommerceAdminPanelProcessing();
                   $categoryList = $ctcAdminProcessing->ctcGetCategoryList();
                   if(!empty($categoryList)):
@@ -1337,12 +1337,8 @@ public function ctcEmailSetting(){
                 
                 //function to display products in table in admin panel
                 public function ctcDisplayProductAdmin(){
-                    add_thickbox();
+                   
                     $ctcAdminProcessing = new ctCommerceAdminPanelProcessing();
-                    
-                    
-                    
-                    
                     $pagenum = isset( $_GET['pagenum'] ) ? absint( $_GET['pagenum'] ) : 1;
                    
                     
@@ -1357,8 +1353,8 @@ public function ctcEmailSetting(){
                     $page_links = paginate_links( array(
                         'base' => add_query_arg( 'pagenum', '%#%' ),
                         'format' => '',
-                        'prev_text' => __( '&laquo;', 'text-domain' ),
-                        'next_text' => __( '&raquo;', 'text-domain' ),
+                        'prev_text' => __( '&laquo;', 'ct-commerce' ),
+                        'next_text' => __( '&raquo;', 'ct-commerce' ),
                         'total' => $num_of_pages,
                         'current' => $pagenum
                     ) );
@@ -1371,7 +1367,7 @@ public function ctcEmailSetting(){
                    <div class="ctcProductListHeader"> 
                    <h4 class="dashicons-before dashicons-list-view">Products:</h4>
                             <?php if ( $page_links ):?> 
-                         
+
                              <div class="tablenav ctcTablenav" >
                                 <div class="tablenav-pages ctcTablenav-pages" > <?=$page_links?> </div>
                              </div>
