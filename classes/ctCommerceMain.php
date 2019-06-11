@@ -12,7 +12,8 @@ require_once 'ctCommercePluginADU.php';
 require_once 'ctCommerceAdminPanelProcessing.php';
 require_once 'ctCommerceFrontendAjax.php';
 require_once 'ctCommerceFrontendProcessing.php';
-require_once('otherContent/payment/stripe-php/init.php');
+require_once 'otherContent/payment/stripe-php/init.php';
+require_once 'ctCoommerceRestapi.php';
 
 
 
@@ -49,7 +50,10 @@ class ctCommerceMain{
     	self::ctcFrontendAjaxRequiredAction();
     	
     	//required filters like modification of nav bar
-    	self::ctcAddRequiredFilters();
+        self::ctcAddRequiredFilters();
+        
+        //required actions for rest api
+        self::ctcRestAPiActions();
     	
     	
     	
@@ -119,10 +123,15 @@ class ctCommerceMain{
         add_action('wp_ajax_ctcProductBarForChart', array($ctcAdminRequiredAjax,'ctcProductBarForChart'));
         add_action('wp_ajax_ctcAjaxSalesReport', array($ctcAdminRequiredAjax,'ctcAjaxSalesReport'));
        
+    }
+
+
+    private function ctcRestApiActions(){
+
+        $ctcRestApi = new ctCommerceRestApi();
         
-        
-        
-       
+        add_action( 'rest_api_init', array($ctcRestApi, 'register_endpoints' ) );
+      
     }
 
 

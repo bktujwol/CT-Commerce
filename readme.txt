@@ -2,9 +2,9 @@
 Contributors: UjW0l
 Tags: e-commerce, online shop,selling tool, one step e-commerce solution 
 Requires at least: 4.9
-Tested up to: 5.1
+Tested up to: 5.2
 Requires PHP: 5 or Higher
-Stable tag: 1.0.5
+Stable tag: 1.5.0
 License: GPLV2
 
 e-commerce Web app built for WordPress. Mostly runs on frontend for better website speed and performance
@@ -111,4 +111,11 @@ Or you can download it and upload it manually
 = 1.0.4 =
 *Address confirmation bug fix
 *User registration bug fix
+
+= 1.5.0 =
+*Bug fixes.
+*Stripe V3.
+*Better admin UI.
+*Basic REST API.
+*Google Plus removed from Social Bar.
 

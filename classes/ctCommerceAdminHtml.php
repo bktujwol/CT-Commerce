@@ -316,7 +316,7 @@ class ctCommerceAdminHtml{
 						                	</div>
 						                    <div class="right">    
 						                         <input type="text" name="ctcEcommerceName" required="required" size="20"  value="<?=get_option('ctcEcommerceName') ?>"  /> 
-						                         <span> <input id="ctcSameAsBusinessName" type="checkbox" /> Same as Business</span>
+						                         <i class="ctcFormComments"> <input id="ctcSameAsBusinessName" type="checkbox" /> Same as Business</i>
 						                          <input type="hidden" name="ctcOldEcommerceName" value="<?= get_option('ctcEcommerceName') ?>"  />
 						                    </div>
 			                    </div >
@@ -458,7 +458,7 @@ class ctCommerceAdminHtml{
 					                 </div>  
 					                   <div class="row">
 							                	<div class="left">           
-							                    <label for="ctcBusinessCurrency">Currency (abbr,like:USD,GBP,INR): </label>
+							                    <label for="ctcBusinessCurrency">Currency <i class="ctcFormComments">(abbr : e.g USD, GBP, INR) </i>: </label>
 							                    </div>
 							                   <div class="right">
 							                         <input type="text" name="ctcBusinessCurrency" size="7" value="<?=get_option('ctcBusinessCurrency') ?>" />            
@@ -574,8 +574,8 @@ public function ctcEmailSetting(){
 							                    <label for="ctcSmtpHost"> SMTP Host Server : </label>
 							                    </div>
 							                   <div class="right">
-							                         <input type="text" name="ctcSmtpHost" size="30" value="<?=get_option('ctcSmtpHost') ?>" />    
-							                         <span>(Like, smtp.something.com)</span>          
+							                         <input type="text" name="ctcSmtpHost" size="30" value="<?=get_option('ctcSmtpHost') ?>" /> <br>   
+							                         <i class="ctcFormComments">(Like, smtp.something.com)</i>          
 							         			</div>
 					         			</div>
 					         		
@@ -584,8 +584,8 @@ public function ctcEmailSetting(){
 							                       <label for="'ctcSmtpFromEmail'">From : </label>
 							                    </div>
 							                    <div class="right">
-							                         <input type="text" name="ctcSmtpFromEmail" size="30" value="<?=get_option('ctcSmtpFromEmail') ?>" />  
-							                          <span>Purchase Confirmation Email</span>           
+							                         <input type="text" name="ctcSmtpFromEmail" size="30" value="<?=get_option('ctcSmtpFromEmail') ?>" /><br>  
+							                          <i class="ctcFormComments">Purchase Confirmation Email</i>           
 							         			</div>
 					         			</div>
 					         			<div class="row">
@@ -595,7 +595,7 @@ public function ctcEmailSetting(){
 							                    </div>
 							                    <div class="right">
 							                         <input type="text" name="ctcSmtpPort" size="8" value="<?=get_option('ctcSmtpPort') ?>" />    
-							                           <span>Like 25, 465, 587 etc</span>         
+							                           <i class="ctcFormComments">Like 25, 465, 587 etc</i>         
 							         			</div>
 					         			</div>
 					         			<div class="row">
@@ -604,7 +604,7 @@ public function ctcEmailSetting(){
 							                    </div>
 							                    <div class="right">
 							                         <input type="text" name="ctcSmtpEncryption" size="12" value="<?=get_option('ctcSmtpEncryption') ?>" />    
-							                         <span>Like TLS, SSL etc</span>        
+							                         <i class="ctcFormComments">Like TLS, SSL etc</i>        
 							         			</div>
 					         			</div>
 					         			
@@ -674,7 +674,7 @@ public function ctcEmailSetting(){
 							                    </div>
 							                   <div class="right">
 							                         <input type="time" title="Store Closing Hour " name="ctcStoreClosingHour" size="30" value="<?= get_option('ctcStoreClosingHour') ?>" />  
-							                         <span>For Delivery and Pickup</span>           
+							                        <i class="ctcFormComments">For Delivery and Pickup</i>           
 							         			</div>
 					         			</div>
 					         			<div class="row">
@@ -691,7 +691,7 @@ public function ctcEmailSetting(){
 							                    </div>
 							                   <div class="right">
 							                         <input type="text" title="Weight Unit" name="ctcWeightUnit" size="10" value="<?= get_option('ctcWeightUnit') ?>" />            
-							         					<span>Use Pound , Kilogram not  lb, oz</span> 
+							         					<i class="ctcFormComments">Use Pound , Kilogram not  lb, oz</i> 
 							         			</div>
 					         			</div>
 					         			
@@ -715,7 +715,7 @@ public function ctcEmailSetting(){
 							                         <font>Yes </font>
 							                          <input type="radio" title=Machinable" name="ctcUspsMachinable" <?=$falseChecked??''?> size="10" value="false" /> 
 							                               <font>No </font>     
-							         					<span>Are your product machinable for USPS shipping only</span> 
+							         					<i class="ctcFormComments">Are your product machinable for USPS shipping only</i> 
 							         			</div>
 					         			</div>
 					         			
@@ -725,7 +725,7 @@ public function ctcEmailSetting(){
 							                    </div>
 							                   <div class="right">
 							                         <input type="text" title="Length Unit" name="ctcLengthUnit" size="10" value="<?= get_option('ctcLengthUnit') ?>" />   
-							                         <span>Use  Foot , Meter etc, not ', "</span>         
+							                        <i class="ctcFormComments">Use  Foot , Meter etc, not ', "</i>         
 							         			</div>
 					         			</div>
 					         			
@@ -734,8 +734,8 @@ public function ctcEmailSetting(){
 							                    <label for="ctcShipmentSize"> Shipping Box Size : </label>
 							                    </div>
 							                   <div class="right">
-							                         <input type="text" title="Shipping box sizes" name="ctcShipmentSize" size="20" value="<?=get_option('ctcShipmentSize') ?>" />   
-							                         <span>Like, Regular, Large etc, Consult USPS's size guide</span>         
+							                         <input type="text" title="Shipping box sizes" name="ctcShipmentSize" size="10" value="<?=get_option('ctcShipmentSize') ?>" />   
+							                         <i class="ctcFormComments">Like, Regular, Large see USPS's size guide</i>         
 							         			</div>
 					         			</div>
 					         		
@@ -749,7 +749,7 @@ public function ctcEmailSetting(){
 							                    </div>
 							                     <div class="right">
 							                         <input type="number" title="Deliver Time" min="0" name="ctcSelfDeliveryTime" size="30" value="<?=get_option('ctcSelfDeliveryTime') ?>" />
-							                         <span> Self delivery time(in days, 0 for sameday)</span>    
+							                        <i class="ctcFormComments"> Self delivery time(in days, 0 for sameday)</i>    
 							                        
 							         			</div>
 							         			
@@ -763,7 +763,7 @@ public function ctcEmailSetting(){
 							                     <div class="right" class="ctcSelfDeliverCharge">
 							                        
 							                         <input  type="number" min="0" title="Delivery Cost" name="ctcSelfDeliveryCost" size="30" value="<?=get_option('ctcSelfDeliveryCost') ?>" />         
-							         			      <span> Self delivery charge</span>  
+							         			     <i class="ctcFormComments"> Self delivery charge</i>  
 							         			</div>
 					         			</div>
 					         			
@@ -775,7 +775,7 @@ public function ctcEmailSetting(){
 							                     <div class="right" class="ctcSelfDeliverCharge">
 							                        
 							                         <input  type="number" min="0" title="Delivery Cost" name="ctcAdditionalItemDeliveryCost" size="30" value="<?= get_option('ctcAdditionalItemDeliveryCost') ?>" />         
-							         			     <span>Self delivery charge for additional items </span>  
+							         			     <i class="ctcFormComments">Self delivery charge for additional items </i>  
 							         			     
 							         			</div>
 					         			</div>
@@ -787,7 +787,7 @@ public function ctcEmailSetting(){
 							                     <div class="right">
 							                        
 							                         <input type="number" min="0" title="Store Pick Up Time" name="ctcStorePickUp" size="30" value="<?= get_option('ctcStorePickUp') ?>" />         
-							         			    <span> Store pickup time (in days, 0 for sameday)</span>    
+							         			   <i class="ctcFormComments"> Store pickup time (in days, 0 for sameday)</i    
 							         			</div>
 					         			</div>
 					         			</fieldset>
@@ -887,11 +887,11 @@ public function ctcEmailSetting(){
                    		          
 	                   		              <div class="left">
                     	
-				                    	      <label for="ctcProductCategory">Product Category : </label>
+				                    	      <label for="ctcProductCategoryName">Product Category : </label>
 					                        </div>
 					                        <div class="right">
-					                             <input id="ctcProductCategoryName" type="text"   name="categoryName" required="required" size="30" value="<?=trim($categoryData['categoryName'])?>" pattern="[^,,|,#,:,~,`,\x22,\x27]+" title="Special Charaters like #,-,:,~ are not allowed"   />
-					                             <span class="ctcFormComments">Vague category like Shirt, Shoe, Car, etc</span>
+					                             <input id="ctcProductCategoryName" type="text"   name="categoryName" required="required" size="30" value="<?=trim($categoryData['categoryName'])?>" pattern="[^,,|,#,:,~,`,\x22,\x27]+" title="Special Charaters like #,-,:,~ are not allowed"   /><br>
+					                             <i class="ctcFormComments">Vague category like Shirt, Shoe, Car, etc</i>
 					                             <?php if(isset($categoryData['categoryId'])):?>
 					                             <input id="ctcProductCategoryId" type="hidden"   name="categoryId"  value="<?=$categoryData['categoryId']?>"  />
 					                             
@@ -909,7 +909,7 @@ public function ctcEmailSetting(){
 		                        
 		                        <div class="right">
 		                             <input id="ctcSubCategory1" type="text" name="subCategory1" size="35"    value="<?=trim($categoryData['subCategory1'])?>" pattern="^[a-zA-Z0-9,-.!? ]*$" title="Only special charaters  -,.!? allowed"  />
-		                       		 <span class="ctcFormComments"> Like Men, Women, Children for clothing</span>
+		                       		 <i class="ctcFormComments"> Like Men, Women, Children for clothing</i>
 		                        </div>
                         </div>
                     	
@@ -919,7 +919,7 @@ public function ctcEmailSetting(){
 		                        </div>
 		                         <div class="right">
 		                             <input id="ctcSubCategory2" type="text"   name="subCategory2" size="35" value="<?=trim($categoryData['subCategory2'])?>" pattern="^[a-zA-Z0-9,-.!? ]*$" title="Only special charaters -,.!? allowed" />
-		                             <span class="ctcFormComments">Like sizes for clothing, Transmission for cars</span>
+		                             <i class="ctcFormComments">Like sizes for clothing, Transmission for cars</i>
 		                        </div>
                     	</div>
                     	 <div class="categoryRow">
@@ -929,7 +929,7 @@ public function ctcEmailSetting(){
 		                        </div>
 		                       <div class="right">
 		                             	 <input id="ctcSubCategory3" type="text" name="subCategory3" size="35"    value="<?=trim($categoryData['subCategory3'])?>" pattern="^[a-zA-Z0-9,-.!? ]*$" title="Only special charaters  -,.!? allowed"  />
-		                               <span class="ctcFormComments">More specfic info of items.</span>
+		                               <i class="ctcFormComments">More specfic info of items.</i>
 		                        </div>
                     	</div>
                     	 <div class="categoryRow">
@@ -938,8 +938,8 @@ public function ctcEmailSetting(){
 		                    	   <label for="ctCCategoryMetaInfo"> Meta Information : </label>
 		                        </div>
 		                       <div class="right">
-		                             <input id="ctComCategoryMetaInfo"    name="metaInfo" value="<?=trim($categoryData['metaInfo'])?>"  size="35"    />
-		                            <span class="ctcFormComments">Noteworthy info like 100  %Cotton, Handmade etc.</span>
+		                             <input id="ctComCategoryMetaInfo"  type="text"  name="metaInfo" value="<?=trim($categoryData['metaInfo'])?>"  size="35"    />
+		                            <i class="ctcFormComments">Noteworthy info like 100  %Cotton, Handmade etc.</i>
 		                             
 		                             
 		                        </div>
@@ -1189,7 +1189,7 @@ public function ctcEmailSetting(){
                                                  	 <div class="ctcProductFormRow">
                                                            			    <div class="ctcProductFormColumn">
                                                            			  		<label for="ctcProductMetaInfo">Meta Data : </label>
-                                                           			  		<span class="ctcFormComments">Noteworthy features.</span>
+                                                           			  		<i class="ctcFormComments">Noteworthy features.</i>
                                                            			     </div>
                                                            			    <div class="ctcProductFormColumn">
                                                                 		 <input id="ctcProductMetaInfo" type="text" name="metaInfo" size="35"    value=""  />
@@ -1234,7 +1234,7 @@ public function ctcEmailSetting(){
                                                       </div>
                                                        <div class="ctcProductFormColumn">
                                                          <input id="ctcProductWeight" type="number" step="0.01" required="required" name="productWeight" size="20"    value=""/>
-                                                         <span class="ctcFormComments"></span>
+                                                         <i class="ctcFormComments"></i>
                                                        </div>
                                                   </div>
                                                   <div class="ctcProductFormRow">
@@ -1253,7 +1253,7 @@ public function ctcEmailSetting(){
                                        			     <div class="ctcProductFormColumn">
 
                                                  		<input id="ctcProductPreOrder" type="checkbox" name="preOrder" size="35"  value="1"   />
-                                       			      <span class="ctcFormComments">If pre order is available for this product</span>
+                                       			      <i class="ctcFormComments">If pre order is available for this product</i>
                                        			     </div>
                                        			 </div>
                                        			 <div class="ctcProductFormRow">
@@ -1262,7 +1262,7 @@ public function ctcEmailSetting(){
                                                		       </div>
                                            		        <div class="ctcProductFormColumn">
                                                          <input id="ctcFeatureProduct" type="checkbox" name="featureProduct" size="35"  value="1"  />
-                                           			   <span class="ctcFormComments">Customer will see product in main page.</span>
+                                           			   <i class="ctcFormComments">Customer will see product in main page.</i>
                                            			    </div>
                                        			</div>
 
@@ -1274,7 +1274,7 @@ public function ctcEmailSetting(){
                                            			   <div class="ctcProductFormColumn">
                                                            <input id="ctcProductPostId" title="Create blog post about this product" type="checkbox" name="createProductPost"   value="1" />
                                            			  	  <input type="hidden" id="ctcProductPostId"	name="productPostId" value="" />
-                                           			  <span class="ctcFormComments">Required for customers to write review. </span>
+                                           			  <i class="ctcFormComments">Required for customers to write review. </i>
                                            			   </div>
                                        			 </div>
 
@@ -1861,7 +1861,7 @@ public function ctcEmailSetting(){
                                                  	  <div class="ctcProductFormRow">
                                                            			    <div class="ctcProductFormColumn">
                                                            			  		<label for="ctcProductMetaInfo">Meta Data : </label>
-                                                           			  		<span class="ctcFormComments">Noteworthy features.</span>
+                                                           			  		<i class="ctcFormComments">Noteworthy features.</i>
                                                            			     </div>
                                                            			    <div class="ctcProductFormColumn">
                                                                 		 <input id="ctcProductMetaInfo" type="text" name="metaInfo" size="35"    value="<?=$productData['metaInfo']?>"  />
@@ -1906,7 +1906,7 @@ public function ctcEmailSetting(){
                                                       </div>
                                                        <div class="ctcProductFormColumn">
                                                          <input id="ctcProductWeight" type="number" step="0.01" name="productWeight" required="required" size="20"    value="<?php if($productData['productWeight'] !== '0.00'): echo trim($productData['productWeight']); endif;?>"/>
-                                                         <span class="ctcFormComments"></span>
+                                                         <i class="ctcFormComments"></i>
                                                        </div>
                                                   </div>
                                                   <div class="ctcProductFormRow">
@@ -1925,7 +1925,7 @@ public function ctcEmailSetting(){
                                        			     <div class="ctcProductFormColumn">
 
                                                  		<input id="ctcProductPreOrder" type="checkbox" name="preOrder" size="35"  value="1"   <?=$productData['preOrder']==1? "checked = 'checked'":""?>/>
-                                       			      <span class="ctcFormComments">If pre order is available for this product</span>
+                                       			      <i class="ctcFormComments">If pre order is available for this product</i>
                                        			     </div>
                                        			 </div>
                                        			 <div class="ctcProductFormRow">
@@ -1934,7 +1934,7 @@ public function ctcEmailSetting(){
                                                		       </div>
                                            		        <div class="ctcProductFormColumn">
                                                          <input id="ctcFeatureProduct" type="checkbox" name="featureProduct" size="35"  value="1"  <?=$productData['featureProduct'] == 1?"checked = 'checked'":" "?>/>
-                                           			   <span class="ctcFormComments">Customer will see product in main page.</span>
+                                           			   <i class="ctcFormComments">Customer will see product in main page.</i>
                                            			    </div>
                                        			</div>
 
@@ -1946,7 +1946,7 @@ public function ctcEmailSetting(){
                                            			   <div class="ctcProductFormColumn">
                                                            <input id="ctcProductPostId" title="Create blog post about this product?" type="checkbox" name="createProductPost"   value="1" <?=$productData['productPostId'] >= 1? "value='1'  checked ='checked'":"value='0'"?> />
                                            			  	  <input type="hidden" id="ctcProductPostId"	name="productPostId" value="<?=$productData['productPostId']?>" />
-                                           			  <span class="ctcFormComments">Required for customers to write review. </span>
+                                           			  <i class="ctcFormComments">Required for customers to write review. </i>
                                            			   </div>
                                        			 </div>
 
@@ -2230,7 +2230,7 @@ public function ctcEmailSetting(){
                                                  	  <div class="ctcProductFormRow">
                                                            			    <div class="ctcProductFormColumn">
                                                            			  		<label for="ctcProductMetaInfo">Meta Data : </label>
-                                                           			  		<span class="ctcFormComments">Noteworthy features.</span>
+                                                           			  		<i class="ctcFormComments">Noteworthy features.</i>
                                                            			     </div>
                                                            			    <div class="ctcProductFormColumn">
                                                                 		 <input id="ctcProductMetaInfo" type="text" name="metaInfo" size="35"    value="<?=$productData['metaInfo']?>"  />
@@ -2275,7 +2275,7 @@ public function ctcEmailSetting(){
                                                       </div>
                                                        <div class="ctcProductFormColumn">
                                                          <input id="ctcProductWeight" type="number" step="0.01" name="productWeight" required="required" size="20"    value="<?php if($productData['productWeight'] !== '0.00'): echo trim($productData['productWeight']); endif;?>"/>
-                                                         <span class="ctcFormComments"></span>
+                                                         <i class="ctcFormComments"></i>
                                                        </div>
                                                   </div>
                                                   <div class="ctcProductFormRow">
@@ -2294,7 +2294,7 @@ public function ctcEmailSetting(){
                                        			     <div class="ctcProductFormColumn">
 
                                                  		<input id="ctcProductPreOrder" type="checkbox" name="preOrder" size="35"  value="1"   <?=$productData['preOrder']==1? "checked = 'checked'":""?>/>
-                                       			      <span class="ctcFormComments">If pre order is available for this product</span>
+                                       			      <i class="ctcFormComments">If pre order is available for this product</i>
                                        			     </div>
                                        			 </div>
                                        			 <div class="ctcProductFormRow">
@@ -2303,7 +2303,7 @@ public function ctcEmailSetting(){
                                                		       </div>
                                            		        <div class="ctcProductFormColumn">
                                                          <input id="ctcFeatureProduct" type="checkbox" name="featureProduct" size="35"  value="1"  <?=$productData['featureProduct'] == 1?"checked = 'checked'":" "?>/>
-                                           			   <span class="ctcFormComments">Customer will see product in main page.</span>
+                                           			   <i class="ctcFormComments">Customer will see product in main page.</i>
                                            			    </div>
                                        			</div>
 
@@ -2315,7 +2315,7 @@ public function ctcEmailSetting(){
                                            			   <div class="ctcProductFormColumn">
                                                            <input id="ctcProductPostId" title="Create blog post about this product?" type="checkbox" name="createProductPost"   value="1" <?=$productData['productPostId'] >= 1? "value='1'  checked ='checked'":"value='0'"?> />
                                            			  	  <input type="hidden" id="ctcProductPostId"	name="productPostId" value="<?=$productData['productPostId']?>" />
-                                           			  <span class="ctcFormComments">Required for customers to write review. </span>
+                                           			  <i class="ctcFormComments">Required for customers to write review. </i>
                                            			   </div>
                                        			 </div>
 
@@ -2616,7 +2616,7 @@ public function ctcEmailSetting(){
                                           </div>
                                          <div class="ctcAddDiscountColumnRight">
                                               <input id="ctcDiscountPercent" type="number" step="0.1"  min="0" required="required"  max="100" name="discountPercent" size="20" value="" />
-                                                 <span class="ctcFormComments"> <input class="ctcDiscountType" id="ctcDiscountPercentCb" type="checkbox" checked="checked"/>Check if percent off.</span>
+                                                 <i class="ctcFormComments"> <input class="ctcDiscountType" id="ctcDiscountPercentCb" type="checkbox" checked="checked"/>Check if percent off.</i>
                                          </div>
                                                           
                                  </div>
@@ -2627,7 +2627,7 @@ public function ctcEmailSetting(){
                                          <div class="ctcAddDiscountColumnRight">
                                                 
                                                  <input id="ctcDiscountAmount" type="number" step="0.01" min="0" class="ctcRequiredField" disabled="disabled" required="required"  name="discountAmount" size="20" value=""> 
-                                                 <span class="ctcFormComments"> <input class="ctcDiscountType" id="ctcDiscountAmountCb" type="checkbox"/>Check if amount off.</span>
+                                                 <i class="ctcFormComments"> <input class="ctcDiscountType" id="ctcDiscountAmountCb" type="checkbox"/>Check if amount off.</i>
                                          </div>
                                                           
                                  </div> 
@@ -2913,7 +2913,7 @@ public function ctcEmailSetting(){
                                           </div>
                                          <div class="ctcAddDiscountColumnRight">
                                               <input id="ctcDiscountPercent" type="number" step="0.1"  min="0"  max="100" name="discountPercent" size="20"   <?=$discountData['discountPercent']>0.00?'':'disabled="disabled"'?> required="required" value="<?=$discountData['discountPercent']?>">
-                                                <span class="ctcFormComments"> <input class="ctcDiscountType" id="ctcDiscountPercentCb" <?=$discountData['discountPercent']>0.00?'checked="checked"':''?> type="checkbox" />Check if percent off.</span>
+                                                <i class="ctcFormComments"> <input class="ctcDiscountType" id="ctcDiscountPercentCb" <?=$discountData['discountPercent']>0.00?'checked="checked"':''?> type="checkbox" />Check if percent off.</i>
                                          </div>
                                                           
                                  </div>
@@ -2924,7 +2924,7 @@ public function ctcEmailSetting(){
                                          <div class="ctcAddDiscountColumnRight">
                                                 
                                                  <input id="ctcDiscountAmount" type="number" step="0.01" min="0" class="ctcRequiredField" <?=$discountData['discountAmount']>0.00?'':'disabled="disabled"'?> required="required"  name="discountAmount" size="15" value="<?=$discountData['discountAmount']?>" /> 
-                                                 <span class="ctcFormComments"> <input class="ctcDiscountType" id="ctcDiscountAmountCb" <?=$discountData['discountAmount']>0.00?'checked="checked"':''?> type="checkbox"/>Check if amount off.</span>
+                                                 <i class="ctcFormComments"> <input class="ctcDiscountType" id="ctcDiscountAmountCb" <?=$discountData['discountAmount']>0.00?'checked="checked"':''?> type="checkbox"/>Check if amount off.</i>
                                          </div>
                                                           
                                  </div> 

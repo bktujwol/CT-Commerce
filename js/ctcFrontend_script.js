@@ -1,6 +1,5 @@
-jQuery.noConflict();
-(function($) {
-    $(document).ready(function($) {
+(function ($) {
+    $(document).ready(function ($) {
         //script to add thickbox class to wordpress gallery
         //$(document).find(".ctcSingleProductGallery  a").addClass("thickbox").attr('rel','gallery-ctc');
 
@@ -40,7 +39,7 @@ jQuery.noConflict();
                 });
 
 
-                $(container).imagesLoaded().progress(function() {
+                $(container).imagesLoaded().progress(function () {
                     $(container).masonry('layout');
 
 
@@ -71,7 +70,7 @@ jQuery.noConflict();
 
 
 
-        $('.ctcSingleProductGallery span:nth-child(2),.ctcSingleProductGallery span:first-child ').on('click', function(event) {
+        $('.ctcSingleProductGallery span:nth-child(2),.ctcSingleProductGallery span:first-child ').on('click', function (event) {
 
             var scrollContainer = $(".ctcSingleProductGallery");
 
@@ -101,7 +100,7 @@ jQuery.noConflict();
          */
 
 
-        $(document).on('click', '#ctCommerceUserLogout', function() {
+        $(document).on('click', '#ctCommerceUserLogout', function () {
 
             localStorage.removeItem("ctcWidgetCartData");
 
@@ -144,7 +143,7 @@ jQuery.noConflict();
          */
 
         //function to show user rgistration form with ajax
-        $(document).on('click', '#ctCommerceUserRegistration', function() {
+        $(document).on('click', '#ctCommerceUserRegistration', function () {
 
             var data = {
 
@@ -152,7 +151,7 @@ jQuery.noConflict();
 
             }
 
-            $.post(ctc_ajax_url, data, function(response) {
+            $.post(ctc_ajax_url, data, function (response) {
 
 
                 $.ctcOverlayEl({
@@ -175,7 +174,7 @@ jQuery.noConflict();
 
 
         //script to register user with ajax
-        $(document).on('submit', '#ctcUserRegistrationForm', function(event) {
+        $(document).on('submit', '#ctcUserRegistrationForm', function (event) {
 
             var password = $("input[name='customerPassword']").val();
             var confirmPassword = $("input[name='customerConfirmPassword']").val();
@@ -190,7 +189,7 @@ jQuery.noConflict();
 
                 }
 
-                $.post(ctc_ajax_url, data, function(response) {
+                $.post(ctc_ajax_url, data, function (response) {
 
 
 
@@ -229,7 +228,7 @@ jQuery.noConflict();
 
 
         //function to get user update form
-        $(document).on('click', '#ctCommerceUserInfoUpdate', function() {
+        $(document).on('click', '#ctCommerceUserInfoUpdate', function () {
 
             var modalCss = {
                 'padding': '50px',
@@ -265,7 +264,7 @@ jQuery.noConflict();
 
         //script to update user information
 
-        $(document).on('submit', '#ctcUserUpdateForm', function(event) {
+        $(document).on('submit', '#ctcUserUpdateForm', function (event) {
 
             var password = $("input[name='customerPassword']").val();
             var confirmPassword = $("input[name='customerConfirmPassword']").val();
@@ -284,7 +283,7 @@ jQuery.noConflict();
 
                 }
 
-                $.post(ctc_ajax_url, data, function(response) {
+                $.post(ctc_ajax_url, data, function (response) {
 
                     if (response >= 1) {
 
@@ -315,7 +314,7 @@ jQuery.noConflict();
         /*script to add intems to the end of page on scroll*/
 
 
-        $(window).on("scroll", function() {
+        $(window).on("scroll", function () {
             var scrollHeight = $(document).height();
             var scrollPosition = $(window).height() + $(window).scrollTop();
 
@@ -327,11 +326,7 @@ jQuery.noConflict();
                 return false;
             } else {
 
-
-
                 if (scrollHeight === scrollPosition) {
-
-
 
                     var data = {
 
@@ -341,14 +336,9 @@ jQuery.noConflict();
 
 
                     if (data['offset']) {
-
-
-                        $.post(ctc_ajax_url, data, function(response) {
-
+                        $.post(ctc_ajax_url, data, function (response) {
 
                             if (response.length > 22) {
-
-
 
                                 // init Masonry
                                 var $grid = $('.ctcFeaturedProductList').masonry({
@@ -362,7 +352,7 @@ jQuery.noConflict();
 
                                 });
 
-                                $grid.imagesLoaded().progress().always(function(instance) {
+                                $grid.imagesLoaded().progress().always(function (instance) {
 
                                     $grid.masonry('layout');
 
@@ -371,20 +361,15 @@ jQuery.noConflict();
                                 $grid.append(response).masonry('reloadItems');
                                 $grid.masonry('appended', response);
 
-
-
-                                $('[id]').each(function(i) {
+                                $('[id]').each(function (i) {
                                     $('[id="' + this.id + '"]').slice(1).remove();
                                 });
-
-
 
                                 var productCount = $('.ctcFeaturedProductContent').length;
 
                                 $('div.ctcStorePageMain').attr('data-type-rowoffset', parseInt(productCount));
 
                             } else {
-
 
                                 $('div.ctcStorePageMain').removeAttr('data-type-rowoffset');
                             }
@@ -421,12 +406,12 @@ jQuery.noConflict();
                     $('.ctcHideOnEmptyCart').animate({
                         opacity: 0,
                         left: "+=100",
-                    }, 150, function() {
+                    }, 150, function () {
 
 
                         $('#ctcWidgetEmptyCartMessage,#ctcPageEmptyCartMessage').empty().prepend("<h5> Empty Cart.</h5>").show("medium");
 
-                        $('#ctcWidgetEmptyCartMessage h5,#ctcPageEmptyCartMessage h5').each(function() {
+                        $('#ctcWidgetEmptyCartMessage h5,#ctcPageEmptyCartMessage h5').each(function () {
 
                             if ($(this).html().length === 0) {
 
@@ -443,11 +428,9 @@ jQuery.noConflict();
                     $('.ctcHideOnEmptyCart').animate({
                         opacity: 1,
                         left: "+=100",
-                    }, 150, function() {
+                    }, 150, function () {
 
                     }).show("fast");
-
-
 
                 }
             }
@@ -455,47 +438,15 @@ jQuery.noConflict();
             var cartChecked = true;
 
         }
-        /*
-		//function to update cart if user manually updates products
-	    $(document).on('change blur','.ctcCartWidgetCount',function(){
-	    	var differenceAmount = '';
-	    	var price = parseFloat($(this).attr('data-type-price'));
-	    	var id = $(this).attr('data-type-id');
-	    	var newCount =$(this).val() || 0;
-	    	var oldTotal =parseFloat($('ctcIndividualProductTotal-'+id).val());
-	    	
-	    	  
-	    	  var newProductTotal = parseInt(newCount)*parseFloat(price);
-	    	  $('#ctcWidgetCartProductTotal-'+id).empty().prepend(newProductTotal.toFixed(2));
-	    	  $('#ctcIndividualProductTotal-'+id).val(newProductTotal);
-	
-	  
-	    		if(newCount == 0){
-	    			$('#ctcCartWidgetTr'+id).remove();
-	    		}
-    		
-    		
-	    	
-	    	//calcualte and prepend grand total
-	    	ctcCartCalculateTotal();
-	    	
-	    });
-	    */
 
         //remove product on delete click
-        $(document).on('click', '.ctcRemoveWidgetCartItem', function() {
+        $(document).on('click', '.ctcRemoveWidgetCartItem', function () {
             var productId = $(this).attr('data-type-id');
 
             if (confirm("Do you want to remove this item from cart?")) {
 
-
-
-
                 $("#ctcCartWidgetTr" + productId).remove();
-
-
                 $("#ctcPageCartItem" + productId).remove();
-
 
                 //calculate and prepend grand total
                 ctcCartCalculateTotal();
@@ -525,12 +476,8 @@ jQuery.noConflict();
                         setVarArray[i] = newProductVariation + ":" + (parseInt(matchingVariation[1]) + 1);
 
                         var newVariationSet = setVarArray.join(',');
-
-
-
                         $('#ctcWidgetCartProductVariation-' + id).val(newVariationSet);
                         $('#ctcWidgetCartProductVariationTooltip-' + id).removeAttr('title').attr('title', $('#ctcWidgetCartProductVariation-' + id).val());
-
                     }
 
                 }
@@ -550,7 +497,7 @@ jQuery.noConflict();
             var shippingCost = 0;
             var tax = parseFloat($('#ctcPageCartItemGrid').attr('data-type-tax'));
 
-            $('input.ctcIndividualProductTotal').each(function() {
+            $('input.ctcIndividualProductTotal').each(function () {
 
                 newGrandTotal = newGrandTotal + parseFloat($(this).val());
 
@@ -564,14 +511,7 @@ jQuery.noConflict();
 
                 var taxAmount = (newGrandTotal / 100) * tax;
 
-
-
-
                 var amountAfterTaxDiscountShipping = newGrandTotal + taxAmount - discountAmount + shippingCost;
-
-
-
-
                 $('#ctcPageCartGrandTotalInput').val(amountAfterTaxDiscountShipping.toFixed(2));
                 $('#ctcCartGrandTotal').val(newGrandTotal.toFixed(2));
                 $('#ctcWidgetGrandTotalAmount').empty().prepend(addCommas(newGrandTotal.toFixed(2)));
@@ -586,15 +526,9 @@ jQuery.noConflict();
             }
             ctcCheckWidgetEmptyCart();
 
-
-
             //function to also save cart in session storage
             cartData = $("#ctcProductCartWidget").html();
-
             setCtcCartLocalStorage(cartData);
-
-
-
         }
 
 
@@ -606,8 +540,6 @@ jQuery.noConflict();
             for (var i in productInCart) {
 
                 switch (productInCart[i]['name']) {
-
-
                     case 'productId':
                         if (productInCart[i]['value'] === id) {
 
@@ -627,9 +559,6 @@ jQuery.noConflict();
                         break;
                 }
             }
-
-
-
             return addNewProduct;
         }
 
@@ -644,8 +573,6 @@ jQuery.noConflict();
             if (!productVariation || productVariation.length <= 0) {
                 delete productVariation;
                 productVariation = name;
-
-
             }
 
             //function to update cart on duplicate product	
@@ -653,7 +580,6 @@ jQuery.noConflict();
             if (ctcCartWidgetDuplicateProduct(id, price, productVariation)) {
 
                 var cartReady = '';
-
                 cartReady += "<tr id='ctcCartWidgetTr" + id + "' class='ctcCartWidgetItem'>";
                 cartReady += "<input class='ctcWidgetProductId' type='hidden' name='productId' value='" + id + "' />";
                 cartReady += "<input  type='hidden' name='productImage' value='" + thumb + "' />";
@@ -675,10 +601,7 @@ jQuery.noConflict();
         }
 
         //javascript to add product to the cart
-        $(document).on('click', '.ctcAddToCartLink', function() {
-
-
-
+        $(document).on('click', '.ctcAddToCartLink', function () {
             var price = $(this).attr('data-type-price');
             var id = $(this).attr('data-type-id');
             var name = $(this).attr('data-type-name');
@@ -698,15 +621,10 @@ jQuery.noConflict();
 
 
             $('#ctcCartWidgetTable').append(prepareProductForCart(price, id, name, thumb, productVariation));
-
-
-
             //add grand total on new product add
             ctcCartCalculateTotal();
-
             //check for empty cart on 
             ctcCheckWidgetEmptyCart();
-
             return false;
         });
 
@@ -746,54 +664,43 @@ jQuery.noConflict();
                             itemDivContent += "<td class='ctcToolTipCartItemTotal'>" + addCommas(parseFloat(cartProductData[i]['value']).toFixed(2)) + "</td></tr>";
                             grandTotal = grandTotal + parseFloat(cartProductData[i]['value']);
                             break;
-
                     }
 
 
                     //html for all product cart data grid
                     allItemsHtml += itemDivContent;
-
                     delete(itemDivContent[i]);
                 }
-
                 allItemsHtml += '<tr id="ctcToolTipCartTotal"><td colspan="2"> Sub Total :</td><td colspan="2">' + addCommas(grandTotal.toFixed(2)) + '</td></td>';
             }
             return allItemsHtml;
         }
 
         //script to add $ ui tooltip
-        $(document).on('mouseenter', '.ctcCartToolTip', function() {
+        $(document).on('mouseenter', '.ctcCartToolTip', function () {
 
             $(this).attr('title', 'Cart Preview');
         });
         //tooltip for cart
 
-        $(function() {
+        $(function () {
             $(document).tooltip({
 
-                content: function() {
-
-
+                content: function () {
                     var element = $(this);
                     if (element.hasClass('ctcWidgetVaritionShowtoolTip')) {
-
                         return $("#ctcWidgetCartProductVariation-" + element.attr('data-type-id')).val();
                     } else if (element.hasClass('ctcPageVaritionShowtoolTip')) {
-
                         return $("#ctcPageCartProductVariation-" + element.attr('data-type-id')).val();
                     } else if (element.hasClass('ctcCartToolTip')) {
 
-                        return function() {
+                        return function () {
 
                             if ($('#ctcCartWidgetTable tr').length !== 0) {
-
                                 return '<div class="ctcToolTipNavCart"><span><b>Cart Preview </b></span> <table>' + ctcToolTipCart() + '</table></div>';
                             } else {
-
                                 return "<h5 class='ctcEmptyCartTooltip'> Empty!</h5>";
                             }
-
-
                         }
 
                     } else if (element.is('img')) {
@@ -807,14 +714,12 @@ jQuery.noConflict();
                     effect: "slideDown",
                     delay: 500
                 },
-
-
                 position: {
                     within: $(this),
                     my: "center bottom-20",
                     at: "center top",
 
-                    using: function(position, feedback) {
+                    using: function (position, feedback) {
                         $(this).css(position);
                         $("<div>")
                             .addClass("arrow")
@@ -822,29 +727,17 @@ jQuery.noConflict();
                             .addClass(feedback.horizontal)
                             .appendTo(this);
                     }
-
                 }
 
-
-
             });
-
-
         });
 
-
-
         //function to add select product variation to the cart data type variation
-        $(document).on('change', 'select.ctcProductVariationSelect', function() {
-
+        $(document).on('change', 'select.ctcProductVariationSelect', function () {
 
             var productVariation = $("option:selected", this).val();
             var productId = $(this).attr('data-type-id');
-
             var preOrder = $("option:selected", this).attr('data-type-preorder');
-
-
-
             if (preOrder == 'yes') {
                 $('#ctcPreOrderAvilable-' + productId).css('visibility', 'visible');
             } else {
@@ -926,41 +819,24 @@ jQuery.noConflict();
 
                     }
 
-
-
                     //html for all product cart data grid
                     allItemsHtml += itemDivContent;
 
                     delete(itemDivContent[i]);
                 }
 
-
-
                 var taxAmount = grandTotal * (taxRate / 100);
                 var grandTotalAfterTax = grandTotal + taxAmount;
-
 
                 //data for stripe checkout
                 ctcCheckOutAmount = grandTotalAfterTax;
                 ctcDataDescription = 'Total Amount : ' + grandTotalAfterTax;
-
-
                 $(allItemsHtml).hide().appendTo('#ctcPageCartItemGrid').show("normal");
-
-
                 $('#ctcPageCartTaxAmount').html(addCommas(taxAmount.toFixed(2)));
                 $('#ctcPageCartGrandTotalInput').val(grandTotalAfterTax);
                 $('#ctcPageCartGtotal').html(addCommas(grandTotalAfterTax.toFixed(2)));
-
-
-
-
                 ctcCheckWidgetEmptyCart();
-
-
             }
-
-
 
         }
 
@@ -968,33 +844,25 @@ jQuery.noConflict();
 
 
         //script to remove item from product cart page
-        $(document).on('click', '.ctcPageCartItemRemove', function() {
+        $(document).on('click', '.ctcPageCartItemRemove', function () {
 
             var productId = $(this).attr('data-type-id');
-
             if (confirm("Do you want to remove this item from cart?")) {
-
-
                 $("#ctcCartWidgetTr" + productId).remove();
                 $("#ctcPageCartItem" + productId).remove();
                 $('#ctcTotalShippingCost').val('0.00');
                 $('#ctcShippingcost').empty();
-
                 $('#ctcPromoCodeSaving').val('0.00');
                 $('#ctcSavingAfterPromoCode').empty();
                 $('#ctcCheckOutPromoCode').val('');
                 $('#ctcCheckoutPaymentOptions').hide();
                 $('#ctcChooseShippingOptions span input').prop('checked', false);
-
                 //calcualte and prepend grand total
                 ctcCartCalculateTotal();
-
                 //check for empty cart
                 ctcCheckWidgetEmptyCart();
             }
-
             return false;
-
         });
 
 
@@ -1012,67 +880,41 @@ jQuery.noConflict();
 
 
         function setCtcCartLocalStorage(cartContent) {
-
             localStorage.removeItem("ctcWidgetCartData");
             localStorage.setItem("ctcWidgetCartData", cartContent);
-
         }
 
 
 
         //function to reinstate cookie on state change of the page
         function ctcReinstateCart() {
-
-
-
             var ctcCartData = localStorage.getItem("ctcWidgetCartData");
-
-
             if (ctcCartData) {
-
                 $("#ctcProductCartWidget").empty();
-
                 $(ctcCartData).hide().prependTo("#ctcProductCartWidget").show('slow').css('opacity', 1);
-
                 //if product cart page add content to the page
                 if ($('#ctcProductCartPageContent').length) {
-
                     ctcProductCartPage();
                 }
-
             }
-
-
-
-
         }
 
         //script to deal with customer checkout
-        $(document).on('click', '.ctcWidgetCartCheckOutbutton', function(event) {
-
+        $(document).on('click', '.ctcWidgetCartCheckOutbutton', function (event) {
             var data = {
-
                 action: 'ctcCustomerWidgetCheckOut',
-
             }
 
             //alert(response);
 
-            $.post(ctc_ajax_url, data, function(response) {
+            $.post(ctc_ajax_url, data, function (response) {
 
                 if (JSON.parse(response)['notLoggedIn']) {
                     $.ctcOverlayEl({
                         modalMessage: JSON.parse(response)['notLoggedIn']
                     });
-
-
                 }
-
-
             });
-
-
-
         });
 
         /**
@@ -1081,10 +923,8 @@ jQuery.noConflict();
          * 
          */
 
-        $(document).on('click', '#ctcCheckOutOptionStripe,#ctcCheckOutOptionCash', function() {
-
+        $(document).on('click', '#ctcCheckOutOptionStripe,#ctcCheckOutOptionCash', function () {
             var checkoutButton = $("#ctcCashCheckoutButton");
-
             if ($(this).attr('id') === 'ctcCheckOutOptionStripe') {
                 $('#ctcCheckoutPaymentOptions button').attr('id', 'ctcStripeCheckoutButton').text('Pay with Card').show();
                 $('#ctcStripeMountDiv,#card-errors').show();
@@ -1102,62 +942,60 @@ jQuery.noConflict();
          * 
          * 
          */
-        if (document.getElementById('ctcCheckoutButton') !== null && 'undefined' !== typeof(ctcStripeParams)) {
-
-    
+        if (document.getElementById('ctcCheckoutButton') !== null && 'undefined' !== typeof (ctcStripeParams)) {
             // Create a Stripe client.
             var stripe = Stripe(ctcStripeParams.ctcStripePubKey);
-
             // Create an instance of Elements.
             var elements = stripe.elements();
-
             // Custom styling can be passed to options when creating an Element.
             // (Note that this demo uses a wider set of styles than the guide below.)
             var style = {
-            base: {
-                color: '#32325d',
-                fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-                fontSmoothing: 'antialiased',
-                fontSize: '16px',
-                '::placeholder': {
-                color: '#aab7c4'
+                base: {
+                    color: '#32325d',
+                    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+                    fontSmoothing: 'antialiased',
+                    fontSize: '16px',
+                    '::placeholder': {
+                        color: '#aab7c4'
+                    },
                 },
-            },
-            invalid: {
-                color: '#fa755a',
-                iconColor: '#fa755a'
-            }
+                invalid: {
+                    color: '#fa755a',
+                    iconColor: '#fa755a'
+                }
             };
 
             // Create an instance of the card Element.
-            var card = elements.create('card', {style: style});
+            var card = elements.create('card', {
+                style: style
+            });
 
             // Add an instance of the card Element into the `card-element` <div>.
             card.mount('#ctcStripeMountDiv');
 
             // Handle real-time validation errors from the card Element.
-            card.addEventListener('change', function(event) {
-            var displayError = document.getElementById('card-errors');
-            if (event.error) {
-                displayError.textContent = event.error.message;
-            } else {
-                displayError.textContent = '';
-            }
+            card.addEventListener('change', function (event) {
+                var displayError = document.getElementById('card-errors');
+                if (event.error) {
+                    displayError.textContent = event.error.message;
+                } else {
+                    displayError.textContent = '';
+                }
             });
 
             // Handle form submission.
-            document.getElementById('ctcProductCartPageForm').addEventListener('submit', function(event) {
-            if('none' !== document.getElementById('ctcStripeMountDiv').style.display){
+            document.getElementById('ctcProductCartPageForm').addEventListener('submit', function (event) {
+                if ('none' !== document.getElementById('ctcStripeMountDiv').style.display) {
                     event.preventDefault();
 
-                    stripe.createToken(card).then(function(result) {
+                    stripe.createToken(card).then(function (result) {
                         if (result.error) {
-                        // Inform the user if there was an error.
-                        var errorElement = document.getElementById('card-errors');
-                        errorElement.textContent = result.error.message;
+                            // Inform the user if there was an error.
+                            var errorElement = document.getElementById('card-errors');
+                            errorElement.textContent = result.error.message;
                         } else {
-                        // Send the token to your server.
-                        // Insert the token ID into the form so it gets submitted to the server
+                            // Send the token to your server.
+                            // Insert the token ID into the form so it gets submitted to the server
                             var form = document.getElementById('ctcProductCartPageForm');
                             var hiddenInput = document.createElement('input');
                             hiddenInput.setAttribute('type', 'hidden');
@@ -1168,12 +1006,12 @@ jQuery.noConflict();
                             // Submit the form
                             form.submit();
                         }
+                    });
+                }
             });
+
+
         }
-        });
-
-
-}
         /**
          * 
          * script to display and apply shipping cost and time
@@ -1184,21 +1022,13 @@ jQuery.noConflict();
 
         function ctcCalculateShippingTime(deliveryTime) {
             var timeNotice = '';
-
             if (deliveryTime == '1') {
-
                 timeNotice = '<font> tomorrow';
             } else if (deliveryTime === '0') {
-
                 timeNotice = 'today';
-
             } else {
-
                 timeNotice = ' in ' + responseObj['deliveryTime'] + ' Days';
             }
-
-
-
             return timeNotice;
         }
 
@@ -1206,8 +1036,7 @@ jQuery.noConflict();
         //function to check for empty field
         function ctcCheckEmptyShippingAddress() {
             var requiredField = ' ';
-
-            $('#ctcShippingAddressZipCode,#ctcShippingAddress1,#ctcShippingAddressCity,#ctcShippingAddressStateProvince,#ctcShippingAddressCountry').each(function() {
+            $('#ctcShippingAddressZipCode,#ctcShippingAddress1,#ctcShippingAddressCity,#ctcShippingAddressStateProvince,#ctcShippingAddressCountry').each(function () {
 
                 if ($(this).val() === '') {
                     $(this).css('border', '1px solid red');
@@ -1218,9 +1047,6 @@ jQuery.noConflict();
                 }
 
             });
-
-
-
             if (requiredField == 'empty') {
                 $.ctcOverlayEl({
                     modalMessage: 'Please fill in required fields, before proceeding.'
@@ -1231,20 +1057,15 @@ jQuery.noConflict();
 
                 return true;
             }
-
-
-
-
         }
 
 
 
         //function to verify shipping address and calculate shipping cost
         function verifyAddressCalculateShippingCost(shippingRadio) {
-
             $.post(ctc_ajax_url, {
                 'action': 'ctcGetUspsApiKey'
-            }, function(uspsApiKey) {
+            }, function (uspsApiKey) {
 
                 shippingStreet1 = $('#ctcShippingAddress1').val();
                 shippingStreet2 = $('#ctcShippingAddress2').val();
@@ -1253,11 +1074,7 @@ jQuery.noConflict();
                 shippingZip = $('#ctcShippingAddressZipCode').val();
                 shippingCountry = $('#ctcShippingAddressCountry').val();
 
-
-
                 var uspsUrl = 'https://secure.shippingapis.com/ShippingAPI.dll';
-
-
                 var validationData = 'API=Verify&XML=<AddressValidateRequest USERID="' + uspsApiKey + '">';
                 validationData += '<Address>';
                 validationData += '<Address1>' + shippingStreet1 + '</Address1>';
@@ -1268,28 +1085,12 @@ jQuery.noConflict();
                 validationData += '<Zip4></Zip4>';
                 validationData += '</Address>';
                 validationData += '</AddressValidateRequest>';
-
-
-
-
-                $.get(uspsUrl, validationData, function(response) {
-
-
+                $.get(uspsUrl, validationData, function (response) {
                     var addressError = $(response).contents().find("Description").text();
-
-
-
                     if (addressError.length !== 0) {
-
-
-
-
                         $('#ctcCheckoutPaymentOptions,#ctcDisplayShippingCost').hide("normal");
                         $('.ctcChooseShippingOption').show("normal");
                         $('#ctcShippingOptionUsps').prop('checked', false);
-
-
-
                         $.ctcOverlayEl({
                             modalMessage: "Invalid Address, Please re-check your address again."
                         });
@@ -1297,36 +1098,22 @@ jQuery.noConflict();
                         return false;
                     } else {
 
-
-
-
                         $('#ctcShippingAddressCity').val($(response).contents().find("Address2").text());
                         $('#ctcShippingAddressCity').val($(response).contents().find("City").text());
                         $('#ctcShippingAddressStateProvince').val($(response).contents().find("State").text());
                         $('#ctcShippingAddressZipCode').val($(response).contents().find("Zip5").text());
                         shippingCountry = $('#ctcShippingAddressCountry').val('USA');
 
-
-
-
                         var i = 0;
                         var productAndCount = {};
                         var productId = '';
-                        $('.ctcPageCartProductId').each(function() {
-
+                        $('.ctcPageCartProductId').each(function () {
                             productId = $(this).val();
-
                             productAndCount[productId] = $('#ctcProductCount-' + productId).val();
-
-
                             i++;
                         });
 
-
-
-
                         var data = {
-
                             'action': 'ctcCalculateShippingCost',
                             'shippingMethod': 'ctcUSPS',
                             'shippintZipCode': $('#ctcShippingAddressZipCode').val(),
@@ -1334,47 +1121,28 @@ jQuery.noConflict();
                             'shipppingZipcode': $('#ctcShippingAddressZipCode').val()
                         }
 
-
                         //get data from server for calculation of shipping cost
-                        $.post(ctc_ajax_url, data, function(shippingData) {
-
-                            $.get(uspsUrl, shippingData, function(shippingCostInfo) {
-
-
-
+                        $.post(ctc_ajax_url, data, function (shippingData) {
+                            $.get(uspsUrl, shippingData, function (shippingCostInfo) {
                                 var shippingTotal = 0;
-
-
-
-
-                                $(shippingCostInfo).contents().find("Rate").each(function() {
+                                $(shippingCostInfo).contents().find("Rate").each(function () {
                                     shippingTotal = (shippingTotal + parseFloat($(this).text()));
-
                                 });
-
-
                                 var shippingTime = $(shippingCostInfo).contents().find("MailService").text().split('&lt')[0];
-
                                 $(".ctcCalculateShipingWait").animate({
                                     opacity: 0
-                                }, 300, function() {
+                                }, 300, function () {
                                     $(this).remove()
                                 });
                                 $('#ctcTotalShippingCost').val(shippingTotal.toFixed(2));
                                 $('#ctcShippingcost').empty().prepend(shippingTotal.toFixed(2) + ' <font > (' + shippingTime + ')</font>');
                                 $('#customerShippingOptionInfo').val(shippingTime);
-
-
                                 $('#ctcDisplayShippingCostInfo').show();
                                 $('.ctcUspsShippingCostDisplay').show('normal');
                                 $('#ctcCheckoutPaymentOptions,#ctcDisplayShippingCost').show("normal");
                                 $('.ctcChooseShippingOption').hide("normal");
-
                                 ctcCartCalculateTotal();
-
-
-                            }).fail(function() {
-
+                            }).fail(function () {
                                 shippingRadio.prop('checked', false);
                                 $('#ctcCheckoutPaymentOptions,#ctcDisplayShippingCost').hide("medium");
                                 $('#ctcUserShippingAddress').slideUp(1500);
@@ -1382,58 +1150,44 @@ jQuery.noConflict();
 
                                 $(".ctcCalculateShipingWait").animate({
                                     opacity: 0
-                                }, 100, function() {
+                                }, 100, function () {
                                     $(this).remove()
                                 });
 
-
                             });
 
-
-
-                        }).fail(function() {
-
+                        }).fail(function () {
                             shippingRadio.prop('checked', false);
                             $('#ctcCheckoutPaymentOptions,#ctcDisplayShippingCost').hide("medium");
                             alert("Shipping could not be calculated at this time \nPlease try again later");
                             $('#ctcUserShippingAddress').slideUp(1500);
                             $(".ctcCalculateShipingWait").animate({
                                 opacity: 0
-                            }, 100, function() {
+                            }, 100, function () {
                                 $(this).remove()
                             });
-
-
                         });
 
                     }
-                }).fail(function() {
-
+                }).fail(function () {
                     shippingRadio.prop('checked', false);
                     $('#ctcCheckoutPaymentOptions,#ctcDisplayShippingCost').hide("medium");
                     alert("Shipping could not be calculated at this time \nPlease try again later");
                     $('#ctcUserShippingAddress').slideUp(1500);
                     $(".ctcCalculateShipingWait").animate({
                         opacity: 0
-                    }, 100, function() {
+                    }, 100, function () {
                         $(this).remove()
                     });
-
-
                 });
-
-
-
-
-            }).fail(function() {
-
+            }).fail(function () {
                 shippingRadio.prop('checked', false);
                 $('#ctcCheckoutPaymentOptions,#ctcDisplayShippingCost').hide("medium");
                 alert("Shipping could not be calculated at this time \nPlease try again later");
                 $('#,#ctcUserShippingAddress').slideUp(1500);
                 $(".ctcCalculateShipingWait").animate({
                     opacity: 0
-                }, 100, function() {
+                }, 100, function () {
                     $(this).remove()
                 });
 
@@ -1442,18 +1196,12 @@ jQuery.noConflict();
 
 
         //ajax for geting shipping cost and time
-        $(document).on('click', '#ctcShippingOptionUsps,#ctcShippingOptionVendor,#ctcShippingOptionPickup', function() {
+        $(document).on('click', '#ctcShippingOptionUsps,#ctcShippingOptionVendor,#ctcShippingOptionPickup', function () {
             var shippingRadio = $(this);
-
-
-
-
             switch ($(this).val()) {
-
                 case 'ctcUSPS':
                     if (ctcCheckEmptyShippingAddress()) {
                         $("#ctcCashPayment").hide(1000);
-
                         $('#ctcCheckOutOptionStripe').prop('checked', true).parents('#ctcStripePayment').find('div').show();
                         $('#ctcCheckoutPaymentOptions button').attr('id', 'ctcStripeCheckoutButton').text('Pay with Card').show();
                         $(".ctcCalculateShipingWait").remove();
@@ -1474,7 +1222,7 @@ jQuery.noConflict();
                         $("#ctcCashPayment").show(1000);
                         $(".ctcCalculateShipingWait").animate({
                             opacity: 0
-                        }, 300, function() {
+                        }, 300, function () {
                             $(this).remove()
                         });
                         shippingRadio.parent().append('<font class="ctcCalculateShipingWait dashicons-before dashicons-update"></font>');
@@ -1483,23 +1231,20 @@ jQuery.noConflict();
                         $('.ctcChooseShippingOption').hide(1000);
 
                         var totalProductCount = 0;
-                        $('.ctcPageCartProductCount').each(function() {
+                        $('.ctcPageCartProductCount').each(function () {
                             totalProductCount = totalProductCount + parseInt($(this).val());
-
                         });
-
                         var data = {
 
                             'action': 'ctcCalculateShippingCost',
                             'shippingMethod': 'ctcVendorShipping',
                             'productCount': totalProductCount
                         }
-
-                        $.post(ctc_ajax_url, data, function(response) {
+                        $.post(ctc_ajax_url, data, function (response) {
 
                             $(".ctcCalculateShipingWait").animate({
                                 opacity: 0
-                            }, 300, function() {
+                            }, 300, function () {
                                 $(this).remove()
                             });
                             responseObj = JSON.parse(response);
@@ -1510,11 +1255,11 @@ jQuery.noConflict();
                                 $('#ctcTotalShippingCost').val(responseObj['deliveryCost'].toFixed(2));
                                 $('#ctcShippingcost').animate({
                                     opacity: 0
-                                }, 200, function() {
+                                }, 200, function () {
                                     $(this).empty()
                                 }).animate({
                                     opacity: 1
-                                }, 200, function() {
+                                }, 200, function () {
 
                                     $(this).prepend('<font>  Free shipping <font>' + shippingTime + '</font>');
 
@@ -1528,11 +1273,11 @@ jQuery.noConflict();
                                 $('#ctcTotalShippingCost').val(responseObj['deliveryCost'].toFixed(2));
                                 $('#ctcShippingcost').animate({
                                     opacity: 0
-                                }, 200, function() {
+                                }, 200, function () {
                                     $(this).empty()
                                 }).animate({
                                     opacity: 1
-                                }, 200, function() {
+                                }, 200, function () {
 
                                     $(this).prepend(responseObj['deliveryCost'].toFixed(2) + '<font>( Delivers ' + shippingTime.replace('<font>', '') + ') </font> ');
 
@@ -1541,13 +1286,8 @@ jQuery.noConflict();
                                 $('#customerShippingOptionInfo').val('Delivers ' + shippingTime);
                                 $('#ctcDisplayShippingCostInfo').show();
                             }
-
-
-
-
                             ctcCartCalculateTotal();
-
-                        }).fail(function() {
+                        }).fail(function () {
 
                             shippingRadio.prop('checked', false);
                             $('#ctcCheckoutPaymentOptions,#ctcDisplayShippingCost').hide("normal");
@@ -1555,7 +1295,7 @@ jQuery.noConflict();
                             //$('#ctcUserShippingAddress').slideUp();
                             $(".ctcCalculateShipingWait").animate({
                                 opacity: 0
-                            }, 100, function() {
+                            }, 100, function () {
                                 $(this).remove()
                             });
 
@@ -1574,7 +1314,7 @@ jQuery.noConflict();
                     $("#ctcCashPayment").show(1000);
                     $(".ctcCalculateShipingWait").animate({
                         opacity: 0
-                    }, 100, function() {
+                    }, 100, function () {
                         $(this).remove()
                     });
                     shippingRadio.parent().append('<font class="ctcCalculateShipingWait dashicons-before dashicons-update"></font>');
@@ -1590,49 +1330,39 @@ jQuery.noConflict();
                         'productCount': totalProductCount
                     }
 
-                    $.post(ctc_ajax_url, data, function(response) {
-
+                    $.post(ctc_ajax_url, data, function (response) {
                         $(".ctcCalculateShipingWait").animate({
                             opacity: 0
-                        }, 100, function() {
+                        }, 100, function () {
                             $(this).remove()
                         });
                         responseObj = JSON.parse(response);
-
-
                         var shippingTime = ctcCalculateShippingTime(responseObj['deliveryTime']);
                         $('#ctcShippingcost').animate({
                             opacity: 0
-                        }, 200, function() {
+                        }, 200, function () {
                             $(this).empty()
                         }).animate({
                             opacity: 1
-                        }, 200, function() {
-
+                        }, 200, function () {
                             $(this).prepend('<font class="ctcShippingPickupTime">You can pick it up ' + shippingTime);
-
                         });
                         $('#customerShippingOptionInfo').val('<font>You can pick it up ' + shippingTime);
                         $('#ctcDisplayShippingCostInfo').hide();
-                    }).fail(function() {
-
+                    }).fail(function () {
                         shippingRadio.prop('checked', false);
                         $('#ctcCheckoutPaymentOptions,#ctcDisplayShippingCost').hide("medium");
                         $('#ctcUserShippingAddress').slideUp(1500);
                         alert("Shipping could not be calculated at this time \nPlease try again later");
-
                         $(".ctcCalculateShipingWait").animate({
                             opacity: 0
-                        }, 100, function() {
+                        }, 100, function () {
                             $(this).remove()
                         });
-
-
                     });
                     $('#ctcTotalShippingCost').val('0.00');
                     ctcCartCalculateTotal();
                     break;
-
             }
 
         });
@@ -1645,40 +1375,27 @@ jQuery.noConflict();
          * 
          */
 
-        $(document).on('click', '#ctcApplyPromoCode', function() {
-
-
+        $(document).on('click', '#ctcApplyPromoCode', function () {
             var promoCodeButton = $(this);
             var productAndCount = {};
             var productId = '';
-            $('.ctcPageCartProductId').each(function() {
-
+            $('.ctcPageCartProductId').each(function () {
                 productId = $(this).val();
-
                 productAndCount[productId] = $('#ctcProductCount-' + productId).val();
             });
-
             var data = {
-
                 'action': 'ctcApplyPromocode',
                 'productsAndCount': JSON.stringify(productAndCount),
                 'promoCode': $('#ctcCheckOutPromoCode').val()
             }
-
-
             if (data['promoCode'].length != 0) {
-
                 promoCodeButton.parent().addClass('ctcAjaxWaitPromoCode');
-                $.post(ctc_ajax_url, data, function(response) {
-
+                $.post(ctc_ajax_url, data, function (response) {
                     promoCodeButton.parent().removeClass('ctcAjaxWaitPromoCode');
-
                     if (!isNaN(response)) {
                         $('#ctcPromoCodeSaving').val(parseFloat(response).toFixed(2));
                         $('#ctcSavingAfterPromoCode').empty().prepend('<span>Discount/Coupon saving : </span><span>' + addCommas(parseFloat(response).toFixed(2)) + '</span>');
-
                         ctcCartCalculateTotal();
-
                     } else if (response == 'invalidPromoCode') {
                         $.ctcOverlayEl({
                             modalMessage: 'Coupon code you have entered is invalid.'
@@ -1686,17 +1403,13 @@ jQuery.noConflict();
                         $('#ctcCheckOutPromoCode').val('');
 
                     } else {
-
-
                         $('#ctcCheckOutPromoCode').val('');
                         $.ctcOverlayEl({
                             modalMessage: "Coupon does not apply to any of the products in cart."
                         });
                     }
-                }).fail(function() {
-
+                }).fail(function () {
                     alert("Discount could not be calculated at this time \nPlease try again later");
-
                 });
             }
 
@@ -1709,11 +1422,8 @@ jQuery.noConflict();
          * 
          */
 
-
-
         //function add substract thumup and thumbdown based on server respose
         function ctcAddSubstractThumbupThumbdon(productId, action, scenario) {
-
             switch (action) {
                 case 'thumbsUp':
                     var ratingUpElem = $('.ctcThumbsUpCount-' + scenario + '-' + productId);
@@ -1724,29 +1434,22 @@ jQuery.noConflict();
                     ratingDownElem = $('.ctcThumbsDownCount-' + scenario + '-' + productId);
                     var ctcNewThumbsDownCount = parseInt(ratingDownElem.attr('data-type-thumdowncount')) + 1;
                     ratingDownElem.empty().text(addCommas(ctcNewThumbsDownCount)).attr('data-type-thumdowncount', ctcNewThumbsDownCount);
-
-
                     break;
                 case 'thumbsUpReversed':
                     var ratingUpElem = $('.ctcThumbsUpCount-' + scenario + '-' + productId);
                     var ratingDownElem = $('.ctcThumbsDownCount-' + scenario + '-' + productId);
                     var ctcNewThumbsUpCount = parseInt(ratingUpElem.attr('data-type-thumupcount')) - 1;
                     var ctcNewThumbsDownCount = parseInt(ratingDownElem.attr('data-type-thumdowncount')) + 1;
-
                     ratingUpElem.empty().text(addCommas(ctcNewThumbsUpCount)).attr('data-type-thumupcount', ctcNewThumbsUpCount);
                     ratingDownElem.empty().text(addCommas(ctcNewThumbsDownCount)).attr('data-type-thumdowncount', ctcNewThumbsDownCount);
-
                     break;
-
                 case 'thumbsDownReversed':
                     var ratingUpElem = $('.ctcThumbsUpCount-' + scenario + '-' + productId);
                     var ratingDownElem = $('.ctcThumbsDownCount-' + scenario + '-' + productId);
                     var ctcNewThumbsUpCount = parseInt(ratingUpElem.attr('data-type-thumupcount')) + 1;
                     var ctcNewThumbsDownCount = parseInt(ratingDownElem.attr('data-type-thumdowncount')) - 1;
-
                     ratingUpElem.empty().text(addCommas(ctcNewThumbsUpCount)).attr('data-type-thumupcount', ctcNewThumbsUpCount);
                     ratingDownElem.empty().text(addCommas(ctcNewThumbsDownCount)).attr('data-type-thumdowncount', ctcNewThumbsDownCount);
-
                     break;
                 case 'unThumbsUp':
                     var ratingUpElem = $('.ctcThumbsUpCount-' + scenario + '-' + productId);
@@ -1757,10 +1460,7 @@ jQuery.noConflict();
                     var ratingDownElem = $('.ctcThumbsDownCount-' + scenario + '-' + productId);
                     var ctcNewThumbsDownCount = parseInt(ratingDownElem.attr('data-type-thumdowncount')) - 1;
                     ratingDownElem.empty().text(addCommas(ctcNewThumbsDownCount)).attr('data-type-thumdowncount', ctcNewThumbsDownCount);
-
-
                     break;
-
             }
         }
 
@@ -1771,7 +1471,7 @@ jQuery.noConflict();
                 case 'thumbsUp':
                     $('.ctcRating-' + productId + '-1').attr('title', 'You already thumbed up this product').animate({
                         'font-size': '25px'
-                    }, 25, function() {
+                    }, 25, function () {
                         $(this).removeClass('ctcThumbDown').addClass('ctcUserThumbUp')
                     });
                     ctcAddSubstractThumbupThumbdon(productId, 'thumbsUp', scenario);
@@ -1779,7 +1479,7 @@ jQuery.noConflict();
                 case 'thumbsDown':
                     $('.ctcRating-' + productId + '-2').attr('title', 'You already thumbed down this product').animate({
                         'font-size': '25px'
-                    }, 25, function() {
+                    }, 25, function () {
                         $(this).removeClass('ctcThumbUp').addClass('ctcUserThumbDown')
                     });
                     ctcAddSubstractThumbupThumbdon(productId, 'thumbsDown', scenario);
@@ -1787,12 +1487,12 @@ jQuery.noConflict();
                 case 'thumbsUpReversed':
                     $('.ctcRating-' + productId + '-1').attr('title', 'Thumbs Up').animate({
                         'font-size': '20px'
-                    }, 25, function() {
+                    }, 25, function () {
                         $(this).removeClass('ctcUserThumbUp').addClass('ctcThumbUp')
                     });
                     $('.ctcRating-' + productId + '-2').attr('title', 'You already thumbed down this product').animate({
                         'font-size': '25px'
-                    }, 25, function() {
+                    }, 25, function () {
                         $(this).removeClass('ctcThumbDown').addClass('ctcUserThumbDown')
                     });
                     ctcAddSubstractThumbupThumbdon(productId, 'thumbsUpReversed', scenario);
@@ -1800,12 +1500,12 @@ jQuery.noConflict();
                 case 'thumbsDownReversed':
                     $('.ctcRating-' + productId + '-2').attr('title', 'Thumbs Down').animate({
                         'font-size': '20px'
-                    }, 25, function() {
+                    }, 25, function () {
                         $(this).removeClass('ctcUserThumbDown').addClass('ctcThumbDown')
                     });
                     $('.ctcRating-' + productId + '-1').attr('title', 'You already thumbed up this product').animate({
                         'font-size': '25px'
-                    }, 25, function() {
+                    }, 25, function () {
                         $(this).removeClass('ctcThumbUp').addClass('ctcUserThumbUp')
                     });
                     ctcAddSubstractThumbupThumbdon(productId, 'thumbsDownReversed', scenario);
@@ -1814,7 +1514,7 @@ jQuery.noConflict();
                     ctcAddSubstractThumbupThumbdon(productId, 'unThumbsUp', scenario);
                     $('.ctcRating-' + productId + '-1').attr('title', 'Thumbs Up').animate({
                         'font-size': '20px'
-                    }, 25, function() {
+                    }, 25, function () {
                         $(this).removeClass('ctcUserThumbUp').addClass('ctcThumbUp')
                     });
                     break;
@@ -1822,49 +1522,35 @@ jQuery.noConflict();
                     ctcAddSubstractThumbupThumbdon(productId, 'unThumbsDown', scenario);
                     $('.ctcRating-' + productId + '-2').attr('title', 'Thumbs Down').animate({
                         'font-size': '20px'
-                    }, 25, function() {
+                    }, 25, function () {
                         $(this).removeClass('ctcUserThumbDown').addClass('ctcThumbDown')
                     });
                     break;
-
             }
         }
 
         //ajax function add thumbs up or thumbs down
-        $(document).on('click', '.ctcThumbUp,.ctcThumbDown,.ctcUserThumbUp,.ctcUserThumbDown', function(event) {
-
+        $(document).on('click', '.ctcThumbUp,.ctcThumbDown,.ctcUserThumbUp,.ctcUserThumbDown', function (event) {
             var scenario = $(this).attr('data-type-scenario');
             var data = {
-
                 'action': 'ctcUserProductRating',
                 'productId': $(this).attr('data-type-id'),
                 'rating': $(this).attr('data-type-rating')
             }
 
 
-            $.post(ctc_ajax_url, data, function(response) {
-
+            $.post(ctc_ajax_url, data, function (response) {
                 if (response === 'notLoggedIn') {
                     $.ctcOverlayEl({
                         modalMessage: 'You need to log in to rate this product.'
                     });
-
-
                     event.preventDefault();
                     return false;
-
                 } else {
-
                     ctcUpdateRatingBasedOnResult(response, data['productId'], scenario);
-
                 }
-
-
-
-            }).fail(function() {
-
+            }).fail(function () {
                 alert("Action could not be completed at this time \nPlease try again later");
-
             });
 
         });
@@ -1888,10 +1574,7 @@ jQuery.noConflict();
         if ($('.ctcSingleProductGallery').length >= 1) {
             $('.ctcSingleProductGallery').ctcOverlay();
 
-
-
-            $(document).on('click', '.ctcProductProfileImage', function() {
-
+            $(document).on('click', '.ctcProductProfileImage', function () {
                 if ($('.ctcverlayImages'))
                     $('.ctcSingleProductGallery').trigger('mouseenter');
                 $("img[data-img-number='0']").trigger('click');
@@ -1901,9 +1584,6 @@ jQuery.noConflict();
             $('.ctcProductProfileImage').ctcOverlay();
         }
 
-
-
-
         /*
          * 
          * section to sort products
@@ -1911,48 +1591,29 @@ jQuery.noConflict();
          */
 
         //script to sort products
-        $(document).on('change', '#ctcSortProductSelect', function() {
-
+        $(document).on('change', '#ctcSortProductSelect', function () {
 
             var parentContainer = $(this).attr('data-type-containertosort');
             var selecElement = $(this);
-
             var ajaxSort = $(this).attr('data-type-ajaxsort');
-
             var sortBy = $("option:selected", this).val();
             var sortableItems = $('>div', parentContainer);
-
-
-
-
             if (ajaxSort === "yes" && selecElement.attr('data-type-allproduct') === undefined) {
-
                 $(this).parent().addClass('ctcShowAjaxWait');
-
-
                 $.post(ctc_ajax_url, {
                     'action': 'ctcAjaxSortProduct'
-                }, function(response) {
-
+                }, function (response) {
                     $('#ctcSortProductSelect').parent().removeClass('ctcShowAjaxWait');
                     $(parentContainer).prepend(response);
                     ctcSortProductBySelection(sortBy, parentContainer, $('>div', parentContainer));
                     selecElement.attr('data-type-allproduct', 'yes');
-
                     return false;
-                }).fail(function() {
-
+                }).fail(function () {
                     alert("Action could not be completed at this time \nPlease try again later");
-
                 });
-
             } else {
                 if (sortBy.length >= 1 && sortableItems.length >= 2) {
-
-
-
                     ctcSortProductBySelection(sortBy, parentContainer, sortableItems);
-
                 }
             }
 
@@ -1963,32 +1624,24 @@ jQuery.noConflict();
             switch (sortBy) {
                 case 'mostThumbUp':
                     var productArrayThumbUp = [];
-                    sortableItems.each(function() {
+                    sortableItems.each(function () {
                         var thisDiv = $(this);
-
                         productArrayThumbUp.push([thisDiv.attr('data-type-id'), parseInt(thisDiv.attr('data-type-thumbup')), thisDiv.wrap('<p/>').parent().html()]);
-
                     });
-
                     ctcSortArrayAndAppend(productArrayThumbUp, parentContainer, 'desc');
                     break;
                 case 'priceLowest':
                     var productArrayPrice = [];
-                    sortableItems.each(function() {
-
+                    sortableItems.each(function () {
                         var thisDiv = $(this);
-
                         productArrayPrice.push([thisDiv.attr('data-type-id'), parseFloat(thisDiv.attr('data-type-price')), thisDiv.wrap('<p/>').parent().html()]);
-
                     });
                     ctcSortArrayAndAppend(productArrayPrice, parentContainer, 'asc')
                     break;
                 case 'priceHighest':
                     var productArrayPrice = [];
-                    sortableItems.each(function() {
-
+                    sortableItems.each(function () {
                         var thisDiv = $(this);
-
                         productArrayPrice.push([thisDiv.attr('data-type-id'), parseFloat(thisDiv.attr('data-type-price')), thisDiv.wrap('<p/>').parent().html()]);
 
                     });
@@ -1996,10 +1649,9 @@ jQuery.noConflict();
                     break;
                 case 'addedDate':
                     var productArrayAddedDate = [];
-                    sortableItems.each(function() {
+                    sortableItems.each(function () {
                         var thisDiv = $(this);
                         productArrayAddedDate.push([thisDiv.attr('data-type-id'), parseInt(thisDiv.attr('data-type-dateadded')), thisDiv.wrap('<p/>').parent().html()]);
-
                     });
 
                     ctcSortArrayAndAppend(productArrayAddedDate, parentContainer, 'desc')
@@ -2010,25 +1662,17 @@ jQuery.noConflict();
 
         //function to sort products by thumb up
         function ctcSortArrayAndAppend(productArrayToSort, parentContainer, sortType) {
-
-
             var sortedHtml = '';
             if (sortType == 'asc') {
                 productArrayToSort.sort((a, b) => a[1] - b[1]); //function(a,b){return a[1]-b[1]});
             } else {
                 productArrayToSort.sort((a, b) => b[1] - a[1]); //function(a,b){return b[1]-a[1]});
             }
-
             for (var key in productArrayToSort) {
                 sortedHtml += productArrayToSort[key][2];
             }
-
-
-
             $(parentContainer).empty().append(sortedHtml).masonry('reloadItems');
             //remove duplicate id
-
-
 
             // init Masonry
             var $grid = $(parentContainer).masonry({
@@ -2039,101 +1683,76 @@ jQuery.noConflict();
                 percentPosition: true,
                 originLeft: false,
                 isFitWidth: true,
-
-
             });
-
-
-            $grid.imagesLoaded().progress().always(function(instance) {
-
-                $('[id]').each(function(i) {
+            $grid.imagesLoaded().progress().always(function (instance) {
+                $('[id]').each(function (i) {
                     $('[id="' + this.id + '"]').slice(1).remove();
                 });
-
                 $grid.masonry('appended', sortedHtml);
                 $grid.masonry('layout');
-
             });
-
         }
 
 
         //script to load comment
-        $(document).on('click', '#ctcLoadMoreReview', function() {
+        $(document).on('click', '#ctcLoadMoreReview', function () {
             var timeInterval;
             var loadReviewLink = $(this);
             var reviewOffSet = parseInt(loadReviewLink.attr('data-type-offset'));
             var totalReview = parseInt(loadReviewLink.attr('data-type-totalreview'));
             var data = {
-
                 'action': 'ctcLoadMoreReview',
                 'offSet': reviewOffSet,
                 'postId': $(this).attr('data-type-postId')
             }
-
-            $.post(ctc_ajax_url, data, function(response) {
-
+            $.post(ctc_ajax_url, data, function (response) {
                 if ((reviewOffSet + 3) >= totalReview) {
-
                     loadReviewLink.remove();
                 } else {
                     loadReviewLink.attr('data-type-offset', (reviewOffSet + 3));
                 }
-
                 var reviewHtml = [];
-
-                $(response).filter('div').each(function(i) {
-
+                $(response).filter('div').each(function (i) {
                     reviewHtml[i] = $(this).addClass('ctcSecondReview').html();
-
                 });
 
                 $('.ctcProductReviews').append(reviewHtml[0]);
-                setTimeout(function() {
+                setTimeout(function () {
                     $('.ctcProductReviews').append(reviewHtml[1])
                 }, 500);
-                setTimeout(function() {
+                setTimeout(function () {
                     $('.ctcProductReviews').append(reviewHtml[2])
                 }, 1000);
-
-
-            }).fail(function() {
-
+            }).fail(function () {
                 alert("Action could not be completed at this time \nPlease try again later");
-
             });
-
-
         });
 
 
         //script load subcategories fro catgory widget
-        $(document).on('click', '.ctcWidgetCategory', function() {
-
+        $(document).on('click', '.ctcWidgetCategory', function () {
             var el = $(this).parent().children('ul');
             var categoryUrl = $(this).attr("data-category-url")
             var data = {
-
                 'action': 'ctcWidgetLoadSubcategory',
                 'categoryName': $(this).attr('data-product-categoryname')
             }
-
             if (el.children('li').length === 0) {
-                $.post(ctc_ajax_url, data, function(response) {
+                $.post(ctc_ajax_url, data, function (response) {
 
                     if (response.length === 0) {
 
                         window.location.href = categoryUrl;
                     } else {
                         el.empty();
-                        $(response).filter('li').each(function(i) {
+                        $(response).filter('li').each(function (i) {
                             var subCatHtml = '<li>' + $(this).html() + '</li>';
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 el.append(subCatHtml)
                             }, (600 * i));
                         });
                     }
-                }).fail(function() {
+                }).fail(function () {
 
                     alert("Action could not be completed at this time \nPlease try again later");
 

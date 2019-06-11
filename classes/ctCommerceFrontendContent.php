@@ -1934,11 +1934,7 @@ endif;
 								<div class=" ctcSocialbarChInfoBack ctcSocialbarChInfoBackTwitter" >
 									<p class="ctcSocialbarTooltipP"  id="ctcSocialbarTwitterTooltip" >
 								  <a class="ctcSocialbarTwitterTooltip dashicons-before dashicons-share" href="http://twitter.com/share?url=<?=$productUrl.'&hashtags='.get_bloginfo( 'name' ).','.get_bloginfo('description')?>"  target="_blank" title="Tweet this page on Twitter"></a>
-								 
-								
 								 </p>
-			
-								
 								</div>
 							</div>
 						</div>
@@ -1957,23 +1953,7 @@ endif;
 							</div>
 						</div>
 					</li>
-					
-					
-					
-					<li>
-						<div class="ctcSocialbarChItem">				
-							<div class="ctcSocialbarChInfo ctcSocialbarChInfoGplus">
-								<div class="ctcSocialbarChInfoFront ctcSocialbarChGplus"></div>
-								<div class="ctcSocialbarChInfoBack ctcSocialbarChInfoBackGplus" >
-									<p class="ctcSocialbarTooltipP"  id="ctcSocialbarGplusTooltip" >
-									<a class="ctcSocialbarGplusTooltip dashicons-before dashicons-share" href="https://plus.google.com/share?url=<?=$productUrl?>"  target="_blank" title="Share this page on Google Plus"></a>
-									
-									</p>
-								</div>	
-							</div>
-						</div>
-					</li>
-					
+						
 					<li>
 						<div class="ctcSocialbarChItem">				
 							<div class="ctcSocialbarChInfo ctcSocialbarChInfoPinterest">
