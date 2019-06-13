@@ -12,7 +12,8 @@ require_once 'ctCommercePluginADU.php';
 require_once 'ctCommerceAdminPanelProcessing.php';
 require_once 'ctCommerceFrontendAjax.php';
 require_once 'ctCommerceFrontendProcessing.php';
-require_once('otherContent/payment/stripe-php/init.php');
+require_once 'otherContent/payment/stripe-php/init.php';
+require_once 'ctCoommerceRestapi.php';
 
 
 
@@ -49,7 +50,10 @@ class ctCommerceMain{
     	self::ctcFrontendAjaxRequiredAction();
     	
     	//required filters like modification of nav bar
-    	self::ctcAddRequiredFilters();
+        self::ctcAddRequiredFilters();
+        
+        //required actions for rest api
+        self::ctcRestAPiActions();
     	
     	
     	
@@ -119,10 +123,15 @@ class ctCommerceMain{
         add_action('wp_ajax_ctcProductBarForChart', array($ctcAdminRequiredAjax,'ctcProductBarForChart'));
         add_action('wp_ajax_ctcAjaxSalesReport', array($ctcAdminRequiredAjax,'ctcAjaxSalesReport'));
        
+    }
+
+
+    private function ctcRestApiActions(){
+
+        $ctcRestApi = new ctCommerceRestApi();
         
-        
-        
-       
+        add_action( 'rest_api_init', array($ctcRestApi, 'register_endpoints' ) );
+      
     }
 
 
@@ -164,19 +173,28 @@ class ctCommerceMain{
         wp_localize_script( 'ctcFrontendlJs', 'ctc_ajax_url', admin_url( 'admin-ajax.php' ) );
         wp_enqueue_script('jquery-masonry');
         wp_enqueue_script('imagesloaded');
-        wp_enqueue_script('ctcStripeCheckoutJs',"https://checkout.stripe.com/checkout.js");
-        wp_localize_script('ctcFrontendlJs', 'ctcStripeParams', array(
-                                                                       'ctcStripePubKey' =>   get_option('ctcStripePublishableKey'),
-                                                                       'ctcStripeName' => get_option('ctcEcommerceName'),
-                                                                       'ctcStripeLogo' => get_option('ctcBusinessLogoDataImage'),
-                                                                       'ctcStripeCurrency' => strtoupper( get_option('ctcBusinessCurrency') ),
-                                                                       'ctcStripeEmail' => wp_get_current_user()->user_email,
-                                                                       'ctcStripeDescription'=> "Shopping at ".get_option('ctcEcommerceName')
-                                                                            ));
-
         wp_enqueue_media();
         wp_enqueue_script( 'jquery-ui-tooltip' );
-    }
+
+       
+        $stripPubKey = '1' == get_option('ctcStripeTestMode') ? get_option( 'ctcStripeTestPublishableKey' ) : get_option( 'ctcStripeLivePublishableKey' );
+
+        if(!empty( $stripPubKey)):
+                wp_enqueue_script('ctcStripeV3','https://js.stripe.com/v3/');
+                wp_localize_script('ctcFrontendlJs', 'ctcStripeParams', 
+                                                                array(
+                                                                        'ctcStripePubKey' =>    $stripPubKey,
+                                                                        'ctcStripeName' => get_option('ctcEcommerceName'),
+                                                                        'ctcStripeLogo' => get_option('ctcBusinessLogoDataImage'),
+                                                                        'ctcStripeCurrency' => strtoupper( get_option('ctcBusinessCurrency') ),
+                                                                        'ctcStripeEmail' => wp_get_current_user()->user_email,
+                                                                        'ctcStripeDescription'=> "Shopping at ".get_option('ctcEcommerceName')
+                                                                    )
+                                    );
+            endif;                                                                     
+
+            }
+  
     
     /* function to eneque fontend style sheets*/
     public function ctcFrontendEnqeueCss(){

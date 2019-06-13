@@ -122,7 +122,7 @@ class ctCommerceAdminHtml{
     
                     //function to display first agree disagree with term option
                     public function ctcConditionAgreeDisagree(){
-                       //  add_thickbox(); 
+                       //  
                         
                         ?>
                         	<!-- <a id="ctcTermConditionsModalLink" href="#TB_inline?height=50&width=50&inlineId=ctcConditionModalTb&modal=true" id="ctcTermConditionsContent" class="thickbox thickBoxModalContent"></a> -->
@@ -289,7 +289,7 @@ class ctCommerceAdminHtml{
                         
                         ?>
                         <div id="ctcBusinessInfoSetting">
-                        <h4 class="dashicons-before dashicons-info ">Business Information</h4>
+                        
                         <form id="ctcBusinessSettingsForm" method="post" action="options.php" autocomplete="on">
                           <?php
 
@@ -299,8 +299,9 @@ class ctCommerceAdminHtml{
                         
                         
                         ?>
-                        <div class="form-table">
-            
+                    <div class="form-table">
+													<fieldset style="padding:10px; padding-left:70px; border:2px dotted rgba(0,0,0,0.3);"> 
+														<legend class="dashicons-before dashicons-info" style="font-size:17px;">Business Information</legend>
 			           			<div class="row">
 						                	<div class="left">
 						                	  <label for="ctcBusinessName">Business Name: </label>
@@ -315,7 +316,7 @@ class ctCommerceAdminHtml{
 						                	</div>
 						                    <div class="right">    
 						                         <input type="text" name="ctcEcommerceName" required="required" size="20"  value="<?=get_option('ctcEcommerceName') ?>"  /> 
-						                         <span> <input id="ctcSameAsBusinessName" type="checkbox" /> Same as Business</span>
+						                         <i class="ctcFormComments"> <input id="ctcSameAsBusinessName" type="checkbox" /> Same as Business</i>
 						                          <input type="hidden" name="ctcOldEcommerceName" value="<?= get_option('ctcEcommerceName') ?>"  />
 						                    </div>
 			                    </div >
@@ -339,17 +340,11 @@ class ctCommerceAdminHtml{
 							         			</div>
 					         			</div>
 			                    
-							    
+							    </fieldset>
 			                    
-			             <div class="row">
-			                   
-					                	<div class="left">
-					                	 <b><span class="dashicons dashicons-id"></span>Business Contact Info</b>
-					                	</div>
-					                	<div class="right">  
-					                	:
-					                </div>
-					             </div>   	
+			            <fieldset style="padding:10px; padding-left:70px; border:2px dotted rgba(0,0,0,0.3);"> 
+					                
+					                	 <legend class="dashicons-before dashicons-id" style="font-size:17px;">Business Contact Info 	: </legend>	 	
 			            
 			                   <div class="row">
 			                   
@@ -420,6 +415,7 @@ class ctCommerceAdminHtml{
 					                         <input type="email" name="ctcBusinessEmail" size="35" value="<?=get_option('ctcBusinessEmail') ?>" />
 					                     </div>
 			                     </div>
+													</fieldset> 
 			        			 <div class="row">
 						                	<div class="left">
 						                      <?php submit_button('Save','primary','ctcBusinessSettingsButton', FALSE); ?>
@@ -450,7 +446,8 @@ class ctCommerceAdminHtml{
 		           
 		                        ?>
 					               <div class="form-table">
-					                     
+					               <fieldset style="padding:10px; padding-left:70px; border:2px dotted rgba(0,0,0,0.3);"> 
+												 <legend class="dashicons-before dashicons-admin-generic ctcMovingSettingIcon" style="font-size:17px;"> Basic Settings : </legend>     
 					           		<div class="row">
 						                	<div class="left">
 						                	   <label for="ctcBusinessTaxRate">Tax Rate %: </label>
@@ -461,37 +458,24 @@ class ctCommerceAdminHtml{
 					                 </div>  
 					                   <div class="row">
 							                	<div class="left">           
-							                    <label for="ctcBusinessCurrency">Currency (abbr,like:USD,GBP,INR): </label>
+							                    <label for="ctcBusinessCurrency">Currency <i class="ctcFormComments">(abbr : e.g USD, GBP, INR) </i>: </label>
 							                    </div>
 							                   <div class="right">
 							                         <input type="text" name="ctcBusinessCurrency" size="7" value="<?=get_option('ctcBusinessCurrency') ?>" />            
 							         			</div>
 					         			 </div>
-					         			<div class="row">
-							                	<div class="left">          
-							                    <label for="ctcStripePublishableKey"> Stripe Publishable Key : </label>
-							                    </div>
-							                   <div class="right">
-							                         <input type="text" name="ctcStripePublishableKey" size="30" value="<?= get_option('ctcStripePublishableKey') ?>" />            
-							         			</div>
-					         			</div>
-					         			<div class="row">
-							                	<div class="left">          
-							                       <label for="ctcStripeSecretKey"> Stripe Secret Key : </label>
-							                    </div>
-							                    <div class="right">
-							                         <input type="text" name="ctcStripeSecretKey" size="30" value="<?=get_option('ctcStripeSecretKey') ?>" />            
-							         			</div>
-					         			</div>
+											
 					   
 					         			<div class="row">
 							                	<div class="left">         
 							                    <label for="ctcCashOnDelivery"> Cash On Delivery : </label>
 							                    </div>
 							                     <div class="right">
-							                         <input type="checkbox" name="ctcCashOnDelivery" <?php if(!empty( get_option('ctcCashOnDelivery'))):echo 'checked="checked"'; endif; ?>  value="1" />            
+							                         <input type="checkbox" name="ctcCashOnDelivery" <?php echo '1' == get_option('ctcCashOnDelivery') ?'checked="checked"' :'';  ?>  value="1" />            
 							         			</div>
 					         			</div>
+												 </fieldset>
+												 <?= $this->ctcStripeSettingHtml() ?>
 					         		    <div class="row">
 						                	<div class="right">          
 						                  		 <?php submit_button('Save','primary','ctcBillingSettingsButton', FALSE ); ?>
@@ -502,14 +486,62 @@ class ctCommerceAdminHtml{
          			</div>
                  <?php        
                     }
-                    
-           
-                    public function ctcEmailSetting(){
+  //function to render stripe setting                  
+	public function ctcStripeSettingHtml(){
+	
+		?>
+<fieldset id="ctcStripeSettingForm"  style="padding:10px; padding-left:70px; border:2px dotted rgba(0,0,0,0.3);" >
+<legend class="dashicons-before dashicons-money" style="font-size:17px;" > Stripe Settings :</legend>
+		<div class="row">
+		<div class="left">          
+			<label for="ctcStripeTestPublishableKey"> Test Publishable Key : </label>
+			</div>
+		 <div class="right">
+					 <input type="text" name="ctcStripeTestPublishableKey" size="30" value="<?=  get_option( 'ctcStripeTestPublishableKey' ) ?>" />            
+ </div>
+</div>
+<div class="row">
+		<div class="left">          
+				 <label for="ctcStripeTestSecretKey"> Test Secret Key : </label>
+			</div>
+			<div class="right">
+					 <input type="text" name="ctcStripeTestSecretKey" size="30" value="<?=get_option('ctcStripeTestSecretKey') ?>" />            
+ </div>
+</div>	
+<div class="row">
+		<div class="left">         
+			<label for="ctcStripeTestMode"> Test Mode : </label>
+			</div>
+			 <div class="right">
+					 <input type="checkbox" name="ctcStripeTestMode" <?php  echo '1' == get_option('ctcStripeTestMode')? 'checked="checked"' : ''; ?> value="1"  />            
+ </div>
+</div>
+<div class="row">
+		<div class="left">          
+			<label for="ctcStripeLivePublishableKey"> Live Publishable Key : </label>
+			</div>
+		 <div class="right">
+					 <input type="text" name="ctcStripeLivePublishableKey" size="30" value="<?= get_option('ctcStripeLivePublishableKey') ?>" />            
+ </div>
+</div>
+<div class="row">
+		<div class="left">          
+				 <label for="ctcStripeLiveSecretKey"> Live Secret Key : </label>
+			</div>
+			<div class="right">
+					 <input type="text" name="ctcStripeLiveSecretKey" size="30" value="<?=get_option('ctcStripeLiveSecretKey') ?>" />            
+ </div>
+</div>
+</fieldset>
+	<?php	
+	}         
+		
+public function ctcEmailSetting(){
                     	
                     ?>	
                     
                       <div id="ctcEmailSetting">
-                        <h4 class="dashicons-before  dashicons-admin-generic ctcMovingSettingIcon">eMail Setting :</h4>
+                       
 		                        <form id="ctcBillingSettingsForm" method="post" action="options.php" autocomplete="on" >
 		                          <?php
 		                        
@@ -519,7 +551,8 @@ class ctCommerceAdminHtml{
 		           
 		                        ?>
 					               <div class="form-table" auto-complete="on">
-					                     
+					               <fieldset style="padding:10px; padding-left:70px; border:2px dotted rgba(0,0,0,0.3);">    
+												 <legend class="dashicons-before  dashicons-admin-generic ctcMovingSettingIcon" style="font-size:17px;">eMail Setting :</legend>  
 					           		<div class="row">
 						                	<div class="left">
 						                	   <label for="ctcSmtpUsername">Email Username : </label>
@@ -541,8 +574,8 @@ class ctCommerceAdminHtml{
 							                    <label for="ctcSmtpHost"> SMTP Host Server : </label>
 							                    </div>
 							                   <div class="right">
-							                         <input type="text" name="ctcSmtpHost" size="30" value="<?=get_option('ctcSmtpHost') ?>" />    
-							                         <span>(Like, smtp.something.com)</span>          
+							                         <input type="text" name="ctcSmtpHost" size="30" value="<?=get_option('ctcSmtpHost') ?>" /> <br>   
+							                         <i class="ctcFormComments">(Like, smtp.something.com)</i>          
 							         			</div>
 					         			</div>
 					         		
@@ -551,8 +584,8 @@ class ctCommerceAdminHtml{
 							                       <label for="'ctcSmtpFromEmail'">From : </label>
 							                    </div>
 							                    <div class="right">
-							                         <input type="text" name="ctcSmtpFromEmail" size="30" value="<?=get_option('ctcSmtpFromEmail') ?>" />  
-							                          <span>Purchase Confirmation Email</span>           
+							                         <input type="text" name="ctcSmtpFromEmail" size="30" value="<?=get_option('ctcSmtpFromEmail') ?>" /><br>  
+							                          <i class="ctcFormComments">Purchase Confirmation Email</i>           
 							         			</div>
 					         			</div>
 					         			<div class="row">
@@ -562,7 +595,7 @@ class ctCommerceAdminHtml{
 							                    </div>
 							                    <div class="right">
 							                         <input type="text" name="ctcSmtpPort" size="8" value="<?=get_option('ctcSmtpPort') ?>" />    
-							                           <span>Like 25, 465, 587 etc</span>         
+							                           <i class="ctcFormComments">Like 25, 465, 587 etc</i>         
 							         			</div>
 					         			</div>
 					         			<div class="row">
@@ -571,7 +604,7 @@ class ctCommerceAdminHtml{
 							                    </div>
 							                    <div class="right">
 							                         <input type="text" name="ctcSmtpEncryption" size="12" value="<?=get_option('ctcSmtpEncryption') ?>" />    
-							                         <span>Like TLS, SSL etc</span>        
+							                         <i class="ctcFormComments">Like TLS, SSL etc</i>        
 							         			</div>
 					         			</div>
 					         			
@@ -601,7 +634,7 @@ class ctCommerceAdminHtml{
 					         			</div>
 					         			
 					         			
-					         			
+					         			</fieldset>
 					         			
 					         		    <div class="row">
 						                	<div class="right">          
@@ -619,7 +652,7 @@ class ctCommerceAdminHtml{
      public function ctcShippingMethodsSubTab(){
                     	?>
     	<div id="ctcShippingInfoSetting">
-    	<h4 class="dashicons-before dashicons-cart"><span class="dashicons-before dashicons-admin-generic ctcMovingSettingIcon"></span>Shipping Setting :</h4>
+    
     	<form id="ctcShippingSettingsForm" method="post" action="options.php" autocomplete="on" >
     	<?php
     	
@@ -629,8 +662,8 @@ class ctCommerceAdminHtml{
     	
     	?>
 					               <div class="form-table">
-					                     
-					           		  
+					               <fieldset style="padding:10px; padding-left:70px; border:2px dotted rgba(0,0,0,0.3);">       
+												<legend class="dashicons-before dashicons-admin-generic ctcMovingSettingIcon" style="font-size:17px;"> <span class="dashicons-before dashicons-cart"></span> Shipping Setting : </legend>
 					                    <div class="row">
 							                	<div class="left">   
 							                	<?php 
@@ -641,7 +674,7 @@ class ctCommerceAdminHtml{
 							                    </div>
 							                   <div class="right">
 							                         <input type="time" title="Store Closing Hour " name="ctcStoreClosingHour" size="30" value="<?= get_option('ctcStoreClosingHour') ?>" />  
-							                         <span>For Delivery and Pickup</span>           
+							                        <i class="ctcFormComments">For Delivery and Pickup</i>           
 							         			</div>
 					         			</div>
 					         			<div class="row">
@@ -658,7 +691,7 @@ class ctCommerceAdminHtml{
 							                    </div>
 							                   <div class="right">
 							                         <input type="text" title="Weight Unit" name="ctcWeightUnit" size="10" value="<?= get_option('ctcWeightUnit') ?>" />            
-							         					<span>Use Pound , Kilogram not  lb, oz</span> 
+							         					<i class="ctcFormComments">Use Pound , Kilogram not  lb, oz</i> 
 							         			</div>
 					         			</div>
 					         			
@@ -682,7 +715,7 @@ class ctCommerceAdminHtml{
 							                         <font>Yes </font>
 							                          <input type="radio" title=Machinable" name="ctcUspsMachinable" <?=$falseChecked??''?> size="10" value="false" /> 
 							                               <font>No </font>     
-							         					<span>Are your product machinable for USPS shipping only</span> 
+							         					<i class="ctcFormComments">Are your product machinable for USPS shipping only</i> 
 							         			</div>
 					         			</div>
 					         			
@@ -692,7 +725,7 @@ class ctCommerceAdminHtml{
 							                    </div>
 							                   <div class="right">
 							                         <input type="text" title="Length Unit" name="ctcLengthUnit" size="10" value="<?= get_option('ctcLengthUnit') ?>" />   
-							                         <span>Use  Foot , Meter etc, not ', "</span>         
+							                        <i class="ctcFormComments">Use  Foot , Meter etc, not ', "</i>         
 							         			</div>
 					         			</div>
 					         			
@@ -701,8 +734,8 @@ class ctCommerceAdminHtml{
 							                    <label for="ctcShipmentSize"> Shipping Box Size : </label>
 							                    </div>
 							                   <div class="right">
-							                         <input type="text" title="Shipping box sizes" name="ctcShipmentSize" size="20" value="<?=get_option('ctcShipmentSize') ?>" />   
-							                         <span>Like, Regular, Large etc, Consult USPS's size guide</span>         
+							                         <input type="text" title="Shipping box sizes" name="ctcShipmentSize" size="10" value="<?=get_option('ctcShipmentSize') ?>" />   
+							                         <i class="ctcFormComments">Like, Regular, Large see USPS's size guide</i>         
 							         			</div>
 					         			</div>
 					         		
@@ -716,7 +749,7 @@ class ctCommerceAdminHtml{
 							                    </div>
 							                     <div class="right">
 							                         <input type="number" title="Deliver Time" min="0" name="ctcSelfDeliveryTime" size="30" value="<?=get_option('ctcSelfDeliveryTime') ?>" />
-							                         <span> Self delivery time(in days, 0 for sameday)</span>    
+							                        <i class="ctcFormComments"> Self delivery time(in days, 0 for sameday)</i>    
 							                        
 							         			</div>
 							         			
@@ -730,7 +763,7 @@ class ctCommerceAdminHtml{
 							                     <div class="right" class="ctcSelfDeliverCharge">
 							                        
 							                         <input  type="number" min="0" title="Delivery Cost" name="ctcSelfDeliveryCost" size="30" value="<?=get_option('ctcSelfDeliveryCost') ?>" />         
-							         			      <span> Self delivery charge</span>  
+							         			     <i class="ctcFormComments"> Self delivery charge</i>  
 							         			</div>
 					         			</div>
 					         			
@@ -742,7 +775,7 @@ class ctCommerceAdminHtml{
 							                     <div class="right" class="ctcSelfDeliverCharge">
 							                        
 							                         <input  type="number" min="0" title="Delivery Cost" name="ctcAdditionalItemDeliveryCost" size="30" value="<?= get_option('ctcAdditionalItemDeliveryCost') ?>" />         
-							         			     <span>Self delivery charge for additional items </span>  
+							         			     <i class="ctcFormComments">Self delivery charge for additional items </i>  
 							         			     
 							         			</div>
 					         			</div>
@@ -754,10 +787,10 @@ class ctCommerceAdminHtml{
 							                     <div class="right">
 							                        
 							                         <input type="number" min="0" title="Store Pick Up Time" name="ctcStorePickUp" size="30" value="<?= get_option('ctcStorePickUp') ?>" />         
-							         			    <span> Store pickup time (in days, 0 for sameday)</span>    
+							         			   <i class="ctcFormComments"> Store pickup time (in days, 0 for sameday)</i    
 							         			</div>
 					         			</div>
-					         			
+					         			</fieldset>
 					         		    <div class="row">
 						                	<div class="right">          
 						                  		 <?php submit_button('Save','primary','ctcShippingSettingsButton', FALSE ); ?>
@@ -854,11 +887,11 @@ class ctCommerceAdminHtml{
                    		          
 	                   		              <div class="left">
                     	
-				                    	      <label for="ctcProductCategory">Product Category : </label>
+				                    	      <label for="ctcProductCategoryName">Product Category : </label>
 					                        </div>
 					                        <div class="right">
-					                             <input id="ctcProductCategoryName" type="text"   name="categoryName" required="required" size="30" value="<?=trim($categoryData['categoryName'])?>" pattern="[^,,|,#,:,~,`,\x22,\x27]+" title="Special Charaters like #,-,:,~ are not allowed"   />
-					                             <span class="ctcFormComments">Vague category like Shirt, Shoe, Car, etc</span>
+					                             <input id="ctcProductCategoryName" type="text"   name="categoryName" required="required" size="30" value="<?=trim($categoryData['categoryName'])?>" pattern="[^,,|,#,:,~,`,\x22,\x27]+" title="Special Charaters like #,-,:,~ are not allowed"   /><br>
+					                             <i class="ctcFormComments">Vague category like Shirt, Shoe, Car, etc</i>
 					                             <?php if(isset($categoryData['categoryId'])):?>
 					                             <input id="ctcProductCategoryId" type="hidden"   name="categoryId"  value="<?=$categoryData['categoryId']?>"  />
 					                             
@@ -876,7 +909,7 @@ class ctCommerceAdminHtml{
 		                        
 		                        <div class="right">
 		                             <input id="ctcSubCategory1" type="text" name="subCategory1" size="35"    value="<?=trim($categoryData['subCategory1'])?>" pattern="^[a-zA-Z0-9,-.!? ]*$" title="Only special charaters  -,.!? allowed"  />
-		                       		 <span class="ctcFormComments"> Like Men, Women, Children for clothing</span>
+		                       		 <i class="ctcFormComments"> Like Men, Women, Children for clothing</i>
 		                        </div>
                         </div>
                     	
@@ -886,7 +919,7 @@ class ctCommerceAdminHtml{
 		                        </div>
 		                         <div class="right">
 		                             <input id="ctcSubCategory2" type="text"   name="subCategory2" size="35" value="<?=trim($categoryData['subCategory2'])?>" pattern="^[a-zA-Z0-9,-.!? ]*$" title="Only special charaters -,.!? allowed" />
-		                             <span class="ctcFormComments">Like sizes for clothing, Transmission for cars</span>
+		                             <i class="ctcFormComments">Like sizes for clothing, Transmission for cars</i>
 		                        </div>
                     	</div>
                     	 <div class="categoryRow">
@@ -896,7 +929,7 @@ class ctCommerceAdminHtml{
 		                        </div>
 		                       <div class="right">
 		                             	 <input id="ctcSubCategory3" type="text" name="subCategory3" size="35"    value="<?=trim($categoryData['subCategory3'])?>" pattern="^[a-zA-Z0-9,-.!? ]*$" title="Only special charaters  -,.!? allowed"  />
-		                               <span class="ctcFormComments">More specfic info of items.</span>
+		                               <i class="ctcFormComments">More specfic info of items.</i>
 		                        </div>
                     	</div>
                     	 <div class="categoryRow">
@@ -905,8 +938,8 @@ class ctCommerceAdminHtml{
 		                    	   <label for="ctCCategoryMetaInfo"> Meta Information : </label>
 		                        </div>
 		                       <div class="right">
-		                             <input id="ctComCategoryMetaInfo"    name="metaInfo" value="<?=trim($categoryData['metaInfo'])?>"  size="35"    />
-		                            <span class="ctcFormComments">Noteworthy info like 100  %Cotton, Handmade etc.</span>
+		                             <input id="ctComCategoryMetaInfo"  type="text"  name="metaInfo" value="<?=trim($categoryData['metaInfo'])?>"  size="35"    />
+		                            <i class="ctcFormComments">Noteworthy info like 100  %Cotton, Handmade etc.</i>
 		                             
 		                             
 		                        </div>
@@ -945,7 +978,7 @@ class ctCommerceAdminHtml{
     
                 //fucntion to display category in admin panel
                 public function ctcDisplayCategoryAdmin(){
-                   add_thickbox(); 
+                   
                   $ctcAdminProcessing =  new ctCommerceAdminPanelProcessing();
                   $categoryList = $ctcAdminProcessing->ctcGetCategoryList();
                   if(!empty($categoryList)):
@@ -1156,7 +1189,7 @@ class ctCommerceAdminHtml{
                                                  	 <div class="ctcProductFormRow">
                                                            			    <div class="ctcProductFormColumn">
                                                            			  		<label for="ctcProductMetaInfo">Meta Data : </label>
-                                                           			  		<span class="ctcFormComments">Noteworthy features.</span>
+                                                           			  		<i class="ctcFormComments">Noteworthy features.</i>
                                                            			     </div>
                                                            			    <div class="ctcProductFormColumn">
                                                                 		 <input id="ctcProductMetaInfo" type="text" name="metaInfo" size="35"    value=""  />
@@ -1201,7 +1234,7 @@ class ctCommerceAdminHtml{
                                                       </div>
                                                        <div class="ctcProductFormColumn">
                                                          <input id="ctcProductWeight" type="number" step="0.01" required="required" name="productWeight" size="20"    value=""/>
-                                                         <span class="ctcFormComments"></span>
+                                                         <i class="ctcFormComments"></i>
                                                        </div>
                                                   </div>
                                                   <div class="ctcProductFormRow">
@@ -1220,7 +1253,7 @@ class ctCommerceAdminHtml{
                                        			     <div class="ctcProductFormColumn">
 
                                                  		<input id="ctcProductPreOrder" type="checkbox" name="preOrder" size="35"  value="1"   />
-                                       			      <span class="ctcFormComments">If pre order is available for this product</span>
+                                       			      <i class="ctcFormComments">If pre order is available for this product</i>
                                        			     </div>
                                        			 </div>
                                        			 <div class="ctcProductFormRow">
@@ -1229,7 +1262,7 @@ class ctCommerceAdminHtml{
                                                		       </div>
                                            		        <div class="ctcProductFormColumn">
                                                          <input id="ctcFeatureProduct" type="checkbox" name="featureProduct" size="35"  value="1"  />
-                                           			   <span class="ctcFormComments">Customer will see product in main page.</span>
+                                           			   <i class="ctcFormComments">Customer will see product in main page.</i>
                                            			    </div>
                                        			</div>
 
@@ -1241,7 +1274,7 @@ class ctCommerceAdminHtml{
                                            			   <div class="ctcProductFormColumn">
                                                            <input id="ctcProductPostId" title="Create blog post about this product" type="checkbox" name="createProductPost"   value="1" />
                                            			  	  <input type="hidden" id="ctcProductPostId"	name="productPostId" value="" />
-                                           			  <span class="ctcFormComments">Required for customers to write review. </span>
+                                           			  <i class="ctcFormComments">Required for customers to write review. </i>
                                            			   </div>
                                        			 </div>
 
@@ -1304,12 +1337,8 @@ class ctCommerceAdminHtml{
                 
                 //function to display products in table in admin panel
                 public function ctcDisplayProductAdmin(){
-                    add_thickbox();
+                   
                     $ctcAdminProcessing = new ctCommerceAdminPanelProcessing();
-                    
-                    
-                    
-                    
                     $pagenum = isset( $_GET['pagenum'] ) ? absint( $_GET['pagenum'] ) : 1;
                    
                     
@@ -1324,8 +1353,8 @@ class ctCommerceAdminHtml{
                     $page_links = paginate_links( array(
                         'base' => add_query_arg( 'pagenum', '%#%' ),
                         'format' => '',
-                        'prev_text' => __( '&laquo;', 'text-domain' ),
-                        'next_text' => __( '&raquo;', 'text-domain' ),
+                        'prev_text' => __( '&laquo;', 'ct-commerce' ),
+                        'next_text' => __( '&raquo;', 'ct-commerce' ),
                         'total' => $num_of_pages,
                         'current' => $pagenum
                     ) );
@@ -1338,7 +1367,7 @@ class ctCommerceAdminHtml{
                    <div class="ctcProductListHeader"> 
                    <h4 class="dashicons-before dashicons-list-view">Products:</h4>
                             <?php if ( $page_links ):?> 
-                         
+
                              <div class="tablenav ctcTablenav" >
                                 <div class="tablenav-pages ctcTablenav-pages" > <?=$page_links?> </div>
                              </div>
@@ -1832,7 +1861,7 @@ class ctCommerceAdminHtml{
                                                  	  <div class="ctcProductFormRow">
                                                            			    <div class="ctcProductFormColumn">
                                                            			  		<label for="ctcProductMetaInfo">Meta Data : </label>
-                                                           			  		<span class="ctcFormComments">Noteworthy features.</span>
+                                                           			  		<i class="ctcFormComments">Noteworthy features.</i>
                                                            			     </div>
                                                            			    <div class="ctcProductFormColumn">
                                                                 		 <input id="ctcProductMetaInfo" type="text" name="metaInfo" size="35"    value="<?=$productData['metaInfo']?>"  />
@@ -1877,7 +1906,7 @@ class ctCommerceAdminHtml{
                                                       </div>
                                                        <div class="ctcProductFormColumn">
                                                          <input id="ctcProductWeight" type="number" step="0.01" name="productWeight" required="required" size="20"    value="<?php if($productData['productWeight'] !== '0.00'): echo trim($productData['productWeight']); endif;?>"/>
-                                                         <span class="ctcFormComments"></span>
+                                                         <i class="ctcFormComments"></i>
                                                        </div>
                                                   </div>
                                                   <div class="ctcProductFormRow">
@@ -1896,7 +1925,7 @@ class ctCommerceAdminHtml{
                                        			     <div class="ctcProductFormColumn">
 
                                                  		<input id="ctcProductPreOrder" type="checkbox" name="preOrder" size="35"  value="1"   <?=$productData['preOrder']==1? "checked = 'checked'":""?>/>
-                                       			      <span class="ctcFormComments">If pre order is available for this product</span>
+                                       			      <i class="ctcFormComments">If pre order is available for this product</i>
                                        			     </div>
                                        			 </div>
                                        			 <div class="ctcProductFormRow">
@@ -1905,7 +1934,7 @@ class ctCommerceAdminHtml{
                                                		       </div>
                                            		        <div class="ctcProductFormColumn">
                                                          <input id="ctcFeatureProduct" type="checkbox" name="featureProduct" size="35"  value="1"  <?=$productData['featureProduct'] == 1?"checked = 'checked'":" "?>/>
-                                           			   <span class="ctcFormComments">Customer will see product in main page.</span>
+                                           			   <i class="ctcFormComments">Customer will see product in main page.</i>
                                            			    </div>
                                        			</div>
 
@@ -1917,7 +1946,7 @@ class ctCommerceAdminHtml{
                                            			   <div class="ctcProductFormColumn">
                                                            <input id="ctcProductPostId" title="Create blog post about this product?" type="checkbox" name="createProductPost"   value="1" <?=$productData['productPostId'] >= 1? "value='1'  checked ='checked'":"value='0'"?> />
                                            			  	  <input type="hidden" id="ctcProductPostId"	name="productPostId" value="<?=$productData['productPostId']?>" />
-                                           			  <span class="ctcFormComments">Required for customers to write review. </span>
+                                           			  <i class="ctcFormComments">Required for customers to write review. </i>
                                            			   </div>
                                        			 </div>
 
@@ -2201,7 +2230,7 @@ class ctCommerceAdminHtml{
                                                  	  <div class="ctcProductFormRow">
                                                            			    <div class="ctcProductFormColumn">
                                                            			  		<label for="ctcProductMetaInfo">Meta Data : </label>
-                                                           			  		<span class="ctcFormComments">Noteworthy features.</span>
+                                                           			  		<i class="ctcFormComments">Noteworthy features.</i>
                                                            			     </div>
                                                            			    <div class="ctcProductFormColumn">
                                                                 		 <input id="ctcProductMetaInfo" type="text" name="metaInfo" size="35"    value="<?=$productData['metaInfo']?>"  />
@@ -2246,7 +2275,7 @@ class ctCommerceAdminHtml{
                                                       </div>
                                                        <div class="ctcProductFormColumn">
                                                          <input id="ctcProductWeight" type="number" step="0.01" name="productWeight" required="required" size="20"    value="<?php if($productData['productWeight'] !== '0.00'): echo trim($productData['productWeight']); endif;?>"/>
-                                                         <span class="ctcFormComments"></span>
+                                                         <i class="ctcFormComments"></i>
                                                        </div>
                                                   </div>
                                                   <div class="ctcProductFormRow">
@@ -2265,7 +2294,7 @@ class ctCommerceAdminHtml{
                                        			     <div class="ctcProductFormColumn">
 
                                                  		<input id="ctcProductPreOrder" type="checkbox" name="preOrder" size="35"  value="1"   <?=$productData['preOrder']==1? "checked = 'checked'":""?>/>
-                                       			      <span class="ctcFormComments">If pre order is available for this product</span>
+                                       			      <i class="ctcFormComments">If pre order is available for this product</i>
                                        			     </div>
                                        			 </div>
                                        			 <div class="ctcProductFormRow">
@@ -2274,7 +2303,7 @@ class ctCommerceAdminHtml{
                                                		       </div>
                                            		        <div class="ctcProductFormColumn">
                                                          <input id="ctcFeatureProduct" type="checkbox" name="featureProduct" size="35"  value="1"  <?=$productData['featureProduct'] == 1?"checked = 'checked'":" "?>/>
-                                           			   <span class="ctcFormComments">Customer will see product in main page.</span>
+                                           			   <i class="ctcFormComments">Customer will see product in main page.</i>
                                            			    </div>
                                        			</div>
 
@@ -2286,7 +2315,7 @@ class ctCommerceAdminHtml{
                                            			   <div class="ctcProductFormColumn">
                                                            <input id="ctcProductPostId" title="Create blog post about this product?" type="checkbox" name="createProductPost"   value="1" <?=$productData['productPostId'] >= 1? "value='1'  checked ='checked'":"value='0'"?> />
                                            			  	  <input type="hidden" id="ctcProductPostId"	name="productPostId" value="<?=$productData['productPostId']?>" />
-                                           			  <span class="ctcFormComments">Required for customers to write review. </span>
+                                           			  <i class="ctcFormComments">Required for customers to write review. </i>
                                            			   </div>
                                        			 </div>
 
@@ -2587,7 +2616,7 @@ class ctCommerceAdminHtml{
                                           </div>
                                          <div class="ctcAddDiscountColumnRight">
                                               <input id="ctcDiscountPercent" type="number" step="0.1"  min="0" required="required"  max="100" name="discountPercent" size="20" value="" />
-                                                 <span class="ctcFormComments"> <input class="ctcDiscountType" id="ctcDiscountPercentCb" type="checkbox" checked="checked"/>Check if percent off.</span>
+                                                 <i class="ctcFormComments"> <input class="ctcDiscountType" id="ctcDiscountPercentCb" type="checkbox" checked="checked"/>Check if percent off.</i>
                                          </div>
                                                           
                                  </div>
@@ -2598,7 +2627,7 @@ class ctCommerceAdminHtml{
                                          <div class="ctcAddDiscountColumnRight">
                                                 
                                                  <input id="ctcDiscountAmount" type="number" step="0.01" min="0" class="ctcRequiredField" disabled="disabled" required="required"  name="discountAmount" size="20" value=""> 
-                                                 <span class="ctcFormComments"> <input class="ctcDiscountType" id="ctcDiscountAmountCb" type="checkbox"/>Check if amount off.</span>
+                                                 <i class="ctcFormComments"> <input class="ctcDiscountType" id="ctcDiscountAmountCb" type="checkbox"/>Check if amount off.</i>
                                          </div>
                                                           
                                  </div> 
@@ -2884,7 +2913,7 @@ class ctCommerceAdminHtml{
                                           </div>
                                          <div class="ctcAddDiscountColumnRight">
                                               <input id="ctcDiscountPercent" type="number" step="0.1"  min="0"  max="100" name="discountPercent" size="20"   <?=$discountData['discountPercent']>0.00?'':'disabled="disabled"'?> required="required" value="<?=$discountData['discountPercent']?>">
-                                                <span class="ctcFormComments"> <input class="ctcDiscountType" id="ctcDiscountPercentCb" <?=$discountData['discountPercent']>0.00?'checked="checked"':''?> type="checkbox" />Check if percent off.</span>
+                                                <i class="ctcFormComments"> <input class="ctcDiscountType" id="ctcDiscountPercentCb" <?=$discountData['discountPercent']>0.00?'checked="checked"':''?> type="checkbox" />Check if percent off.</i>
                                          </div>
                                                           
                                  </div>
@@ -2895,7 +2924,7 @@ class ctCommerceAdminHtml{
                                          <div class="ctcAddDiscountColumnRight">
                                                 
                                                  <input id="ctcDiscountAmount" type="number" step="0.01" min="0" class="ctcRequiredField" <?=$discountData['discountAmount']>0.00?'':'disabled="disabled"'?> required="required"  name="discountAmount" size="15" value="<?=$discountData['discountAmount']?>" /> 
-                                                 <span class="ctcFormComments"> <input class="ctcDiscountType" id="ctcDiscountAmountCb" <?=$discountData['discountAmount']>0.00?'checked="checked"':''?> type="checkbox"/>Check if amount off.</span>
+                                                 <i class="ctcFormComments"> <input class="ctcDiscountType" id="ctcDiscountAmountCb" <?=$discountData['discountAmount']>0.00?'checked="checked"':''?> type="checkbox"/>Check if amount off.</i>
                                          </div>
                                                           
                                  </div> 
@@ -3150,7 +3179,7 @@ class ctCommerceAdminHtml{
 		              				  <?=$order['shippingOption']?> 
 		              				  <br><b>Customer Address:</b><br>
 		              				  <span id="shippingAddress<?=$order['transactionId']?>" >
-		              				      <?=str_replace(',',',<br>',$order['shippingAddress'])?> 
+														<address>    <?=str_replace(',',' ',$order['shippingAddress'])?> </address>
 										</span>
 						</td>
 						
@@ -3350,7 +3379,8 @@ class ctCommerceAdminHtml{
 		              				  <?=$order['shippingOption']?> 
 		              				  <br><b>Cutomer Address :</b><br>
 		              				  <span id="shippingAddress<?=$order['transactionId']?>" >
-		              				      <?=str_replace(',',',<br>',$order['shippingAddress'])?> 
+
+		              				  <address>    <?=str_replace(',',' ',$order['shippingAddress'])?> </address>
 										</span>
 						</td>
 						

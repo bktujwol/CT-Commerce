@@ -80,7 +80,7 @@ class ctCommerceFrontendAjax{
 	
 	public function ctcGetUspsApiKey(){
 
-		echo get_option(ctcUspsApiKey);
+		echo get_option('ctcUspsApiKey');
 		
 		wp_die();
 	}

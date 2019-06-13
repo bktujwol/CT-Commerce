@@ -22,6 +22,7 @@ class ctCommerceFrontendContent{
 	
 	//function to create main product page
 	public function ctcStoreFrontPage(){
+		if(!is_admin()):
 		$userId= get_current_user_id();
 		$ctcFrontendProcessing  = new ctCommerceFrontendProcessing();
 		
@@ -42,7 +43,8 @@ class ctCommerceFrontendContent{
 		</div>	
 		
 	<?php	
-		
+	
+		endif;		
 	}
 	
 	/**
@@ -197,6 +199,8 @@ class ctCommerceFrontendContent{
 	
 	//function to displayproduct categories by shortcode
 	public function ctcDisplayProductCategories(){
+
+		if(!is_admin()):
 		$ctcFrontendProcessing = new ctCommerceFrontendProcessing();
 		
 		$categories = $ctcFrontendProcessing->ctcGetProductCategories();
@@ -242,12 +246,14 @@ class ctCommerceFrontendContent{
 		 
 		
 		<?php 
+	endif;	
 	}
 	
 	//function to display single product category
 	
 	public function ctcDisplaySingleCategory(){
 		
+		if(!is_admin()):
 		$category = isset($_GET['category'])? $_GET['category']:'';
 		$subCat = isset($_GET['subcat'])? $_GET['subcat']:'';
 		$header = '';
@@ -361,11 +367,17 @@ class ctCommerceFrontendContent{
 			       $this->ctcStoreFrontPage();
 		endif;
 		
+	
+	
+	
+	endif;
+	
 	}
 	
 	//function to display single product page 
 	public function ctcDisplaySingleProduct(){
 
+		if(!is_admin()):
 		$productId = isset($_GET['product-id'])? $_GET['product-id']:'';
 		
 	if(!empty($productId)):	
@@ -505,6 +517,8 @@ class ctCommerceFrontendContent{
 	$this->ctcStoreFrontPage();
 	
 	endif;
+
+endif;
 	}
 	
 	
@@ -641,7 +655,7 @@ class ctCommerceFrontendContent{
 	//function to display user product cart
 	public function ctcDisplayProductCart(){
 		
-		
+		if(!is_admin()):
 		
          
 							?>
@@ -703,7 +717,7 @@ class ctCommerceFrontendContent{
 			</div>	  
 			 <div id="ctcPageEmptyCartMessage"> </div>
 	<?php	  
-		
+	endif;	
 	}
 	
 	
@@ -820,34 +834,24 @@ class ctCommerceFrontendContent{
 	
 	private function ctcDisplayCheckOutOption(){
 		
-		$ctcPaymentOption = array(
-				
-				'stripeKeys'=>array('stripeSecretKey'=>get_option('ctcStripeSecretKey'),'StripePublishableKey'=>get_option('ctcStripePublishableKey')),
-				'cashOnDelivery'=>get_option('ctcCashOnDelivery'),
-				
-		);
-		
-		if (!empty($ctcPaymentOption)):?>
+		$ctcPaymentOptions = array(
+																$this->ctcDisplayCashOnDeliveryButton(),
+																$this->ctcDisplayStripeButton(),
+												);
+
+		if (!empty(implode('',$ctcPaymentOptions))):?>
 						  		<p class="ctcChooseShippingOption"> Please choose shipping option first to proceed with check out.</p>	
 						  			<div id="ctcCheckoutPaymentOptions" class="ctcCheckoutPaymentOptions ">			
 						  					  	
 						  						<span > Payment Options : </span>
-							  						
-							  						 <?php $this->ctcDisplayCashOnDeliveryButton($ctcPaymentOption['cashOnDelivery'])?>
-														 <?php $this->ctcDisplayStripeButton($ctcPaymentOption['stripeKeys'])?>	
-														 <input id="ctcCheckoutCashButton" type="hidden" name="ctcCheckoutCashButton"  value="cash"/>
-														 <button id="ctcCheckoutButton" style="display:none;"> Pay With Card</button>			
+													<?php
+													array_map(function($option){
 
-														 
-														<!--
-															<div id="ctcCashCheckoutButton">
-															  <span >
-															  
-															  <button    onclick="document.getElementById('ctcProductCartPageForm').submit();return false;" > Cash On Delivery</button> 
-																</span>
-																
-														</div >
-	-->			
+														echo $option;
+
+													},$ctcPaymentOptions);
+													?>
+														 <button id="ctcCheckoutButton" style="display:none;"> Pay With Card</button>			
 											 <?php else:
 													
 													$noPaymentSet ="Vendor has not set up any payment option yet.";
@@ -866,34 +870,43 @@ class ctCommerceFrontendContent{
 
 	
 //function to display stripe checkout option
-	private function ctcDisplayStripeButton($ctcStripeKeys){
-		
-		if (!empty($ctcStripeKeys['stripeSecretKey']) && !empty($ctcStripeKeys['StripePublishableKey'])):?>
-		
-		<div id="ctcStripePayment">
-		<span><input type="radio"  id="ctcCheckOutOptionStripe" name="ctcCheckOutOption"  /> : Check Out With Card</span>
-		 
-			
-		</div>										  
-	<?php 
-		endif;
-		
-		
-		
+	private function ctcDisplayStripeButton(){
+
+		if (!empty(get_option('ctcStripeTestPublishableKey')) && !empty(get_option('ctcStripeTestSecretKey')) && '1'=== get_option('ctcStripeTestMode')):		
+			$stripeOption = '<div id="ctcStripePayment" data-mode-test="test"  style="margin-bottom:20px;">';
+			$stripeOption .='<span><input type="radio"  id="ctcCheckOutOptionStripe" name="ctcCheckOutOption"  /> : Check Out With Stripe</span>';
+			$stripeOption .='<div style="display:none;" id="ctcStripeMountDiv" ></div>';
+			$stripeOption .='<div id="card-errors" role="alert"></div>';
+			$stripeOption .='</div>';
+			return $stripeOption;	
+
+	elseif( !empty(get_option('ctcStripeLivePublishableKey')) && !empty(get_option('ctcStripeLiveSecretKey'))):
+					$stripeOption  ='<div id="ctcStripePayment" data-mode-test="live" style="margin-bottom:20px;">';
+					$stripeOption .='<span><input type="radio"  id="ctcCheckOutOptionStripe" name="ctcCheckOutOption"  /> : Check Out With Stripe</span>';
+					$stripeOption .='<div style="display:none;" id="ctcStripeMountDiv" ></div>';
+					$stripeOption .='<div id="card-errors" role="alert"></div>';
+					$stripeOption .='</div>';
+			return $stripeOption;	
+	else :
+		return false;			
+	endif;			
+
 	}
 	
 //function to display cash on heck out button
-	private function ctcDisplayCashOnDeliveryButton($ctcCashOption){
+	private function ctcDisplayCashOnDeliveryButton(){
 		
 		
-		if($ctcCashOption ==='1' ):
-		 
-		 ?>
-		 <div id="ctcCashPayment">
-		 <span id="ctcCheckOutCashRadio"> <input type="radio" id="ctcCheckOutOptionCash" name="ctcCheckOutOption" /> : Cash on Delivery </span>
-			  										  
-		</div>												  
-    <?php endif;    
+		if('1' === get_option('ctcCashOnDelivery')  ):
+	
+		 $cashOption ='<div id="ctcCashPayment">';
+		 $cashOption .='<span id="ctcCheckOutCashRadio"> <input type="radio" id="ctcCheckOutOptionCash" name="ctcCheckOutOption" /> : Cash on Delivery </span>';
+		 $cashOption .='<input id="ctcCheckoutCashButton" type="hidden" name="ctcCheckoutCashButton"  value="cash"/>';  										  
+		 $cashOption .='</div>';
+		 return $cashOption;	
+		 else :
+			return false;													  
+     endif;    
 		
 	}
 	
@@ -1013,6 +1026,9 @@ class ctCommerceFrontendContent{
  */	
 	//function to display purchase confirmation page
 	public function ctcPurchaseConfirmation(){
+
+		if(!is_admin()):
+
 		$ctcFrontendProcessing = new ctCommerceFrontendProcessing();
 		
 		if(!empty($_POST)):
@@ -1042,10 +1058,12 @@ class ctCommerceFrontendContent{
 		
 		<?php 
 		endif;
+	endif;	
 	}
 	
 	//function to display discounted producta in page
 	public function ctcDisplayDiscountProducts(){
+		if(!is_admin()):
 		$userId= get_current_user_id();
 		$discountCode = isset($_GET['discount'])? $_GET['discount']:'all';
 		
@@ -1085,11 +1103,14 @@ class ctCommerceFrontendContent{
 		 
 			
 	<?php 
+	endif;
 	}
 	
 	
 	//function to display products with meta tags
 	public function ctcProductAndCategoryMetaTag(){
+
+		if(!is_admin()):
 		$metaTag = isset($_GET['tag'])? $_GET['tag']:'';
 		
 		
@@ -1190,7 +1211,7 @@ class ctCommerceFrontendContent{
 	       
 	    endif;	
 		
-		
+		endif;	
 	}
 	
 	
@@ -1819,8 +1840,8 @@ class ctCommerceFrontendContent{
     
     //function to add shortcode to the product post page add to cart button
     public function ctcGetPostAddToCart(){
+			if(!is_admin()):
     	$ctcFrontendProcessing = new ctCommerceFrontendProcessing();
-    	
     	$product = $ctcFrontendProcessing->ctcGetProductFromPost(get_the_ID());
     	
     	$productVariation = $ctcFrontendProcessing->ctcProcessProducVariation( $product['avilableProducts'],$product['preOrder']);
@@ -1834,12 +1855,15 @@ class ctCommerceFrontendContent{
 	    			$productVariation);
 	    
     	endif;
-    	return ob_get_clean();
+			return ob_get_clean();
+		endif;	
     }
     
     //function to add shortcode for rating for post
     
     public function ctcGetPostRating(){
+
+			if(!is_admin()):
     	$ctcFrontendProcessing = new ctCommerceFrontendProcessing();
  
     	$rating = $ctcFrontendProcessing->ctcGetRatingFromPost(get_the_ID());
@@ -1847,17 +1871,19 @@ class ctCommerceFrontendContent{
     	$this->ctcDisplayRatingThumbs($rating['productId'], $rating['thumbsUpCount'], 
     								  $rating['thumbsDownCount'],$rating['thumbsUpUser'],$rating['thumbsDownUser'],
     								  'ctcPostPage',get_current_user_id());
-     return ob_get_clean();
+		 return ob_get_clean();
+			endif; 
     }
     
     
     //function to add shortcode for post social sharing
     
     public function ctcPostSocialbarSharing(){
-    
+    if(!is_admin()):
     	ob_start();
     	$this->ctcDisplaySocialbarSharing(get_permalink());
-       return ob_get_clean();
+			 return ob_get_clean();
+		endif;	 
     }
     
     
@@ -1908,11 +1934,7 @@ class ctCommerceFrontendContent{
 								<div class=" ctcSocialbarChInfoBack ctcSocialbarChInfoBackTwitter" >
 									<p class="ctcSocialbarTooltipP"  id="ctcSocialbarTwitterTooltip" >
 								  <a class="ctcSocialbarTwitterTooltip dashicons-before dashicons-share" href="http://twitter.com/share?url=<?=$productUrl.'&hashtags='.get_bloginfo( 'name' ).','.get_bloginfo('description')?>"  target="_blank" title="Tweet this page on Twitter"></a>
-								 
-								
 								 </p>
-			
-								
 								</div>
 							</div>
 						</div>
@@ -1931,23 +1953,7 @@ class ctCommerceFrontendContent{
 							</div>
 						</div>
 					</li>
-					
-					
-					
-					<li>
-						<div class="ctcSocialbarChItem">				
-							<div class="ctcSocialbarChInfo ctcSocialbarChInfoGplus">
-								<div class="ctcSocialbarChInfoFront ctcSocialbarChGplus"></div>
-								<div class="ctcSocialbarChInfoBack ctcSocialbarChInfoBackGplus" >
-									<p class="ctcSocialbarTooltipP"  id="ctcSocialbarGplusTooltip" >
-									<a class="ctcSocialbarGplusTooltip dashicons-before dashicons-share" href="https://plus.google.com/share?url=<?=$productUrl?>"  target="_blank" title="Share this page on Google Plus"></a>
-									
-									</p>
-								</div>	
-							</div>
-						</div>
-					</li>
-					
+						
 					<li>
 						<div class="ctcSocialbarChItem">				
 							<div class="ctcSocialbarChInfo ctcSocialbarChInfoPinterest">

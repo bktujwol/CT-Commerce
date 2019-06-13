@@ -38,15 +38,11 @@ class ctCommerceFrontendProcessing{
 	
 //function to get main page data of featured product
 
-	public function ctcGetFeaturedProducts($offset,$limit){
-		
-		
+public function ctcGetFeaturedProducts($offset,$limit){
 		global $wpdb;
 		
 		if($offset>=1):
-		
-		$offset = $offset+1;
-		
+		  $offset = $offset+1;
 		endif;
 		
 		$rating = $wpdb->prefix."ctCommerceProductRating";
@@ -58,10 +54,43 @@ class ctCommerceFrontendProcessing{
         $sql .= " FROM {$products} AS p INNER JOIN {$rating}  r USING(productId)"; 
 		$sql .= " WHERE p.featureProduct = 1  GROUP BY (productId)   LIMIT %d OFFSET %d ) t ;";
 		return $wpdb->get_results($wpdb->prepare($sql,array($limit,$offset)),ARRAY_A); 
-		
-		
+
+	}
+
+
+	//function to data for rest api
+
+public function ctcGetProducts(){
+		global $wpdb;
+	
+		$rating = $wpdb->prefix."ctCommerceProductRating";
+		$products = $wpdb->prefix."ctCommerceProducts";
+
+		$sql = "SELECT  t.* FROM ";
+		$sql .= "(SELECT  p.productId, p.productName,p.categoryName,p.primaryImage,p.addtionalImages,p.productPrice,p.avilableProducts,p.preOrder, "; 
+		$sql .="r.thumbsUpCount, r.thumbsDownCount ";
+        $sql .= " FROM {$products} AS p INNER JOIN {$rating}  r USING(productId)"; 
+		$sql .= "GROUP BY (productId)  ) t ;";
+		return $wpdb->get_results($wpdb->prepare($sql,array()),ARRAY_A); 
 	}
 	
+		//function to get main page data of featured product
+
+public function ctcGetProductsPost(){
+		global $wpdb;
+	
+		$rating = $wpdb->prefix."ctCommerceProductRating";
+		$products = $wpdb->prefix."ctCommerceProducts";
+
+		$sql = "SELECT  t.* FROM ";
+		$sql .= "(SELECT  p.productId, p.productPostId, "; 
+		$sql .="r.thumbsUpCount, r.thumbsDownCount ";
+        $sql .= " FROM {$products} AS p INNER JOIN {$rating}  r USING(productId)"; 
+		$sql .= " WHERE  p.productPostId <> 0  GROUP BY (productId)  ) t ;";
+		return $wpdb->get_results($wpdb->prepare($sql,array()),ARRAY_A); 
+	}
+
+
 	
     //function to process user registration 	
 	public function ctcProcessUserRegistration($userData){
@@ -122,8 +151,6 @@ class ctCommerceFrontendProcessing{
 		global $wpdb;
 		
 		$wpUserInfo = wp_get_current_user();
-		
-		
 		
 		$savedInfo['ID'] = $wpUserInfo->ID;
 		$savedInfo['firstName']= $wpUserInfo->first_name;
@@ -226,10 +253,6 @@ class ctCommerceFrontendProcessing{
 				$wpdb->query($sql2);
 				$result = $wpdb->get_results($sql, ARRAY_A)[0]; 
 		
-		      
-
-		       
-			 
 		      if(!empty($result)):
 				$result["avilableProducts"] =  $this->ctcProcessProducVariation($result['avilableProducts'],$result['preOrder']);
 				 return $result;
@@ -241,7 +264,6 @@ class ctCommerceFrontendProcessing{
 		
 		
 		$allProductOptions = explode(',',trim($avilableProducts));
-		
 		
 		for($i=0; $i<=count($allProductOptions)-1; $i++ ):
 		
@@ -281,11 +303,7 @@ class ctCommerceFrontendProcessing{
 		
 		global $wpdb;
 		
-
 		return $wpdb->get_results("SELECT categoryName,primaryImage FROM {$wpdb->prefix}ctCommerceProducts ORDER BY RAND();",ARRAY_A);
-		
-		
-		
 	}
 	
 	/**
@@ -461,7 +479,7 @@ class ctCommerceFrontendProcessing{
 		$machinable = strtoupper(get_option('ctcUspsMachinable'));
 		$businessAddress =  get_option('ctcBusinessAddressZip') ;
 
-		$uspsRequest .='API=RateV4&XML=<RateV4Request USERID="'.get_option("ctcUspsApiKey").'">';
+		$uspsRequest ='API=RateV4&XML=<RateV4Request USERID="'.get_option("ctcUspsApiKey").'">';
 		foreach($productShippingInfo as $key=>$product):
 		
 		$weight = explode('.',$product['productWeight']);
@@ -728,9 +746,9 @@ class ctCommerceFrontendProcessing{
 			);
 			
 	
-			
+			$stripeSecretKey = '1' == get_option('ctcStripeTestMode') ? get_option( 'ctcStripeTestSecretKey' ) : get_option( 'ctcStripeLiveSecretKey' );
 			// See your keys here: https://dashboard.stripe.com/account/apikeys
-			\Stripe\Stripe::setApiKey( get_option('ctcStripeSecretKey'));
+			\Stripe\Stripe::setApiKey( $stripeSecretKey);
 			
 			// Token is created using Checkout or Elements!
 			// Get the payment token ID submitted by the form:
@@ -1085,8 +1103,7 @@ class ctCommerceFrontendProcessing{
 		$sql .= " WHERE p.categoryName = %s AND subCategory LIKE  %s  ORDER BY RAND() ;";
 		
 		
-		
-		
+	
 		$like = '%'. $wpdb->esc_like($subCategoryName) . '%';   
 		
 		$result = $wpdb->get_results($wpdb->prepare($sql,$categoryName,$like), ARRAY_A);

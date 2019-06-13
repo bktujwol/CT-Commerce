@@ -67,7 +67,7 @@ class ctCommerceAdminPanelAjax{
         $ctcAdminPanelHtml = new ctCommerceAdminHtml();
         $ctcAdminPanelProcessing = new ctCommerceAdminPanelProcessing();
         
-         $ctcAdminPanelHtml->ctcAddCategory($ctcAdminPanelProcessing->ctcGetCtaegoryData($_POST[categoryId]));
+         $ctcAdminPanelHtml->ctcAddCategory($ctcAdminPanelProcessing->ctcGetCtaegoryData($_POST['categoryId']));
          
         wp_die();
     }

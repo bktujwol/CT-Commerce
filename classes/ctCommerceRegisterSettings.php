@@ -36,7 +36,7 @@ class ctCommerceRegisterSettings{
     //function to register all of the required billing info setting
     public function ctcRegisterBillingSetting(){
         
-        $billingSettings = array('ctcBusinessTaxRate','ctcBusinessCurrency','ctcStripeSecretKey','ctcStripePublishableKey','ctcCashOnDelivery');
+        $billingSettings = array('ctcBusinessTaxRate','ctcBusinessCurrency','ctcStripeTestMode','ctcStripeLiveSecretKey','ctcStripeLivePublishableKey','ctcStripeTestSecretKey','ctcStripeTestPublishableKey','ctcCashOnDelivery');
         
         foreach ($billingSettings as $setting){
             

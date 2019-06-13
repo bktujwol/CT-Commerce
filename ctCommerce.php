@@ -3,9 +3,10 @@
  Plugin Name:CT-Commerce
  Plugin URI:
  Description: Inituitive e-commerce plugin for WordPress
- Version: 1.0.3
+ Version: 1.5.0
  Author: Ujwol Bastakoti
  Author URI:https://ujwolbastakoti.wordpress.com/
+Text Domain:  ct-commerce
  License: GPLv2
  */
 /*include plugin and  widgets classes files*/

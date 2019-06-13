@@ -558,8 +558,7 @@ static loadOverlayImages(currentImageNumber){
 			  		           
 			  		            
 			  		          //script to load image and margin of close button 
-								
-								 ctcOverlayViewer.removeClass(['overlayContentloadingV'],closeBtn);
+								 			ctcOverlayViewer.removeClass(['overlayContentloadingV'],closeBtn);
 								 
 		  		          
 			  		              if(prevGalImg[0] !== undefined){

@@ -36,7 +36,7 @@ class ctCommercePluginADU{
         
         wp_delete_category(get_cat_ID('CT Commerce') );
         
-        self::ctcDropTables();
+        //self::ctcDropTables();
      
         
        
@@ -70,7 +70,7 @@ class ctCommercePluginADU{
                     
                     
                     //remove billing settings
-                    $billingSettings = array('ctcBusinessTaxRate','ctcBusinessCurrency','ctcStripePublishableKey','ctcStripeSecretKey','ctcCashOnDelivery');
+                    $billingSettings = array('ctcBusinessTaxRate','ctcBusinessCurrency','ctcStripeTestMode','ctcStripeLiveSecretKey','ctcStripeLivePublishableKey','ctcStripeTestSecretKey','ctcStripeTestPublishableKey','ctcCashOnDelivery');
                     
                     foreach ($billingSettings as $billingSetting){
                         
