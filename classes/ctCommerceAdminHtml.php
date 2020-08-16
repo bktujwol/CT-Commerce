@@ -40,19 +40,12 @@ class ctCommerceAdminHtml{
        
        <div class="ctcAdminPanel"> 
 		
-       <?php 
-       
-            //if user agress to the terms and condition
-            if( get_option('ctcConditionsAgree')  == '1'):
-           ?>
-                  <h1><span class="dashicons dashicons-admin-home">&nbsp;&nbsp;</span>CT Commerce Admin Panel</h1>
+            <h1><span class="dashicons dashicons-admin-home">&nbsp;&nbsp;</span>CT Commerce Admin Panel</h1>
            <?php        
                  self::ctcAdminPanelTab();
                  self::ctcAdminPanelHtml(); 
 
-            else:
-                $this->ctcConditionAgreeDisagree();
-            endif;
+         
             ?>
             </div>
          <?php    
@@ -1148,7 +1141,7 @@ public function ctcEmailSetting(){
                                                                                          <span class="dashicons dashicons-format-image"></span>
                                              
                                                                            	     </a>
-                                                                         		 <span class="ctcPrimaryPicThumb" onmouseenter="new ctcOverlayViewer(this);"><img /></span>
+                                                                         		 <span class="ctcPrimaryPicThumb" ><img /></span>
                                                                 
                                                                          </div>
                                                                      </div>
@@ -1163,7 +1156,7 @@ public function ctcEmailSetting(){
                                                                                          <span class="dashicons dashicons-images-alt"></span>
                                              
                                                                            	     </a>
-                                                                     	<div class="ctcAdditionaImages" onmouseenter="new ctcOverlayViewer(this);"></div>
+                                                                     	<div class="ctcAdditionaImages" ></div>
                                                                         		
                                                                      </div>
                                                                    </div>
@@ -1449,7 +1442,7 @@ public function ctcEmailSetting(){
                                                             <div class="ctcProductColumnOther">
                                                                  Gallery : 
                                                            </div> 
-                                                            <div id="addtionalImages<?=$product['productId']?>" class="ctcProductColumnOther" onmouseenter="new ctcOverlayViewer(this);">
+                                                            <div id="addtionalImages<?=$product['productId']?>" class="ctcProductColumnOther" >
                       
                                                             <?php foreach(explode(',',$product['addtionalImages']) as $key=>$image):
                                                           			  if(!empty($image)):
@@ -1566,7 +1559,7 @@ public function ctcEmailSetting(){
 								
 								?>
 								
-								<a class="ctcProductPrimaryPic" onmouseenter="new ctcOverlayViewer(this);" id="primaryPic<?=$product['productId']?>" href="JavaScript:void(0)" title="<?=$product['productName']?>"  >
+								<a class="ctcProductPrimaryPic"  id="primaryPic<?=$product['productId']?>" href="JavaScript:void(0)" title="<?=$product['productName']?>"  >
 								  	
 								  	<img src="<?=$imgUrl?>" title="<?=$product['productName']?>" />
 								      
@@ -1743,7 +1736,7 @@ public function ctcEmailSetting(){
                                                                                          <span class="dashicons dashicons-format-image"></span>
                                   
                                                                            	     </a>
-                                                                           	     <span class="ctcPrimaryPicThumbUpdate" onmouseenter="new ctcOverlayViewer(this);">
+                                                                           	     <span class="ctcPrimaryPicThumbUpdate" >
                                                                            	    <?php  
                                                                            	     if(!empty($productData['primaryImage'])):
                                                                            	     
@@ -1770,7 +1763,7 @@ public function ctcEmailSetting(){
                                                                                          <span class="dashicons dashicons-images-alt"></span>
                                              
                                                                            	     </a>
-                                                                     	<div id="ctcAdditionaImagesUpdate" class="ctcAdditionaImagesUpdate" onmouseenter="new ctcOverlayViewer(this);">
+                                                                     	<div id="ctcAdditionaImagesUpdate" class="ctcAdditionaImagesUpdate" >
                                                                      	<?php if(!empty($productData['addtionalImages'])):
                                                                      	$gallery = (explode(',',$productData['addtionalImages']));
                                                                      	
@@ -2109,7 +2102,7 @@ public function ctcEmailSetting(){
                                                                                          <span class="dashicons dashicons-format-image"></span>
                                   
                                                                            	     </a>
-                                                                           	     <span class="ctcPrimaryPicThumbUpdate" onmouseenter="new ctcOverlayViewer(this);">
+                                                                           	     <span class="ctcPrimaryPicThumbUpdate" >
                                                                            	    <?php  
                                                                            	     if(!empty($productData['primaryImage'])):
                                                                            	     
@@ -2136,7 +2129,7 @@ public function ctcEmailSetting(){
                                                                                          <span class="dashicons dashicons-images-alt"></span>
                                              
                                                                            	     </a>
-                                                                     	<div id="ctcAdditionaImagesUpdate" class="ctcAdditionaImagesUpdate" onmouseenter="new ctcOverlayViewer(this);">
+                                                                     	<div id="ctcAdditionaImagesUpdate" class="ctcAdditionaImagesUpdate" >
                                                                      	<?php if(!empty($productData['addtionalImages'])):
                                                                      	$gallery = (explode(',',$productData['addtionalImages']));
                                                                      	
@@ -2463,7 +2456,7 @@ public function ctcEmailSetting(){
 										
 										?>
 										
-										<a onmouseenter="new ctcOverlayViewer(this);" id="primaryPic<?=$product['productId']?>" href="JavaScript:void(0)" title="<?=$product['productName']?>" class="ctcPurgedProductPic" >
+										<a  id="primaryPic<?=$product['productId']?>" href="JavaScript:void(0)" title="<?=$product['productName']?>" class="ctcPurgedProductPic" >
 										  
 										      <img src="<?=$imgUrl?>" title="<?=$product['productName']?>" />
 										     </a>
@@ -2642,7 +2635,7 @@ public function ctcEmailSetting(){
                                                           <span class="dashicons dashicons-format-image"></span>
                                   
                                               </a>
-                                              <span class="ctcDiscountPicThumb" onmouseenter="new ctcOverlayViewer(this);"><img></span>
+                                              <span class="ctcDiscountPicThumb" ><img></span>
                                                  
                                          </div>
                                                           
@@ -2779,7 +2772,7 @@ public function ctcEmailSetting(){
 										
 										?>
 										
-              				   <a id="ctcCouponImage<?=$discount['discountId']?>" href="JavaScript:void(0);" title="<?=$discount['discountName']?>" onmouseenter="new ctcOverlayViewer(this);" class="ctcDiscountThumb" >
+              				   <a id="ctcCouponImage<?=$discount['discountId']?>" href="JavaScript:void(0);" title="<?=$discount['discountName']?>"  class="ctcDiscountThumb" >
               				    <img src="<?=$imgUrl?>" title="<?=$discount['discountName']?>" />
 							  </a>
               				    <?php  else: ?>
@@ -2945,7 +2938,7 @@ public function ctcEmailSetting(){
                                                         $parsed = parse_url( wp_get_attachment_url($discountData['couponImage']) );
                                                          $url    = dirname( $parsed [ 'path' ] ) . '/' . rawurlencode( basename( $parsed[ 'path' ] ) );
                                                 ?>
-                                                 	 <span class="ctcDiscountPicThumbUpdate" onmouseenter="new ctcOverlayViewer(this);"><img src="<?=$url?>" /></span>
+                                                 	 <span class="ctcDiscountPicThumbUpdate" ><img src="<?=$url?>" /></span>
                                                                            	     
                                                  <?php 
                                                    else:?>

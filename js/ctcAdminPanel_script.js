@@ -10,35 +10,10 @@
 
 		/*Section to handle $ functionalities for Terms and condition part of plugin */
 
-		//this sections loads info of terms and condition on modal box
-		$(window).load(function () {
-			if ($('#ctcConditionModalTb').length >= 1) {
-				$.ctcOverlayEl({
-					elemHeight: '700px',
-					elemWidth: '1000px',
-					hideCloseBtn: 'yes',
-					elemSelector: '#ctcConditionModalTb'
-				});
-			}
-		});
 
-		//this section handles basic styling of Terms and conditions box 
-		$("div.ctcConditionReading").css({
-			'height': '520px',
-			'width': '730px',
-			'overflow': 'scroll'
-		});
 
-		//this section enables submit button once admin agrees to term and condition
-		$(document).on("click", "#ctcConditionsAgreeCheckbox", function () {
-			if ($(this).is(':checked')) {
-				$('#ctcConditionsAgreeButton').removeAttr("disabled");
-				$('#ctcConditionsDisgreeButton').attr("disabled", "disabled");
-			} else {
-				$('#ctcConditionsAgreeButton').attr("disabled", "disabled");
-				$('#ctcConditionsDisgreeButton').removeAttr("disabled");
-			}
-		});
+
+
 
 		/**
 		 * This section will included requred code to process ajax request
@@ -46,23 +21,7 @@
 		 * 
 		 */
 
-		//this section will handle deactivation of the plugin if user disagrees with terms and condition
-		$(document).on('click', '#ctcConditionsDisgreeButton', function () {
-			var data = {
-				'action': 'ctcDeactivatePlugin',
-				'deactivatePlugin': 'deactivate'
-			};
 
-			$.post(ajaxurl, data, function (response) {
-				if (response.match(/plugins.php/).length == 1) {
-					alert("Plugin has been deactivated, you may remove the plugin!");
-					top.location.replace(response);
-				}
-
-			}).fail(function () {
-				alert("Action could not be completed at this time \nPlease try again later");
-			});
-		});
 
 
 		//copy business name as e-commerce name
@@ -88,7 +47,7 @@
 					'oldEcommerceTitle': oldEcommerceName
 				};
 
-				$.post(ajaxurl, data, function (response) {}).fail(function () {
+				$.post(ajaxurl, data, function (response) { }).fail(function () {
 					alert("Action could not be completed at this time \nPlease try again later");
 				});
 			} else {
@@ -370,7 +329,7 @@
 
 			// Fires when the modal closes.
 			// @see media.view.Modal.close()
-			frame.on('close', function () {});
+			frame.on('close', function () { });
 			// Fires when a user has selected attachment(s) and clicked the select button.
 			// @see media.view.MediaFrame.Post.mainInsertToolbar()
 			frame.on('select', function () {
@@ -528,7 +487,7 @@
 			});
 			// Fires when the modal closes.
 			// @see media.view.Modal.close()
-			frame.on('close', function () {});
+			frame.on('close', function () { });
 			// Open the modal.
 			frame.open();
 			return false;
@@ -605,8 +564,8 @@
 			}
 
 			$.ctcOverlayEl({
-				elemHeight: '760px',
-				elemWidth: '70%',
+				elemHeight: '600px',
+				elemWidth: '1100px',
 				ajaxUrl: ajaxurl,
 				ajaxData: data,
 				ajaxMethod: 'post'
@@ -777,7 +736,7 @@
 			});
 			// Fires when the modal closes.
 			// @see media.view.Modal.close()
-			frame.on('close', function () {});
+			frame.on('close', function () { });
 			// Fires when a user has selected attachment(s) and clicked the select button.
 			// @see media.view.MediaFrame.Post.mainInsertToolbar()
 			frame.on('select', function () {
@@ -927,7 +886,7 @@
 			});
 			// Fires when the modal closes.
 			// @see media.view.Modal.close()
-			frame.on('close', function () {});
+			frame.on('close', function () { });
 			// Open the modal.
 			frame.open();
 			return false;
@@ -1233,7 +1192,7 @@
 			});
 			// Fires when the modal closes.
 			// @see media.view.Modal.close()
-			frame.on('close', function () {});
+			frame.on('close', function () { });
 			// Fires when a user has selected attachment(s) and clicked the select button.
 			// @see media.view.MediaFrame.Post.mainInsertToolbar()
 			frame.on('select', function () {
@@ -1325,7 +1284,7 @@
 
 			// Fires when the modal closes.
 			// @see media.view.Modal.close()
-			frame.on('close', function () {});
+			frame.on('close', function () { });
 			// Fires when a user has selected attachment(s) and clicked the select button.
 			// @see media.view.MediaFrame.Post.mainInsertToolbar()
 			frame.on('select', function () {
@@ -1447,7 +1406,7 @@
 
 			// Fires when the modal closes.
 			// @see media.view.Modal.close()
-			frame.on('close', function () {});
+			frame.on('close', function () { });
 			// Fires when a user has selected attachment(s) and clicked the select button.
 			// @see media.view.MediaFrame.Post.mainInsertToolbar()
 			frame.on('select', function () {
@@ -1679,7 +1638,7 @@
 					alert("Sales report could not be loaded at this time ");
 				});
 			} else {
-				h4El.siblings().fadeToggle(1000, function () {});
+				h4El.siblings().fadeToggle(1000, function () { });
 			}
 			h4El.toggleClass('showingContent');
 		});
