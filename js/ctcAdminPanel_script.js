@@ -21,7 +21,6 @@
 		 * 
 		 */
 
-		console.log(ctcTrans);
 		//copy business name as e-commerce name
 		$(document).on('click', '#ctcSameAsBusinessName', function () {
 			var businessName = $("[name*='ctcBusinessName']").val();
@@ -280,7 +279,7 @@
 				$('#ctcProductInventory').attr('placeholder', ctcTrans.requiredProductNum).css('border', '2px solid red');
 				alert(ctcTrans.enterInventoryNum);
 			}
-			//$('#ctcProductInventory').val('');
+
 		});
 
 
