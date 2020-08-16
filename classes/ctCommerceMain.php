@@ -197,6 +197,15 @@ class ctCommerceMain{
                                                                         'confirmReplaceItemDatabase'=>__("Do you want to replace this item in database? ",'ct-commerce'),
                                                                         'printShippingAddress'=>__("Would you like to print shipping address for this order? ",'ct-commerce'),
                                                                         'cancelOrderConfirm'=>__("Are you sure you want to cancel this order? ",'ct-commerce'),
+                                                                        'selPrimaryImg'=>__("Select Primary Product Image ",'ct-commerce'),
+                                                                        'selAdditionaImg'=>__('Select Additional  Product Images','ct-commerce'),
+                                                                        'selVideo'=>__('Select Product Video','ct-commerce'),
+                                                                        'updatePrimaryImg'=>__("Update Primary Product Image ",'ct-commerce'),
+                                                                        'updateAdditionaImg'=>__('Update Additional  Product Images','ct-commerce'),
+                                                                        'updateVideo'=>__('Update Product Video','ct-commerce'),
+                                                                        'addCouponImage'=>__('Add Coupon Image','ct-commerce'),
+                                                                        'updateCouponImage'=>__('Update Coupon Image','ct-commerce'),
+                                                                        'businessLogo'=>__('Business Logo','ct-commerce'),
                                                                         )
                                     );
       

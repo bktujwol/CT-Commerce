@@ -8,6 +8,11 @@
 			return value;
 		};
 
+		/*Section to handle $ functionalities for Terms and condition part of plugin */
+
+
+
+
 
 
 		/**
@@ -16,6 +21,7 @@
 		 * 
 		 */
 
+		console.log(ctcTrans);
 		//copy business name as e-commerce name
 		$(document).on('click', '#ctcSameAsBusinessName', function () {
 			var businessName = $("[name*='ctcBusinessName']").val();
@@ -213,11 +219,11 @@
 
 		//validate the input field for add product form
 		$(document).on('click', "#ctcAddAvilableProduct", function () {
-
 			if (!$('#ctcProductName').val()) {
 				$('#ctcProductName').attr('placeholder', ctcTrans.productNameEmpty).css({
 					'border': '2px solid red'
 				});
+				return false;
 			} else {
 				$('#ctcProductName').removeAttr('style');
 
@@ -269,12 +275,12 @@
 				} else {
 					var avilableProduct = product + '~' + $('#ctcProductInventory').val();
 				}
-				$("#ctcAvilableProducts").attr('value', avilableProduct);
+				$("#ctcAvilableProducts").val(avilableProduct);
 			} else {
-				$('#ctcProductInventory').attr('placeholder', 'Required, enter number').css('border', '2px solid red');
+				$('#ctcProductInventory').attr('placeholder', ctcTrans.requiredProductNum).css('border', '2px solid red');
 				alert(ctcTrans.enterInventoryNum);
 			}
-
+			//$('#ctcProductInventory').val('');
 		});
 
 
@@ -294,7 +300,7 @@
 			// Accepts an optional object hash to override default values.
 			var frame = new wp.media.view.MediaFrame.Select({
 				// Modal title
-				title: 'Select Primary Product Image',
+				title: ctcTrans.selPrimaryImg,
 				// Enable/disable multiple select
 				multiple: true,
 				// Library WordPress query arguments.
@@ -350,7 +356,7 @@
 			// Accepts an optional object hash to override default values.
 			var frame = new wp.media.view.MediaFrame.Select({
 				// Modal title
-				title: 'Select Additional  Product Images',
+				title: ctcTrans.selAdditionaImg,
 				// Enable/disable multiple select
 				multiple: 'add',
 				// Library WordPress query arguments.
@@ -441,7 +447,7 @@
 			// Accepts an optional object hash to override default values.
 			var frame = new wp.media.view.MediaFrame.Select({
 				// Modal title
-				title: 'Select Product Video',
+				title: ctcTrans.selVideo,
 				// Enable/disable multiple select
 				multiple: false,
 				// Library WordPress query arguments.
@@ -634,24 +640,18 @@
 		 */
 
 		//validate the input field for add product form
-		$(document).on('click', "#ctcAddAvilableProduct", function () {
-
+		$(document).on('click', "#ctcAddAvilableProductUpdateForm", function () {
 			if (!$('#ctcProductName').val()) {
-
-				$('#ctcProductName').attr('placeholder', ctcTrans.productNameEmpty).css({
+				$('#ctcProductName').attr('placeholder', 'Product name cannot be empty').css({
 					'border': '2px solid red'
 				});
-
 				return false;
 			} else {
 				$('#ctcProductName').removeAttr('style');
-
 			}
 			var productInventory = $('#ctcProductInventory').val();
 			//get the value of selected option 
 			var mainCat = $("#ctcProductCategorySelect").val();
-
-
 			//if the main category is not selected
 			if (!mainCat) {
 				$("#ctcProductCategorySelect").css('border', '2px solid red');
@@ -661,74 +661,44 @@
 				$("#ctcProductCategorySelect").removeAttr('style');
 
 			}
-
-
 			var subCat1 = $("#ctcProductSubCategory1").val();
 			var subCat2 = $("#ctcProductSubCategory2").val();
 			var subCat3 = $("#ctcProductSubCategory3").val();
-
-
-
 			var product = checkNull(subCat1) + '-' + checkNull(subCat2) + '-' + checkNull(subCat3);
+			//filter to check if number of product entered 
+			if (productInventory == '') {
+				$('#ctcProductInventory').attr('placeholder', ctcTrans.requiredProductNum).css({
+					'border': '2px solid red'
+				});
 
-
+				return false
+			}
 			var setVal = $('#ctcAvilableProducts').val();
-
-			if (productInventory != '') {
-
-				//remove required field styling
-				$('#ctcProductInventory').removeAttr('style');
-
-				if (setVal != '') {
-
-
-					if (setVal.search(product) == -1) {
-
-
-						var avilableProduct = setVal + ',\n' + product + '~' + productInventory;
-
-					} else {
-
-
-						var replaceConfirm = confirm(ctcTrans.confirmReplaceItem)
-
-						if (!replaceConfirm) {
-
-							return false;
-
-						}
-
-						var newVal = setVal.split(',');
-
-
-						for (var i in newVal) {
-
-							if (newVal[i].search(product) >= 0) {
-
-								delete newVal[i];
-
-								if (i != 0) {
-									newVal[i] = '\n' + product + '~' + productInventory;
-								} else {
-
-									newVal[i] = product + '~' + productInventory;
-								}
+			if (setVal.trim() == '') {
+				$('#ctcAvilableProducts').val(product + '~' + productInventory);
+			} else {
+				if (setVal.search(product) >= 0) {
+					var replaceConfirm = confirm(ctcTrans.confirmReplaceItemDatabase)
+					if (!replaceConfirm) {
+						return false;
+					}
+					var newVal = setVal.split(',');
+					for (var i in newVal) {
+						if (newVal[i].search(product) >= 0) {
+							delete newVal[i];
+							if (i != 0) {
+								newVal[i] = '\n' + product + '~' + productInventory;
+							} else {
+								newVal[i] = product + '~' + productInventory;
 							}
 						}
-
-
-						var newProductSet = newVal.join(',');
-						$('#ctcAvilableProducts').empty().val(newProductSet);
-
 					}
+					var newProductSet = newVal.join(',');
+					$('#ctcAvilableProducts').empty().val(newProductSet);
 				} else {
-
-					var avilableProduct = product + '~' + $('#ctcProductInventory').val();
+					var setOfProducts = setVal.trim().concat(',\n' + product + '~' + productInventory);
+					$('#ctcAvilableProducts').empty().val(setOfProducts);
 				}
-				$("#ctcAvilableProducts").val(avilableProduct);
-			} else {
-				$('#ctcProductInventory').attr('placeholder', ctcTrans.requiredProductNum).css('border', '2px solid red');
-				alert(ctcTrans.enterInventoryNum);
 			}
 		});
 
@@ -739,7 +709,7 @@
 			// Accepts an optional object hash to override default values.
 			var frame = new wp.media.view.MediaFrame.Select({
 				// Modal title
-				title: 'Update Primary Product Image',
+				title: ctcTrans.updatePrimaryImg,
 				// Enable/disable multiple select
 				multiple: true,
 				// Library WordPress query arguments.
@@ -790,7 +760,7 @@
 			// Accepts an optional object hash to override default values.
 			var frame = new wp.media.view.MediaFrame.Select({
 				// Modal title
-				title: 'Update Additional  Product Images',
+				title: ctcTrans.updateAdditionaImg,
 				// Enable/disable multiple select
 				multiple: 'add',
 				// Library WordPress query arguments.
@@ -875,7 +845,7 @@
 			// Accepts an optional object hash to override default values.
 			var frame = new wp.media.view.MediaFrame.Select({
 				// Modal title
-				title: 'Select Product Video',
+				title: ctcTrans.updateVideo,
 				// Enable/disable multiple select
 				multiple: false,
 				// Library WordPress query arguments.
@@ -1195,7 +1165,7 @@
 			// Accepts an optional object hash to override default values.
 			var frame = new wp.media.view.MediaFrame.Select({
 				// Modal title
-				title: 'Add Coupon Image',
+				title: ctcTrans.addCouponImage,
 				// Enable/disable multiple select
 				multiple: true,
 				// Library WordPress query arguments.
@@ -1286,7 +1256,7 @@
 			// Accepts an optional object hash to override default values.
 			var frame = new wp.media.view.MediaFrame.Select({
 				// Modal title
-				title: 'Update Coupon Image',
+				title: ctcTrans.updateCouponImage,
 				// Enable/disable multiple select
 				multiple: true,
 				// Library WordPress query arguments.
@@ -1408,7 +1378,7 @@
 			// Accepts an optional object hash to override default values.
 			var frame = new wp.media.view.MediaFrame.Select({
 				// Modal title
-				title: 'Business Logo',
+				title: ctcTrans.businessLogo,
 				// Enable/disable multiple select
 				multiple: true,
 				// Library WordPress query arguments.
@@ -1604,7 +1574,7 @@
 		});
 		//script to cancel order on customer request
 		$(document).on('click', '.ctcCancelPendingOrder', function () {
-			if (confirm(ctcTrans.cancelOrderConfirm)) {
+			if (confirm("Are you sure you want to cancel this order?")) {
 				var data = {
 					'action': 'ctcCancelPendingOrder',
 					'transactionId': $(this).attr('data-type-tansactionid')
