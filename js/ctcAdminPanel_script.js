@@ -8,11 +8,6 @@
 			return value;
 		};
 
-		/*Section to handle $ functionalities for Terms and condition part of plugin */
-
-
-
-
 
 
 		/**
@@ -20,9 +15,6 @@
 		 * 
 		 * 
 		 */
-
-
-
 
 		//copy business name as e-commerce name
 		$(document).on('click', '#ctcSameAsBusinessName', function () {
@@ -48,11 +40,11 @@
 				};
 
 				$.post(ajaxurl, data, function (response) { }).fail(function () {
-					alert("Action could not be completed at this time \nPlease try again later");
+					alert(ctcTrans.ajaxFail);
 				});
 			} else {
-				//alert("Name for Ecommerce field cannot be empty.");
-				$("[name*='ctcEcommerceName']").css('border', '2px solid red').attr("placeholder", "eCommerce name  cannot be empty.");
+
+				$("[name*='ctcEcommerceName']").css('border', '2px solid red').attr("placeholder", ctcTrans.ecommerceNameEmpty);
 				return false;
 			}
 
@@ -79,13 +71,13 @@
 				// make ajax call
 				$.post(ajaxurl, data, function (response) {
 					if (response == 1) {
-						alert("Product category sucessfully added.");
+						alert(ctcTrans.productAdded);
 						document.getElementById("ctcAddProductCategoryForm").reset();
 					} else {
-						alert("There was some issue with adding the category,Maybe category already exists.");
+						alert(ctcTrans.issueProductAdded);
 					}
 				}).fail(function () {
-					alert("Action could not be completed at this time \nPlease try again later");
+					alert(ctcTrans.ajaxFail);
 				});
 			}
 			event.preventDefault();
@@ -130,7 +122,7 @@
 				//trigger ajax to update category
 				$.post(ajaxurl, data, function (response) {
 					if (response == 1) {
-						alert("Product category sucessfully updated.");
+						alert(ctcTrans.categoryUpdated);
 						for (var i in categoryData) {
 							var categoryId = $('#ctcProductCategoryId').val();
 							var tdSelector = categoryId + '-' + categoryData[i]['name'];
@@ -139,10 +131,10 @@
 						//trigger thickbox close botton click
 						$('#ctcOverlayElClosebtn').trigger('click');
 					} else {
-						alert("There was some issue with update. Did you make any changes?.");
+						alert(ctcTrans.issueCategoryUpdated);
 					}
 				}).fail(function () {
-					alert("Action could not be completed at this time \nPlease try again later");
+					alert(ctcTrans.ajaxFail);
 				});
 			}
 			event.preventDefault();
@@ -152,7 +144,7 @@
 		//this section deals with deletion of the category with ajax
 		$(document).on('click', '#ctcDeleteCategoryButton', function () {
 			var categoryId = $('#ctcProductCategoryId').val();
-			var deleteConfirm = confirm('Are you sure you want to delete this category? ');
+			var deleteConfirm = confirm(ctcTrans.confirmCatDelete);
 
 			if (deleteConfirm == true) {
 				var data = {
@@ -164,13 +156,13 @@
 				$.post(ajaxurl, data, function (response) {
 					if (response == 1) {
 						$('#ctcOverlayElClosebtn').trigger('click');
-						alert('Category sucessfully deleted');
+						alert(ctcTrans.categoryDeleted);
 						$('.' + categoryId + '-categoryName').closest("tr").remove();
 					} else {
-						alert("For some reason category couldn't be deleted");
+						alert(ctcTrans.issueCategoryDelete);
 					}
 				}).fail(function () {
-					alert("Action could not be completed at this time \nPlease try again later");
+					alert(ctcTrans.ajaxFail);
 				});
 			};
 			return false;
@@ -201,7 +193,7 @@
 						$("[name*='" + key + "']").empty().append(responseObj[key]);
 					}
 				}).fail(function () {
-					alert("Action could not be completed at this time \nPlease try again later");
+					alert(ctcTrans.ajaxFail)
 				});
 			}
 		});
@@ -221,11 +213,11 @@
 
 		//validate the input field for add product form
 		$(document).on('click', "#ctcAddAvilableProduct", function () {
+
 			if (!$('#ctcProductName').val()) {
-				$('#ctcProductName').attr('placeholder', 'Product name cannot be empty').css({
+				$('#ctcProductName').attr('placeholder', ctcTrans.productNameEmpty).css({
 					'border': '2px solid red'
 				});
-				return false;
 			} else {
 				$('#ctcProductName').removeAttr('style');
 
@@ -236,7 +228,7 @@
 			//if the main category is not selected
 			if (!mainCat) {
 				$("#ctcProductCategorySelect").css('border', '2px solid red');
-				alert("Please select valid category for product");
+				alert(ctcTrans.selectValidCategory);
 				return false;
 			} else {
 				$("#ctcProductCategorySelect").removeAttr('style');
@@ -256,7 +248,7 @@
 					if (setVal.search(product) == -1) {
 						var avilableProduct = setVal + ',\n' + product + '~' + productInventory;
 					} else {
-						var replaceConfirm = confirm("Do you want to replace this item ? ")
+						var replaceConfirm = confirm(ctcTrans.confirmReplaceItem)
 						if (!replaceConfirm) {
 							return false;
 						}
@@ -280,16 +272,16 @@
 				$("#ctcAvilableProducts").attr('value', avilableProduct);
 			} else {
 				$('#ctcProductInventory').attr('placeholder', 'Required, enter number').css('border', '2px solid red');
-				alert("Please enter number of this particular products you have in your inventory. \nSet it to any number you feel comfortable with ");
+				alert(ctcTrans.enterInventoryNum);
 			}
-			//$('#ctcProductInventory').val('');
+
 		});
 
 
 
 		//this section deals with activation ctcavilableProducts textarea also used with update product form
 		$(document).on('click keyup', '#ctcAvilableProducts', function () {
-			alert('Use this feature only if you understand the format like avoid comma after end of last item, else it might mess up the way  product is diplayed in frontend!\n\n Use + icon and selection boxes instead ');
+			alert(ctcTrans.productVariationFormat);
 		});
 
 
@@ -508,7 +500,7 @@
 			var emptyField = [];
 			var i = 0;
 			$('.ctcRequiredField').each(function () {
-				//alert($(this).attr('id'));
+
 				var fieldVal = $(this).val();
 				if (!$.trim(fieldVal)) {
 					emptyField[i] = $(this).val();
@@ -532,16 +524,16 @@
 			//trigger ajax to add product
 			$.post(ajaxurl, data, function (response) {
 				if (response >= 1) {
-					alert('Product sucessfully added.');
+					alert(ctcTrans.productAdded);
 					document.getElementById("ctcAddProductForm").reset();
 					$('.ctcAdditionaImages').empty().hide();
 					$('#ctcVideoThumb').remove();
 					$('.ctcPrimaryPicThumb img').hide().attr('src', '');
 				} else {
-					alert('Product could not be added, Probably it already exists, try updating it');
+					alert(ctcTrans.couldNotAddproduct);
 				}
 			}).fail(function () {
-				alert("Action could not be completed at this time \nPlease try again later");
+				alert(ctcTrans.ajaxFail)
 			});
 			event.preventDefault();
 			return false;
@@ -590,7 +582,7 @@
 			//if the main category is not selected
 			if (!mainCat) {
 				$("#ctcProductCategorySelect").css('border', '2px solid red');
-				alert("Please select valid category for product");
+				alert(ctcTrans.selectValidCategory);
 				return false;
 			} else {
 				$("#ctcProductCategorySelect").removeAttr('style');
@@ -604,10 +596,10 @@
 			$('#ctcProductInventory').removeAttr('style placeholder');
 			var setVal = $('#ctcAvilableProducts').val();
 			if (setVal.trim() == '') {
-				alert("You do not any variation added for this product.");
+				alert(ctcTrans.noProductVariation);
 			} else {
 				if (setVal.search(product) >= 0) {
-					var replaceConfirm = confirm("Do you want to remove this product variation?")
+					var replaceConfirm = confirm(ctcTrans.optionRemoveVariation)
 					if (!replaceConfirm) {
 						return false;
 					} else {
@@ -623,7 +615,7 @@
 						$('#ctcAvilableProducts').empty().val(newProductSet.trim());
 					}
 				} else {
-					alert("Such product combination does not exist");
+					alert(ctcTrans.noProductCombination);
 				}
 			}
 		});
@@ -642,65 +634,101 @@
 		 */
 
 		//validate the input field for add product form
-		$(document).on('click', "#ctcAddAvilableProductUpdateForm", function () {
+		$(document).on('click', "#ctcAddAvilableProduct", function () {
+
 			if (!$('#ctcProductName').val()) {
-				$('#ctcProductName').attr('placeholder', 'Product name cannot be empty').css({
+
+				$('#ctcProductName').attr('placeholder', ctcTrans.productNameEmpty).css({
 					'border': '2px solid red'
 				});
+
 				return false;
 			} else {
 				$('#ctcProductName').removeAttr('style');
+
 			}
 			var productInventory = $('#ctcProductInventory').val();
 			//get the value of selected option 
 			var mainCat = $("#ctcProductCategorySelect").val();
+
+
 			//if the main category is not selected
 			if (!mainCat) {
 				$("#ctcProductCategorySelect").css('border', '2px solid red');
-				alert("Please select valid category for product");
+				alert(ctcTrans.selectValidCategory);
 				return false;
 			} else {
 				$("#ctcProductCategorySelect").removeAttr('style');
 
 			}
+
+
 			var subCat1 = $("#ctcProductSubCategory1").val();
 			var subCat2 = $("#ctcProductSubCategory2").val();
 			var subCat3 = $("#ctcProductSubCategory3").val();
-			var product = checkNull(subCat1) + '-' + checkNull(subCat2) + '-' + checkNull(subCat3);
-			//filter to check if number of product entered 
-			if (productInventory == '') {
-				$('#ctcProductInventory').attr('placeholder', 'Required, enter number').css({
-					'border': '2px solid red'
-				});
 
-				return false
-			}
+
+
+			var product = checkNull(subCat1) + '-' + checkNull(subCat2) + '-' + checkNull(subCat3);
+
+
 			var setVal = $('#ctcAvilableProducts').val();
-			if (setVal.trim() == '') {
-				$('#ctcAvilableProducts').val(product + '~' + productInventory);
-			} else {
-				if (setVal.search(product) >= 0) {
-					var replaceConfirm = confirm("Do you want to replace this item in database? ")
-					if (!replaceConfirm) {
-						return false;
-					}
-					var newVal = setVal.split(',');
-					for (var i in newVal) {
-						if (newVal[i].search(product) >= 0) {
-							delete newVal[i];
-							if (i != 0) {
-								newVal[i] = '\n' + product + '~' + productInventory;
-							} else {
-								newVal[i] = product + '~' + productInventory;
+
+			if (productInventory != '') {
+
+				//remove required field styling
+				$('#ctcProductInventory').removeAttr('style');
+
+				if (setVal != '') {
+
+
+					if (setVal.search(product) == -1) {
+
+
+						var avilableProduct = setVal + ',\n' + product + '~' + productInventory;
+
+					} else {
+
+
+						var replaceConfirm = confirm(ctcTrans.confirmReplaceItem)
+
+						if (!replaceConfirm) {
+
+							return false;
+
+						}
+
+						var newVal = setVal.split(',');
+
+
+						for (var i in newVal) {
+
+							if (newVal[i].search(product) >= 0) {
+
+								delete newVal[i];
+
+								if (i != 0) {
+									newVal[i] = '\n' + product + '~' + productInventory;
+								} else {
+
+									newVal[i] = product + '~' + productInventory;
+								}
 							}
 						}
+
+
+						var newProductSet = newVal.join(',');
+						$('#ctcAvilableProducts').empty().val(newProductSet);
+
 					}
-					var newProductSet = newVal.join(',');
-					$('#ctcAvilableProducts').empty().val(newProductSet);
 				} else {
-					var setOfProducts = setVal.trim().concat(',\n' + product + '~' + productInventory);
-					$('#ctcAvilableProducts').empty().val(setOfProducts);
+
+					var avilableProduct = product + '~' + $('#ctcProductInventory').val();
 				}
+				$("#ctcAvilableProducts").val(avilableProduct);
+			} else {
+				$('#ctcProductInventory').attr('placeholder', ctcTrans.requiredProductNum).css('border', '2px solid red');
+				alert(ctcTrans.enterInventoryNum);
 			}
 		});
 
@@ -1011,12 +1039,12 @@
 					$('#ctcOverlayElClosebtn').trigger('click');
 					var productId = $('#ctcProductIdUpdate').val();
 					updateProductOnSucess(formData, productId, responseObj, otherData);
-					alert('Product sucessfully updated.');
+					alert(ctcTrans.productUpdated);
 				} else {
-					alert('Product could not be updated,Check for duplicate product name.');
+					alert(ctcTrans.productNotUpdated);
 				}
 			}).fail(function () {
-				alert("Action could not be completed at this time \nPlease try again later");
+				alert(ctcTrans.ajaxFail)
 			});
 			event.preventDefault();
 			return false;
@@ -1024,7 +1052,7 @@
 
 		//this section deals with purge product part
 		$(document).on('click', '#ctcPurgeProductButton', function () {
-			var purgeConfirm = confirm("Are you sure you want to purge this product.");
+			var purgeConfirm = confirm(ctcTrans.confirmPurge);
 			if (purgeConfirm) {
 				var data = {
 					'action': 'ctcPurgeProduct',
@@ -1032,14 +1060,14 @@
 				}
 				$.post(ajaxurl, data, function (response) {
 					if (response >= 1) {
-						alert("Product sucesfully purged.");
+						alert(ctcTrans.productPurge);
 						$('#ctcOverlayElClosebtn').trigger('click');
 						$('#ctcProductRow' + data['productId']).remove();
 					} else {
-						alert("Product couldn't be purged, please try again.");
+						alert(ctcTrans.couldNotPurge);
 					}
 				}).fail(function () {
-					alert("Action could not be completed at this time \nPlease try again later");
+					alert(ctcTrans.ajaxFail)
 				});
 			}
 			return false;
@@ -1096,18 +1124,18 @@
 					}
 					$.post(ajaxurl, newData, function (response) {
 						if (response === '1') {
-							alert('Product sucessfully added back.');
+							alert(ctcTrans.unPurged);
 							$('#ctcPurgedProductRow' + productId).remove();
 							$('#ctcOverlayElClosebtn').trigger('click');
 						} else {
-							alert('Product could not be added, Probably it already exists');
+							alert(ctcTrans.couldNotUnPurged);
 						}
 					});
 				} else {
-					alert('Product could not be added, Probably it already exists');
+					alert(ctcTrans.couldNotUnPurged);
 				}
 			}).fail(function () {
-				alert("Action could not be completed at this time \nPlease try again later");
+				alert(ctcTrans.ajaxFail)
 			});
 			event.preventDefault();
 			return false;
@@ -1219,7 +1247,7 @@
 			}
 			$.post(ajaxurl, data, function (response) {
 				if (response == 1) {
-					alert("Discount sucessfully added");
+					alert(ctcTrans.discountAdded);
 					$(":input").each(function () {
 						if ($(this).attr('id') != 'ctcAddDiscountButton') {
 							$(this).val('');
@@ -1227,10 +1255,10 @@
 						}
 					});
 				} else {
-					alert("Discount couldn't be added.\nPlease check for duplicate entry.");
+					alert(ctcTrans.discountAddFail);
 				}
 			}).fail(function () {
-				alert("Action could not be completed at this time \nPlease try again later");
+				alert(ctcTrans.ajaxFail)
 			});
 			event.preventDefault();
 			return false;
@@ -1343,14 +1371,14 @@
 			$.post(ajaxurl, data, function (response) {
 				var responseObj = JSON.parse(response);
 				if (responseObj.update == 1) {
-					alert("Discount sucesfully updated");
+					alert(ctcTrans.discountUpdated);
 					$('#ctcOverlayElClosebtn').trigger('click');
 					ctcUpdateDiscountList(responseObj);
 				} else {
-					alert("Discount couldnot be updated.\nPlease try again.");
+					alert(ctcTrans.discountUpdateFail);
 				}
 			}).fail(function () {
-				alert("Action could not be completed at this time \nPlease try again later");
+				alert(ctcTrans.ajaxFail)
 			});
 			event.preventDefault();
 			return false;
@@ -1363,14 +1391,14 @@
 			}
 			$.post(ajaxurl, data, function (response) {
 				if (response == 1) {
-					alert("Discount successfully deleted.");
+					alert(ctcTrans.discountDeleted);
 					$('#ctcOverlayElClosebtn').trigger('click');
 					$("#ctcDiscountListRow" + data['discountId']).remove();
 				} else {
-					alert("Discount couldn't be deleted.\n Please try again.");
+					alert(ctcTrans.discountDeleteFail);
 				}
 			}).fail(function () {
-				alert("Action could not be completed at this time \nPlease try again later");
+				alert(ctcTrans.ajaxFail)
 			});
 		});
 		//script to handle business setting logo 
@@ -1436,7 +1464,7 @@
 					$('.ctcPendingOrderCount').empty().append(pendingOrdersCount);
 				}
 			}).fail(function () {
-				alert("Action could not be completed at this time \nPlease try again later");
+				alert(ctcTrans.ajaxFail)
 			});
 		}
 		//function to print shipping address
@@ -1473,7 +1501,7 @@
 				if (responseObj.complete == 'complete') {
 					//update the pending order notification 
 					updatePendingOrdersNotifications();
-					if (confirm("Would you like to print shipping address for this order")) {
+					if (confirm(ctcTrans.printShippingAddress)) {
 						var businessAddress = $('#ctcBusinessAddressOrderTab').text().replace(/,/gi, '<br>');
 						var shippingAddress = $('#shippingAddress' + data['transactionId']).text().replace(/,/gi, '<br>');
 						var customerName = $('#ctcShippingCustomerName' + data['transactionId']).text();
@@ -1507,27 +1535,27 @@
 					checkedElement.prop('checked', false);
 					var inventoryMessage = '';
 					if (typeof (responseObj.outOfStockProducts) != "undefined") {
-						inventoryMessage += 'Out of Stock Products:\n';
+						inventoryMessage += ctcTrans.productOutOfStock + ':\n';
 						for (var i in responseObj.outOfStockProducts) {
 							inventoryMessage += '-' + responseObj.outOfStockProducts[i] + '\n';
 						}
 
 					}
 					if (typeof (responseObj.variation) != "undefined") {
-						inventoryMessage += 'Out of Stock Product variation:\n';
+						inventoryMessage += ctcTrans.variationOutOfStock + ':\n';
 						for (var a in responseObj.variation) {
 							inventoryMessage += responseObj.variation[a] + '\n';
 						}
 					}
 
 					if (inventoryMessage.length >= 1) {
-						alert("Couldn't complete order.\n" + inventoryMessage + '\nPlease update inventory before proceeding.');
+						alert(ctcTrans.couldNotComplteOrder + "\n" + inventoryMessage + '\n' + updateInventory);
 					} else {
-						alert("Couldn't complete order. Please try again later.");
+						alert(ctcTrans.couldNotComplteOrder);
 					}
 				}
 			}).fail(function () {
-				alert("Action could not be completed at this time \nPlease try again later");
+				alert(ctcTrans.ajaxFail)
 			});
 		});
 
@@ -1554,12 +1582,12 @@
 			}
 			$.post(ajaxurl, data, function (response) {
 				if (response === 'refundSuccessful') {
-					alert("Refund successfully processed");
+					alert(ctcTrans.refundSuccess);
 					$('#ctcOverlayElClosebtn').trigger('click');
 					var newRefund = parseFloat($('#ctcRefundtotal-' + data['refundData'][1]['value']).text()) + parseFloat(data['refundData'][0]['value']);
 					$('#ctcRefundtotal-' + data['refundData'][1]['value']).empty().prepend(newRefund.toFixed(2));
 				} else {
-					alert("Refund could not be processed at this time, please try again later");
+					alert(ctcTrans.refundFail);
 				}
 			});
 			event.preventDefault();
@@ -1576,7 +1604,7 @@
 		});
 		//script to cancel order on customer request
 		$(document).on('click', '.ctcCancelPendingOrder', function () {
-			if (confirm("Are you sure you want to cancel this order?")) {
+			if (confirm(ctcTrans.cancelOrderConfirm)) {
 				var data = {
 					'action': 'ctcCancelPendingOrder',
 					'transactionId': $(this).attr('data-type-tansactionid')
@@ -1591,10 +1619,10 @@
 							$('#ctcOrderList').append('<div class="dashicons-before dashicons-smiley"> You do not have any pending order left.</div>');
 						}
 					} else {
-						alert("Order couldn't be cancelled at this time,\n Please try again later.");
+						alert(ctcTrans.couldNotCanelOrder);
 					}
 				}).fail(function () {
-					alert("Action could not be completed at this time \nPlease try again later");
+					alert(ctcTrans.ajaxFail)
 				});
 			}
 
@@ -1619,7 +1647,7 @@
 					});
 
 				}).fail(function () {
-					alert("Action could not be completed at this time \nPlease try again later");
+					alert(ctcTrans.ajaxFail)
 				});
 			} else if (h4El.hasClass('ctcShowSalesActivity') && $('.ctcSalesReportList ul').length === 0) {
 				$.post(ajaxurl, {
@@ -1635,7 +1663,7 @@
 						});
 					});
 				}).fail(function () {
-					alert("Sales report could not be loaded at this time ");
+					alert(ctcTrans.salesReportNotLoaded);
 				});
 			} else {
 				h4El.siblings().fadeToggle(1000, function () { });
