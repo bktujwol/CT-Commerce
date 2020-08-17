@@ -405,8 +405,6 @@ class ctCommerceAdminPanelProcessing{
        // echo($sql);
         $result = $wpdb->get_results($sql,ARRAY_A);
         
-      
-        
         return $result;
         
     }
@@ -463,7 +461,6 @@ class ctCommerceAdminPanelProcessing{
         global $wpdb;
         $currency = get_option('ctcBusinessCurrency') ;
       
-        
         foreach(json_decode(stripslashes($productData),true) as $key=>$val):
       
                             switch ($val['name']):
@@ -510,11 +507,9 @@ class ctCommerceAdminPanelProcessing{
                    $productInfo['productDimension'] ='';
                 endif;
              
-         
                 //the date product was added
                 $productInfo['addDate'] = current_time('timestamp');
                 
-                      
                if($productInfo['createProductPost']=='1'):
                        $productInfo['productPostId'] = $this->ctcCreateProductPost($productInfo, $currency);
                        unset($productInfo['createProductPost']);

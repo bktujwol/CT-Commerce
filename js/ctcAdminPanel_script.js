@@ -10,11 +10,6 @@
 
 		/*Section to handle $ functionalities for Terms and condition part of plugin */
 
-
-
-
-
-
 		/**
 		 * This section will included requred code to process ajax request
 		 * 
@@ -1051,8 +1046,8 @@
 
 			}
 			$.ctcOverlayEl({
-				elemHeight: '690px',
-				elemWidth: '500px',
+				elemHeight: '600px',
+				elemWidth: '1100px',
 				ajaxUrl: ajaxurl,
 				ajaxData: data,
 				ajaxMethod: 'post'

@@ -23,7 +23,6 @@ class ctCommerceAdminPanelAjax{
                 $oldPageTitle = sanitize_title($_POST['oldEcommerceTitle']);
             endif;
 
-            
             $ctcAdminPanelProcessing->ctcBusinessPage(sanitize_title($_POST['eCommerceTitle']),$oldPageTitle);
             $ctcAdminPanelProcessing->ctcCreateRequiredPages();
             $ctcAdminPanelProcessing->ctcCreateCustomMenu();
