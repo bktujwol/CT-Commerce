@@ -1,7 +1,13 @@
 (function ($) {
     $(document).ready(function ($) {
-        //script to add thickbox class to wordpress gallery
-        //$(document).find(".ctcSingleProductGallery  a").addClass("thickbox").attr('rel','gallery-ctc');
+
+        $('.ctcCategoryLinkContainer').tooltip(
+            {
+                position: {
+                    my: "center ",
+                    at: "center ",
+                }
+            });
 
         //function to javascript number format
         function addCommas(nStr) {
@@ -1398,18 +1404,18 @@
                         ctcCartCalculateTotal();
                     } else if (response == 'invalidPromoCode') {
                         $.ctcOverlayEl({
-                            modalMessage: 'Coupon code you have entered is invalid.'
+                            modalMessage: ' Coupon code you have entered is invalid.'
                         });
                         $('#ctcCheckOutPromoCode').val('');
 
                     } else {
                         $('#ctcCheckOutPromoCode').val('');
                         $.ctcOverlayEl({
-                            modalMessage: "Coupon does not apply to any of the products in cart."
+                            modalMessage: " Coupon does not apply to any of the products in cart."
                         });
                     }
                 }).fail(function () {
-                    alert("Discount could not be calculated at this time \nPlease try again later");
+                    alert(" Discount could not be calculated at this time \nPlease try again later");
                 });
             }
 

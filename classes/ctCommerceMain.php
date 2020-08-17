@@ -228,13 +228,14 @@ class ctCommerceMain{
     /*function to enqeue   javascript in frontend*/
     public function ctcFrontendEnequeJs(){
         wp_enqueue_script('ctcGalleryOverlayJs',plugin_dir_url( __DIR__ ).'js/ctc_gallery_overlay.js');
+        wp_enqueue_script( 'jquery-ui-tooltip' );
         wp_enqueue_script('ctcFrontendlJs', plugin_dir_url(__DIR__ ).'js/ctcFrontend_script.js', array('jquery'));
         wp_enqueue_script('ctcOverlayJq',plugin_dir_url( __DIR__ ).'js/ctc_overlay.jquery.js', array('jquery'));
         wp_localize_script( 'ctcFrontendlJs', 'ctc_ajax_url', admin_url( 'admin-ajax.php' ) );
         wp_enqueue_script('jquery-masonry');
         wp_enqueue_script('imagesloaded');
         wp_enqueue_media();
-        wp_enqueue_script( 'jquery-ui-tooltip' );
+       
 
        
         $stripPubKey = '1' == get_option('ctcStripeTestMode') ? get_option( 'ctcStripeTestPublishableKey' ) : get_option( 'ctcStripeLivePublishableKey' );

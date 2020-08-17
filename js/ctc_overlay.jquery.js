@@ -538,7 +538,7 @@
 
 		$('body').css('overflow', 'hidden');
 
-		let elHeight = '200px';
+		let elHeight = '150px';
 		let elWidth = '350px';
 		var elHtml;
 		var ajaxMethod = 'GET';
@@ -594,7 +594,7 @@
 
 		} else if (param.modalMessage != undefined) {
 			hideExitBtn = 'YES';
-			ctcLoadOverlayEl('<div style="font-size:18px;float:left;" id="ctcOverlayModal">' + param.modalMessage + '<div style="margin-left:auto;margin-right:auto;display:block;"><button style="font-size:22px;" id="ctcOverlayModaButton"> OK </button></div></div>');
+			ctcLoadOverlayEl('<div style="font-family: Times New Roman;color:rgba(255,255,255,1);font-size:18px;float:left;text-align:center;line-height:1.5;" id="ctcOverlayModal">' + param.modalMessage + '<button style="border:1px solid rgba(255,255,255,1);font-family: Times New Roman;color:rgba(255,255,255,1);font-size:20px;line-height:1;" id="ctcOverlayModaButton"> OK </button></div>');
 		} else if (param.iframeUrl !== undefined) {
 
 			ctcLoadOverlayEl('<iframe height="' + elHeight + '" width="' + elWidth + '" src="' + param.iframeUrl + '" allowfullscreen>></iframe>');
