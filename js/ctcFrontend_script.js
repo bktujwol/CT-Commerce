@@ -1610,7 +1610,7 @@
                     'action': 'ctcAjaxSortProduct'
                 }, function (response) {
                     $('#ctcSortProductSelect').parent().removeClass('ctcShowAjaxWait');
-                    $(parentContainer).prepend(response);
+                    $(parentContainer).empty().prepend(response);
                     ctcSortProductBySelection(sortBy, parentContainer, $('>div', parentContainer));
                     selecElement.attr('data-type-allproduct', 'yes');
                     return false;
@@ -1670,9 +1670,9 @@
         function ctcSortArrayAndAppend(productArrayToSort, parentContainer, sortType) {
             var sortedHtml = '';
             if (sortType == 'asc') {
-                productArrayToSort.sort((a, b) => a[1] - b[1]); //function(a,b){return a[1]-b[1]});
+                productArrayToSort.sort((a, b) => a[1] - b[1]);
             } else {
-                productArrayToSort.sort((a, b) => b[1] - a[1]); //function(a,b){return b[1]-a[1]});
+                productArrayToSort.sort((a, b) => b[1] - a[1]);
             }
             for (var key in productArrayToSort) {
                 sortedHtml += productArrayToSort[key][2];

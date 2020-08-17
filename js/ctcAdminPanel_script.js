@@ -1518,7 +1518,8 @@
 					}
 
 					if (inventoryMessage.length >= 1) {
-						alert(ctcTrans.couldNotComplteOrder + "\n" + inventoryMessage + '\n' + updateInventory);
+
+						alert(ctcTrans.couldNotComplteOrder + "\n" + inventoryMessage + '\n' + ctcTrans.updateInventory);
 					} else {
 						alert(ctcTrans.couldNotComplteOrder);
 					}

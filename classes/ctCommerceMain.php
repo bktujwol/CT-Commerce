@@ -141,7 +141,6 @@ class ctCommerceMain{
      */
     /*function to eneque admin panel javascript file */
     public function ctcAdminEnequeJs(){
-        wp_enqueue_script('ctcGalleryOverlayJs',plugin_dir_url( __DIR__ ).'js/ctc_gallery_overlay.js');
         wp_enqueue_script('ctcAdminPanelJs',plugin_dir_url( __DIR__ ).'js/ctcAdminPanel_script.js', array('jquery'));
         wp_enqueue_script('ctcOverlayJq',plugin_dir_url( __DIR__ ).'js/ctc_overlay.jquery.js', array('jquery'));
         wp_enqueue_script('jquery-masonry');
