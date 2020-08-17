@@ -3,7 +3,7 @@
  Plugin Name:CT-Commerce
  Plugin URI:
  Description: Inituitive e-commerce plugin for WordPress
- Version: 1.5.0
+ Version: 2.0.0
  Author: Ujwol Bastakoti
  Author URI:https://ujwolbastakoti.wordpress.com/
 Text Domain:  ct-commerce
@@ -17,9 +17,6 @@ require_once 'widgets/ctCommerceCategoryWidget.php';
 require_once 'widgets/ctCommerceProductCart.php';
 
 $ctcPlugADU = new ctCommercePluginADU();
-
-
-
 
 /**
  *
