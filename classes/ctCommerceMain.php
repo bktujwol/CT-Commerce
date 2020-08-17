@@ -97,7 +97,6 @@ class ctCommerceMain{
         
         $ctcAdminRequiredAjax = new ctCommerceAdminPanelAjax();
        
-        add_action( 'wp_ajax_ctcDeactivatePlugin', array($ctcAdminRequiredAjax,'ctcDeactivatePlugin' ));
         add_action( 'wp_ajax_ctcCreateBusinessPage', array($ctcAdminRequiredAjax,'ctcCreateBusinessPage' ));
         add_action( 'wp_ajax_ctcAddProductCategory', array($ctcAdminRequiredAjax,'ctcAddProductCategory' ));
         add_action( 'wp_ajax_ctcGetCategoryUpdateForm', array($ctcAdminRequiredAjax,'ctcGetCategoryUpdateForm' ));

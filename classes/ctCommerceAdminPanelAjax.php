@@ -8,21 +8,6 @@
 
 class ctCommerceAdminPanelAjax{
     
-   
-    
-    
-    
-    //function to deactivate tables if user disagrees with terms and condition only this case
-    public function ctcDeactivatePlugin(){
-        
-
-        deactivate_plugins(plugin_dir_path( __DIR__ ).'ctCommerce.php');
-        
-        echo  admin_url('/plugins.php') ;
-        
-        wp_die();
-    }
-    
     
     //function to create page for business when business setting is done
     public function ctcCreateBusinessPage(){

@@ -156,7 +156,7 @@
 
                 $.ctcOverlayEl({
                     elemHeight: '550px',
-                    elemWidth: '80%',
+                    elemWidth: '1200px',
                     ajaxUrl: ctc_ajax_url,
                     ajaxData: data,
                     ajaxMethod: 'post'
@@ -244,7 +244,7 @@
 
             $.ctcOverlayEl({
                 elemHeight: '550px',
-                elemWidth: '80%',
+                elemWidth: '1200px',
                 ajaxUrl: ctc_ajax_url,
                 ajaxData: data,
                 ajaxMethod: 'post'
@@ -669,7 +669,7 @@
 
                     //html for all product cart data grid
                     allItemsHtml += itemDivContent;
-                    delete(itemDivContent[i]);
+                    delete (itemDivContent[i]);
                 }
                 allItemsHtml += '<tr id="ctcToolTipCartTotal"><td colspan="2"> Sub Total :</td><td colspan="2">' + addCommas(grandTotal.toFixed(2)) + '</td></td>';
             }
@@ -822,7 +822,7 @@
                     //html for all product cart data grid
                     allItemsHtml += itemDivContent;
 
-                    delete(itemDivContent[i]);
+                    delete (itemDivContent[i]);
                 }
 
                 var taxAmount = grandTotal * (taxRate / 100);

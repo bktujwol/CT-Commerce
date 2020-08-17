@@ -113,60 +113,8 @@ class ctCommerceAdminHtml{
         
     }
     
-                    //function to display first agree disagree with term option
-                    public function ctcConditionAgreeDisagree(){
-                       //  
-                        
-                        ?>
-                        	<!-- <a id="ctcTermConditionsModalLink" href="#TB_inline?height=50&width=50&inlineId=ctcConditionModalTb&modal=true" id="ctcTermConditionsContent" class="thickbox thickBoxModalContent"></a> -->
-                           
-                            <div id ="ctcConditionModalTb" class="thickBoxModalContent">
-                            
-                            <div class="ctcConditionMain" > 
-                            
-                            <h3><span class="dashicons dashicons-info">&nbsp;&nbsp;</span>Please Go Through Terms and Conditions First!<a id="ctcGoToDashboard" href="index.php" title="Go back to Dashboard" ><span class="dashicons dashicons-dashboard"></span></a> </h3>
-                            <div class="ctcConditionReading">
-
-                             <?php 
-                             
-                               $this->ctcConditionAgreeDisagreeContent();
-                             
-                             ?>
-                            
-                            </div>
-                              <div id="ctcConditionsForm" class="ctcConditionsForm">
-                                 <form id="ctcTermsAndConditionsForm" method="post" action="options.php">
-                                 <?php  
-                                        
-                                        settings_fields('ctcConditionsAgreeForm');
-                                        
-                                        do_settings_sections('ctcConditionsAgreeForm');
-                                ?>
-                                
-                        		<label for="ctcConditionsAgreeCheckbox">Please check if you agree : </label>
-                                 <input id="ctcConditionsAgreeCheckbox"  class ="ctcConditionsAgreeCheckbox" type="checkbox" <?php if(get_option('ctcConditionsAgree')  == '1'): echo 'checked="checked"'; endif;?> name="ctcConditionsAgree" value = "1"  /> &nbsp;&nbsp;
-                        		
-                                  <?php submit_button('I Agree','primary','ctcConditionsAgreeButton', FALSE ,array('disabled' => 'disabled', 'name'=>'submit')); ?>
-                                    <a id="ctcConditionsDisgreeButton" href="#" class="button button-primary">I Disagree</a> 
-                                   
-                               </form>
-                               
-                                </div>   
-                                </div>    
-                               </div> 
-                     <?php  
-                        
-             }
     
-                    //function to read GNU license into string
-                    public function ctcConditionAgreeDisagreeContent(){
-                        
-                        
-                        $file = plugin_dir_path(__DIR__).'content/ctcTermsAndConditions.txt';
-                        echo nl2br(file_get_contents($file));
-                    }
-    
-    
+                   
                 //function to display basicinfo content
                 public function ctcBasicInfo(){
                 	$ctcAdminpanelProcssing = new ctCommerceAdminPanelProcessing();
@@ -883,7 +831,7 @@ public function ctcEmailSetting(){
 				                    	      <label for="ctcProductCategoryName">Product Category : </label>
 					                        </div>
 					                        <div class="right">
-					                             <input id="ctcProductCategoryName" type="text"   name="categoryName" required="required" size="30" value="<?=trim($categoryData['categoryName'])?>" pattern="[^,,|,#,:,~,`,\x22,\x27]+" title="Special Charaters like #,-,:,~ are not allowed"   /><br>
+					                             <input id="ctcProductCategoryName" type="text"   name="categoryName" required="required" size="30" value="<?php if(!empty($categoryData['categoryName'])): echo $categoryData['categoryName']; endif;?>" pattern="[^,,|,#,:,~,`,\x22,\x27]+" title="Special Charaters like #,-,:,~ are not allowed"   /><br>
 					                             <i class="ctcFormComments">Vague category like Shirt, Shoe, Car, etc</i>
 					                             <?php if(isset($categoryData['categoryId'])):?>
 					                             <input id="ctcProductCategoryId" type="hidden"   name="categoryId"  value="<?=$categoryData['categoryId']?>"  />
@@ -901,7 +849,7 @@ public function ctcEmailSetting(){
 		                        </div>
 		                        
 		                        <div class="right">
-		                             <input id="ctcSubCategory1" type="text" name="subCategory1" size="35"    value="<?=trim($categoryData['subCategory1'])?>" pattern="^[a-zA-Z0-9,-.!? ]*$" title="Only special charaters  -,.!? allowed"  />
+		                             <input id="ctcSubCategory1" type="text" name="subCategory1" size="35"    value="<?php if(!empty($categoryData['subCategory1'])):echo $categoryData['subCategory1'];endif;?>" pattern="^[a-zA-Z0-9,-.!? ]*$" title="Only special charaters  -,.!? allowed"  />
 		                       		 <i class="ctcFormComments"> Like Men, Women, Children for clothing</i>
 		                        </div>
                         </div>
@@ -911,7 +859,7 @@ public function ctcEmailSetting(){
 		                    	   <label for="ctcSubCategory2">Sub Category 2 : </label>
 		                        </div>
 		                         <div class="right">
-		                             <input id="ctcSubCategory2" type="text"   name="subCategory2" size="35" value="<?=trim($categoryData['subCategory2'])?>" pattern="^[a-zA-Z0-9,-.!? ]*$" title="Only special charaters -,.!? allowed" />
+		                             <input id="ctcSubCategory2" type="text"   name="subCategory2" size="35" value="<?php if(!empty($categoryData['subCategory2'])): echo $categoryData['subCategory2']; endif;?>" pattern="^[a-zA-Z0-9,-.!? ]*$" title="Only special charaters -,.!? allowed" />
 		                             <i class="ctcFormComments">Like sizes for clothing, Transmission for cars</i>
 		                        </div>
                     	</div>
@@ -921,7 +869,7 @@ public function ctcEmailSetting(){
 		                    	  
 		                        </div>
 		                       <div class="right">
-		                             	 <input id="ctcSubCategory3" type="text" name="subCategory3" size="35"    value="<?=trim($categoryData['subCategory3'])?>" pattern="^[a-zA-Z0-9,-.!? ]*$" title="Only special charaters  -,.!? allowed"  />
+		                             	 <input id="ctcSubCategory3" type="text" name="subCategory3" size="35"    value="<?php if(!empty($categoryData['subCategory3'])):echo $categoryData['subCategory3']; endif;?>" pattern="^[a-zA-Z0-9,-.!? ]*$" title="Only special charaters  -,.!? allowed"  />
 		                               <i class="ctcFormComments">More specfic info of items.</i>
 		                        </div>
                     	</div>
@@ -931,7 +879,7 @@ public function ctcEmailSetting(){
 		                    	   <label for="ctCCategoryMetaInfo"> Meta Information : </label>
 		                        </div>
 		                       <div class="right">
-		                             <input id="ctComCategoryMetaInfo"  type="text"  name="metaInfo" value="<?=trim($categoryData['metaInfo'])?>"  size="35"    />
+		                             <input id="ctComCategoryMetaInfo"  type="text"  name="metaInfo" value="<?php if(!empty($categoryData['metaInfo'])): echo $categoryData['metaInfo']; endif;?>"  size="35"    />
 		                            <i class="ctcFormComments">Noteworthy info like 100  %Cotton, Handmade etc.</i>
 		                             
 		                             
