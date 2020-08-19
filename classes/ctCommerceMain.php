@@ -13,7 +13,7 @@ require_once 'ctCommerceAdminPanelProcessing.php';
 require_once 'ctCommerceFrontendAjax.php';
 require_once 'ctCommerceFrontendProcessing.php';
 require_once 'otherContent/payment/stripe-php/init.php';
-require_once 'ctCoommerceRestapi.php';
+require_once 'ctCommerceRestapi.php';
 
 
 
