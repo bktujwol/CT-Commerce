@@ -1,5 +1,6 @@
 (function ($) {
 	$(document).ready(function ($) {
+
 		//simple function to check if the value of field is null is so set it to empty
 		function checkNull(value) {
 			if (!value) {
@@ -1622,9 +1623,9 @@
 					h4El.siblings().slideToggle(100, function () {
 						$(response).filter('li').each(function (i) {
 							var salesActHtml = $(this).html();
-							setTimeout(function () {
-								$('.ctcSalesReportList ul').append('<li>' + salesActHtml + '</li>')
-							}, (500 * i));
+
+							$('.ctcSalesReportList ul').append('<li>' + salesActHtml + '</li>')
+
 						});
 					});
 				}).fail(function () {

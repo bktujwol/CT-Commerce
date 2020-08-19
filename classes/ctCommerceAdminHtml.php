@@ -1153,19 +1153,18 @@ public function ctcEmailSetting(){
                                                			    
                                                			 </div>
                                                			  <div class="ctcProductFormColumn">
-                                                           <!--    <input  type="hidden" name="productDimension" size="5"    value=""/> -->
-                                                         
+ 
                                                            <span>
-                                                             <input class="ctcProductFormDimension" placeholder="Width" type="number"  name="productDimensionWidth" size="6" pattern='[^:,~,`,\x22,\x27]+' title='Special Charaters like `:,~,Quotation are not allowed'   value=""/>
+                                                             <input class="ctcProductFormDimension" placeholder="Width" type="number"  name="productDimensionWidth" size="6" pattern='[^:,~,`,\x22,\x27]+' title='Width'   value=""/>
                                                           </span>
                                                            <span>
-                                                             <input class="ctcProductFormDimension" placeholder="Length" type="number"  name="productDimensionLength" size="6"  pattern='[^:,~,`,\x22,\x27]+' title='Special Charaters like `:,~,Quotation are not allowed'  value=""/>
+                                                             <input class="ctcProductFormDimension" placeholder="Length" type="number"  name="productDimensionLength" size="6"  pattern='[^:,~,`,\x22,\x27]+' title='Length'  value=""/>
                                                           </span>
                                                            <span >
-                                                             <input  class="ctcProductFormDimension" placeholder="Height" type="number"  name="productDimensionHeight" size="6"  pattern='[^:,~,`,\x22,\x27]+' title='Special Charaters like `:,~,Quotation are not allowed'  value=""/>
+                                                             <input  class="ctcProductFormDimension" placeholder="Height" type="number"  name="productDimensionHeight" size="6"  pattern='[^:,~,`,\x22,\x27]+' title='Height'  value=""/>
                                                           </span>
                                                            <span >
-                                                             <input class="ctcProductFormDimension"  placeholder="Girth" type="number"  name="productDimensionGirth" size="6" pattern='[^:,~,`,\x22,\x27]+' title='Special Charaters like `:,~,Quotation are not allowed'   value=""/>
+                                                             <input class="ctcProductFormDimension"  placeholder="Girth" type="number"  name="productDimensionGirth" size="6" pattern='[^:,~,`,\x22,\x27]+' title='Girth'   value=""/>
                                                           </span>
                                                           </div>
                                                   </div>
@@ -1828,16 +1827,16 @@ public function ctcEmailSetting(){
                                                            
                                                          
                                                            <span>
-                                                             <input placeholder="Width" type="number"  name="productDimensionWidth" size="6"   pattern='[,~,`,\x22,\x27]+' title='Special Charaters like `:,~,Quotation are not allowed' value="<?=$productData['width']?>"/>
+                                                             <input class="ctcProductFormDimension" placeholder="Width" type="number"  name="productDimensionWidth" size="6"   pattern='[,~,`,\x22,\x27]+' title='Width' value="<?=$productData['width']?>"/>
                                                           </span>
                                                            <span>
-                                                             <input placeholder="Length" type="number"  name="productDimensionLength" size="6"  pattern='[^~,`,\x22,\x27]+' title='Special Charaters like `:,~,Quotation are not allowed'  value="<?=$productData['length']?>"/>
+                                                             <input class="ctcProductFormDimension" placeholder="Length" type="number"  name="productDimensionLength" size="6"  pattern='[^~,`,\x22,\x27]+' title='Length'  value="<?=$productData['length']?>"/>
                                                           </span>
                                                            <span >
-                                                             <input  placeholder="Height" type="number"  name="productDimensionHeight" size="6" pattern='[^~,`,\x22,\x27]+' title='Special Charaters like `:,~,Quotation are not allowed'   value="<?=$productData['height']?>"/>
+                                                             <input class="ctcProductFormDimension"  placeholder="Height" type="number"  name="productDimensionHeight" size="6" pattern='[^~,`,\x22,\x27]+' title='Heigth'   value="<?=$productData['height']?>"/>
                                                           </span>
                                                            <span >
-                                                             <input  placeholder="Girth" type="number"  name="productDimensionGirth" size="6"  pattern='[^`,\x22,\x27]+' title='Special Charaters like `:,~,Quotation are not allowed'   value="<?=$productData['girth']?>"/>
+                                                             <input  class="ctcProductFormDimension" placeholder="Girth" type="number"  name="productDimensionGirth" size="6"  pattern='[^`,\x22,\x27]+' title='Girth'   value="<?=$productData['girth']?>"/>
                                                           </span>
                                                           </div>
                                                   </div>
@@ -2197,16 +2196,16 @@ public function ctcEmailSetting(){
                                                            
                                                          
                                                            <span>
-                                                             <input placeholder="Width" type="number"  name="productDimensionWidth" size="6"   pattern='[,~,`,\x22,\x27]+' title='Special Charaters like `:,~,Quotation are not allowed' value="<?=$productData['width']?>"/>
+                                                             <input class="ctcProductFormDimension" placeholder="Width" type="number"  name="productDimensionWidth" size="6"   pattern='[,~,`,\x22,\x27]+' title='Width' value="<?=$productData['width']?>"/>
                                                           </span>
                                                            <span>
-                                                             <input placeholder="Length" type="number"  name="productDimensionLength" size="6"  pattern='[^~,`,\x22,\x27]+' title='Special Charaters like `:,~,Quotation are not allowed'  value="<?=$productData['length']?>"/>
+                                                             <input class="ctcProductFormDimension" placeholder="Length" type="number"  name="productDimensionLength" size="6"  pattern='[^~,`,\x22,\x27]+' title='Length'  value="<?=$productData['length']?>"/>
                                                           </span>
                                                            <span >
-                                                             <input  placeholder="Height" type="number"  name="productDimensionHeight" size="6" pattern='[^~,`,\x22,\x27]+' title='Special Charaters like `:,~,Quotation are not allowed'   value="<?=$productData['height']?>"/>
+                                                             <input  class="ctcProductFormDimension" placeholder="Height" type="number"  name="productDimensionHeight" size="6" pattern='[^~,`,\x22,\x27]+' title='Height'   value="<?=$productData['height']?>"/>
                                                           </span>
                                                            <span >
-                                                             <input  placeholder="Girth" type="number"  name="productDimensionGirth" size="6"  pattern='[^`,\x22,\x27]+' title='Special Charaters like `:,~,Quotation are not allowed'   value="<?=$productData['girth']?>"/>
+                                                             <input  class="ctcProductFormDimension" placeholder="Girth" type="number"  name="productDimensionGirth" size="6"  pattern='[^`,\x22,\x27]+' title='Girth'   value="<?=$productData['girth']?>"/>
                                                           </span>
                                                           </div>
                                                   </div>

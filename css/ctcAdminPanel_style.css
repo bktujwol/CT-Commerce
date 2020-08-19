@@ -1574,22 +1574,9 @@ div.ctcProductPreviewChart ul {
   padding-bottom: 10px;
   padding-top: 5px;
   border-left: 20px solid rgba(142, 140, 216, 1);
-
   padding-left: 10px;
-  -webkit-transition: width 0.5s;
-  /* Safari */
-  transition: width 0.5;
-  transition: 0.5s ease;
-  -webkit-transition: 0.5s ease;
-  -moz-transition: 0.5s ease;
-
-  -webkit-animation: animateSlideIn 0.5s linear;
-  animation: animateSlideIn 0.5s linear;
-
-
   width: 500px;
   max-width: 70%;
-
   box-shadow: 0.5px 0.5px 0.5px 0.5px rgba(0, 0, 0, 0.5);
 }
 
