@@ -40,19 +40,12 @@ class ctCommerceAdminHtml{
        
        <div class="ctcAdminPanel"> 
 		
-       <?php 
-       
-            //if user agress to the terms and condition
-            if( get_option('ctcConditionsAgree')  == '1'):
-           ?>
-                  <h1><span class="dashicons dashicons-admin-home">&nbsp;&nbsp;</span>CT Commerce Admin Panel</h1>
+            <h1><span class="dashicons dashicons-admin-home">&nbsp;&nbsp;</span>CT Commerce Admin Panel</h1>
            <?php        
                  self::ctcAdminPanelTab();
                  self::ctcAdminPanelHtml(); 
 
-            else:
-                $this->ctcConditionAgreeDisagree();
-            endif;
+         
             ?>
             </div>
          <?php    
@@ -120,60 +113,8 @@ class ctCommerceAdminHtml{
         
     }
     
-                    //function to display first agree disagree with term option
-                    public function ctcConditionAgreeDisagree(){
-                       //  
-                        
-                        ?>
-                        	<!-- <a id="ctcTermConditionsModalLink" href="#TB_inline?height=50&width=50&inlineId=ctcConditionModalTb&modal=true" id="ctcTermConditionsContent" class="thickbox thickBoxModalContent"></a> -->
-                           
-                            <div id ="ctcConditionModalTb" class="thickBoxModalContent">
-                            
-                            <div class="ctcConditionMain" > 
-                            
-                            <h3><span class="dashicons dashicons-info">&nbsp;&nbsp;</span>Please Go Through Terms and Conditions First!<a id="ctcGoToDashboard" href="index.php" title="Go back to Dashboard" ><span class="dashicons dashicons-dashboard"></span></a> </h3>
-                            <div class="ctcConditionReading">
-
-                             <?php 
-                             
-                               $this->ctcConditionAgreeDisagreeContent();
-                             
-                             ?>
-                            
-                            </div>
-                              <div id="ctcConditionsForm" class="ctcConditionsForm">
-                                 <form id="ctcTermsAndConditionsForm" method="post" action="options.php">
-                                 <?php  
-                                        
-                                        settings_fields('ctcConditionsAgreeForm');
-                                        
-                                        do_settings_sections('ctcConditionsAgreeForm');
-                                ?>
-                                
-                        		<label for="ctcConditionsAgreeCheckbox">Please check if you agree : </label>
-                                 <input id="ctcConditionsAgreeCheckbox"  class ="ctcConditionsAgreeCheckbox" type="checkbox" <?php if(get_option('ctcConditionsAgree')  == '1'): echo 'checked="checked"'; endif;?> name="ctcConditionsAgree" value = "1"  /> &nbsp;&nbsp;
-                        		
-                                  <?php submit_button('I Agree','primary','ctcConditionsAgreeButton', FALSE ,array('disabled' => 'disabled', 'name'=>'submit')); ?>
-                                    <a id="ctcConditionsDisgreeButton" href="#" class="button button-primary">I Disagree</a> 
-                                   
-                               </form>
-                               
-                                </div>   
-                                </div>    
-                               </div> 
-                     <?php  
-                        
-             }
     
-                    //function to read GNU license into string
-                    public function ctcConditionAgreeDisagreeContent(){
-                        
-                        
-                        $file = plugin_dir_path(__DIR__).'content/ctcTermsAndConditions.txt';
-                        echo nl2br(file_get_contents($file));
-                    }
-    
-    
+                   
                 //function to display basicinfo content
                 public function ctcBasicInfo(){
                 	$ctcAdminpanelProcssing = new ctCommerceAdminPanelProcessing();
@@ -890,7 +831,7 @@ public function ctcEmailSetting(){
 				                    	      <label for="ctcProductCategoryName">Product Category : </label>
 					                        </div>
 					                        <div class="right">
-					                             <input id="ctcProductCategoryName" type="text"   name="categoryName" required="required" size="30" value="<?=trim($categoryData['categoryName'])?>" pattern="[^,,|,#,:,~,`,\x22,\x27]+" title="Special Charaters like #,-,:,~ are not allowed"   /><br>
+					                             <input id="ctcProductCategoryName" type="text"   name="categoryName" required="required" size="30" value="<?php if(!empty($categoryData['categoryName'])): echo $categoryData['categoryName']; endif;?>" pattern="[^,,|,#,:,~,`,\x22,\x27]+" title="Special Charaters like #,-,:,~ are not allowed"   /><br>
 					                             <i class="ctcFormComments">Vague category like Shirt, Shoe, Car, etc</i>
 					                             <?php if(isset($categoryData['categoryId'])):?>
 					                             <input id="ctcProductCategoryId" type="hidden"   name="categoryId"  value="<?=$categoryData['categoryId']?>"  />
@@ -908,7 +849,7 @@ public function ctcEmailSetting(){
 		                        </div>
 		                        
 		                        <div class="right">
-		                             <input id="ctcSubCategory1" type="text" name="subCategory1" size="35"    value="<?=trim($categoryData['subCategory1'])?>" pattern="^[a-zA-Z0-9,-.!? ]*$" title="Only special charaters  -,.!? allowed"  />
+		                             <input id="ctcSubCategory1" type="text" name="subCategory1" size="35"    value="<?php if(!empty($categoryData['subCategory1'])):echo $categoryData['subCategory1'];endif;?>" pattern="^[a-zA-Z0-9,-.!? ]*$" title="Only special charaters  -,.!? allowed"  />
 		                       		 <i class="ctcFormComments"> Like Men, Women, Children for clothing</i>
 		                        </div>
                         </div>
@@ -918,7 +859,7 @@ public function ctcEmailSetting(){
 		                    	   <label for="ctcSubCategory2">Sub Category 2 : </label>
 		                        </div>
 		                         <div class="right">
-		                             <input id="ctcSubCategory2" type="text"   name="subCategory2" size="35" value="<?=trim($categoryData['subCategory2'])?>" pattern="^[a-zA-Z0-9,-.!? ]*$" title="Only special charaters -,.!? allowed" />
+		                             <input id="ctcSubCategory2" type="text"   name="subCategory2" size="35" value="<?php if(!empty($categoryData['subCategory2'])): echo $categoryData['subCategory2']; endif;?>" pattern="^[a-zA-Z0-9,-.!? ]*$" title="Only special charaters -,.!? allowed" />
 		                             <i class="ctcFormComments">Like sizes for clothing, Transmission for cars</i>
 		                        </div>
                     	</div>
@@ -928,7 +869,7 @@ public function ctcEmailSetting(){
 		                    	  
 		                        </div>
 		                       <div class="right">
-		                             	 <input id="ctcSubCategory3" type="text" name="subCategory3" size="35"    value="<?=trim($categoryData['subCategory3'])?>" pattern="^[a-zA-Z0-9,-.!? ]*$" title="Only special charaters  -,.!? allowed"  />
+		                             	 <input id="ctcSubCategory3" type="text" name="subCategory3" size="35"    value="<?php if(!empty($categoryData['subCategory3'])):echo $categoryData['subCategory3']; endif;?>" pattern="^[a-zA-Z0-9,-.!? ]*$" title="Only special charaters  -,.!? allowed"  />
 		                               <i class="ctcFormComments">More specfic info of items.</i>
 		                        </div>
                     	</div>
@@ -938,7 +879,7 @@ public function ctcEmailSetting(){
 		                    	   <label for="ctCCategoryMetaInfo"> Meta Information : </label>
 		                        </div>
 		                       <div class="right">
-		                             <input id="ctComCategoryMetaInfo"  type="text"  name="metaInfo" value="<?=trim($categoryData['metaInfo'])?>"  size="35"    />
+		                             <input id="ctComCategoryMetaInfo"  type="text"  name="metaInfo" value="<?php if(!empty($categoryData['metaInfo'])): echo $categoryData['metaInfo']; endif;?>"  size="35"    />
 		                            <i class="ctcFormComments">Noteworthy info like 100  %Cotton, Handmade etc.</i>
 		                             
 		                             
@@ -1148,7 +1089,7 @@ public function ctcEmailSetting(){
                                                                                          <span class="dashicons dashicons-format-image"></span>
                                              
                                                                            	     </a>
-                                                                         		 <span class="ctcPrimaryPicThumb" onmouseenter="new ctcOverlayViewer(this);"><img /></span>
+                                                                         		 <span class="ctcPrimaryPicThumb" ><img /></span>
                                                                 
                                                                          </div>
                                                                      </div>
@@ -1163,7 +1104,7 @@ public function ctcEmailSetting(){
                                                                                          <span class="dashicons dashicons-images-alt"></span>
                                              
                                                                            	     </a>
-                                                                     	<div class="ctcAdditionaImages" onmouseenter="new ctcOverlayViewer(this);"></div>
+                                                                     	<div class="ctcAdditionaImages" ></div>
                                                                         		
                                                                      </div>
                                                                    </div>
@@ -1212,19 +1153,18 @@ public function ctcEmailSetting(){
                                                			    
                                                			 </div>
                                                			  <div class="ctcProductFormColumn">
-                                                           <!--    <input  type="hidden" name="productDimension" size="5"    value=""/> -->
-                                                         
+ 
                                                            <span>
-                                                             <input class="ctcProductFormDimension" placeholder="Width" type="number"  name="productDimensionWidth" size="6" pattern='[^:,~,`,\x22,\x27]+' title='Special Charaters like `:,~,Quotation are not allowed'   value=""/>
+                                                             <input class="ctcProductFormDimension" placeholder="Width" type="number"  name="productDimensionWidth" size="6" pattern='[^:,~,`,\x22,\x27]+' title='Width'   value=""/>
                                                           </span>
                                                            <span>
-                                                             <input class="ctcProductFormDimension" placeholder="Length" type="number"  name="productDimensionLength" size="6"  pattern='[^:,~,`,\x22,\x27]+' title='Special Charaters like `:,~,Quotation are not allowed'  value=""/>
+                                                             <input class="ctcProductFormDimension" placeholder="Length" type="number"  name="productDimensionLength" size="6"  pattern='[^:,~,`,\x22,\x27]+' title='Length'  value=""/>
                                                           </span>
                                                            <span >
-                                                             <input  class="ctcProductFormDimension" placeholder="Height" type="number"  name="productDimensionHeight" size="6"  pattern='[^:,~,`,\x22,\x27]+' title='Special Charaters like `:,~,Quotation are not allowed'  value=""/>
+                                                             <input  class="ctcProductFormDimension" placeholder="Height" type="number"  name="productDimensionHeight" size="6"  pattern='[^:,~,`,\x22,\x27]+' title='Height'  value=""/>
                                                           </span>
                                                            <span >
-                                                             <input class="ctcProductFormDimension"  placeholder="Girth" type="number"  name="productDimensionGirth" size="6" pattern='[^:,~,`,\x22,\x27]+' title='Special Charaters like `:,~,Quotation are not allowed'   value=""/>
+                                                             <input class="ctcProductFormDimension"  placeholder="Girth" type="number"  name="productDimensionGirth" size="6" pattern='[^:,~,`,\x22,\x27]+' title='Girth'   value=""/>
                                                           </span>
                                                           </div>
                                                   </div>
@@ -1449,7 +1389,7 @@ public function ctcEmailSetting(){
                                                             <div class="ctcProductColumnOther">
                                                                  Gallery : 
                                                            </div> 
-                                                            <div id="addtionalImages<?=$product['productId']?>" class="ctcProductColumnOther" onmouseenter="new ctcOverlayViewer(this);">
+                                                            <div id="addtionalImages<?=$product['productId']?>" class="ctcProductColumnOther" >
                       
                                                             <?php foreach(explode(',',$product['addtionalImages']) as $key=>$image):
                                                           			  if(!empty($image)):
@@ -1566,7 +1506,7 @@ public function ctcEmailSetting(){
 								
 								?>
 								
-								<a class="ctcProductPrimaryPic" onmouseenter="new ctcOverlayViewer(this);" id="primaryPic<?=$product['productId']?>" href="JavaScript:void(0)" title="<?=$product['productName']?>"  >
+								<a class="ctcProductPrimaryPic"  id="primaryPic<?=$product['productId']?>" href="JavaScript:void(0)" title="<?=$product['productName']?>"  >
 								  	
 								  	<img src="<?=$imgUrl?>" title="<?=$product['productName']?>" />
 								      
@@ -1743,7 +1683,7 @@ public function ctcEmailSetting(){
                                                                                          <span class="dashicons dashicons-format-image"></span>
                                   
                                                                            	     </a>
-                                                                           	     <span class="ctcPrimaryPicThumbUpdate" onmouseenter="new ctcOverlayViewer(this);">
+                                                                           	     <span class="ctcPrimaryPicThumbUpdate" >
                                                                            	    <?php  
                                                                            	     if(!empty($productData['primaryImage'])):
                                                                            	     
@@ -1770,7 +1710,7 @@ public function ctcEmailSetting(){
                                                                                          <span class="dashicons dashicons-images-alt"></span>
                                              
                                                                            	     </a>
-                                                                     	<div id="ctcAdditionaImagesUpdate" class="ctcAdditionaImagesUpdate" onmouseenter="new ctcOverlayViewer(this);">
+                                                                     	<div id="ctcAdditionaImagesUpdate" class="ctcAdditionaImagesUpdate" >
                                                                      	<?php if(!empty($productData['addtionalImages'])):
                                                                      	$gallery = (explode(',',$productData['addtionalImages']));
                                                                      	
@@ -1887,16 +1827,16 @@ public function ctcEmailSetting(){
                                                            
                                                          
                                                            <span>
-                                                             <input placeholder="Width" type="number"  name="productDimensionWidth" size="6"   pattern='[,~,`,\x22,\x27]+' title='Special Charaters like `:,~,Quotation are not allowed' value="<?=$productData['width']?>"/>
+                                                             <input class="ctcProductFormDimension" placeholder="Width" type="number"  name="productDimensionWidth" size="6"   pattern='[,~,`,\x22,\x27]+' title='Width' value="<?=$productData['width']?>"/>
                                                           </span>
                                                            <span>
-                                                             <input placeholder="Length" type="number"  name="productDimensionLength" size="6"  pattern='[^~,`,\x22,\x27]+' title='Special Charaters like `:,~,Quotation are not allowed'  value="<?=$productData['length']?>"/>
+                                                             <input class="ctcProductFormDimension" placeholder="Length" type="number"  name="productDimensionLength" size="6"  pattern='[^~,`,\x22,\x27]+' title='Length'  value="<?=$productData['length']?>"/>
                                                           </span>
                                                            <span >
-                                                             <input  placeholder="Height" type="number"  name="productDimensionHeight" size="6" pattern='[^~,`,\x22,\x27]+' title='Special Charaters like `:,~,Quotation are not allowed'   value="<?=$productData['height']?>"/>
+                                                             <input class="ctcProductFormDimension"  placeholder="Height" type="number"  name="productDimensionHeight" size="6" pattern='[^~,`,\x22,\x27]+' title='Heigth'   value="<?=$productData['height']?>"/>
                                                           </span>
                                                            <span >
-                                                             <input  placeholder="Girth" type="number"  name="productDimensionGirth" size="6"  pattern='[^`,\x22,\x27]+' title='Special Charaters like `:,~,Quotation are not allowed'   value="<?=$productData['girth']?>"/>
+                                                             <input  class="ctcProductFormDimension" placeholder="Girth" type="number"  name="productDimensionGirth" size="6"  pattern='[^`,\x22,\x27]+' title='Girth'   value="<?=$productData['girth']?>"/>
                                                           </span>
                                                           </div>
                                                   </div>
@@ -2109,7 +2049,7 @@ public function ctcEmailSetting(){
                                                                                          <span class="dashicons dashicons-format-image"></span>
                                   
                                                                            	     </a>
-                                                                           	     <span class="ctcPrimaryPicThumbUpdate" onmouseenter="new ctcOverlayViewer(this);">
+                                                                           	     <span class="ctcPrimaryPicThumbUpdate" >
                                                                            	    <?php  
                                                                            	     if(!empty($productData['primaryImage'])):
                                                                            	     
@@ -2136,7 +2076,7 @@ public function ctcEmailSetting(){
                                                                                          <span class="dashicons dashicons-images-alt"></span>
                                              
                                                                            	     </a>
-                                                                     	<div id="ctcAdditionaImagesUpdate" class="ctcAdditionaImagesUpdate" onmouseenter="new ctcOverlayViewer(this);">
+                                                                     	<div id="ctcAdditionaImagesUpdate" class="ctcAdditionaImagesUpdate" >
                                                                      	<?php if(!empty($productData['addtionalImages'])):
                                                                      	$gallery = (explode(',',$productData['addtionalImages']));
                                                                      	
@@ -2256,16 +2196,16 @@ public function ctcEmailSetting(){
                                                            
                                                          
                                                            <span>
-                                                             <input placeholder="Width" type="number"  name="productDimensionWidth" size="6"   pattern='[,~,`,\x22,\x27]+' title='Special Charaters like `:,~,Quotation are not allowed' value="<?=$productData['width']?>"/>
+                                                             <input class="ctcProductFormDimension" placeholder="Width" type="number"  name="productDimensionWidth" size="6"   pattern='[,~,`,\x22,\x27]+' title='Width' value="<?=$productData['width']?>"/>
                                                           </span>
                                                            <span>
-                                                             <input placeholder="Length" type="number"  name="productDimensionLength" size="6"  pattern='[^~,`,\x22,\x27]+' title='Special Charaters like `:,~,Quotation are not allowed'  value="<?=$productData['length']?>"/>
+                                                             <input class="ctcProductFormDimension" placeholder="Length" type="number"  name="productDimensionLength" size="6"  pattern='[^~,`,\x22,\x27]+' title='Length'  value="<?=$productData['length']?>"/>
                                                           </span>
                                                            <span >
-                                                             <input  placeholder="Height" type="number"  name="productDimensionHeight" size="6" pattern='[^~,`,\x22,\x27]+' title='Special Charaters like `:,~,Quotation are not allowed'   value="<?=$productData['height']?>"/>
+                                                             <input  class="ctcProductFormDimension" placeholder="Height" type="number"  name="productDimensionHeight" size="6" pattern='[^~,`,\x22,\x27]+' title='Height'   value="<?=$productData['height']?>"/>
                                                           </span>
                                                            <span >
-                                                             <input  placeholder="Girth" type="number"  name="productDimensionGirth" size="6"  pattern='[^`,\x22,\x27]+' title='Special Charaters like `:,~,Quotation are not allowed'   value="<?=$productData['girth']?>"/>
+                                                             <input  class="ctcProductFormDimension" placeholder="Girth" type="number"  name="productDimensionGirth" size="6"  pattern='[^`,\x22,\x27]+' title='Girth'   value="<?=$productData['girth']?>"/>
                                                           </span>
                                                           </div>
                                                   </div>
@@ -2463,7 +2403,7 @@ public function ctcEmailSetting(){
 										
 										?>
 										
-										<a onmouseenter="new ctcOverlayViewer(this);" id="primaryPic<?=$product['productId']?>" href="JavaScript:void(0)" title="<?=$product['productName']?>" class="ctcPurgedProductPic" >
+										<a  id="primaryPic<?=$product['productId']?>" href="JavaScript:void(0)" title="<?=$product['productName']?>" class="ctcPurgedProductPic" >
 										  
 										      <img src="<?=$imgUrl?>" title="<?=$product['productName']?>" />
 										     </a>
@@ -2642,7 +2582,7 @@ public function ctcEmailSetting(){
                                                           <span class="dashicons dashicons-format-image"></span>
                                   
                                               </a>
-                                              <span class="ctcDiscountPicThumb" onmouseenter="new ctcOverlayViewer(this);"><img></span>
+                                              <span class="ctcDiscountPicThumb" ><img></span>
                                                  
                                          </div>
                                                           
@@ -2779,7 +2719,7 @@ public function ctcEmailSetting(){
 										
 										?>
 										
-              				   <a id="ctcCouponImage<?=$discount['discountId']?>" href="JavaScript:void(0);" title="<?=$discount['discountName']?>" onmouseenter="new ctcOverlayViewer(this);" class="ctcDiscountThumb" >
+              				   <a id="ctcCouponImage<?=$discount['discountId']?>" href="JavaScript:void(0);" title="<?=$discount['discountName']?>"  class="ctcDiscountThumb" >
               				    <img src="<?=$imgUrl?>" title="<?=$discount['discountName']?>" />
 							  </a>
               				    <?php  else: ?>
@@ -2945,7 +2885,7 @@ public function ctcEmailSetting(){
                                                         $parsed = parse_url( wp_get_attachment_url($discountData['couponImage']) );
                                                          $url    = dirname( $parsed [ 'path' ] ) . '/' . rawurlencode( basename( $parsed[ 'path' ] ) );
                                                 ?>
-                                                 	 <span class="ctcDiscountPicThumbUpdate" onmouseenter="new ctcOverlayViewer(this);"><img src="<?=$url?>" /></span>
+                                                 	 <span class="ctcDiscountPicThumbUpdate" ><img src="<?=$url?>" /></span>
                                                                            	     
                                                  <?php 
                                                    else:?>

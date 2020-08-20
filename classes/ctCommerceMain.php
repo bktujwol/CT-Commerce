@@ -13,7 +13,7 @@ require_once 'ctCommerceAdminPanelProcessing.php';
 require_once 'ctCommerceFrontendAjax.php';
 require_once 'ctCommerceFrontendProcessing.php';
 require_once 'otherContent/payment/stripe-php/init.php';
-require_once 'ctCoommerceRestapi.php';
+require_once 'ctCommerceRestapi.php';
 
 
 
@@ -97,7 +97,6 @@ class ctCommerceMain{
         
         $ctcAdminRequiredAjax = new ctCommerceAdminPanelAjax();
        
-        add_action( 'wp_ajax_ctcDeactivatePlugin', array($ctcAdminRequiredAjax,'ctcDeactivatePlugin' ));
         add_action( 'wp_ajax_ctcCreateBusinessPage', array($ctcAdminRequiredAjax,'ctcCreateBusinessPage' ));
         add_action( 'wp_ajax_ctcAddProductCategory', array($ctcAdminRequiredAjax,'ctcAddProductCategory' ));
         add_action( 'wp_ajax_ctcGetCategoryUpdateForm', array($ctcAdminRequiredAjax,'ctcGetCategoryUpdateForm' ));
@@ -142,12 +141,71 @@ class ctCommerceMain{
      */
     /*function to eneque admin panel javascript file */
     public function ctcAdminEnequeJs(){
-        wp_enqueue_script('ctcGalleryOverlayJs',plugin_dir_url( __DIR__ ).'js/ctc_gallery_overlay.js');
         wp_enqueue_script('ctcAdminPanelJs',plugin_dir_url( __DIR__ ).'js/ctcAdminPanel_script.js', array('jquery'));
         wp_enqueue_script('ctcOverlayJq',plugin_dir_url( __DIR__ ).'js/ctc_overlay.jquery.js', array('jquery'));
         wp_enqueue_script('jquery-masonry');
         wp_enqueue_script('imagesloaded');
         wp_enqueue_media();
+
+        wp_localize_script('ctcAdminPanelJs', 'ctcTrans', 
+                                                                array(
+                                                                        'ecommerceNameEmpty' => __('eCommerce name  cannot be empty.','ct-commerce'),
+                                                                        'productAdded'=> __('Product category sucessfully added','ct-commerce'),
+                                                                        'issueProductAdded'=> __('There was some issue with adding the category,Maybe category already exists.','ct-commerce'),
+                                                                        'ajaxFail'=> __('Action could not be completed at this time \nPlease try again later.','ct-commerce'),
+                                                                        'categoryUpdated'=> __('Product category sucessfully updated.','ct-commerce'),
+                                                                        'issueCategoryUpdated'=> __('There was some issue with update. Did you make any changes?','ct-commerce'),
+                                                                        'categoryDeleted'=> __('Category sucessfully deleted.','ct-commerce'),
+                                                                        'issueCategoryDelete'=> __("For some reason category couldn't be deleted.",'ct-commerce'),
+                                                                        'selectValidCategory'=> __("Please select valid category for product.",'ct-commerce'),
+                                                                        'requiredProductNum'=>__('Required, enter number','ct-commerce'),
+                                                                        'enterInventoryNum'=> __("Please enter number of this particular products you have in your inventory. \nSet it to any number you feel comfortable with.",'ct-commerce'),
+                                                                        'productVariationFormat'=> __("Use this feature only if you understand the format like avoid comma after end of last item, else it might mess up the way  product is diplayed in frontend!\n\n Use + icon and selection boxes instead .",'ct-commerce'),
+                                                                        'productAdded'=> __("Product sucessfully added.",'ct-commerce'),
+                                                                        'couldNotAddproduct'=> __("Product could not be added, Probably it already exists, try updating it.",'ct-commerce'),
+                                                                        'noProductVariation'=> __("You do not any variation added for this product.",'ct-commerce'),
+                                                                        'optionRemoveVariation'=> __("Do you want to remove this product variation?",'ct-commerce'),
+                                                                        'noProductCombination'=> __("Such product combination does not exist",'ct-commerce'),
+                                                                        'requiredProductNum'=>__("Required, enter number ",'ct-commerce'),
+                                                                        'productNameEmpty'=> __("Product name cannot be empty.",'ct-commerce'),
+                                                                        'productUpdated'=> __("Product sucessfully updated.",'ct-commerce'),
+                                                                        'productNotUpdated'=> __("Product could not be updated,Check for duplicate product name.",'ct-commerce'),
+                                                                        'confirmPurge'=> __("Are you sure you want to purge this product.",'ct-commerce'),
+                                                                        'productPurge'=> __("Product sucesfully purged.",'ct-commerce'),
+                                                                        'couldNotPurge'=> __("Product couldn't be purged, please try again later.",'ct-commerce'),
+                                                                        'unPurged'=> __("Product sucessfully added back.",'ct-commerce'),
+                                                                        'couldNotUnPurged'=> __("Product could not be added, Probably it already exists.",'ct-commerce'),
+                                                                        'discountAdded'=> __("Discount sucessfully added.",'ct-commerce'),
+                                                                        'discountAddFail'=> __("Discount couldn't be added.\nPlease check for duplicate entry.",'ct-commerce'),
+                                                                        'discountUpdated'=> __("Discount sucesfully updated.",'ct-commerce'),
+                                                                        'discountUpdateFail'=> __("Discount couldnot be updated.\nPlease try again.",'ct-commerce'),
+                                                                        'discountDeleted'=> __("Discount successfully deleted.",'ct-commerce'),
+                                                                        'discountDeleteFail'=> __("Discount couldn't be deleted.\n Please try again.",'ct-commerce'),
+                                                                        'productOutOfStock'=> __("Out of Stock Products",'ct-commerce'),
+                                                                        'variationOutOfStock'=> __("Out of Stock Product variation",'ct-commerce'),
+                                                                        'couldNotComplteOrder'=>__("Couldn't complete order.",'ct-commerce'),
+                                                                        'updateInventory'=>__("Please update inventory before proceeding.",'ct-commerce'),
+                                                                        'refundSuccess'=>__("Refund successfully processed.",'ct-commerce'),
+                                                                        'refundFail'=>__("Refund could not be processed at this time, please try again later.",'ct-commerce'),
+                                                                        'couldNotCanelOrder'=>__("Order couldn't be cancelled at this time,\n Please try again later.",'ct-commerce'),
+                                                                        'salesReportNotLoaded'=>__("Sales report could not be loaded at this time.",'ct-commerce'),
+
+                                                                        'confirmCatDelete'=>__("Are you sure you want to delete this category?",'ct-commerce'),
+                                                                        'confirmReplaceItem'=>__("Do you want to replace this item ? ",'ct-commerce'),
+                                                                        'confirmReplaceItemDatabase'=>__("Do you want to replace this item in database? ",'ct-commerce'),
+                                                                        'printShippingAddress'=>__("Would you like to print shipping address for this order? ",'ct-commerce'),
+                                                                        'cancelOrderConfirm'=>__("Are you sure you want to cancel this order? ",'ct-commerce'),
+                                                                        'selPrimaryImg'=>__("Select Primary Product Image ",'ct-commerce'),
+                                                                        'selAdditionaImg'=>__('Select Additional  Product Images','ct-commerce'),
+                                                                        'selVideo'=>__('Select Product Video','ct-commerce'),
+                                                                        'updatePrimaryImg'=>__("Update Primary Product Image ",'ct-commerce'),
+                                                                        'updateAdditionaImg'=>__('Update Additional  Product Images','ct-commerce'),
+                                                                        'updateVideo'=>__('Update Product Video','ct-commerce'),
+                                                                        'addCouponImage'=>__('Add Coupon Image','ct-commerce'),
+                                                                        'updateCouponImage'=>__('Update Coupon Image','ct-commerce'),
+                                                                        'businessLogo'=>__('Business Logo','ct-commerce'),
+                                                                        )
+                                    );
       
     }
     
@@ -162,19 +220,21 @@ class ctCommerceMain{
         wp_enqueue_style( 'ctcGalleryOverlayCss', plugin_dir_url( __DIR__ ).'css/ctc_gallery_overlay_style.css');
         wp_enqueue_style( 'ctcAdminPanelCss', plugin_dir_url( __DIR__ ).'css/ctcAdminPanel_style.css');
         wp_enqueue_style( 'ctcOverlayCss', plugin_dir_url( __DIR__ ).'css/ctc_overlay_style.css');
+        
       
     }
     
     /*function to enqeue   javascript in frontend*/
     public function ctcFrontendEnequeJs(){
         wp_enqueue_script('ctcGalleryOverlayJs',plugin_dir_url( __DIR__ ).'js/ctc_gallery_overlay.js');
+        wp_enqueue_script( 'jquery-ui-tooltip' );
         wp_enqueue_script('ctcFrontendlJs', plugin_dir_url(__DIR__ ).'js/ctcFrontend_script.js', array('jquery'));
         wp_enqueue_script('ctcOverlayJq',plugin_dir_url( __DIR__ ).'js/ctc_overlay.jquery.js', array('jquery'));
         wp_localize_script( 'ctcFrontendlJs', 'ctc_ajax_url', admin_url( 'admin-ajax.php' ) );
         wp_enqueue_script('jquery-masonry');
         wp_enqueue_script('imagesloaded');
         wp_enqueue_media();
-        wp_enqueue_script( 'jquery-ui-tooltip' );
+       
 
        
         $stripPubKey = '1' == get_option('ctcStripeTestMode') ? get_option( 'ctcStripeTestPublishableKey' ) : get_option( 'ctcStripeLivePublishableKey' );

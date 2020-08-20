@@ -229,7 +229,7 @@ class ctCommerceFrontendContent{
 	   
 	   ?>
 	          
-	             <div class="ctcCategoryLinkContainer" data-category-name="<?=$key?>">
+	             <div class="ctcCategoryLinkContainer" title="<?=$key?>">
 	             
 			     <a class="ctcCategoryLink" href="<?=home_url()?>/product-category/?category=<?=$key?>" >
 			   
@@ -410,8 +410,7 @@ class ctCommerceFrontendContent{
 	                <?php if(!wp_is_mobile()):?>
 	                
 	                
-		             <span></span>
-		              <span></span>
+		             
 		              
 		              
 		              <?php endif;?>
@@ -419,14 +418,15 @@ class ctCommerceFrontendContent{
 	               
 		             <div class="ctcSingleProductGalleryContainer" >
 		            
-		            
 		               <?=		     			
 		                  do_shortcode( '[gallery  type=â€�slideshowâ€� ids="'.$product['primaryImage'].','.$product['addtionalImages'].' "
 														 size="full"  link="file" column="1"]' ); ?>
 				
 		                
 		                
-		                </div>
+						</div>
+						
+					
 		                
 		               </div>  
 		               <?php endif;?>
@@ -1239,8 +1239,9 @@ endif;
 
      
     
-    $postContent ='<div id="ctcProductPost">';
-    
+	$postContent ='<div id="ctcProductPost">';
+
+    $postContent = '<div id="ctc-blog-shortcode" >[ctcGetPostRating][ctcPostSocialbarSharing][ctcGetPostAddToCart]</div>';
     if(!empty($data['price'])):
     $postContent .='<div class="ctcPostPrice"></span> Price : <span>'.$data['price'].''.strtoupper($data['currency']).'</span></div>';
     

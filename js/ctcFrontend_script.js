@@ -1,7 +1,13 @@
 (function ($) {
     $(document).ready(function ($) {
-        //script to add thickbox class to wordpress gallery
-        //$(document).find(".ctcSingleProductGallery  a").addClass("thickbox").attr('rel','gallery-ctc');
+
+        $('.ctcCategoryLinkContainer').tooltip(
+            {
+                position: {
+                    my: "center ",
+                    at: "center ",
+                }
+            });
 
         //function to javascript number format
         function addCommas(nStr) {
@@ -156,7 +162,7 @@
 
                 $.ctcOverlayEl({
                     elemHeight: '550px',
-                    elemWidth: '80%',
+                    elemWidth: '1200px',
                     ajaxUrl: ctc_ajax_url,
                     ajaxData: data,
                     ajaxMethod: 'post'
@@ -244,7 +250,7 @@
 
             $.ctcOverlayEl({
                 elemHeight: '550px',
-                elemWidth: '80%',
+                elemWidth: '1200px',
                 ajaxUrl: ctc_ajax_url,
                 ajaxData: data,
                 ajaxMethod: 'post'
@@ -669,7 +675,7 @@
 
                     //html for all product cart data grid
                     allItemsHtml += itemDivContent;
-                    delete(itemDivContent[i]);
+                    delete (itemDivContent[i]);
                 }
                 allItemsHtml += '<tr id="ctcToolTipCartTotal"><td colspan="2"> Sub Total :</td><td colspan="2">' + addCommas(grandTotal.toFixed(2)) + '</td></td>';
             }
@@ -822,7 +828,7 @@
                     //html for all product cart data grid
                     allItemsHtml += itemDivContent;
 
-                    delete(itemDivContent[i]);
+                    delete (itemDivContent[i]);
                 }
 
                 var taxAmount = grandTotal * (taxRate / 100);
@@ -1398,18 +1404,18 @@
                         ctcCartCalculateTotal();
                     } else if (response == 'invalidPromoCode') {
                         $.ctcOverlayEl({
-                            modalMessage: 'Coupon code you have entered is invalid.'
+                            modalMessage: ' Coupon code you have entered is invalid.'
                         });
                         $('#ctcCheckOutPromoCode').val('');
 
                     } else {
                         $('#ctcCheckOutPromoCode').val('');
                         $.ctcOverlayEl({
-                            modalMessage: "Coupon does not apply to any of the products in cart."
+                            modalMessage: " Coupon does not apply to any of the products in cart."
                         });
                     }
                 }).fail(function () {
-                    alert("Discount could not be calculated at this time \nPlease try again later");
+                    alert(" Discount could not be calculated at this time \nPlease try again later");
                 });
             }
 
@@ -1604,7 +1610,7 @@
                     'action': 'ctcAjaxSortProduct'
                 }, function (response) {
                     $('#ctcSortProductSelect').parent().removeClass('ctcShowAjaxWait');
-                    $(parentContainer).prepend(response);
+                    $(parentContainer).empty().prepend(response);
                     ctcSortProductBySelection(sortBy, parentContainer, $('>div', parentContainer));
                     selecElement.attr('data-type-allproduct', 'yes');
                     return false;
@@ -1664,9 +1670,9 @@
         function ctcSortArrayAndAppend(productArrayToSort, parentContainer, sortType) {
             var sortedHtml = '';
             if (sortType == 'asc') {
-                productArrayToSort.sort((a, b) => a[1] - b[1]); //function(a,b){return a[1]-b[1]});
+                productArrayToSort.sort((a, b) => a[1] - b[1]);
             } else {
-                productArrayToSort.sort((a, b) => b[1] - a[1]); //function(a,b){return b[1]-a[1]});
+                productArrayToSort.sort((a, b) => b[1] - a[1]);
             }
             for (var key in productArrayToSort) {
                 sortedHtml += productArrayToSort[key][2];
