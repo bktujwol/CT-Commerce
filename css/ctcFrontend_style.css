@@ -3026,6 +3026,15 @@ margin-top:5px;
 }
 
 
+div#ctc-blog-shortcode .ctcItemRating{
+
+  display:inline-block;
+  margin-left:34.5%;
+
+
+}
+
+
 
 /*animation for page load*/
 @-webkit-keyframes   animateSlideIn {
@@ -3046,16 +3055,11 @@ margin-top:5px;
   
         margin-left:-40%;
      
-    to {
+    to  {
     
  
        margin-left:0%;
      
     }
-}
-
-#ctc-blog-shortcode  .ctcItemRating{
-
-  display:none;
 }
 
