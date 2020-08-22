@@ -722,7 +722,7 @@
                 },
                 position: {
                     within: $(this),
-                    my: "center bottom-20",
+                    my: "center bottom-5",
                     at: "center top",
 
                     using: function (position, feedback) {
@@ -1641,16 +1641,49 @@
 
         //function to sort products by thumb up
         function ctcSortArrayAndAppend(productArrayToSort, parentContainer, sortType) {
-            var sortedHtml = '';
+            let sortedHtml = Array();
+            let sortByArray = Array();
             if (sortType == 'asc') {
-                productArrayToSort.sort((a, b) => a[1] - b[1]);
+
+                sortByArray = productArrayToSort.map(x => x[1]);
+                sortByArray.sort((a, b) => a - b);
+
+
+                sortedHtml = sortByArray.map(x => {
+
+                    for (let i = 0; i < productArrayToSort.length; i++) {
+
+                        if (x == productArrayToSort[i][1]) {
+                            let minSortedArr = productArrayToSort.splice(i, 1);
+                            return minSortedArr[0][2]
+                        }
+                    }
+
+                });
+
+
+
+
             } else {
-                productArrayToSort.sort((a, b) => b[1] - a[1]);
+                sortByArray = productArrayToSort.map(x => x[1]);
+                sortByArray.sort((a, b) => b - a);
+                sortedHtml = sortByArray.map(x => {
+
+                    for (let i = 0; i < productArrayToSort.length; i++) {
+
+                        if (x == productArrayToSort[i][1]) {
+                            let minSortedArr = productArrayToSort.splice(i, 1);
+                            return minSortedArr[0][2]
+                        }
+                    }
+
+                });
+
             }
             for (var key in productArrayToSort) {
                 sortedHtml += productArrayToSort[key][2];
             }
-            $(parentContainer).empty().append(sortedHtml).masonry('reloadItems');
+            $(parentContainer).empty().append(sortedHtml.join('')).masonry('reloadItems');
             //remove duplicate id
 
             // init Masonry

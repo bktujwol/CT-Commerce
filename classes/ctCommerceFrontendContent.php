@@ -640,7 +640,7 @@ endif;
 		<select id="ctcSortProductSelect" data-type-containertosort="<?=$parentContainer?>" data-type-ajaxsort="<?=$ajaxSort?>">
 		<option value="">Sort product by</option>
 		<option value="mostThumbUp">Thumbs Up</option>
-		<option value="priceLowest">Price (low to high)</option>
+		<option value="priceLowest">Price(low to high)</option>
 		<option value="priceHighest">Price(high to low)</option>
 		<option value="addedDate">Date(recent first)</option>
 		</select>
