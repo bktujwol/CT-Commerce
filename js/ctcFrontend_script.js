@@ -1561,34 +1561,7 @@
 
         });
 
-        /*
-         * 
-         * 
-         * 
-         * 
-         * 
-         * 
-         * 
-         * script for product page overlay functionalities
-         * 
-         * 
-         */
 
-
-
-
-        if ($('.ctcSingleProductGallery').length >= 1) {
-            $('.ctcSingleProductGallery').ctcOverlay();
-
-            $(document).on('click', '.ctcProductProfileImage', function () {
-                if ($('.ctcverlayImages'))
-                    $('.ctcSingleProductGallery').trigger('mouseenter');
-                $("img[data-img-number='0']").trigger('click');
-            });
-        } else {
-
-            $('.ctcProductProfileImage').ctcOverlay();
-        }
 
         /*
          * 
