@@ -226,7 +226,6 @@ class ctCommerceMain{
     
     /*function to enqeue   javascript in frontend*/
     public function ctcFrontendEnequeJs(){
-        wp_enqueue_script('ctcGalleryOverlayJs',plugin_dir_url( __DIR__ ).'js/ctc_gallery_overlay.js');
         wp_enqueue_script( 'jquery-ui-tooltip' );
         wp_enqueue_script('ctcFrontendlJs', plugin_dir_url(__DIR__ ).'js/ctcFrontend_script.js', array('jquery'));
         wp_enqueue_script('ctcOverlayJq',plugin_dir_url( __DIR__ ).'js/ctc_overlay.jquery.js', array('jquery'));
@@ -258,7 +257,6 @@ class ctCommerceMain{
     
     /* function to eneque fontend style sheets*/
     public function ctcFrontendEnqeueCss(){
-        wp_enqueue_style( 'ctcGalleryOverlayCss', plugin_dir_url( __DIR__ ).'css/ctc_gallery_overlay_style.css');
         wp_enqueue_style( 'ctcFrontendCss', plugin_dir_url( __DIR__ ).'css/ctcFrontend_style.css');            
         wp_enqueue_style( 'dashicons' );
         wp_enqueue_style( 'ctcOverlayCss', plugin_dir_url( __DIR__ ).'css/ctc_overlay_style.css');

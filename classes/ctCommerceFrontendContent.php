@@ -1241,7 +1241,7 @@ endif;
     
 	$postContent ='<div id="ctcProductPost">';
 
-    $postContent = '<div id="ctc-blog-shortcode" >[ctcGetPostRating][ctcPostSocialbarSharing][ctcGetPostAddToCart]</div>';
+    $postContent .= '<ul id="ctc-blog-shortcode" ><li>[ctcGetPostRating]</li><li>[ctcPostSocialbarSharing]</li><li>[ctcGetPostAddToCart]</li></ul>';
     if(!empty($data['price'])):
     $postContent .='<div class="ctcPostPrice"></span> Price : <span>'.$data['price'].''.strtoupper($data['currency']).'</span></div>';
     
