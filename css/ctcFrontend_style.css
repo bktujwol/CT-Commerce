@@ -45,6 +45,7 @@ a {
     position:absolute;
     max-width:80%;
     width:210px;
+   
   }
   .arrow {
     width: 50px;
@@ -89,6 +90,10 @@ a {
 	
 	display:none;
 }
+
+tr#toolTipHeader td{
+  text-transform: capitalize!important;
+}
 /*hide empty cart message*/
 
 
@@ -128,8 +133,6 @@ a {
 
      -webkit-animation: animateComponent 0.6s linear;
     animation: animateComponent 0.6s linear;
-	 
-	
     width:100%;
 	max-width:100%;
 	margin-left:auto;
@@ -147,7 +150,7 @@ a {
 	 
    
 	
-	width:210px;
+	width:270px;
     border: 5px solid white;
     display:inline-block;
     background-color: rgba(192,192,192, 0.3);
@@ -465,7 +468,8 @@ a.ctcCategoryLink img:hover{
 	margin-right:auto;
 	display:block;
 	width:180px;
-	max-width:90%;
+  max-width:90%;
+display:none;
 }
 
 .ctcPreOrderAvilable{
@@ -1457,10 +1461,7 @@ width:200px;
 
    }
    .ctcItemRating{
-     margin-left:auto;
-     margin-right:auto;
-     display:block;
-     padding:1%;
+    margin-left:15.5%;
    }
    .ctcItemRating span{
    
@@ -2256,6 +2257,7 @@ white-space: nowrap;
     -o-transform: scale(1.2);
     -ms-transform: scale(1.2);
      transform: scale(1.2);
+     margin-left:0!important;
    
  }
  .ctcImagesRatingCartContainer .ctcProductPageAddToCart  a.ctcAddToCartLink{
@@ -2277,9 +2279,7 @@ white-space: nowrap;
   .ctcProductPageRating{
      width:230px;
      display:block;
-    
     border:1px solid rgba(0,0,0,1);
-    border-radius:10px;
     padding-left:20px;
     padding-top:3px;
     margin-top:5px;
@@ -2301,7 +2301,6 @@ white-space: nowrap;
  width:230px;
   display:block;
   border:1px solid rgba(0,0,0,1);
-    border-radius:10px;
     padding-right:left;
     padding-top:10px;
     margin-top:3px;
@@ -2312,7 +2311,6 @@ white-space: nowrap;
  width:230px;
   display:block;
   border:1px solid rgba(0,1,1,1);
-    border-radius:10px;
     padding-left:10px;
     padding-top:3px;
      margin-top:3px;

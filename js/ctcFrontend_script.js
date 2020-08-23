@@ -29,6 +29,9 @@
 
         //check for empty cart
         ctcCheckWidgetEmptyCart();
+
+
+
         //function to apply masonry to the divs
         function ctcApplyMasonry(container) {
 
@@ -47,17 +50,13 @@
 
                 $(container).imagesLoaded().progress(function () {
                     $(container).masonry('layout');
-
-
-
                 });
 
             }
 
         }
 
-        //apply masonry to featured products list
-        //ctcApplyMasonry('.ctcPostImgGallery div');
+
 
         //apply masonry to featured products list
         ctcApplyMasonry('.ctcFeaturedProductList');
@@ -606,25 +605,55 @@
             return cartReady;
         }
 
+
+
         //javascript to add product to the cart
         $(document).on('click', '.ctcAddToCartLink', function () {
-            var price = $(this).attr('data-type-price');
+
             var id = $(this).attr('data-type-id');
+            let subCat1 = null != $('#ctcProductSubCat1Select-' + id).val() ? $('#ctcProductSubCat1Select-' + id).val().trim() : '';
+            let subCat2 = null != $('#ctcProductSubCat2Select-' + id).val() ? $('#ctcProductSubCat2Select-' + id).val().trim() : '';
+            let subCat3 = null != $('#ctcProductSubCat3Select-' + id).val() ? $('#ctcProductSubCat3Select-' + id).val().trim() : '';
+            let i = 0;
+            let subCat123 = subCat1 + '-' + subCat2 + '-' + subCat3;
+
+            $('#ctcProductSelect-' + id + ' option').each(function () {
+
+                if ($(this).val().trim() === subCat123) {
+                    $(this).prop('selected', true);
+                    $(this).attr('data-variation', subCat123);
+                    $(this).closest('select').trigger('change');
+                    $('.ctcProductSelectClass-' + id).attr('data-type-variation', productVariation);
+                    i++;
+
+                } else {
+
+                    if (i <= 0) {
+                        $('#ctcProductSelect-' + id + ' option:first-child').prop('selected', true)
+                    }
+
+
+                }
+
+            })
+
+
+            var price = $(this).attr('data-type-price');
             var name = $(this).attr('data-type-name');
             var thumb = $(this).attr('data-type-thumb');
             var productVariation = $(this).attr('data-type-variation');
+
 
             //check if empty option is selcted 
             if ($('#ctcProductSelect-' + id).val() == 'emptyOption') {
 
                 $.ctcOverlayEl({
-                    modalMessage: 'Please select a product combination first'
+                    modalMessage: 'Select availalable product combination first.'
                 });
 
                 return false;
 
             }
-
 
             $('#ctcCartWidgetTable').append(prepareProductForCart(price, id, name, thumb, productVariation));
             //add grand total on new product add
@@ -645,7 +674,7 @@
         function ctcToolTipCart() {
 
             var cartProductData = $('#ctcProductCartWidgetForm').serializeArray();
-            var allItemsHtml = '<tr><th></th><th>Product</th><th>Qty</th><th>Total</th></tr> ';
+            var allItemsHtml = '<tr id="toolTipHeader" ><th></th><th>Product</th><th>Qty</th><th>Total</th></tr> ';
             var grandTotal = 0;
 
             //one as grand total on widget is not removed
@@ -691,7 +720,6 @@
 
         $(function () {
             $(document).tooltip({
-
                 content: function () {
                     var element = $(this);
                     if (element.hasClass('ctcWidgetVaritionShowtoolTip')) {
@@ -718,13 +746,12 @@
 
                 show: {
                     effect: "slideDown",
-                    delay: 500
+                    delay: 300
                 },
                 position: {
                     within: $(this),
                     my: "center bottom-5",
                     at: "center top",
-
                     using: function (position, feedback) {
                         $(this).css(position);
                         $("<div>")
@@ -754,8 +781,59 @@
 
         });
 
+        /**
+         * 
+         * script to select subcategories
+         * 
+         */
+        $('.ctcProductSelCat1').on('change', function () {
+            let subCat1 = $(this).val().trim();
+            let productId = $(this).closest('select').attr('data-type-id');
+            $('#ctcProductSubCat1Select-' + productId + ' option:first-child').prop('disabled', true);
+            $('#ctcProductSelect-' + productId + ' option').each(function () {
+
+                let prodVar = $(this).val().trim();
+                if ('emptyOption' != prodVar) {
+                    $('#ctcProductSubCat2Select-' + productId + ' option').each(function () {
+                        if (prodVar.search(subCat1 + '-' + $(this).val()) === 0) {
+                            $(this).attr('data-sc-one', subCat1);
+                            $(this).prop('disabled', false);
+
+                        } else {
+                            if ($(this).attr('data-sc-one') != subCat1) {
+                                $(this).prop('disabled', true);
+                            }
+
+                        }
+                    })
+
+                }
 
 
+            });
+
+        })
+
+        $('.ctcProductSelCat2').on('change', function () {
+
+            let productId = $(this).closest('select').attr('data-type-id');
+            let scOneTwo = $('#ctcProductSubCat1Select-' + productId).val().trim() + '-' + $(this).val().trim();
+
+            $('#ctcProductSelect-' + productId + ' option').each(function () {
+                let prodVar = $(this).val().trim();
+                $('#ctcProductSubCat3Select-' + productId + ' option').each(function () {
+                    if (prodVar.search(scOneTwo + '-' + $(this).val()) === 0) {
+                        $(this).attr('data-sc-one-two', scOneTwo);
+                        $(this).prop('disabled', false);
+                    } else {
+                        if ($(this).attr('data-sc-one-two') != scOneTwo) {
+                            $(this).prop('disabled', true);
+                        }
+                    }
+                });
+            });
+
+        })
 
         /**
          * 
@@ -1684,7 +1762,6 @@
                 sortedHtml += productArrayToSort[key][2];
             }
             $(parentContainer).empty().append(sortedHtml.join('')).masonry('reloadItems');
-            //remove duplicate id
 
             // init Masonry
             var $grid = $(parentContainer).masonry({
