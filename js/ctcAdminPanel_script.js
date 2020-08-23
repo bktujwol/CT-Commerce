@@ -1546,7 +1546,11 @@
 				'action': 'ctcProcessRefund',
 				'refundData': $(this).serializeArray()
 			}
+
+
+
 			$.post(ajaxurl, data, function (response) {
+
 				if (response === 'refundSuccessful') {
 					alert(ctcTrans.refundSuccess);
 					$('#ctcOverlayElClosebtn').trigger('click');

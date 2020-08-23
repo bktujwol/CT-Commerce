@@ -44,7 +44,7 @@ a {
     box-shadow: 0 0 7px black;
     position:absolute;
     max-width:80%;
-    width:210px;
+    width:215px;
    
   }
   .arrow {
@@ -1401,6 +1401,7 @@ width:200px;
         display:block;
         clear:both;
     }
+
     
     .ctcUserUpdateLeft,
     .ctcUserRegistrationLeft{
@@ -3009,7 +3010,7 @@ margin-top:5px;
 }
 #ctc-blog-shortcode  .ctcItemRating{
 
-  margin-left:35%;
+  margin-left:37%;
 }
 
 

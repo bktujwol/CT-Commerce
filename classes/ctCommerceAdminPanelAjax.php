@@ -238,7 +238,7 @@ class ctCommerceAdminPanelAjax{
     //function to process refund 
     public function ctcProcessRefund(){
     	$ctcAdminPanelProcessing = new ctCommerceAdminPanelProcessing();
-    	
+        
     	 $ctcAdminPanelProcessing->ctcProcessRefundRequest($_POST['refundData']);
     	
     	wp_die();

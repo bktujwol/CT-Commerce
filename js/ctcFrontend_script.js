@@ -648,7 +648,7 @@
             if ($('#ctcProductSelect-' + id).val() == 'emptyOption') {
 
                 $.ctcOverlayEl({
-                    modalMessage: 'Select availalable product combination first.'
+                    modalMessage: 'Select available product combination first.'
                 });
 
                 return false;

@@ -1299,15 +1299,16 @@ class ctCommerceAdminPanelProcessing{
     private function ctcProcessStripeRefund($transactionId,$refundTotal){
     	
     	$refundAmount = $refundTotal*100;
-    
-    	\Stripe\Stripe::setApiKey( get_option('ctcStripeSecretKey'));
-    	
+	
+	
+		
+    	\Stripe\Stripe::setApiKey( trim(get_option('ctcStripeSecretKey')));
+		
     	$refund = \Stripe\Refund::create([
-    			'charge' => trim(str_replace('ctcStripe_', '',$transactionId)),
+    			'charge' => str_replace('ctcStripe_', '',$transactionId),
     			'amount' => $refundAmount
     	]);
-    	
-    	
+		
     	
     	if($refund->status == 'succeeded'):
     	   global $wpdb;

@@ -1770,7 +1770,7 @@ endif;
     	 <div class="ctcSelectProductVariationContainer">
 <i><?=__('Select product variation below','ct-commerce')?></i>
 <select class="ctcProductSelCat1" id="ctcProductSubCat1Select-<?=$productId?>" data-type-id="<?=$productId?>">
-<option selected > --- </option>
+<option selected > ------- </option>
 <?php foreach($uSubCat1 as $key=>$val):?>
 	<option  value="<?=$val?>"><?=$val?></option>
 <?php endforeach;?>
@@ -1779,7 +1779,7 @@ endif;
 </select>
 
 <select class="ctcProductSelCat2" id="ctcProductSubCat2Select-<?=$productId?>" data-type-id="<?=$productId?>">
-<option disabled selected > --- </option>
+<option disabled selected > ------- </option>
 <?php foreach($uSubCat2 as $k=>$v):?>
 	<option  value="<?=$v?>" disabled ><?=$v?></option>
 <?php endforeach;?>
@@ -1788,7 +1788,7 @@ endif;
 </select>
 
 <select class="ctcProductSelCat3" id="ctcProductSubCat3Select-<?=$productId?>" data-type-id="<?=$productId?>">
-<option disabled selected> --- </option>
+<option disabled selected> ------- </option>
 <?php foreach($uSubCat3 as $x =>$value) :?>
 	<option  value="<?=$value?>" disabled ><?=$value?></option>
 <?php endforeach;?>
