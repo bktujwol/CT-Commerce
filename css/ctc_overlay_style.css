@@ -386,12 +386,4 @@ from {
 
 }
 
-.ctcSelectProductVariationContainer select{
- margin-left:2px; 
-display:inline-block;
-width:31%;
-}
-.ctcSelectProductVariationContainer i{
-  display:block;
-  text-align:center;
-}
+

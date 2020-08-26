@@ -311,7 +311,7 @@ class ctCommerceFrontendContent{
 							
 							     <div id="ctcCategoryPageProductImage<?= $product['productId']?>" class="ctcCategoryPageProductImage">
 							       <a href="<?= home_url()?>/product/?product-id=<?=$product['productId']?>" >
-							           <?=wp_get_attachment_image( $product['primaryImage'], array('285','285'));?>
+							           <?=wp_get_attachment_image( $product['primaryImage'], array('280','280'));?>
 							     	</a>
 							     
 							     </div>
@@ -403,20 +403,11 @@ class ctCommerceFrontendContent{
    	              <div class="ctcProductsImagesMedia">
    	                  <figure class="ctcProductProfileImage"> <?=wp_get_attachment_image( $product['primaryImage'], array('382','382'));?></figure>
    	                  
-   	                  <?php //$galleryImageWidth = (substr_count($product['addtionalImages'],',')+1)*110; ?>
-		             
+   	             
 	                  <?php if(!empty($product['addtionalImages'])):?> 	
 	               <div class="ctcSingleProductGallery">
-	                <?php if(!wp_is_mobile()):?>
-	                
-	                
-		             
-		              
-		              
-		              <?php endif;?>
-	              
-	               
-		             <div class="ctcSingleProductGalleryContainer" >
+	           <?php $imgCount =  count(explode(',',$product['addtionalImages']))+1?>
+		             <div class="ctcSingleProductGalleryContainer"  style="padding-left:<?=((395-($imgCount*45))/2) ?>px">
 		            
 		               <?=		     			
 		                  do_shortcode( '[gallery  type=â€�slideshowâ€� ids="'.$product['primaryImage'].','.$product['addtionalImages'].' "
@@ -1779,7 +1770,7 @@ endif;
 </select>
 
 <select class="ctcProductSelCat2" id="ctcProductSubCat2Select-<?=$productId?>" data-type-id="<?=$productId?>">
-<option disabled selected > ------- </option>
+<option disabled selected > -------</option>
 <?php foreach($uSubCat2 as $k=>$v):?>
 	<option  value="<?=$v?>" disabled ><?=$v?></option>
 <?php endforeach;?>

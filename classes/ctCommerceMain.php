@@ -217,7 +217,6 @@ class ctCommerceMain{
      */
     /*function to enqeue admin panel style sheet */
     public function ctcAdminEnequeCss(){
-        wp_enqueue_style( 'ctcGalleryOverlayCss', plugin_dir_url( __DIR__ ).'css/ctc_gallery_overlay_style.css');
         wp_enqueue_style( 'ctcAdminPanelCss', plugin_dir_url( __DIR__ ).'css/ctcAdminPanel_style.css');
         wp_enqueue_style( 'ctcOverlayCss', plugin_dir_url( __DIR__ ).'css/ctc_overlay_style.css');
         
@@ -226,15 +225,12 @@ class ctCommerceMain{
     
     /*function to enqeue   javascript in frontend*/
     public function ctcFrontendEnequeJs(){
+
         wp_enqueue_script( 'jquery-ui-tooltip' );
-        wp_enqueue_script('ctcFrontendlJs', plugin_dir_url(__DIR__ ).'js/ctcFrontend_script.js', array('jquery'));
+        wp_enqueue_script('ctcJsMasonry', plugin_dir_url(__DIR__ ).'js/js-masonry.js', array());
+        wp_enqueue_script('ctcFrontendlJs', plugin_dir_url(__DIR__ ).'js/ctcFrontend_script.js', array('jquery','ctcJsMasonry'));
         wp_enqueue_script('ctcOverlayJq',plugin_dir_url( __DIR__ ).'js/ctc_overlay.jquery.js', array('jquery'));
         wp_localize_script( 'ctcFrontendlJs', 'ctc_ajax_url', admin_url( 'admin-ajax.php' ) );
-        wp_enqueue_script('jquery-masonry');
-        wp_enqueue_script('imagesloaded');
-        wp_enqueue_media();
-       
-
        
         $stripPubKey = '1' == get_option('ctcStripeTestMode') ? get_option( 'ctcStripeTestPublishableKey' ) : get_option( 'ctcStripeLivePublishableKey' );
 

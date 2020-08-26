@@ -59,19 +59,19 @@
 
 
         //apply masonry to featured products list
-        ctcApplyMasonry('.ctcFeaturedProductList');
+        //ctcApplyMasonry('.ctcFeaturedProductList');
+        const prodMas = new jsMasonry('.ctcFeaturedProductList,.ctcProductCategoriesMain,.ctcCategoryPageProductList,.ctcMetaPageProductList,.ctcDiscountProductList');
 
-
-        ctcApplyMasonry('.ctcProductCategoriesMain');
-
-        //applyMasonary to product list product category page
-        ctcApplyMasonry('.ctcCategoryPageProductList');
+        // ctcApplyMasonry('.ctcProductCategoriesMain');
 
         //applyMasonary to product list product category page
-        ctcApplyMasonry('.ctcMetaPageProductList');
+        //ctcApplyMasonry('.ctcCategoryPageProductList');
 
         //applyMasonary to product list product category page
-        ctcApplyMasonry('.ctcDiscountProductList');
+        // ctcApplyMasonry('.ctcMetaPageProductList');
+
+        //applyMasonary to product list product category page
+        // ctcApplyMasonry('.ctcDiscountProductList');
 
 
 
@@ -345,6 +345,7 @@
 
                             if (response.length > 22) {
 
+                                /*
                                 // init Masonry
                                 var $grid = $('.ctcFeaturedProductList').masonry({
                                     transitionDuration: '1.5s',
@@ -365,6 +366,11 @@
 
                                 $grid.append(response).masonry('reloadItems');
                                 $grid.masonry('appended', response);
+*/
+                                $('.ctcFeaturedProductList').append(response);
+
+                                prodMas.layBrks(document.querySelector('.ctcFeaturedProductList'));
+                                //console.log(response);
 
                                 $('[id]').each(function (i) {
                                     $('[id="' + this.id + '"]').slice(1).remove();
@@ -1014,7 +1020,7 @@
                 $('#ctcStripeMountDiv,#card-errors').show();
             } else if ($(this).attr('id') === 'ctcCheckOutOptionCash') {
                 $('#ctcStripeMountDiv,#card-errors').hide();
-                $('#ctcCheckoutPaymentOptions button').attr('id', 'ctcCashCheckoutButton').text("Cash on checkout").show();
+                $('#ctcCheckoutPaymentOptions button').attr('id', 'ctcCashCheckoutButton').text("Cash on Delivery").show();
             }
 
         });
@@ -1725,8 +1731,6 @@
 
                 sortByArray = productArrayToSort.map(x => x[1]);
                 sortByArray.sort((a, b) => a - b);
-
-
                 sortedHtml = sortByArray.map(x => {
 
                     for (let i = 0; i < productArrayToSort.length; i++) {
@@ -1736,12 +1740,7 @@
                             return minSortedArr[0][2]
                         }
                     }
-
                 });
-
-
-
-
             } else {
                 sortByArray = productArrayToSort.map(x => x[1]);
                 sortByArray.sort((a, b) => b - a);
@@ -1758,28 +1757,11 @@
                 });
 
             }
-            for (var key in productArrayToSort) {
-                sortedHtml += productArrayToSort[key][2];
-            }
-            $(parentContainer).empty().append(sortedHtml.join('')).masonry('reloadItems');
 
-            // init Masonry
-            var $grid = $(parentContainer).masonry({
-                transitionDuration: '0.7s',
-                stagger: 20,
-                fitWidth: true,
-                gutter: 9,
-                percentPosition: true,
-                originLeft: false,
-                isFitWidth: true,
-            });
-            $grid.imagesLoaded().progress().always(function (instance) {
-                $('[id]').each(function (i) {
-                    $('[id="' + this.id + '"]').slice(1).remove();
-                });
-                $grid.masonry('appended', sortedHtml);
-                $grid.masonry('layout');
-            });
+            $(parentContainer).empty().html(sortedHtml.join(''));
+            //lay in grid
+            prodMas.layBrks(document.querySelector(parentContainer));
+
         }
 
 
@@ -1851,6 +1833,8 @@
 
             }
         });
+
+
         /**
          * 
          * do not write code beyond 

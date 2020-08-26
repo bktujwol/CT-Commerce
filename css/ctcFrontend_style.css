@@ -110,17 +110,7 @@ tr#toolTipHeader td{
 	
 	
 }
-.ctcStorePageMain{
-	
-	
-}
 
-.ctcCategoryPageProduct,
-.ctcFeaturedProduct{
-
- 
-   
-}
 .ctcMetaPageProductList,
 .ctcCategoryPageProductList,
 .ctcFeaturedProductList{
@@ -150,7 +140,7 @@ tr#toolTipHeader td{
 	 
    
 	
-	width:270px;
+	width:400px;
     border: 5px solid white;
     display:inline-block;
     background-color: rgba(192,192,192, 0.3);
@@ -232,6 +222,18 @@ opacity:0.9;
 }
 
 
+.ctcCategoryPageProductImage a{
+  display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.ctcCategoryPageProductImage a img{
+display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:100%;
+}
+
 .ctcFeaturedProduct a img{
 display: block;
     margin-left: auto;
@@ -269,11 +271,10 @@ display: block;
      -webkit-animation: animateComponent 0.6s linear;
     animation: animateComponent 0.6s linear;
 	
-	width:300px;
+	width:410px;
 	background-color:rgba(240, 243, 244 );
-    border:10px solid rgba(0, 0, 0,1);
+    border:3px solid rgba(0, 0, 0,1);
     padding:auto;
-   border-radius:10px;
    margin:1%;
    max-width:90%;
      box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.5);
@@ -281,10 +282,18 @@ display: block;
      display:inline-block;
 }
 .ctcCategoryLinkContainer a{
-
+margin:auto;
 	text-align:center;
-	text-decoration:none !important;
+  text-decoration:none !important;
+  width:100%;
 }
+
+.ctcCategoryLinkContainer a img{
+  margin:auto;
+    text-align:center;
+    text-decoration:none !important;
+    width:100%;
+  }
 
 
 
@@ -900,6 +909,11 @@ section.widget_ctcommerce_cart_widget{
 	 
 
 }
+
+.ctcWidgetCartCheckOutbutton:hover{
+  background-color: #13aff0!important;
+
+}
 .ctcWidgetCartCheckOutbutton:hover span{
     margin-right:2px;
     padding-right:0px !important;
@@ -909,7 +923,7 @@ section.widget_ctcommerce_cart_widget{
 }
 
 .ctcProductCartWidget button:hover{
-	background-color:rgba(255,255,255);
+	background-color:rgba(255,255,255,1);
 }
 
 
@@ -1214,7 +1228,7 @@ width:200px;
 	
 	text-decoration:none;
 	width:120px !important;
-	border: 1px solid rgba(0,0,0,1);
+
 	padding:8px;
 	background-color:rgba(245,245,245,0.5);
   color:rgba(255,255,255,1);
@@ -1225,11 +1239,9 @@ width:200px;
 
 #ctcApplyPromoCode:hover{
 
-    border: 1px solid rgba(0,0,0,1);
     background-color:#13aff0;
-    text-shadow: 5px;
-    
-    
+     text-shadow: 8px 8px 12px  rgba(0,0,0,0.8);
+  
 }
 
 #ctcApplyPromoCode::before{
@@ -1817,7 +1829,7 @@ width:200px;
   display:none;
   color:rgba(255,255,255,1);
   background-color:#13aff0;
-  border:1px solid rgba(0,0,0,1);
+  border:none;
 } 
 #ctcStripeCheckoutButton:before,
 #ctcCashCheckoutButton:before{
@@ -1825,6 +1837,11 @@ width:200px;
   content: "\f526";
   margin-right:5px;
 
+}
+
+#ctcStripeCheckoutButton:hover,
+#ctcCashCheckoutButton:hover{
+  text-shadow: 8px 8px 12px  rgba(0,0,0,0.8);
 }
 
 
@@ -1910,14 +1927,7 @@ width:200px;
  /*styling for product page*/
  
 .ctcMobileProductPage{
-	
-	margin-left:auto !important;
-	margin-right:auto !important;
-	display:block !important;
-	    margin-left: auto !important;
-    margin-right: auto !important;
-    display: block !important;
-    padding-left: 5%;
+
 }
   
  .ctcProductsImagesMedia{
@@ -1936,18 +1946,8 @@ max-width:90%;
     -ms-transition: all 0.4s ease-in-out 0.2s;
     transition: all 0.4s ease-in-out 0.2s; 
  }
-.ctcProductProfileImage img{
+.ctcProductProfileImage{
 	
-	width: 382px;
-	
-    margin-bottom: -8px;
-    max-width: 99%;
-    border-radius: 10px;
-    margin-right: 2px;
-    box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.2);
-	height:382px;
-	max-width:100%;
-	cursor:pointer;
 }
 
 .ctcProductAdditionalMedia{
@@ -1959,19 +1959,19 @@ max-width:90%;
     width: 395px;
     overflow-x: auto;
     overflow-y: hidden;
-    height: 130px;
-    border-style: double;
     max-width: 97%;
     margin-right: 0.1%;
-    margin-top:15px;
-    white-space: nowrap;
+   
+ }
+
+ .ctcSingleProductGallery img{
+   margin-left:5px;
  }
 
  .ctcSingleProductGallery div{
  
  overflow-y:hidden;
  display:inline-block;
-white-space: nowrap;
  }
  /*
  .ctcSingleProductGallery figure:first-child{
@@ -1986,44 +1986,6 @@ white-space: nowrap;
   
  }
  */
- .ctcSingleProductGallery .gallery{
-
-  white-space: nowrap;
-  
-  
- }
- .ctcSingleProductGallery span:first-child::before{
- 
-    font-family: dashicons;
-    content: "\f341";
-    position: absolute;
-    font-size: 70px;
-    color: rgba(0,0,0,0.7);
-    z-index: 1;
-    margin-left: -2.5%;
-    margin-top: -0.3%;
-    background-color: rgba(238,238,238,0);
-    width: 6.5%;
-    height: 118px;
-   
-    text-align: left;
-   max-width:25%;
-
- }
- .ctcSingleProductGallery span:nth-child(2){
- margin-left:330px;
- }
- .ctcSingleProductGallery span:nth-child(2)::before{
-    font-family: dashicons;
-    content: "\f345";
-    position: absolute;
-    font-size: 70px;
-    color: rgba(0,0,0,0.7);
-    z-index: 1;
-    background-color: rgba(238,238,238,0);
-    width: 6.5%!important;
-    height: 116px; 
- }
  
  .ctcSingleProductGallery span:first-child:hover::before,
   .ctcSingleProductGallery span:nth-child(2):hover::before{
@@ -2036,19 +1998,19 @@ white-space: nowrap;
  .ctcSingleProductGallery div figure{
  display:inline-block;
 width:auto;
-height:120px;
+height:50px;
 padding-top: 15px;
-max-width: 120px;
+max-width: 50px;
 white-space: nowrap;
- margin-left:10px;
+
  }
  
  
  .ctcSingleProductGallery div figure div {
  display:inline-block;
-width:120px;
+width:50px;
 white-space: nowrap;
- height:100px;
+ height:50px;
  }
  
  .ctcSingleProductGallery figcaption{
@@ -2057,16 +2019,14 @@ white-space: nowrap;
  
  
  .ctcSingleProductGallery div figure div a img{
- width:95px !important;
- height:95px;
+ width:50px !important;
+ height:50px;
  max-height:95%;
- border:1px solid rgba(0,0,0,1);
- border-radius:20%;
+ 
 
  }
  
  .ctcSingleProductGallery div figure div a img:hover{
- border:1px solid rgba(0,0,0,0.3);
 
     -webkit-transition: all 0.15s ease-in-out 0.15s;
     -moz-transition: all 0.15s ease-in-out 0.15s;
@@ -3013,6 +2973,16 @@ margin-top:5px;
   margin-left:37%;
 }
 
+.ctcSelectProductVariationContainer select{
+  margin-left:3px; 
+ display:inline-block;
+ width:30.5%;
+ }
+ .ctcSelectProductVariationContainer i{
+   display:block;
+   text-align:center;
+ }
+
 
 
 /*animation for page load*/
@@ -3041,4 +3011,6 @@ margin-top:5px;
      
     }
 }
+
+
 
