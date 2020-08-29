@@ -32,47 +32,8 @@
 
 
 
-        //function to apply masonry to the divs
-        function ctcApplyMasonry(container) {
-
-
-            if ($(container + '>div').length >= 3) {
-
-
-                $(container).masonry({
-                    fitWidth: true,
-                    gutter: 9,
-                    isFitWidth: true,
-                    initLayout: false,
-
-                });
-
-
-                $(container).imagesLoaded().progress(function () {
-                    $(container).masonry('layout');
-                });
-
-            }
-
-        }
-
-
-
-        //apply masonry to featured products list
-        //ctcApplyMasonry('.ctcFeaturedProductList');
-        const prodMas = new jsMasonry('.ctcFeaturedProductList,.ctcProductCategoriesMain,.ctcCategoryPageProductList,.ctcMetaPageProductList,.ctcDiscountProductList');
-
-        // ctcApplyMasonry('.ctcProductCategoriesMain');
-
-        //applyMasonary to product list product category page
-        //ctcApplyMasonry('.ctcCategoryPageProductList');
-
-        //applyMasonary to product list product category page
-        // ctcApplyMasonry('.ctcMetaPageProductList');
-
-        //applyMasonary to product list product category page
-        // ctcApplyMasonry('.ctcDiscountProductList');
-
+        // apply required masonry
+        const prodMas = new jsMasonry('.ctcFeaturedProductList,.ctcProductCategoriesMain,.ctcCategoryPageProductList,.ctcMetaPageProductList,.ctcDiscountProductList, .ctcPostImgGallery .gallery');
 
 
         $('.ctcSingleProductGallery span:nth-child(2),.ctcSingleProductGallery span:first-child ').on('click', function (event) {
@@ -1662,7 +1623,7 @@
             var sortBy = $("option:selected", this).val();
             var sortableItems = $('>div', parentContainer);
             if (ajaxSort === "yes" && selecElement.attr('data-type-allproduct') === undefined) {
-                $(this).parent().addClass('ctcShowAjaxWait');
+
                 $.post(ctc_ajax_url, {
                     'action': 'ctcAjaxSortProduct'
                 }, function (response) {

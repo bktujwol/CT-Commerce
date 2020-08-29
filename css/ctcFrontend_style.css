@@ -177,7 +177,7 @@ tr#toolTipHeader td{
 .ctcFeaturedProductPrice{
     text-align: center;
     display: block;
-    max-width:95%;
+    max-width:99.5%;
 }
 .ctcMetaPageProductName,
 .ctcCategoryPageProductName,
@@ -396,7 +396,7 @@ a.ctcCategoryLink img:hover{
 
 .ctcAddToCartLink span:first-child{
 	float:left;
-	margin-left:10px;
+	margin-left:5px;
 	height:75%;
    transition: 0.5s ease;
   -webkit-transition: 0.5s ease;
@@ -525,20 +525,27 @@ display:none;
 	
 }
 /*style for product cart widget*/
-section.widget_ctcommerce_cart_widget{
+.widget_ctcommerce_cart_widget h4:before{
+  font-family: dashicons;
+    content: "\f174";
 	
 }
 .widget_ctcommerce_cart_widget h2::before{
 font-family: dashicons;
     content: "\f174";
 }
-.widget_ctcommerce_user_login_registration_widget h2::before{
-font-family: dashicons;
-content: "\f112";
+
+.widget_ctcommerce_user_login_registration_widget h4:before{
+  font-family: dashicons;
+  content: "\f110";
+}
+.widget_ctcommerce_coupon_widget h4:before{
+  font-family: dashicons;
+  content: "\f524";
 }
 .widget_ctcommerce_cart_widget ,
 .widget_ctcommerce_user_login_registration_widget{
-	padding:15px !important;
+	
 	
 }
 .widget_ctcommerce_user_login_registration_widget p:nth-child(2) input,
@@ -981,22 +988,24 @@ section.widget_ctcommerce_cart_widget{
 
 .ctcPageCartContentMain{
 	
-	  -webkit-animation: animateComponent 1s linear;
-    animation: animateComponent 1s linear;
+	color:rgba(0, 0, 0,1);
 	
 }
 .ctcPageCartItemGrid{
    
-
+  width: 850px;
+  max-width: 100%;
+  color:rgba(0,0,0,1);
 
 }
 
 
 .ctcPageCartItem{
-	border-bottom: 1px solid rgba(0,0,0,1);
+	border-bottom: 1px dotted rgba(0,0,0,1);
 	font-size:12px;
 	padding-left:0px;
-	padding-right:0px;
+  padding-right:0px;
+  color: rbga(0,0,0,0,1);
 }
 
 .ctcPageCartItem:hover{
@@ -1006,12 +1015,13 @@ section.widget_ctcommerce_cart_widget{
 
 
 .ctcPageCartItem span{   
-  display:inline-block;
-  vertical-align: middle;
-  text-align:center;
-  width:96px;
-  padding-top:5px;
-  max-width:14.5%;
+  display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    width: 230px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    max-width: 15.4%;
   
  
 }
@@ -1023,7 +1033,11 @@ section.widget_ctcommerce_cart_widget{
     transition: 0.5s ease;
   -webkit-transition: 0.5s ease;
   -moz-transition: 0.5s ease;
-padding-bottom:20px;
+
+}
+
+.ctcPageCartItem span:last-child{
+  line-height:0.2;
 }
 
 .ctcPageCartItem  a span:hover{
@@ -1046,10 +1060,8 @@ padding-bottom:20px;
 
 
 .ctcPageCartImg img{
- width:60px !important;
- height:60px !important;
- border: 2px solid rgba(0,0,0,1);
- border-radius: 60px;
+ width:50px !important;
+ height:50px !important;
  object-fit: cover !important;
 -webkit-transition: width 0.7s, height 0.9s; /* Safari */
   transition: 0.8s ease;
@@ -1060,7 +1072,7 @@ padding-bottom:20px;
 
 .ctcPageCartItem:hover img{
     
-    border:2px solid rgba(133, 173, 173,0.5);
+    
    
 }
 .ctcPageCartItemRemove{
@@ -1265,15 +1277,15 @@ width:200px;
 	display:block;
 	width:650px;
 	max-width:95%;
-	border:2px solid rgba(0,0,0,1);
+	border:1px dotted rgba(0,0,0,1);
 	padding:10px;
 	height:310px;
 	overflow-y:auto;
 	margin-left:auto;
 	margin-right:auto;
-	border-radius:10px;
 	background-color:rgba(245,245,245,0.5);
-	padding-bottom:20px;
+  padding-bottom:20px;
+  color:rgba(0, 0, 0,1);
 }
 .ctcShippingAddressLeftSection{
 	
@@ -1380,7 +1392,7 @@ width:200px;
    #ctCommerceUserLostPassword span,
    #ctCommerceUserInfoUpdate span,
    #ctCommerceUserLogout span{
-     margin-top:5px;
+     
      text-decoration:none;
    
    }
@@ -1471,7 +1483,7 @@ width:200px;
    
    */
    .ctcDisplayProductRating{
-
+padding-left:13.2%;
    }
    .ctcItemRating{
     margin-left:15.5%;
@@ -1751,12 +1763,24 @@ width:200px;
 
     text-decoration:none !important;
 }
+.ctcDsicountWidget{
+  color:rgba(0,0,0,1);
+}
 .ctcDsicountWidget ul{
 	
 	margin:0 !important;
     
     text-align:center;
     list-style-type:none !important;
+}
+
+.ctcDsicountWidget ul li a{
+	
+	text-decoration:underline;
+} 
+.ctcDiscountAplicableProducts:before{
+  font-family: dashicons;
+  content: "\f103";
 }
  .ctcDsicountWidget h4{
       white-space:nowrap !important;
@@ -1768,7 +1792,6 @@ width:200px;
   margin-right:auto;
   display: block;
   border:2px solid rgba(255, 255, 255,0.8);
-  border-radius:50%;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.9);
   
       -webkit-transition: width 2s,height 3s ; /* Safari */
@@ -2330,48 +2353,11 @@ white-space: nowrap;
 }
 
 /*animation for page load*/
-@-webkit-keyframes  animateComponent {
-     from {
-    
-    
-            -webkit-transform: scale(1.3);
-    -moz-transform: scale(2.3);
-    -o-transform: scale(2.3);
-    -ms-transform: scale(2.3);
-     transform: scale(2.3);
-   
-          
-   
-  
-      -ms-transform: rotateY(60deg); 
-       -webkit-transform: rotateY(60deg); 
-       transform: rotateY(60deg);}
-    
-    
-    to {
-    
-     opacity:1;
-   
-     
-     
-    }
-}
 
 @keyframes animateComponent {
      from {
-
-    -webkit-transform: scale(1.3);
-    -moz-transform: scale(2.3);
-    -o-transform: scale(2.3);
-    -ms-transform: scale(2.3);
-     transform: scale(2.3);
-   
-          
-   
- 
-      -ms-transform: rotateY(60deg); 
-       -webkit-transform: rotateY(60deg); 
-       transform: rotateY(60deg);}
+opacity:0;
+      }
     
     
     to {
@@ -2727,23 +2713,14 @@ white-space: nowrap;
  #ctcSortProduct select{
  
  float:right;
-  margin-top:-5.5%;
+  margin-top:-5.9%;
   width:19.5%;
   border:1px solid rgba(0,0,0,1);
+  max-width:30%;
+  height:25px;
  }
 
- 
-.ctcShowAjaxWait::after{
-    font-family: dashicons;
-    content: "\f463";
-    -webkit-animation: ajaxWait 3s infinite linear;
-    animation: ajaxWait 3s infinite linear;
-    position: absolute;
-    margin-top: -10%;
-    dislay: inline-block;
-    right: -5%;
-    font-size: 25px;
- }
+
  
  
 
@@ -2887,15 +2864,13 @@ white-space: nowrap;
 	
 }
 .ctcProductCategoriesWidget > ul li {
-	margin-bottom:20px !important;
+	margin-bottom:5px !important;
     
 }
 
 .ctcProductCategoriesWidget img{
-width:50px;
-height:50px;
-border-radius:50%;	
-margin-bottom:-10px !important;	
+width:35px;
+height:35px;	
 border:1px solid rgba(0,0,0,0.8);
 margin-right:5px;
 
@@ -2909,7 +2884,7 @@ margin-right:5px;
 }
 
 .ctcProductCategoriesWidget > ul > li >a {
-font-size:23px;
+font-size:18px;
 text-decoration:none !important;
 
 
@@ -2920,15 +2895,6 @@ position:absolute;
 margin-top:5px;
 }
 .ctcProductCategoriesWidget > ul > li:hover {
-
-  -webkit-transition: width 0.5s; /* Safari */
-    transition: width 0.5s;
-   transition: 0.5s ease;
-  -webkit-transition: 0.5s ease;
-  -moz-transition: 0.5s ease;
-  
-  text-shadow: 2px 2px 4px  rgba(0,0,0,0.4);
-
 
    
 }
@@ -2976,7 +2942,7 @@ margin-top:5px;
 .ctcSelectProductVariationContainer select{
   margin-left:3px; 
  display:inline-block;
- width:30.5%;
+ width:31.7%;
  }
  .ctcSelectProductVariationContainer i{
    display:block;
@@ -2986,25 +2952,13 @@ margin-top:5px;
 
 
 /*animation for page load*/
-@-webkit-keyframes   animateSlideIn {
-     from {
-  
-        margin-left:-40%;
-     
-    to {
-    
- 
-       margin-left:0%;
-     
-    }
-}
 
 @keyframes  animateSlideIn{
      from {
   
         margin-left:-40%;
      
-    to  {
+      } to  {
     
  
        margin-left:0%;
@@ -3012,5 +2966,12 @@ margin-top:5px;
     }
 }
 
+#ctcStripeMountDiv{
+  margin-top:10px;
+  padding:15px;
+  border:2px dashed rgba(0,0,0,1);
 
-
+}
+#ctcStripeMountDiv input{
+  border:1px solid rgba(0,0,0,1);
+}
