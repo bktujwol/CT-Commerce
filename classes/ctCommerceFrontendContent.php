@@ -401,13 +401,13 @@ class ctCommerceFrontendContent{
    	           
    	           <div class="ctcImagesRatingCartContainer">
    	              <div class="ctcProductsImagesMedia">
-   	                  <figure class="ctcProductProfileImage"> <?=wp_get_attachment_image( $product['primaryImage'], array('382','382'));?></figure>
+   	                  <figure class="ctcProductProfileImage" style='background-image: url("<?=wp_get_attachment_image_src($product['primaryImage'], array('500','500'))[0]?>");'' > </figure>
    	                  
    	             
 	                  <?php if(!empty($product['addtionalImages'])):?> 	
 	               <div class="ctcSingleProductGallery">
 	           <?php $imgCount =  count(explode(',',$product['addtionalImages']))+1?>
-		             <div class="ctcSingleProductGalleryContainer"  style="padding-left:<?=((395-($imgCount*45))/2) ?>px">
+		             <div class="ctcSingleProductGalleryContainer"  style="width: <?=($imgCount*70)?>px;padding-left:<?=((475-($imgCount*55))/2) ?>px">
 		            
 		               <?=		     			
 		                  do_shortcode( '[gallery  type=â€�slideshowâ€� ids="'.$product['primaryImage'].','.$product['addtionalImages'].' "
@@ -429,9 +429,9 @@ class ctCommerceFrontendContent{
 		            
 		        <div class="ctcRatingAddtocartVideo">
 		     
-		              <div class="ctcProductPageRating">
+		              <div class="ctcProductPageRating ctcMultiMedDiv">
 					
-					<h5>Rate This Product</h5>
+					
 					<?php 
 					$this->ctcDisplayRatingThumbs($product['productId'], $product['thumbsUpCount'], 
 							                       $product['thumbsDownCount'], $product['thumbsUpUser'], 
@@ -442,13 +442,13 @@ class ctCommerceFrontendContent{
 		           
 		           
 						   
-		  			<div class="ctcProductPageSocialBar">
-					<h5>Share This Product</h5>
+		  			<div class="ctcProductPageSocialBar ctcMultiMedDiv">
+					
 				<?php $this->ctcDisplaySocialbarSharing(home_url().'/product/?product-id='.$product['productId']) ?>
 					
 		            </div>
 		            
-		             <div class="ctcProductPageAddToCart " >
+		             <div class="ctcProductPageAddToCart ctcMultiMedDiv" >
 		             
 		             <span class="ctcFeaturedProductPrice">Price : <?=strtoupper(get_option('ctcBusinessCurrency') ).' '.number_format($product['productPrice'],2)?></span> 
 		            
@@ -473,7 +473,7 @@ class ctCommerceFrontendContent{
         	             $url    = dirname( $parsed [ 'path' ] ) . '/' . rawurlencode( basename( $parsed[ 'path' ] ) );
         	             ?>
         	          
-					    <div class="ctcProductPageVideoContainer">
+					    <div class="ctcProductPageVideoContainer ctcMultiMedDiv">
 							<video class="ctcProductPageVideo"  src="<?=$url ?>" controls="controls" ></video> 
 						</div> 		
         	             

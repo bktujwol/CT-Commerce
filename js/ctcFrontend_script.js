@@ -1617,6 +1617,10 @@
         //script to sort products
         $(document).on('change', '#ctcSortProductSelect', function () {
 
+            if ($(this).val().length === 0) {
+                return;
+            }
+
             var parentContainer = $(this).attr('data-type-containertosort');
             var selecElement = $(this);
             var ajaxSort = $(this).attr('data-type-ajaxsort');
@@ -1794,6 +1798,33 @@
 
             }
         });
+
+        $('.ctcSingleProductGalleryContainer .gallery img').on('mouseenter', function () {
+
+            $(".ctcProductProfileImage").css('background-image', 'url("' + $(this).attr('src') + '")');
+        });
+
+
+        /*
+        *
+        */
+
+        if (undefined != document.querySelector('.ctcRatingAddtocartVideo')) {
+            let container = document.querySelector('.ctcRatingAddtocartVideo')
+            let contHeight = container.offsetHeight;
+            let multiMedDivs = Array.from(container.querySelectorAll('.ctcMultiMedDiv'))
+
+            for (let i in multiMedDivs) {
+                contHeight -= (multiMedDivs[i].offsetHeight + 3);
+            }
+
+
+
+
+
+            container.style.paddingTop = (contHeight / 2) + 'px';
+
+        }
 
 
         /**

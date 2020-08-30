@@ -220,6 +220,10 @@ tr#toolTipHeader td{
 .ctcFeaturedProductImage:hover{
 opacity:0.9;
 }
+.ctcMetaPageProductImage img{
+  width:100%!important;
+  height: auto;
+}
 
 
 .ctcCategoryPageProductImage a{
@@ -1956,7 +1960,8 @@ padding-left:13.2%;
  .ctcProductsImagesMedia{
  display:inline-block;
  float:left;
-    width:395px;
+    width:475px;
+    height:auto;
  border-radius:10px;
 max-width:90%; 
 
@@ -1970,7 +1975,15 @@ max-width:90%;
     transition: all 0.4s ease-in-out 0.2s; 
  }
 .ctcProductProfileImage{
-	
+  
+  width: 475px;
+    height: 475px;
+    z-index: 1000;
+    display: inline-block;
+    margin-top: 0px;
+    background: url('') center center / contain no-repeat rgb(255, 255, 255,1);
+    box-shadow: black 0px 1px 5px 2px;
+   ;
 }
 
 .ctcProductAdditionalMedia{
@@ -1979,11 +1992,11 @@ max-width:90%;
 }
 
  .ctcSingleProductGallery {
-    width: 395px;
+    width: 475px;
     overflow-x: auto;
     overflow-y: hidden;
-    max-width: 97%;
-    margin-right: 0.1%;
+    max-width: 100%;
+   
    
  }
 
@@ -2031,9 +2044,9 @@ white-space: nowrap;
  
  .ctcSingleProductGallery div figure div {
  display:inline-block;
-width:50px;
+
 white-space: nowrap;
- height:50px;
+ 
  }
  
  .ctcSingleProductGallery figcaption{
@@ -2045,7 +2058,7 @@ white-space: nowrap;
  width:50px !important;
  height:50px;
  max-height:95%;
- 
+ box-shadow : 2px 2px 10px 2px rgba(0,0,0,1); 
 
  }
  
@@ -2124,9 +2137,7 @@ white-space: nowrap;
    transition: 0.5s ease;
   -webkit-transition: 0.5s ease;
   -moz-transition: 0.5s ease;
-    -webkit-animation: loadReview 0.5s linear;
-    animation: loadReview 0.5s linear;
-    
+  
     
     -webkit-transition: all 0.4s ease-in-out 0.2s;
     -moz-transition: all 0.4s ease-in-out 0.2s;
@@ -2211,8 +2222,8 @@ white-space: nowrap;
  .ctcRatingAddtocartVideo{
      display: inline-block;
     max-width: 70%;
-   margin-left:0.5%;
-   padding-top:1%;
+    padding:5%;
+  height:475px;
   
  }
  .ctcRatingAddtocartVideo div:hover{
@@ -2232,6 +2243,7 @@ white-space: nowrap;
  margin-right:auto;
  display:block;
 
+
  }
  .ctcProductPageRating .ctcItemRating{
  
@@ -2241,7 +2253,7 @@ white-space: nowrap;
     -o-transform: scale(1.2);
     -ms-transform: scale(1.2);
      transform: scale(1.2);
-     margin-left:0!important;
+     margin-left:5px!important;
    
  }
  .ctcImagesRatingCartContainer .ctcProductPageAddToCart  a.ctcAddToCartLink{
@@ -2263,12 +2275,11 @@ white-space: nowrap;
   .ctcProductPageRating{
      width:230px;
      display:block;
-    border:1px solid rgba(0,0,0,1);
     padding-left:20px;
     padding-top:3px;
     margin-top:5px;
-   box-shadow:  1px 1px 1px 1px rgba(0,0,0,0.2);
-    height:17% !important;
+    box-shadow:  0px 1px 20px 2px rgba(0, 0, 0 ,1);
+   
         padding-bottom: 10px;
    
  }
@@ -2284,45 +2295,52 @@ white-space: nowrap;
  .ctcProductPageAddToCart{
  width:230px;
   display:block;
-  border:1px solid rgba(0,0,0,1);
+  
     padding-right:left;
     padding-top:10px;
+    padding-bottom:2px;
     margin-top:3px;
-    box-shadow:  1px 1px 1px 1px rgba(0,0,0,0.2);
-     height:28%;
+    box-shadow:  0px 1px 20px 2px rgba(0, 0, 0 ,1)
+    
  }
  .ctcProductPageSocialBar{
  width:230px;
   display:block;
-  border:1px solid rgba(0,1,1,1);
     padding-left:10px;
     padding-top:3px;
      margin-top:3px;
-     box-shadow:  1px 1px 1px 1px rgba(0,0,0,0.2);
-     height:21% !important;
+     box-shadow:  0px 1px 20px 2px rgba(0, 0, 0 ,1)
+     
  
  }
 
  .ctcProductDescription{
 
-  display:block !important;
-  margin-top:200px;
+  display:block!important;
+  margin-top: 14%;
+  
+ }
+ .ctcProductPageAddToCart{
+   color:rgb(0,0,0,1)
  }
  .ctcProductPageVideoContainer{
   display:block;
    width:230px;
  display:block;
- border:1px solid rgba(0,0,0,1);
+ 
   margin-top:3px;
-    border-radius:10px;
-    padding-left:4px;
-    box-shadow:  2px 1px rgba(0,0,0,0.2);
-     height:26.7% !important;
+    padding-left:6px;
+   box-shadow:  0px 1px 20px 2px rgba(0, 0, 0 ,1)
+  
+     
  }
+ .ctcProductPageAddToCart .ctcSelectProductVariationContainer select{
+   width:30.3%;
+ }
+
 .ctcProductPageVideo{
  
    width: 220px;
-      border-radius:10px;
     height:130px;
     margin-bottom:-7px;
    
@@ -2403,7 +2421,7 @@ opacity:0;
 	
 	 text-shadow: 8px 8px 12px  rgba(0,0,0,0.9);
 	
-	 transform: rotate(-20deg):
+	 transform: rotate(-20deg);
 }
 
 .ctcProductPageSocialBar .ctcSocialbarChInfoFront::before{
@@ -2571,7 +2589,7 @@ opacity:0;
    font-size:20px;
    color:white;
 	font-family: dashicons;
-   content: "\f338";
+  content: "\f18d";
     font-weight:normal;
      text-shadow: 2px 2px 3px  rgba(0,0,0,1);
      
@@ -2597,11 +2615,11 @@ opacity:0;
    
 }
 .ctcSocialbarChPinterest::before{
-	font-family:cursive;
+  font-family: dashicons;
    text-align:center;
    font-size:22px;
    color:white;
-   content: "\P";
+   content: "\f192";
    font-weight:bold;
    text-shadow: 2px 2px 3px  rgba(0,0,0,1);
    
@@ -2936,7 +2954,7 @@ margin-top:5px;
 }
 #ctc-blog-shortcode  .ctcItemRating{
 
-  margin-left:37%;
+  margin-left:38.5%;
 }
 
 .ctcSelectProductVariationContainer select{
