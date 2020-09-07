@@ -34,13 +34,9 @@
 
         // apply required masonry
         const prodMas = new jsMasonry('.ctcFeaturedProductList,.ctcProductCategoriesMain,.ctcCategoryPageProductList,.ctcMetaPageProductList,.ctcDiscountProductList, .ctcPostImgGallery .gallery');
-
-
         $('.ctcSingleProductGallery span:nth-child(2),.ctcSingleProductGallery span:first-child ').on('click', function (event) {
 
             var scrollContainer = $(".ctcSingleProductGallery");
-
-
 
             if ($(this).is('.ctcSingleProductGallery span:first-child')) {
 
@@ -71,8 +67,6 @@
             localStorage.removeItem("ctcWidgetCartData");
 
         });
-
-
 
 
         /**
@@ -112,13 +106,10 @@
         $(document).on('click', '#ctCommerceUserRegistration', function () {
 
             var data = {
-
                 'action': 'ctcGetUserRegistrationForm'
-
             }
 
             $.post(ctc_ajax_url, data, function (response) {
-
 
                 $.ctcOverlayEl({
                     elemHeight: '550px',
@@ -128,13 +119,9 @@
                     ajaxMethod: 'post'
                 });
 
-
-
             });
 
-
             return false;
-
         });
 
 
@@ -152,15 +139,11 @@
 
                     'action': 'ctcRegisterUser',
                     'userInfo': JSON.stringify($(this).serializeArray())
-
                 }
 
                 $.post(ctc_ajax_url, data, function (response) {
 
-
-
                     if (response == 1) {
-
 
                         $.ctcOverlayEl({
                             modalMessage: 'Account sucesfully created.'
@@ -178,8 +161,6 @@
                             modalMessage: errorUser
                         });
 
-
-
                     }
 
                 });
@@ -187,7 +168,6 @@
             }
             event.preventDefault();
             return false;
-
         });
 
 
@@ -216,13 +196,6 @@
                 ajaxMethod: 'post'
             });
 
-            /*
-            $.post(ctc_ajax_url, data , function(response){
-            	
-            	ctcOpenWpMediaModal(response,modalCss);
-            	
-            });
-            */
             return false;
 
         });
@@ -236,43 +209,25 @@
             var confirmPassword = $("input[name='customerConfirmPassword']").val();
             var confirmPasswordId = $("input[name='customerConfirmPassword']").attr('id');
 
-
-
             if (ctcCheckPasswordMatch(password, confirmPassword, confirmPasswordId)) {
-
-
                 var data = {
-
                     'action': 'ctcUpdateUserInfo',
                     'updatedInfo': JSON.stringify($(this).serializeArray())
-
-
                 }
-
                 $.post(ctc_ajax_url, data, function (response) {
-
                     if (response >= 1) {
-
-                        $.ctcOverlayEl({
-                            modalMessage: 'Information sucessfully updated.'
-                        });
+                        $.ctcOverlayEl({ modalMessage: 'Information sucessfully updated.' });
 
                         $('button.media-modal-close, #ctcUserUpdatenFormReset').trigger('click');
                     } else {
                         $.ctcOverlayEl({
                             modalMessage: 'Information could not be updated at this time.<br/>Try loging out log back in and update'
                         });
-
-
                     }
 
                 });
 
             }
-
-
-
-
             event.preventDefault();
             return false
         });
@@ -283,8 +238,6 @@
         $(window).on("scroll", function () {
             var scrollHeight = $(document).height();
             var scrollPosition = $(window).height() + $(window).scrollTop();
-
-
 
             //just kill process if all featured product are loaded
             if ($('#ctcSortProductSelect').attr('data-type-allproduct') === 'yes') {
@@ -306,37 +259,12 @@
 
                             if (response.length > 22) {
 
-                                /*
-                                // init Masonry
-                                var $grid = $('.ctcFeaturedProductList').masonry({
-                                    transitionDuration: '1.5s',
-                                    stagger: 20,
-                                    fitWidth: true,
-                                    gutter: 9,
-                                    percentPosition: true,
-                                    originLeft: false,
-                                    isFitWidth: true,
-
-                                });
-
-                                $grid.imagesLoaded().progress().always(function (instance) {
-
-                                    $grid.masonry('layout');
-
-                                });
-
-                                $grid.append(response).masonry('reloadItems');
-                                $grid.masonry('appended', response);
-*/
                                 $('.ctcFeaturedProductList').append(response);
 
                                 prodMas.layBrks(document.querySelector('.ctcFeaturedProductList'));
-                                //console.log(response);
-
                                 $('[id]').each(function (i) {
                                     $('[id="' + this.id + '"]').slice(1).remove();
                                 });
-
                                 var productCount = $('.ctcFeaturedProductContent').length;
 
                                 $('div.ctcStorePageMain').attr('data-type-rowoffset', parseInt(productCount));
@@ -357,13 +285,6 @@
 
         /**
          * 
-         * script to deal with store functionalities
-         * 
-         */
-
-
-        /**
-         * 
          * Script for Widget Product cart functionalities
          * 
          * 
@@ -372,8 +293,6 @@
         //function to check if cartdoes not have item if no do not display
         function ctcCheckWidgetEmptyCart() {
             if (!cartChecked) {
-
-
                 if ($('#ctcCartWidgetTable tr').length === 0) {
                     $('.ctcHideOnEmptyCart').animate({
                         opacity: 0,
@@ -434,8 +353,6 @@
             var setProductVariation = $('#ctcWidgetCartProductVariation-' + id).val();
             if (setProductVariation.search(newProductVariation) !== -1) {
 
-
-
                 var setVarArray = setProductVariation.split(',');
                 for (var i in setVarArray) {
 
@@ -493,8 +410,6 @@
             } else {
                 $('#ctcCartGrandTotal, #ctcPageCartGrandTotal input').val(newGrandTotal.toFixed(2));
                 $('#ctcWidgetGrandTotalAmount,#ctcPageCartGtotal').empty().prepend(addCommas(newGrandTotal.toFixed(2)));
-                //$('#ctcWidgetGrandTotalAmount').empty().prepend(newGrandTotal.toFixed(2));
-
             }
             ctcCheckWidgetEmptyCart();
 
@@ -568,7 +483,6 @@
                 cartReady += "</tr>";
             }
 
-
             return cartReady;
         }
 
@@ -585,14 +499,12 @@
             let subCat123 = subCat1 + '-' + subCat2 + '-' + subCat3;
 
             $('#ctcProductSelect-' + id + ' option').each(function () {
-
                 if ($(this).val().trim() === subCat123) {
                     $(this).prop('selected', true);
                     $(this).attr('data-variation', subCat123);
                     $(this).closest('select').trigger('change');
                     $('.ctcProductSelectClass-' + id).attr('data-type-variation', productVariation);
                     i++;
-
                 } else {
 
                     if (i <= 0) {
@@ -753,7 +665,7 @@
          * script to select subcategories
          * 
          */
-        $('.ctcProductSelCat1').on('change', function () {
+        $(document).on('change', '.ctcProductSelCat1', function () {
             let subCat1 = $(this).val().trim();
             let productId = $(this).closest('select').attr('data-type-id');
             $('#ctcProductSubCat1Select-' + productId + ' option:first-child').prop('disabled', true);
@@ -762,6 +674,7 @@
                 let prodVar = $(this).val().trim();
                 if ('emptyOption' != prodVar) {
                     $('#ctcProductSubCat2Select-' + productId + ' option').each(function () {
+
                         if (prodVar.search(subCat1 + '-' + $(this).val()) === 0) {
                             $(this).attr('data-sc-one', subCat1);
                             $(this).prop('disabled', false);
@@ -770,22 +683,15 @@
                             if ($(this).attr('data-sc-one') != subCat1) {
                                 $(this).prop('disabled', true);
                             }
-
                         }
                     })
-
                 }
-
-
             });
-
         })
 
-        $('.ctcProductSelCat2').on('change', function () {
-
+        $(document).on('change', '.ctcProductSelCat2', function () {
             let productId = $(this).closest('select').attr('data-type-id');
             let scOneTwo = $('#ctcProductSubCat1Select-' + productId).val().trim() + '-' + $(this).val().trim();
-
             $('#ctcProductSelect-' + productId + ' option').each(function () {
                 let prodVar = $(this).val().trim();
                 $('#ctcProductSubCat3Select-' + productId + ' option').each(function () {
@@ -890,8 +796,6 @@
             }
 
         }
-
-
 
 
         //script to remove item from product cart page
@@ -1094,23 +998,17 @@
                     requiredField = 'empty';
                 } else {
                     $(this).removeAttr('style');
-
                 }
-
             });
             if (requiredField == 'empty') {
                 $.ctcOverlayEl({
                     modalMessage: 'Please fill in required fields, before proceeding.'
                 });
                 return false;
-
             } else {
-
                 return true;
             }
         }
-
-
 
         //function to verify shipping address and calculate shipping cost
         function verifyAddressCalculateShippingCost(shippingRadio) {
@@ -1343,7 +1241,6 @@
                             shippingRadio.prop('checked', false);
                             $('#ctcCheckoutPaymentOptions,#ctcDisplayShippingCost').hide("normal");
                             alert("Shipping could not be calculated at this time \nPlease try again later");
-                            //$('#ctcUserShippingAddress').slideUp();
                             $(".ctcCalculateShipingWait").animate({
                                 opacity: 0
                             }, 100, function () {
@@ -1370,7 +1267,6 @@
                     });
                     shippingRadio.parent().append('<font class="ctcCalculateShipingWait dashicons-before dashicons-update"></font>');
                     $('#ctcUserShippingAddress').slideUp(2000).find('input').removeAttr('required');
-
                     $('#ctcCheckoutPaymentOptions,#ctcDisplayShippingCost').show(1500);
                     $('.ctcChooseShippingOption').hide("medium");
 
@@ -1417,8 +1313,6 @@
             }
 
         });
-
-
 
         /**
          * 
@@ -1726,7 +1620,6 @@
             $(parentContainer).empty().html(sortedHtml.join(''));
             //lay in grid
             prodMas.layBrks(document.querySelector(parentContainer));
-
         }
 
 
@@ -1775,9 +1668,7 @@
             }
             if (el.children('li').length === 0) {
                 $.post(ctc_ajax_url, data, function (response) {
-
                     if (response.length === 0) {
-
                         window.location.href = categoryUrl;
                     } else {
                         el.empty();
@@ -1789,25 +1680,17 @@
                         });
                     }
                 }).fail(function () {
-
                     alert("Action could not be completed at this time \nPlease try again later");
-
                 });
             } else {
                 el.slideToggle("slow");
-
             }
         });
 
         $('.ctcSingleProductGalleryContainer .gallery img').on('mouseenter', function () {
-
             $(".ctcProductProfileImage").css('background-image', 'url("' + $(this).attr('src') + '")');
         });
 
-
-        /*
-        *
-        */
 
         if (undefined != document.querySelector('.ctcRatingAddtocartVideo')) {
             let container = document.querySelector('.ctcRatingAddtocartVideo')
@@ -1817,16 +1700,8 @@
             for (let i in multiMedDivs) {
                 contHeight -= (multiMedDivs[i].offsetHeight + 3);
             }
-
-
-
-
-
             container.style.paddingTop = (contHeight / 2) + 'px';
-
         }
-
-
         /**
          * 
          * do not write code beyond 

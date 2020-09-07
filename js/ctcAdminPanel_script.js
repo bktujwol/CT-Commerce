@@ -101,7 +101,15 @@
 				ajaxData: data,
 				ajaxMethod: 'post'
 			});
+
+
+
+
+
+
 		});
+
+
 
 		//this part updates category with ajax
 		$(document).on('submit', '#ctcUpdateCategoryForm', function (event) {
@@ -420,7 +428,7 @@
 				for (var i in imagesThumb) {
 					productCollage += '<div class="ctcImgAlbum"><img   style="width:' + imgWidth + 'px;  height:' + imgHeight + 'px;" class="gridImg"  src="' + imagesThumb[i] + '" /></div>';
 				}
-				//$('.ctcImgAlbum').remove();
+
 				if (typeof masonry == 'function') {
 					$('.ctcAdditionaImages').masonry('destroy');
 				}
@@ -1651,3 +1659,4 @@
 		 */
 	});
 }(jQuery));
+
