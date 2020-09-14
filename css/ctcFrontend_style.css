@@ -758,7 +758,7 @@ section.widget_ctcommerce_cart_widget{
 #ctcCartWidgetTable tr td{
 	
 	
-	text-align:right;
+
     border: 0;
     padding:5px;
 
@@ -807,8 +807,8 @@ section.widget_ctcommerce_cart_widget{
 	
 
     max-width:99% !important;
-    width:35px !important;
-    min-width:35px;
+    width:25px !important;
+    min-width:25px;
 }
 
 .ctcCartWidgetTable tr:hover td{
@@ -839,7 +839,7 @@ section.widget_ctcommerce_cart_widget{
 
 .ctcCartWidgetItem img:hover{
   
-    border:1px solid rgba(0,0,0,1);
+   
   
 }
 
@@ -1901,19 +1901,17 @@ padding-left:13.2%;
  .ctcUserRegistrationLeft,
  .ctcUserUpdateLeft{
  
-    float: left;
-    width: 495px;
-    max-width: 90%;
+
+    width: 400px;
     display:inline-block;
  
  }
  
  .ctcUserRegistrationRight,
  .ctcUserUpdateRight{
-     float: left;
-    width: 495px;
-    max-width: 90%;
+    width: 400px;
       display:inline-block;
+      float:right;
  }
  
  .ctcUserRegistrationRow,
@@ -1921,9 +1919,15 @@ padding-left:13.2%;
     display: table-row;
     width: auto;
     
+    
 }
+
  .ctcUserUpdateRowButton{
    display:block !important;
+ }
+.ctcUserRegistrationRow input,
+ .ctcUserUpdateRow input{
+   color:rgba(255,255,255,1)!important;
  }
  
  
@@ -1946,8 +1950,15 @@ padding-left:13.2%;
      display:inline-block;
  
  }
- 
- 
+ input#userUserZipCode,
+ input#ctcUserZipCode{
+   max-width:80px!important;
+ }
+ input#userUserPhoneNumber,
+ input#userUserPhoneNumber{
+  max-width:120px!important;
+
+ }
 
 
  

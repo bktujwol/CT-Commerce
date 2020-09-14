@@ -113,7 +113,7 @@
 
                 $.ctcOverlayEl({
                     elemHeight: '550px',
-                    elemWidth: '1200px',
+                    elemWidth: '1000px',
                     ajaxUrl: ctc_ajax_url,
                     ajaxData: data,
                     ajaxMethod: 'post'
@@ -190,7 +190,7 @@
 
             $.ctcOverlayEl({
                 elemHeight: '550px',
-                elemWidth: '1200px',
+                elemWidth: '1000px',
                 ajaxUrl: ctc_ajax_url,
                 ajaxData: data,
                 ajaxMethod: 'post'

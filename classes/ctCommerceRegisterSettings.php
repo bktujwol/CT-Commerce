@@ -5,7 +5,7 @@ class ctCommerceRegisterSettings{
     public function ctcRegisterRequiredSettings(){
         self::ctcRegisterBussinessSetting();
         self::ctcRegisterBillingSetting();
-       self::ctcRegisterShippingSetting();
+        self::ctcRegisterShippingSetting();
         self::ctcTermsConditionsSetting();
        self::ctcRegisterEmailSetting();
     }

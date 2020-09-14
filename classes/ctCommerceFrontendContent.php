@@ -1307,7 +1307,7 @@ endif;
    ?>
 
 		<div id="ctcUserRegistrationForm">
-		    	
+		    	<br/>
 		    	     <h2 class="dashicons-before dashicons-smiley">User Registration </h2>
                    		<form id="ctcUserRegistrationForm" autocomplete="on" >
                    		
@@ -1355,7 +1355,7 @@ endif;
                                  <div class="ctcUserRegistrationRow">   
 										<ul class="ctcPasswordNote">
                                  		   <li>
-                                 		   Password should contain:  UpperCase, LowerCase, Number/SpecialChar and min 8 Chars
+											<i>Password should be 8 chars long with UpperCase and Number/SpecialChars </i>
                                  		   </li>
                                  		   </ul>   
                                           <div class="ctcUserRegistrationColumn">
@@ -1389,7 +1389,7 @@ endif;
 	                                      </div>  
                                           <div class="ctcUserRegistrationColumnRight">
                                           
-                                           <input id="userUserPhoneNumber" type="text" name="customerPhone" size="20" value=""/>
+                                           <input id="userUserPhoneNumber" type="number" name="customerPhone" size="20" value=""/>
                                              
                                          </div>
                                   </div>
@@ -1462,7 +1462,7 @@ endif;
 	                                      </div>  
                                           <div class="ctcUserRegistrationColumnRight">
                                           
-                                           <input id="userUserZipCode" type="text" name="zipCode" size="20" value=""/>
+                                           <input id="userUserZipCode" type="number" name="zipCode" size="20" value=""/>
                                              
                                          </div>
                                   </div> 
@@ -1517,7 +1517,7 @@ endif;
     ?>	
     	<form id="ctcUserUpdateForm" autocomplete="on" >
     	<div id="ctcUserUpdateForm">
-		    	
+		    	<br/>
 		    	     <h2 class="dashicons-before dashicons-edit">Update Information</h2>
                    		
                    		
@@ -1566,7 +1566,7 @@ endif;
                                  <div class="ctcUserUpdateRow">   
 										<ul class="ctcPasswordNote">
                                  		   <li>
-                                 		   Password should contain:  UpperCase, LowerCase, Number/SpecialChar and min 8 Chars
+                                 		   <i>Password should be 8 chars long with UpperCase and Number/SpecialChars </i>
                                  		   </li>
                                  		   </ul>   
                                           <div class="ctcUserUpdateColumn">
@@ -1600,7 +1600,7 @@ endif;
 	                                      </div>  
                                           <div class="ctcUserUpdateColumnRight">
                                           
-                                           <input id="userUserPhoneNumber" type="text" name="customerPhone" size="20" value="<?=!empty($userData['customerPhone'])?$userData['customerPhone']:''?>">
+                                           <input id="userUserPhoneNumber" type="number" name="customerPhone" size="20" value="<?=!empty($userData['customerPhone'])?$userData['customerPhone']:''?>">
                                              
                                          </div>
                                   </div>
@@ -1673,7 +1673,7 @@ endif;
 	                                      </div>  
                                           <div class="ctcUserUpdateColumnRight">
                                           
-                                           <input id="ctcUserZipCode" type="text" name="zipCode" size="20"  value="<?=!empty($userData['zipCode'])?$userData['zipCode']:''?>" />
+                                           <input id="ctcUserZipCode" type="number" name="zipCode" size="50"  value="<?=!empty($userData['zipCode'])?$userData['zipCode']:''?>" />
                                              
                                          </div>
                                   </div> 
