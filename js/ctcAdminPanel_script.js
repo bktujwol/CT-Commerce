@@ -1661,5 +1661,5 @@
 }(jQuery));
 
 window.addEventListener('load', () => {
-	let jsMas = new jsMasonry('.gallery ');
+	let jsMas = new jsMasonry('.ctcPostImgGallery .gallery ');
 })
