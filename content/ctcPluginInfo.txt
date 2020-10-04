@@ -4,7 +4,7 @@
 <div >
 <div class="updated js-update-details"">
     <p>
-        Plugin CT Commerce was built using <a href="https://wordpress.org/themes/scratchpad">Scratchpad</a> as base theme, it works better with Scratchpad or similar theme. 
+        Plugin CT Commerce was built using <a href="https://wordpress.org/themes/oceanwp/">OceanWP</a> as default theme, it works better with OceanWP or similar theme. 
     </p>
   </div>  
     <div class="updated js-update-details"">
@@ -15,8 +15,7 @@
     
    <div class="updated js-update-details"">
     <p>
-     You need to have profile image for product otherwise, plugin will not function properly, (seriously what can you sell with out image?) 
-     </p>
+     You need to have profile image for product.
      </div>
     </div>
 </div>

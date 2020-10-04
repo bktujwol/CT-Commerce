@@ -1054,8 +1054,6 @@ span.ctcPrimaryPicThumb img {
   float: left;
   /*fix for  buggy browsers*/
   display: table-column;
-  width: 408px;
-  max-width: 90%;
 
 }
 

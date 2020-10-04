@@ -2964,10 +2964,37 @@ margin-top:5px;
   
 }
 #ctc-blog-shortcode  .ctcItemRating{
+  margin:15px;
+margin-left:0px;
 
-  margin-left:38.5%;
+}
+#ctc-blog-shortcode .ctcSocialbarChGrid{
+  margin:15px;
+  margin-left:20px;
+display:inline;
+
 }
 
+#ctc-blog-shortcode .ctcAddToCartLink{
+  margin:15px;
+  margin-left:20px;
+  
+}
+#ctc-blog-shortcode .ctcSelectProductVariationContainer{
+  margin:15px;
+  margin-left:0px;
+  width:200px;
+
+}
+#ctc-blog-shortcode .ctcPreOrderAvilable{
+  text-align:left;
+  margin:15px;
+  margin-left:26px;
+
+}
+#ctc-blog-shortcode .ctcSelectProductVariationContainer select{
+  width:30%;
+}
 .ctcSelectProductVariationContainer select{
   margin-left:3px; 
  display:inline-block;

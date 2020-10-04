@@ -553,7 +553,7 @@
 			let id = $(this).attr('data-type-id');
 			$.ctcOverlayEl({
 				elemHeight: '570px',
-				elemWidth: '630px',
+				elemWidth: '470px',
 				elemSelector: '#ctcOtherContent' + id
 			});
 		});
@@ -1660,3 +1660,6 @@
 	});
 }(jQuery));
 
+window.addEventListener('load', () => {
+	let jsMas = new jsMasonry('.gallery ');
+})
