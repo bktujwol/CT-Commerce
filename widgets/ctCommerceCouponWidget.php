@@ -97,7 +97,7 @@ class ctCommerceCouponWidget extends WP_Widget{
 	            <li class="ctcWidgetDiscountImage">
 	              <?= wp_get_attachment_image($discount['couponImage'], array('100','100'));?>
 	            </li>
-	            <li ><a href="<?=home_url().'//current-discount/?discount='.$discount['promoCode']?>">Aplicable Products</a></li>
+	            <li ><a class="ctcDiscountAplicableProducts" href="<?=home_url().'//current-discount/?discount='.$discount['promoCode']?>">Aplicable Products</a></li>
 	            <li class="ctcCouponWidgetPromoCode"><span>Promo Code:</span><span><?=$discount['promoCode']?></span></li>
 	            <?php if($discount['discountAmount'] > 0): ?>
 	                <li class="ctcCouponWidgetAmountOff"><?=$discount['discountType']?> - <?=$discount['discountAmount']?> <?=strtoupper(esc_attr( get_option('ctcBusinessCurrency') ))?> Off.</li>

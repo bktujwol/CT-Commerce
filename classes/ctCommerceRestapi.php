@@ -42,7 +42,6 @@ class ctCommerceRestApi{
                             else:
                                 unset($product[$key]);
                             endif; 
-                           
                          endif;   
                     endforeach;   
                        return $product;

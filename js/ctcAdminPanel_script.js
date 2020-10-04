@@ -101,7 +101,15 @@
 				ajaxData: data,
 				ajaxMethod: 'post'
 			});
+
+
+
+
+
+
 		});
+
+
 
 		//this part updates category with ajax
 		$(document).on('submit', '#ctcUpdateCategoryForm', function (event) {
@@ -420,7 +428,7 @@
 				for (var i in imagesThumb) {
 					productCollage += '<div class="ctcImgAlbum"><img   style="width:' + imgWidth + 'px;  height:' + imgHeight + 'px;" class="gridImg"  src="' + imagesThumb[i] + '" /></div>';
 				}
-				//$('.ctcImgAlbum').remove();
+
 				if (typeof masonry == 'function') {
 					$('.ctcAdditionaImages').masonry('destroy');
 				}
@@ -545,7 +553,7 @@
 			let id = $(this).attr('data-type-id');
 			$.ctcOverlayEl({
 				elemHeight: '570px',
-				elemWidth: '630px',
+				elemWidth: '470px',
 				elemSelector: '#ctcOtherContent' + id
 			});
 		});
@@ -1546,7 +1554,11 @@
 				'action': 'ctcProcessRefund',
 				'refundData': $(this).serializeArray()
 			}
+
+
+
 			$.post(ajaxurl, data, function (response) {
+
 				if (response === 'refundSuccessful') {
 					alert(ctcTrans.refundSuccess);
 					$('#ctcOverlayElClosebtn').trigger('click');
@@ -1647,3 +1659,7 @@
 		 */
 	});
 }(jQuery));
+
+window.addEventListener('load', () => {
+	let jsMas = new jsMasonry('.gallery ');
+})

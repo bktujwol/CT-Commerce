@@ -1,0 +1,31 @@
+{
+  "name": "ct-commerce",
+  "version": "2.0.0",
+  "description": "WordPress e-commerce plugin",
+  "main": "ctcCommerce.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ujw0l/CT-Commerce.git"
+  },
+  "keywords": [
+    "e-commerce",
+    "WordPress"
+  ],
+  "author": "UjW0L",
+  "license": "GPL-2.0-or-later",
+  "bugs": {
+    "url": "https://github.com/ujw0l/CT-Commerce/issues"
+  },
+  "homepage": "https://github.com/ujw0l/CT-Commerce#readme",
+  "dependencies": {
+    "js-masonry": "^1.0.3",
+    "masonry-layout": "4.2.2",
+    "imagesloaded": "4.1.4",
+    "jquery": "3.5.1",
+    "ctc-overlay-viewer": "1.2.4",
+    "backbone": "1.4.0"
+  }
+}

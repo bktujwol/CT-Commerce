@@ -32,14 +32,7 @@ class ctCommercePluginADU{
         $ctcAdminPanelProcessing->ctcRemoveGeneratedPages();
         $this->ctcRemoveOptionSetting();
         remove_role( 'ctc-user' );
-        
-        
         wp_delete_category(get_cat_ID('CT Commerce') );
-        
-        //self::ctcDropTables();
-     
-        
-       
     }
     
     //run this function on plugin uninstall

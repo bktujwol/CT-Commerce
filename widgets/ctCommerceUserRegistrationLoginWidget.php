@@ -108,7 +108,7 @@ class ctCommerceUserLoginRegistration extends WP_Widget{
             
             	
             	   if(isset($_GET['ctcLoginFailed'])):
-            	      echo "<p class='ctcLoginWidgetError'>Can't Log you in. Wrong Username or Password</p>";
+            	      echo "<p class='ctcLoginWidgetError'>".__("Can't Log you in. Wrong Username or Password",'ct-commerce')."</p>";
             	   endif;
                  wp_login_form($args);
  
@@ -120,7 +120,9 @@ class ctCommerceUserLoginRegistration extends WP_Widget{
               </ul>
             <?php
             else:
+                echo $before_title .__('Logout/Update Info','ct-commerce') . $after_title;
             ?>
+            
             <ul>
            <li> <a id="ctCommerceUserLogout" href="<?php echo wp_logout_url(home_url()); ?>"><span class="dashicons dashicons-migrate"></span>Logout</a></li>
             <li><a id="ctCommerceUserInfoUpdate" href="JavaScript:void(0);" ><span class="dashicons dashicons-sos"></span>Update Information</a></li>

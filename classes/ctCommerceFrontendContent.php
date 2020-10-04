@@ -311,7 +311,7 @@ class ctCommerceFrontendContent{
 							
 							     <div id="ctcCategoryPageProductImage<?= $product['productId']?>" class="ctcCategoryPageProductImage">
 							       <a href="<?= home_url()?>/product/?product-id=<?=$product['productId']?>" >
-							           <?=wp_get_attachment_image( $product['primaryImage'], array('285','285'));?>
+							           <?=wp_get_attachment_image( $product['primaryImage'], array('280','280'));?>
 							     	</a>
 							     
 							     </div>
@@ -401,22 +401,13 @@ class ctCommerceFrontendContent{
    	           
    	           <div class="ctcImagesRatingCartContainer">
    	              <div class="ctcProductsImagesMedia">
-   	                  <figure class="ctcProductProfileImage"> <?=wp_get_attachment_image( $product['primaryImage'], array('382','382'));?></figure>
+   	                  <figure class="ctcProductProfileImage" style='background-image: url("<?=wp_get_attachment_image_src($product['primaryImage'], array('500','500'))[0]?>");'' > </figure>
    	                  
-   	                  <?php //$galleryImageWidth = (substr_count($product['addtionalImages'],',')+1)*110; ?>
-		             
+   	             
 	                  <?php if(!empty($product['addtionalImages'])):?> 	
 	               <div class="ctcSingleProductGallery">
-	                <?php if(!wp_is_mobile()):?>
-	                
-	                
-		             
-		              
-		              
-		              <?php endif;?>
-	              
-	               
-		             <div class="ctcSingleProductGalleryContainer" >
+	           <?php $imgCount =  count(explode(',',$product['addtionalImages']))+1?>
+		             <div class="ctcSingleProductGalleryContainer"  style="width: <?=($imgCount*70)?>px;padding-left:<?=((475-($imgCount*55))/2) ?>px">
 		            
 		               <?=		     			
 		                  do_shortcode( '[gallery  type=â€�slideshowâ€� ids="'.$product['primaryImage'].','.$product['addtionalImages'].' "
@@ -438,9 +429,9 @@ class ctCommerceFrontendContent{
 		            
 		        <div class="ctcRatingAddtocartVideo">
 		     
-		              <div class="ctcProductPageRating">
+		              <div class="ctcProductPageRating ctcMultiMedDiv">
 					
-					<h5>Rate This Product</h5>
+					
 					<?php 
 					$this->ctcDisplayRatingThumbs($product['productId'], $product['thumbsUpCount'], 
 							                       $product['thumbsDownCount'], $product['thumbsUpUser'], 
@@ -451,13 +442,13 @@ class ctCommerceFrontendContent{
 		           
 		           
 						   
-		  			<div class="ctcProductPageSocialBar">
-					<h5>Share This Product</h5>
+		  			<div class="ctcProductPageSocialBar ctcMultiMedDiv">
+					
 				<?php $this->ctcDisplaySocialbarSharing(home_url().'/product/?product-id='.$product['productId']) ?>
 					
 		            </div>
 		            
-		             <div class="ctcProductPageAddToCart " >
+		             <div class="ctcProductPageAddToCart ctcMultiMedDiv" >
 		             
 		             <span class="ctcFeaturedProductPrice">Price : <?=strtoupper(get_option('ctcBusinessCurrency') ).' '.number_format($product['productPrice'],2)?></span> 
 		            
@@ -482,7 +473,7 @@ class ctCommerceFrontendContent{
         	             $url    = dirname( $parsed [ 'path' ] ) . '/' . rawurlencode( basename( $parsed[ 'path' ] ) );
         	             ?>
         	          
-					    <div class="ctcProductPageVideoContainer">
+					    <div class="ctcProductPageVideoContainer ctcMultiMedDiv">
 							<video class="ctcProductPageVideo"  src="<?=$url ?>" controls="controls" ></video> 
 						</div> 		
         	             
@@ -640,7 +631,7 @@ endif;
 		<select id="ctcSortProductSelect" data-type-containertosort="<?=$parentContainer?>" data-type-ajaxsort="<?=$ajaxSort?>">
 		<option value="">Sort product by</option>
 		<option value="mostThumbUp">Thumbs Up</option>
-		<option value="priceLowest">Price (low to high)</option>
+		<option value="priceLowest">Price(low to high)</option>
 		<option value="priceHighest">Price(high to low)</option>
 		<option value="addedDate">Date(recent first)</option>
 		</select>
@@ -1241,7 +1232,7 @@ endif;
     
 	$postContent ='<div id="ctcProductPost">';
 
-    $postContent = '<div id="ctc-blog-shortcode" >[ctcGetPostRating][ctcPostSocialbarSharing][ctcGetPostAddToCart]</div>';
+    $postContent .= '<ul id="ctc-blog-shortcode" ><li>[ctcGetPostRating]</li><li>[ctcPostSocialbarSharing]</li><li>[ctcGetPostAddToCart]</li></ul>';
     if(!empty($data['price'])):
     $postContent .='<div class="ctcPostPrice"></span> Price : <span>'.$data['price'].''.strtoupper($data['currency']).'</span></div>';
     
@@ -1316,7 +1307,7 @@ endif;
    ?>
 
 		<div id="ctcUserRegistrationForm">
-		    	
+		    	<br/>
 		    	     <h2 class="dashicons-before dashicons-smiley">User Registration </h2>
                    		<form id="ctcUserRegistrationForm" autocomplete="on" >
                    		
@@ -1364,7 +1355,7 @@ endif;
                                  <div class="ctcUserRegistrationRow">   
 										<ul class="ctcPasswordNote">
                                  		   <li>
-                                 		   Password should contain:  UpperCase, LowerCase, Number/SpecialChar and min 8 Chars
+											<i>Password should be 8 chars long with UpperCase and Number/SpecialChars </i>
                                  		   </li>
                                  		   </ul>   
                                           <div class="ctcUserRegistrationColumn">
@@ -1398,7 +1389,7 @@ endif;
 	                                      </div>  
                                           <div class="ctcUserRegistrationColumnRight">
                                           
-                                           <input id="userUserPhoneNumber" type="text" name="customerPhone" size="20" value=""/>
+                                           <input id="userUserPhoneNumber" type="number" name="customerPhone" size="20" value=""/>
                                              
                                          </div>
                                   </div>
@@ -1471,7 +1462,7 @@ endif;
 	                                      </div>  
                                           <div class="ctcUserRegistrationColumnRight">
                                           
-                                           <input id="userUserZipCode" type="text" name="zipCode" size="20" value=""/>
+                                           <input id="userUserZipCode" type="number" name="zipCode" size="20" value=""/>
                                              
                                          </div>
                                   </div> 
@@ -1526,7 +1517,7 @@ endif;
     ?>	
     	<form id="ctcUserUpdateForm" autocomplete="on" >
     	<div id="ctcUserUpdateForm">
-		    	
+		    	<br/>
 		    	     <h2 class="dashicons-before dashicons-edit">Update Information</h2>
                    		
                    		
@@ -1575,7 +1566,7 @@ endif;
                                  <div class="ctcUserUpdateRow">   
 										<ul class="ctcPasswordNote">
                                  		   <li>
-                                 		   Password should contain:  UpperCase, LowerCase, Number/SpecialChar and min 8 Chars
+                                 		   <i>Password should be 8 chars long with UpperCase and Number/SpecialChars </i>
                                  		   </li>
                                  		   </ul>   
                                           <div class="ctcUserUpdateColumn">
@@ -1609,7 +1600,7 @@ endif;
 	                                      </div>  
                                           <div class="ctcUserUpdateColumnRight">
                                           
-                                           <input id="userUserPhoneNumber" type="text" name="customerPhone" size="20" value="<?=!empty($userData['customerPhone'])?$userData['customerPhone']:''?>">
+                                           <input id="userUserPhoneNumber" type="number" name="customerPhone" size="20" value="<?=!empty($userData['customerPhone'])?$userData['customerPhone']:''?>">
                                              
                                          </div>
                                   </div>
@@ -1682,7 +1673,7 @@ endif;
 	                                      </div>  
                                           <div class="ctcUserUpdateColumnRight">
                                           
-                                           <input id="ctcUserZipCode" type="text" name="zipCode" size="20"  value="<?=!empty($userData['zipCode'])?$userData['zipCode']:''?>" />
+                                           <input id="ctcUserZipCode" type="number" name="zipCode" size="50"  value="<?=!empty($userData['zipCode'])?$userData['zipCode']:''?>" />
                                              
                                          </div>
                                   </div> 
@@ -1749,17 +1740,58 @@ endif;
     	
     	
     	if(count($variation) > 1):
-    	
-    	
+		
+		$subCat1 =Array();
+		$subCat2 =Array();
+		$subCat3 =Array();
+
+		for($i=0; $i<count($variation); $i++) :
+
+			$varExpld = explode("-",$variation[$i]['product']);
+			$subCat1[] = trim($varExpld[0]);
+			$subCat2[] = trim($varExpld[1]);
+			$subCat3[] = trim($varExpld[2]);
+		endfor;
+
+		$uSubCat1 = array_unique($subCat1);
+		$uSubCat2= array_unique($subCat2);
+		$uSubCat3= array_unique($subCat3);
+
     	?>
     	 <div class="ctcSelectProductVariationContainer">
+<i><?=__('Select product variation below','ct-commerce')?></i>
+<select class="ctcProductSelCat1" id="ctcProductSubCat1Select-<?=$productId?>" data-type-id="<?=$productId?>">
+<option selected > ------- </option>
+<?php foreach($uSubCat1 as $key=>$val):?>
+	<option  value="<?=$val?>"><?=$val?></option>
+<?php endforeach;?>
+
+
+</select>
+
+<select class="ctcProductSelCat2" id="ctcProductSubCat2Select-<?=$productId?>" data-type-id="<?=$productId?>">
+<option disabled selected > -------</option>
+<?php foreach($uSubCat2 as $k=>$v):?>
+	<option  value="<?=$v?>" disabled ><?=$v?></option>
+<?php endforeach;?>
+
+
+</select>
+
+<select class="ctcProductSelCat3" id="ctcProductSubCat3Select-<?=$productId?>" data-type-id="<?=$productId?>">
+<option disabled selected> ------- </option>
+<?php foreach($uSubCat3 as $x =>$value) :?>
+	<option  value="<?=$value?>" disabled ><?=$value?></option>
+<?php endforeach;?>
+
+
+</select>
+
     	 
-    	   <select id="ctcProductSelect-<?=$productId?>" data-type-id="<?=$productId?>"class="ctcProductVariation ctcProductVariationSelect" >
+    	   <select style="display:none;" id="ctcProductSelect-<?=$productId?>" data-type-id="<?=$productId?>"class="ctcProductVariation ctcProductVariationSelect" >
     	      <option value="emptyOption" >Select Variation</option>
 	                 <?php  for($a=0; $a<=count($variation)-1; $a++):?>
-	 					
 	                     <option data-type-preorder="<?=$variation[$a]['preOrder'] ??'' ?>" value="<?=$variation[$a]['product']?>"><?=$variation[$a]['product']?></option>
-	                 
 	                 <?php endfor;?>
 	               
 	      </select>

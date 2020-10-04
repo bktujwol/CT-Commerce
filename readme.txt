@@ -1,35 +1,35 @@
 === CT Commerce ===
 Contributors: UjW0l
-Tags: e-commerce, online shop,selling tool, one step e-commerce solution 
+Tags: e-commerce, auto inventory management,selling tool,e-commerce solution 
 Requires at least: 4.9
-Tested up to: 5.5
+Tested up to: 5.5.1
 Requires PHP: 5 or Higher
-Stable tag: 1.6.0
+Stable tag: 2.0.0
 License: GPLV2
 
-e-commerce Web app built for WordPress. Mostly runs on frontend for better website speed and performance
+e-commerce Web app built for WordPress which automatically manages inventory. Mostly runs on frontend for better website speed and performance ideal for shared hosting.
 
 == Description ==
-The idea behind this plugin is built a plugin from scratch without  gluing  bunch of different stuffs together and make it function.It runs mainly on Javascript and jQuery uses server  only when necessary, come built with own rating and review features along with overlay image feature 
-(using AJAX ), plugin in very intuitive and engaging  on both front end and backend. Almost everything is built  from scratch for better performance. 
-e-commerce plugin for WordPress, written mainly using Javascript and jQuery. Gives you option to sell your products beautifully. Plugin features option of Strip payment, Cash on delivery. And calculates shipping cost using USPS api , along with Vendor Shipping and Customer store pick up. You can create your own discount and display in frontend using coupon widget. 
-You have option of using plugin default product page or create post page using plugin and add add to cart short code using WP editor and customise it the way you want.
+The idea behind this plugin is built a plugin from scratch without  gluing  bunch of different stuffs together and make it function.It runs mainly on Javascript and jQuery uses server  only when necessary so ideal for slow server or shared server .Comes built with own rating and review features along with overlay image feature 
+(using AJAX ), the plugin is very intuitive and engaging  on both the frontend and backend. Almost everything is built  from scratch for better performance. 
+e-commerce plugin for WordPress, written mainly using Javascript and jQuery. Gives you the option to sell your products beautifully. Plugin features option of Stripe payment, Cash on delivery. And calculates shipping cost using USPS api , along with Vendor Shipping and Customer store pick up. You can create your own discount and display in frontend using a coupon widget. 
+You have the option of using plugin default product page or create post page using plugin and add to cart short code using WP editor and customise it the way you want.
 ---Front-end---
-Plugin also come with built in image overlay feature, which adapts to any screen size to display best possible  image resolution and displays image albums.
+Plugin also comes with a built in image overlay feature, which adapts to any screen size to display best possible  image resolution and displays image albums.
 
-Plugin also comes wit built in share product feature, which was built from scratch. 
+Plugin also comes with a built in share product feature, which was built from scratch. 
 
-Plugin communicates with server only when required to reduce pressure on server.
+Plugin communicates with the server only when required to reduce pressure on the server.
 
-Plugin has built in user registration and login feature built in using WordPress login feature, without having to go backend to log in.
+Plugin has built in user registration and login features built in using the WordPress login feature, without having to go backend to log in.
 
 Plugin come built-in with couple of product cart one as tooltip and other as widget (very intuitive) 
 
-Plugin utilises best possible security option available with  WordPress against SQL injection and fraudulent activities.
+Plugin utilises the best possible security option available with  WordPress against SQL injection and fraudulent activities.
 
-Plugin also has widget to display product based on category and it subcategories.
+Plugin also has a widget to display products based on category and it's subcategories.
 
-Plugin also has inventory management  feature which notifies you of zero inventory and automatically manages itself based on sales.
+Plugin also has an inventory management  feature which notifies you of zero inventory and automatically manages itself based on sales.
 
 Plugin also has sort product features with option of sorting them based on price, thumbs up and date
 
@@ -37,30 +37,30 @@ Plugin comes built in with feature which provides users to thumbs up or thumbs d
 
 Plugin makes good use of AJAX to keep server side and client side communication to minimum(to reduce traffic on server).
 
-You can sell product with different variation(size, gender, color etc)using same name.
+You can sell products with different variations(size, gender, color etc)using the same name.
 
-Plugin let's customer review product which can de display in product page.
+Plugin let's customers review products which can be displayed on the product page.
 
-You can add product video for product .
+You can add product videos for products .
 
 --Admin Section--
-Admin features built in with category bar-chart , sales activities visualisation.
+Admin features built in with category bar-chart , sales activities visualisations.
 
-It comes with easy to section where you can create e-commerce site in a snap, it even creates menu to be used in frontend.
+It comes with an easy section where you can create an e-commerce site in a snap, it even creates a menu to be used in the frontend.
 
-You need to add USPS key (if using USPS for shipping ), Stripe Key(if using strip payment) on backend 
+You need to add USPS key (if using USPS for shipping ), Stripe Key(if using stripe payment) on backend 
 
-You need to set up STMP for business for your site to send purchase confirmation to the customer(and comes with builtin email template).
+You need to set up STMP for business for your site to send purchase confirmation to the customer(and comes with a builtin email template).
 
 You can add/view/update/remove product categories.
 
-You can create  add/categorize/sub-cateorize/view/update/purge product
+You can create  add/categorize/sub-categorized/view/update/purge product
 
-You can create add/update/remove discount along with promo code and clearance.
+You can create add/update/remove discounts along with promo code and clearance.
 
 You can view pending orders and complete orders and it also print shipping labels for shipping
 
-You can also process refund from backend.
+You can also process refunds from the backend.
 
 
 
@@ -69,6 +69,20 @@ You can also process refund from backend.
 == Installation ==
 Add this plugin from WordPress plugin site directly from your admin dashboard.
 Or you can download it and upload it manually
+
+
+== Frequently Asked Questions ==
+
+= Why page are not displaying properly? =
+
+Plugin is set to use post name as part of permalink . If your pages are not displaying properly go to page Settings->Permalinks and select Post Name and save it.
+
+= Why Product Cart/Discount/User registration/Product Category Widgets is not displaying? =
+
+For above widgets to display you need to got to widget section in admin panel and add all the widgets to display in either footer or sidebar section.
+
+= Why menu is displaying too many pages? =
+Plugin uses Pages architecture for different functionalities so it has many built in pages which displays on default menu. However it comes with built in menu , to use it go to menu section in appearance section on admin panel and set it to Main and save it. 
 
 == Screenshots ==
 1. Featured product page
@@ -126,6 +140,14 @@ Or you can download it and upload it manually
 *Sell from blogpost.
 *Rate from blog post.
 *No terms and condition modal
+
+= 2.0.0 =
+*Use of OceanWP as default theme
+*Product variation selection
+*Use of light weight jsMasonry over Masonry
+*Improved product page
+*Admin panel bug fixes
+
 
 
 

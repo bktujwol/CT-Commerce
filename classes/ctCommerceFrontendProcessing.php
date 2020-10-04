@@ -633,30 +633,18 @@ public function ctcGetProductsPost(){
 					$email .="<div style='display:table-cell;vertical-align: middle;'> <ol>";
 			
 					for($i=0; $i<=count($product)-1; $i++):
-					
-					
-					
 					$email .= "<li>";
 					$email .="<span >{$data['productName-'.$product[$i]['productId']]}</span> ";
 					$email .= "<span> X ".$data['productCount-'.$product[$i]['productId']]."</span>";
 					$email .= "<span> (Price : ".number_format($data['productPrice-'.$product[$i]['productId']],2).") <span>";
 					$email .= "<ul>";
 						foreach(explode(',',$data['productVariation-'.$product[$i]['productId']]) as $key=>$variationAndCount):
-						
-						
 						     $email .= "<li>".str_replace(':', ' X ', $variationAndCount)."</li>";
-						
-						
 						endforeach;
 					
 						$email .="</ul>";
 						$email .= "<b><span style='text-decoration:underline;'> Item Total  : ".number_format($data['productTotal-'.$product[$i]['productId']], 2)."</b></span> <span style='text-transform:uppercase;text-decoration:underline;'>(".get_option('ctcBusinessCurrency').")</span></li>";
 						
-					
-					
-					
-					
-					
 					$totalCharge += $product[$i]['productPrice'] * $data['productCount-'.$product[$i]['productId']];
 					
 					//products bought

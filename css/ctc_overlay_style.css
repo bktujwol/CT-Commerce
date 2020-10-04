@@ -267,9 +267,10 @@ overflow:auto;
 
 }
 
-#overlayElContainer  div{
+#overlayElContainer  div h2,
+#overlayElContainer  div h3{
 
-
+color:rgba(255,255,255,1);
 
 }
 #ctcOverlayModal:parent{
@@ -288,7 +289,6 @@ color:rgba(255,255,255,1) !important;
 border:2px solid rgba(255,255,255,1);
 background-color:rgba(0,0,0,1) !important;
 color:rgba(255,255,255,1);
-border-radius:10px!important;
 text-align:center !important;
 
 margin-top:50px;
@@ -385,3 +385,5 @@ from {
 
 
 }
+
+

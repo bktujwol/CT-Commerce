@@ -29,58 +29,14 @@
 
         //check for empty cart
         ctcCheckWidgetEmptyCart();
-        //function to apply masonry to the divs
-        function ctcApplyMasonry(container) {
-
-
-            if ($(container + '>div').length >= 3) {
-
-
-                $(container).masonry({
-                    fitWidth: true,
-                    gutter: 9,
-                    isFitWidth: true,
-                    initLayout: false,
-
-                });
-
-
-                $(container).imagesLoaded().progress(function () {
-                    $(container).masonry('layout');
 
 
 
-                });
-
-            }
-
-        }
-
-        //apply masonry to featured products list
-        //ctcApplyMasonry('.ctcPostImgGallery div');
-
-        //apply masonry to featured products list
-        ctcApplyMasonry('.ctcFeaturedProductList');
-
-
-        ctcApplyMasonry('.ctcProductCategoriesMain');
-
-        //applyMasonary to product list product category page
-        ctcApplyMasonry('.ctcCategoryPageProductList');
-
-        //applyMasonary to product list product category page
-        ctcApplyMasonry('.ctcMetaPageProductList');
-
-        //applyMasonary to product list product category page
-        ctcApplyMasonry('.ctcDiscountProductList');
-
-
-
+        // apply required masonry
+        const prodMas = new jsMasonry('.ctcFeaturedProductList,.ctcProductCategoriesMain,.ctcCategoryPageProductList,.ctcMetaPageProductList,.ctcDiscountProductList, .ctcPostImgGallery .gallery');
         $('.ctcSingleProductGallery span:nth-child(2),.ctcSingleProductGallery span:first-child ').on('click', function (event) {
 
             var scrollContainer = $(".ctcSingleProductGallery");
-
-
 
             if ($(this).is('.ctcSingleProductGallery span:first-child')) {
 
@@ -111,8 +67,6 @@
             localStorage.removeItem("ctcWidgetCartData");
 
         });
-
-
 
 
         /**
@@ -152,29 +106,22 @@
         $(document).on('click', '#ctCommerceUserRegistration', function () {
 
             var data = {
-
                 'action': 'ctcGetUserRegistrationForm'
-
             }
 
             $.post(ctc_ajax_url, data, function (response) {
 
-
                 $.ctcOverlayEl({
                     elemHeight: '550px',
-                    elemWidth: '1200px',
+                    elemWidth: '1000px',
                     ajaxUrl: ctc_ajax_url,
                     ajaxData: data,
                     ajaxMethod: 'post'
                 });
 
-
-
             });
 
-
             return false;
-
         });
 
 
@@ -192,15 +139,11 @@
 
                     'action': 'ctcRegisterUser',
                     'userInfo': JSON.stringify($(this).serializeArray())
-
                 }
 
                 $.post(ctc_ajax_url, data, function (response) {
 
-
-
                     if (response == 1) {
-
 
                         $.ctcOverlayEl({
                             modalMessage: 'Account sucesfully created.'
@@ -218,8 +161,6 @@
                             modalMessage: errorUser
                         });
 
-
-
                     }
 
                 });
@@ -227,7 +168,6 @@
             }
             event.preventDefault();
             return false;
-
         });
 
 
@@ -250,19 +190,12 @@
 
             $.ctcOverlayEl({
                 elemHeight: '550px',
-                elemWidth: '1200px',
+                elemWidth: '1000px',
                 ajaxUrl: ctc_ajax_url,
                 ajaxData: data,
                 ajaxMethod: 'post'
             });
 
-            /*
-            $.post(ctc_ajax_url, data , function(response){
-            	
-            	ctcOpenWpMediaModal(response,modalCss);
-            	
-            });
-            */
             return false;
 
         });
@@ -276,43 +209,25 @@
             var confirmPassword = $("input[name='customerConfirmPassword']").val();
             var confirmPasswordId = $("input[name='customerConfirmPassword']").attr('id');
 
-
-
             if (ctcCheckPasswordMatch(password, confirmPassword, confirmPasswordId)) {
-
-
                 var data = {
-
                     'action': 'ctcUpdateUserInfo',
                     'updatedInfo': JSON.stringify($(this).serializeArray())
-
-
                 }
-
                 $.post(ctc_ajax_url, data, function (response) {
-
                     if (response >= 1) {
-
-                        $.ctcOverlayEl({
-                            modalMessage: 'Information sucessfully updated.'
-                        });
+                        $.ctcOverlayEl({ modalMessage: 'Information sucessfully updated.' });
 
                         $('button.media-modal-close, #ctcUserUpdatenFormReset').trigger('click');
                     } else {
                         $.ctcOverlayEl({
                             modalMessage: 'Information could not be updated at this time.<br/>Try loging out log back in and update'
                         });
-
-
                     }
 
                 });
 
             }
-
-
-
-
             event.preventDefault();
             return false
         });
@@ -323,8 +238,6 @@
         $(window).on("scroll", function () {
             var scrollHeight = $(document).height();
             var scrollPosition = $(window).height() + $(window).scrollTop();
-
-
 
             //just kill process if all featured product are loaded
             if ($('#ctcSortProductSelect').attr('data-type-allproduct') === 'yes') {
@@ -346,31 +259,12 @@
 
                             if (response.length > 22) {
 
-                                // init Masonry
-                                var $grid = $('.ctcFeaturedProductList').masonry({
-                                    transitionDuration: '1.5s',
-                                    stagger: 20,
-                                    fitWidth: true,
-                                    gutter: 9,
-                                    percentPosition: true,
-                                    originLeft: false,
-                                    isFitWidth: true,
+                                $('.ctcFeaturedProductList').append(response);
 
-                                });
-
-                                $grid.imagesLoaded().progress().always(function (instance) {
-
-                                    $grid.masonry('layout');
-
-                                });
-
-                                $grid.append(response).masonry('reloadItems');
-                                $grid.masonry('appended', response);
-
+                                prodMas.layBrks(document.querySelector('.ctcFeaturedProductList'));
                                 $('[id]').each(function (i) {
                                     $('[id="' + this.id + '"]').slice(1).remove();
                                 });
-
                                 var productCount = $('.ctcFeaturedProductContent').length;
 
                                 $('div.ctcStorePageMain').attr('data-type-rowoffset', parseInt(productCount));
@@ -391,13 +285,6 @@
 
         /**
          * 
-         * script to deal with store functionalities
-         * 
-         */
-
-
-        /**
-         * 
          * Script for Widget Product cart functionalities
          * 
          * 
@@ -406,8 +293,6 @@
         //function to check if cartdoes not have item if no do not display
         function ctcCheckWidgetEmptyCart() {
             if (!cartChecked) {
-
-
                 if ($('#ctcCartWidgetTable tr').length === 0) {
                     $('.ctcHideOnEmptyCart').animate({
                         opacity: 0,
@@ -468,8 +353,6 @@
             var setProductVariation = $('#ctcWidgetCartProductVariation-' + id).val();
             if (setProductVariation.search(newProductVariation) !== -1) {
 
-
-
                 var setVarArray = setProductVariation.split(',');
                 for (var i in setVarArray) {
 
@@ -527,8 +410,6 @@
             } else {
                 $('#ctcCartGrandTotal, #ctcPageCartGrandTotal input').val(newGrandTotal.toFixed(2));
                 $('#ctcWidgetGrandTotalAmount,#ctcPageCartGtotal').empty().prepend(addCommas(newGrandTotal.toFixed(2)));
-                //$('#ctcWidgetGrandTotalAmount').empty().prepend(newGrandTotal.toFixed(2));
-
             }
             ctcCheckWidgetEmptyCart();
 
@@ -602,29 +483,56 @@
                 cartReady += "</tr>";
             }
 
-
             return cartReady;
         }
 
+
+
         //javascript to add product to the cart
         $(document).on('click', '.ctcAddToCartLink', function () {
-            var price = $(this).attr('data-type-price');
+
             var id = $(this).attr('data-type-id');
+            let subCat1 = null != $('#ctcProductSubCat1Select-' + id).val() ? $('#ctcProductSubCat1Select-' + id).val().trim() : '';
+            let subCat2 = null != $('#ctcProductSubCat2Select-' + id).val() ? $('#ctcProductSubCat2Select-' + id).val().trim() : '';
+            let subCat3 = null != $('#ctcProductSubCat3Select-' + id).val() ? $('#ctcProductSubCat3Select-' + id).val().trim() : '';
+            let i = 0;
+            let subCat123 = subCat1 + '-' + subCat2 + '-' + subCat3;
+
+            $('#ctcProductSelect-' + id + ' option').each(function () {
+                if ($(this).val().trim() === subCat123) {
+                    $(this).prop('selected', true);
+                    $(this).attr('data-variation', subCat123);
+                    $(this).closest('select').trigger('change');
+                    $('.ctcProductSelectClass-' + id).attr('data-type-variation', productVariation);
+                    i++;
+                } else {
+
+                    if (i <= 0) {
+                        $('#ctcProductSelect-' + id + ' option:first-child').prop('selected', true)
+                    }
+
+
+                }
+
+            })
+
+
+            var price = $(this).attr('data-type-price');
             var name = $(this).attr('data-type-name');
             var thumb = $(this).attr('data-type-thumb');
             var productVariation = $(this).attr('data-type-variation');
+
 
             //check if empty option is selcted 
             if ($('#ctcProductSelect-' + id).val() == 'emptyOption') {
 
                 $.ctcOverlayEl({
-                    modalMessage: 'Please select a product combination first'
+                    modalMessage: 'Select available product combination first.'
                 });
 
                 return false;
 
             }
-
 
             $('#ctcCartWidgetTable').append(prepareProductForCart(price, id, name, thumb, productVariation));
             //add grand total on new product add
@@ -645,7 +553,7 @@
         function ctcToolTipCart() {
 
             var cartProductData = $('#ctcProductCartWidgetForm').serializeArray();
-            var allItemsHtml = '<tr><th></th><th>Product</th><th>Qty</th><th>Total</th></tr> ';
+            var allItemsHtml = '<tr id="toolTipHeader" ><th></th><th>Product</th><th>Qty</th><th>Total</th></tr> ';
             var grandTotal = 0;
 
             //one as grand total on widget is not removed
@@ -691,7 +599,6 @@
 
         $(function () {
             $(document).tooltip({
-
                 content: function () {
                     var element = $(this);
                     if (element.hasClass('ctcWidgetVaritionShowtoolTip')) {
@@ -718,13 +625,12 @@
 
                 show: {
                     effect: "slideDown",
-                    delay: 500
+                    delay: 300
                 },
                 position: {
                     within: $(this),
-                    my: "center bottom-20",
+                    my: "center bottom-5",
                     at: "center top",
-
                     using: function (position, feedback) {
                         $(this).css(position);
                         $("<div>")
@@ -754,8 +660,53 @@
 
         });
 
+        /**
+         * 
+         * script to select subcategories
+         * 
+         */
+        $(document).on('change', '.ctcProductSelCat1', function () {
+            let subCat1 = $(this).val().trim();
+            let productId = $(this).closest('select').attr('data-type-id');
+            $('#ctcProductSubCat1Select-' + productId + ' option:first-child').prop('disabled', true);
+            $('#ctcProductSelect-' + productId + ' option').each(function () {
 
+                let prodVar = $(this).val().trim();
+                if ('emptyOption' != prodVar) {
+                    $('#ctcProductSubCat2Select-' + productId + ' option').each(function () {
 
+                        if (prodVar.search(subCat1 + '-' + $(this).val()) === 0) {
+                            $(this).attr('data-sc-one', subCat1);
+                            $(this).prop('disabled', false);
+
+                        } else {
+                            if ($(this).attr('data-sc-one') != subCat1) {
+                                $(this).prop('disabled', true);
+                            }
+                        }
+                    })
+                }
+            });
+        })
+
+        $(document).on('change', '.ctcProductSelCat2', function () {
+            let productId = $(this).closest('select').attr('data-type-id');
+            let scOneTwo = $('#ctcProductSubCat1Select-' + productId).val().trim() + '-' + $(this).val().trim();
+            $('#ctcProductSelect-' + productId + ' option').each(function () {
+                let prodVar = $(this).val().trim();
+                $('#ctcProductSubCat3Select-' + productId + ' option').each(function () {
+                    if (prodVar.search(scOneTwo + '-' + $(this).val()) === 0) {
+                        $(this).attr('data-sc-one-two', scOneTwo);
+                        $(this).prop('disabled', false);
+                    } else {
+                        if ($(this).attr('data-sc-one-two') != scOneTwo) {
+                            $(this).prop('disabled', true);
+                        }
+                    }
+                });
+            });
+
+        })
 
         /**
          * 
@@ -847,8 +798,6 @@
         }
 
 
-
-
         //script to remove item from product cart page
         $(document).on('click', '.ctcPageCartItemRemove', function () {
 
@@ -936,7 +885,7 @@
                 $('#ctcStripeMountDiv,#card-errors').show();
             } else if ($(this).attr('id') === 'ctcCheckOutOptionCash') {
                 $('#ctcStripeMountDiv,#card-errors').hide();
-                $('#ctcCheckoutPaymentOptions button').attr('id', 'ctcCashCheckoutButton').text("Cash on checkout").show();
+                $('#ctcCheckoutPaymentOptions button').attr('id', 'ctcCashCheckoutButton').text("Cash on Delivery").show();
             }
 
         });
@@ -1049,23 +998,17 @@
                     requiredField = 'empty';
                 } else {
                     $(this).removeAttr('style');
-
                 }
-
             });
             if (requiredField == 'empty') {
                 $.ctcOverlayEl({
                     modalMessage: 'Please fill in required fields, before proceeding.'
                 });
                 return false;
-
             } else {
-
                 return true;
             }
         }
-
-
 
         //function to verify shipping address and calculate shipping cost
         function verifyAddressCalculateShippingCost(shippingRadio) {
@@ -1298,7 +1241,6 @@
                             shippingRadio.prop('checked', false);
                             $('#ctcCheckoutPaymentOptions,#ctcDisplayShippingCost').hide("normal");
                             alert("Shipping could not be calculated at this time \nPlease try again later");
-                            //$('#ctcUserShippingAddress').slideUp();
                             $(".ctcCalculateShipingWait").animate({
                                 opacity: 0
                             }, 100, function () {
@@ -1325,7 +1267,6 @@
                     });
                     shippingRadio.parent().append('<font class="ctcCalculateShipingWait dashicons-before dashicons-update"></font>');
                     $('#ctcUserShippingAddress').slideUp(2000).find('input').removeAttr('required');
-
                     $('#ctcCheckoutPaymentOptions,#ctcDisplayShippingCost').show(1500);
                     $('.ctcChooseShippingOption').hide("medium");
 
@@ -1372,8 +1313,6 @@
             }
 
         });
-
-
 
         /**
          * 
@@ -1561,34 +1500,7 @@
 
         });
 
-        /*
-         * 
-         * 
-         * 
-         * 
-         * 
-         * 
-         * 
-         * script for product page overlay functionalities
-         * 
-         * 
-         */
 
-
-
-
-        if ($('.ctcSingleProductGallery').length >= 1) {
-            $('.ctcSingleProductGallery').ctcOverlay();
-
-            $(document).on('click', '.ctcProductProfileImage', function () {
-                if ($('.ctcverlayImages'))
-                    $('.ctcSingleProductGallery').trigger('mouseenter');
-                $("img[data-img-number='0']").trigger('click');
-            });
-        } else {
-
-            $('.ctcProductProfileImage').ctcOverlay();
-        }
 
         /*
          * 
@@ -1599,13 +1511,17 @@
         //script to sort products
         $(document).on('change', '#ctcSortProductSelect', function () {
 
+            if ($(this).val().length === 0) {
+                return;
+            }
+
             var parentContainer = $(this).attr('data-type-containertosort');
             var selecElement = $(this);
             var ajaxSort = $(this).attr('data-type-ajaxsort');
             var sortBy = $("option:selected", this).val();
             var sortableItems = $('>div', parentContainer);
             if (ajaxSort === "yes" && selecElement.attr('data-type-allproduct') === undefined) {
-                $(this).parent().addClass('ctcShowAjaxWait');
+
                 $.post(ctc_ajax_url, {
                     'action': 'ctcAjaxSortProduct'
                 }, function (response) {
@@ -1668,35 +1584,42 @@
 
         //function to sort products by thumb up
         function ctcSortArrayAndAppend(productArrayToSort, parentContainer, sortType) {
-            var sortedHtml = '';
+            let sortedHtml = Array();
+            let sortByArray = Array();
             if (sortType == 'asc') {
-                productArrayToSort.sort((a, b) => a[1] - b[1]);
-            } else {
-                productArrayToSort.sort((a, b) => b[1] - a[1]);
-            }
-            for (var key in productArrayToSort) {
-                sortedHtml += productArrayToSort[key][2];
-            }
-            $(parentContainer).empty().append(sortedHtml).masonry('reloadItems');
-            //remove duplicate id
 
-            // init Masonry
-            var $grid = $(parentContainer).masonry({
-                transitionDuration: '0.7s',
-                stagger: 20,
-                fitWidth: true,
-                gutter: 9,
-                percentPosition: true,
-                originLeft: false,
-                isFitWidth: true,
-            });
-            $grid.imagesLoaded().progress().always(function (instance) {
-                $('[id]').each(function (i) {
-                    $('[id="' + this.id + '"]').slice(1).remove();
+                sortByArray = productArrayToSort.map(x => x[1]);
+                sortByArray.sort((a, b) => a - b);
+                sortedHtml = sortByArray.map(x => {
+
+                    for (let i = 0; i < productArrayToSort.length; i++) {
+
+                        if (x == productArrayToSort[i][1]) {
+                            let minSortedArr = productArrayToSort.splice(i, 1);
+                            return minSortedArr[0][2]
+                        }
+                    }
                 });
-                $grid.masonry('appended', sortedHtml);
-                $grid.masonry('layout');
-            });
+            } else {
+                sortByArray = productArrayToSort.map(x => x[1]);
+                sortByArray.sort((a, b) => b - a);
+                sortedHtml = sortByArray.map(x => {
+
+                    for (let i = 0; i < productArrayToSort.length; i++) {
+
+                        if (x == productArrayToSort[i][1]) {
+                            let minSortedArr = productArrayToSort.splice(i, 1);
+                            return minSortedArr[0][2]
+                        }
+                    }
+
+                });
+
+            }
+
+            $(parentContainer).empty().html(sortedHtml.join(''));
+            //lay in grid
+            prodMas.layBrks(document.querySelector(parentContainer));
         }
 
 
@@ -1745,9 +1668,7 @@
             }
             if (el.children('li').length === 0) {
                 $.post(ctc_ajax_url, data, function (response) {
-
                     if (response.length === 0) {
-
                         window.location.href = categoryUrl;
                     } else {
                         el.empty();
@@ -1759,15 +1680,28 @@
                         });
                     }
                 }).fail(function () {
-
                     alert("Action could not be completed at this time \nPlease try again later");
-
                 });
             } else {
                 el.slideToggle("slow");
-
             }
         });
+
+        $('.ctcSingleProductGalleryContainer .gallery img').on('mouseenter', function () {
+            $(".ctcProductProfileImage").css('background-image', 'url("' + $(this).attr('src') + '")');
+        });
+
+
+        if (undefined != document.querySelector('.ctcRatingAddtocartVideo')) {
+            let container = document.querySelector('.ctcRatingAddtocartVideo')
+            let contHeight = container.offsetHeight;
+            let multiMedDivs = Array.from(container.querySelectorAll('.ctcMultiMedDiv'))
+
+            for (let i in multiMedDivs) {
+                contHeight -= (multiMedDivs[i].offsetHeight + 3);
+            }
+            container.style.paddingTop = (contHeight / 2) + 'px';
+        }
         /**
          * 
          * do not write code beyond 
