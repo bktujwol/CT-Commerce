@@ -27,7 +27,7 @@ Plugin come built-in with couple of product cart one as tooltip and other as wid
 
 Plugin utilises the best possible security option available with  WordPress against SQL injection and fraudulent activities.
 
-Plugin also has a widget to display products based on category and its subcategories.
+Plugin also has a widget to display products based on category and it's subcategories.
 
 Plugin also has an inventory management  feature which notifies you of zero inventory and automatically manages itself based on sales.
 
@@ -44,7 +44,7 @@ Plugin let's customers review products which can be displayed on the product pag
 You can add product videos for products .
 
 --Admin Section--
-Admin features built in with category bar-chart , sales activities visualisation.
+Admin features built in with category bar-chart , sales activities visualisations.
 
 It comes with an easy section where you can create an e-commerce site in a snap, it even creates a menu to be used in the frontend.
 
@@ -73,14 +73,16 @@ Or you can download it and upload it manually
 
 == Frequently Asked Questions ==
 
-= Why page are not displaying propely? =
+= Why page are not displaying properly? =
 
-Plugin is set to use post name as part of permalink . If your pages are not displaying properly go settings->permalinks and select Post Name and save it.
+Plugin is set to use post name as part of permalink . If your pages are not displaying properly go to page Settings->Permalinks and select Post Name and save it.
 
 = Why Product Cart/Discount/User registration/Product Category Widgets is not displaying? =
 
 For above widgets to display you need to got to widget section in admin panel and add all the widgets to display in either footer or sidebar section.
 
+= Why menu is displaying too many pages? =
+Plugin uses Pages architecture for different functionalities so it has many built in pages which displays on default menu. However it comes with built in menu , to use it go to menu section in appearance section on admin panel and set it to Main and save it. 
 
 == Screenshots ==
 1. Featured product page
@@ -140,10 +142,11 @@ For above widgets to display you need to got to widget section in admin panel an
 *No terms and condition modal
 
 = 2.0.0 =
-*Use of oceanWp as default theme
+*Use of OceanWP as default theme
 *Product variation selection
 *Use of light weight jsMasonry over Masonry
 *Improved product page
+*Admin panel bug fixes
 
 
 
