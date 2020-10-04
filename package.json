@@ -24,6 +24,8 @@
     "js-masonry": "^1.0.3",
     "masonry-layout": "4.2.2",
     "imagesloaded": "4.1.4",
-    "jquery": "3.5.1"
+    "jquery": "3.5.1",
+    "ctc-overlay-viewer": "1.2.4",
+    "backbone": "1.4.0"
   }
 }
