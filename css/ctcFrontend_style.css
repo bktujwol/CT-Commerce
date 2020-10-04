@@ -2894,7 +2894,10 @@ opacity:0;
 }
 .ctcProductCategoriesWidget > ul li {
 	margin-bottom:5px !important;
-    list-style: square;
+  
+}
+.ctcProductCategoriesWidget > ul li ul li{
+  list-style: square;
 }
 
 .ctcProductCategoriesWidget img{
