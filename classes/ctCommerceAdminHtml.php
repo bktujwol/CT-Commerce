@@ -850,7 +850,7 @@ public function ctcEmailSetting(){
 		                        
 		                        <div class="right">
 		                             <input id="ctcSubCategory1" type="text" name="subCategory1" size="35"    value="<?php if(!empty($categoryData['subCategory1'])):echo $categoryData['subCategory1'];endif;?>" pattern="^[a-zA-Z0-9,-.!? ]*$" title="Only special charaters  -,.!? allowed"  />
-		                       		 <i class="ctcFormComments"> Like Men, Women, Children for clothing</i>
+		                       		 <i class="ctcFormComments"> Like Men, Women, Children for clothing.Comma Sperated</i>
 		                        </div>
                         </div>
                     	
@@ -860,7 +860,7 @@ public function ctcEmailSetting(){
 		                        </div>
 		                         <div class="right">
 		                             <input id="ctcSubCategory2" type="text"   name="subCategory2" size="35" value="<?php if(!empty($categoryData['subCategory2'])): echo $categoryData['subCategory2']; endif;?>" pattern="^[a-zA-Z0-9,-.!? ]*$" title="Only special charaters -,.!? allowed" />
-		                             <i class="ctcFormComments">Like sizes for clothing, Transmission for cars</i>
+		                             <i class="ctcFormComments">Like sizes for clothing, Transmission for cars. Comma Sperated</i>
 		                        </div>
                     	</div>
                     	 <div class="categoryRow">
@@ -870,7 +870,7 @@ public function ctcEmailSetting(){
 		                        </div>
 		                       <div class="right">
 		                             	 <input id="ctcSubCategory3" type="text" name="subCategory3" size="35"    value="<?php if(!empty($categoryData['subCategory3'])):echo $categoryData['subCategory3']; endif;?>" pattern="^[a-zA-Z0-9,-.!? ]*$" title="Only special charaters  -,.!? allowed"  />
-		                               <i class="ctcFormComments">More specfic info of items.</i>
+		                               <i class="ctcFormComments">More specfic info of items like color. Comma Sperated</i>
 		                        </div>
                     	</div>
                     	 <div class="categoryRow">
@@ -880,7 +880,7 @@ public function ctcEmailSetting(){
 		                        </div>
 		                       <div class="right">
 		                             <input id="ctComCategoryMetaInfo"  type="text"  name="metaInfo" value="<?php if(!empty($categoryData['metaInfo'])): echo $categoryData['metaInfo']; endif;?>"  size="35"    />
-		                            <i class="ctcFormComments">Noteworthy info like 100  %Cotton, Handmade etc.</i>
+		                            <i class="ctcFormComments">Noteworthy info like 100% Cotton, Handmade etc. Comma Sperated</i>
 		                             
 		                             
 		                        </div>
