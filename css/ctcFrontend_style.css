@@ -2894,7 +2894,7 @@ opacity:0;
 }
 .ctcProductCategoriesWidget > ul li {
 	margin-bottom:5px !important;
-    
+    list-style: square;
 }
 
 .ctcProductCategoriesWidget img{
@@ -2988,7 +2988,6 @@ display:inline;
 }
 #ctc-blog-shortcode .ctcPreOrderAvilable{
   text-align:left;
-  margin:15px;
   margin-left:26px;
 
 }

@@ -1,6 +1,7 @@
 (function ($) {
     $(document).ready(function ($) {
 
+
         $('.ctcCategoryLinkContainer').tooltip(
             {
                 position: {
@@ -652,8 +653,12 @@
             var preOrder = $("option:selected", this).attr('data-type-preorder');
             if (preOrder == 'yes') {
                 $('#ctcPreOrderAvilable-' + productId).css('visibility', 'visible');
+                $('#ctc-blog-shortcode #ctcPreOrderAvilable-' + productId).css('display', '');
+
             } else {
-                $('#ctcPreOrderAvilable-' + productId).css('visibility', 'hidden');;
+                $('#ctcPreOrderAvilable-' + productId).css('visibility', 'hidden');
+
+
             }
 
             $('.ctcProductSelectClass-' + productId).attr('data-type-variation', productVariation);
