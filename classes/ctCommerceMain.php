@@ -73,6 +73,7 @@ class ctCommerceMain{
         add_action( 'wp_enqueue_scripts', array($this, 'ctcFrontendEnequeJs') );
         add_action('admin_init',array($ctcRegisterSetting ,'ctcRegisterRequiredSettings'));
         add_action( 'phpmailer_init', array($ctcAdminPanelProcessing,'ctcSmtpSetting' ));
+        add_filter( 'wp_mail_from', function(){return get_option('ctcSmtpFromEmail');} );
         add_filter('the_category',array($ctcAdminPanelProcessing,'ctcCategoryFilter'),10,2);
         add_action( 'admin_notices', array($ctcAdminPanelHtml,'ctcThemeNotice') );
     

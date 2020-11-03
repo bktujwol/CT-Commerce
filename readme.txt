@@ -4,7 +4,7 @@ Tags: e-commerce, auto inventory management,selling tool,e-commerce solution
 Requires at least: 4.9
 Tested up to: 5.5.1
 Requires PHP: 5 or Higher
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 License: GPLV2
 
 e-commerce Web app built for WordPress which automatically manages inventory. Mostly runs on frontend for better website speed and performance ideal for shared hosting.
@@ -148,6 +148,6 @@ Plugin uses Pages architecture for different functionalities so it has many buil
 *Improved product page
 *Admin panel bug fixes
 
-
-
+= 2.0.1 =
+*From email bug fixed
 
