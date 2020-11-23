@@ -1,6 +1,6 @@
 === CT Commerce ===
 Contributors: UjW0l
-Tags: e-commerce, auto inventory management,selling tool,e-commerce solution 
+Tags: e-commerce, machine-learning 
 Requires at least: 4.9
 Tested up to: 5.5.1
 Requires PHP: 5 or Higher
